@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script>
+    //Tipos de ventanas emergentes:
+    //--Ventana Modal
+    // Son cuadros que aparecen sobre la página, bloqueando todas las funciones para concentrar el foco en una acción 
+    // particular que, habitualmente, conlleva que el usuario deba realizar una acción. 
+    // Las ventanas modales se activan cuando el usuario hace clic en un llamado o presiona un botón, previniendo a los 
+    // usuarios de errores y facilitando acciones, al permitir realizarlas sin salir de la página.
+    
+    //--Pop-up o ventana emergente
+    // Este tipo de ventanas se abren de forma automática, sin que el usuario interactúe, haciendo clic en la interfaz. 
+    // Pueden aparecer al cargar la página, después de un periodo de tiempo o cuando se sitúa el puntero en un punto 
+    // determinado.
+    // Al interrumpir la navegación, se utiliza para hacer publicidad intrusiva, por lo que muchos navegadores las bloquean.
+    // También pueden ser utilizadas por los propios sistemas operativos para presentar ciertos mensajes o errores.
+
+    //--Tooltip
+    // Son pequeños recuadros de información que aparecen al posicionar el ratón sobre un elemento. 
+    // Son utilizados de forma general para ofrecer información adicional sobre el elemento seleccionado o para mostrar 
+    // al usuario pequeños mensajes de ayuda. También se les llama hovercard.
+
+    //--Lightbox
+    // Son un tipo de ventanas modales con la particularidad de que muestran poca información y oscurecen el fondo detrás, 
+    // sin ningún tipo de acción o enlaces. 
+    // Se pueden usar para mostrar imágenes en tamaño completo, navegar una galería o ver un vídeo, sin necesidad de 
+    // cargar una página adicional.
+
+    // En este ejemplo vamos a ver un pequeño ejemplo sobre VENTANAS MODALES
+    // Aunque, a nivel personal,  recomiendo algun tipo de librería o framework para hacer estas cosas
+    // https://www.hongkiat.com/blog/best-free-javascript-modal-window-plugins/
+    function mostrarVentana(){
+        // Accedemos al contenedor
+        var ventana = document.getElementById('miVentana'); 		    		    
+        // Definimos su posición vertical. La ponemos fija para simplificar el código
+        ventana.style.marginTop = "100px";
+        // Definimos su posición horizontal, en base a la anchura del cliente
+        ventana.style.marginLeft = ((document.body.clientWidth-350) / 2) +  "px"; 
+        // Y lo hacemos visible
+        ventana.style.display = 'block'; //en el stylo del div esta puesto a "none"
+    }
+    
+    function ocultarVentana(){
+        //Accedemos al contenedor 
+        var ventana = document.getElementById('miVentana'); 
+        //Y lo hacemos visible
+        ventana.style.display = 'none'; // Y lo hacemos invisible
+    }   
+ </script>
+</head>
+<body>
+    <p onclick="mostrarVentana();">Abrir Ventana</p>
+    <div id="miVentana" style="position: fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; border: #333333 3px solid; background-color: #FAFAFA; color: #000000; display:none;">
+        <div style="font-weight: bold; text-align: left; color: #FFFFFF; padding: 5px; background-color:#006394">Título de la ventana</div>
+        <p style="padding: 5px; text-align: justify; line-height:normal">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum a est. Suspendisse vehicula, nisl vitae molestie pulvinar.</p>
+    <div style="padding: 10px; background-color: #F0F0F0; text-align: center; margin-top: 44px;"><input id="btnAceptar" onclick="ocultarVentana();" name="btnAceptar" size="20" type="button" value="Aceptar" /></div>
+ </div>
+</body>
+</html>

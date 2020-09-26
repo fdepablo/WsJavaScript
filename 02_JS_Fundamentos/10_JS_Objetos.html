@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<script type="application/javascript">
+
+//En JS los objetos son arrays asociativos
+//Las claves del array son las propiedades del objeto
+//Como valor de una propiedad podemos tener una función
+//Podemos definir el objeto con la sintaxis de los corchetes o con las llaves
+//Podemos acceder a las propiedades de un objeto con los corchetes o con el punto
+
+let libro = []
+libro["autor"]  = "RLS"
+libro["titulo"] = "La isla del tesoro"
+
+let libro2 = {
+    autor  : 'JC',
+    titulo : 'El corazón de las tinieblas'
+}
+//En cualquier momento podemos modificar un objeto
+//Para añadirle funcionalidad a un objeto le ponemos como valor de una
+//de sus propiedades una función
+libro2['saludar'] = function(){
+    console.log("Hola, soy un libro")
+}
+libro2.saludar()
+
+////////////////
+//    THIS    //
+////////////////
+
+//En JS this es una referencia al objeto al que se le ha asignado 
+//la funcion 
+
+console.log("============================")
+let disco = {
+    titulo : 'Machine Head',
+    grupo  : 'Deep Purple',
+    imprimirDatos : function(){
+        //console.log(titulo+", "+grupo) //undefined, undefined
+        console.log(this.titulo+", "+this.grupo)
+    }
+}
+disco.imprimirDatos()
+
+//Las funciones se asignan siempre a un objeto
+//Cuando esa asignación no es explícita se asignan a window
+function sumar(s1, s2){
+    console.log("============================")
+    console.log(s1+s2)
+    console.log(this)
+}
+//Podemos usar window para invocar la funcion (es un poco tonto hacerlo asi)
+window.sumar(10,20)
+sumar(20,30)
+//Una función puede estar asociada a varios objetos
+let calculadora = {
+    sumar : sumar
+}
+calculadora.sumar(30,40) //Aqui, dentro de la función sumar, this es 'calculadora'
+
+console.log("============================")
+let persona1 = { nombre : 'Homer' }
+let persona2 = { nombre : 'Bart' }
+let persona3 = { nombre : 'Hubert J Farnsworth' }
+let saludar = function(){
+    console.log("Hola, soy "+this.nombre)
+}
+persona1.saludar = saludar
+persona2.saludar = saludar
+persona3.saludar = saludar
+persona1.saludar() 
+persona2.saludar()
+persona3.saludar()
+
+//En el 'contexto raíz' this es window
+console.log(this) //-> window
+
+console.log("============================")
+//Las variables que declaramos como globales se asignan tambien a window
+a = 5
+var b = 10
+let c = 15
+console.log(a)
+console.log(b)
+console.log(c)
+console.log(window.a) //5
+console.log(window.b) //10
+console.log(window.c) //undefained
+
+/////////////////////////
+// FUNCIONES PROTOTIPO //
+/////////////////////////
+console.log("============================")
+function Avion(){
+    this.fabricante = ''
+    this.modelo     = ''
+    this.year       = 0
+}
+//Cuando invocamos una función con 'new' nos devuelven un objeto
+let a1 = new Avion()
+a1.modelo = 'Eurofighter'
+console.log(a1)
+let a2 = new Avion()
+a2.modelo = 'Phantom II'
+console.log(a2)
+
+//
+//Simulando un constructor
+//
+console.log("============================")
+function Barco(nombre, eslora, desplazamiento){
+    this.nombre = nombre
+    this.eslora = eslora
+    this.desplazamiento = desplazamiento
+}
+barco = new Barco('USS Nimitz', 300, 85000)
+console.log(barco)
+
+//
+//Añadiendo funcionalidad a los objetos
+//
+console.log("============================")
+function Pelicula(titulo, director){
+    this.titulo   = titulo
+    this.director = director
+    //Si añadimos las funciones aqui entoces cada instancia tendrá
+    //su propia copia de la función
+    //Y esto NO ESTÁ BIEN
+    this.toString = function(){
+        return this.titulo+", "+this.director
+    }
+}
+let p1 = new Pelicula('T1')
+let p2 = new Pelicula('T2')
+let p3 = new Pelicula('T3')
+console.log(p1.toString())
+console.log(p2.toString())
+console.log(p3.toString())
+
+//
+//Añadiendo funciones al PROTOTIPO
+//
+console.log("============================")
+function Locomotora(fabricante, modelo){
+    this.fabricante = fabricante
+    this.modelo = modelo
+}
+//Creamos esta locomotora ANTES de añadir la funcion toString al prototipo
+//Las funciones añadidas al prototipo se compartiran entre todas las instancias
+Locomotora.prototype.toString = function(){
+    return this.fabricante+", "+this.modelo
+}
+//Todas las locomotoras tienen la función toString, incluso esta que
+//se creo antes definirlo
+let l1 = new Locomotora('CAF-Krauss-Maffei', 'Eurosprinter 252')
+console.log(l1.toString())
+let l2 = new Locomotora('Macosa-GM','333')
+console.log(l2.toString())
+
+//'sobreescribiendo' la función toString de un objeto del 'tipo' Locomotora:
+let l3 = new Locomotora('CAF-Mitsubishi', '269')
+l3.toString = function(){
+    return "Fabricante:"+this.fabricante+", modelo:"+this.modelo
+}
+console.log(l2.toString())
+console.log(l2.__proto__.toString()) //Esto no va. NO DEBEMOS USAR __proto__
+
+//Tambien podemos añadir identidad al prototipo, aunque no tenga sentido
+Locomotora.prototype.longitud = 0;
+
+//
+//Atributos 'estáticos'
+//
+console.log("============================")
+function Caballo(nombre){
+    this.nombre = nombre
+
+    if( !Caballo.contador ){
+        Caballo.contador = 0
+    }
+    Caballo.contador++
+}
+Caballo.prototype.toString = () => "Hola, soy el caballo"+this.nombre
+c1 = new Caballo("Bucefalo")
+c2 = new Caballo("Babieca")
+c3 = new Caballo("Incitatus") 
+c4 = new Caballo("Imperioso")
+c5 = new Caballo("Rocinante")
+
+console.log("Contador:"+ Caballo.contador )
+
+//                     //
+//Funciones 'estáticas'//
+//                     //
+//Se añaden directamente a la función prototipo
+//NO se añaden a los objetos creados
+//NO se añaden al objeto __proto__
+console.log("============================")
+function Usuario(){
+    this.nombre = ''
+    this.login = ''
+    this.pw = ''
+}
+Usuario.prototype.save = function(){
+    //Dentro de las funciones que se añaden al prototipo podemos
+    //usar 'this' para referirnos a los valores del objeto
+    console.log("Guardando los datos:"+this.nombre+", "+this.login+", "+this.pw)
+}
+//Las funciones 'estáticas' no pertenecen a los objetos que se crean
+//sino a la función que se usa para crearlos
+Usuario.buscar = function(id){
+    console.log("buscando por el id:"+id)
+}
+let usr = new Usuario()
+usr.save() //ok
+//usr.buscar() //ZASCA porque es undefined!
+//si quiero buscar se lo pido a la funcion prototipo
+Usuario.buscar(5)
+
+
+</script>
+
+<body>
+    
+    <h1>08 Objetos</h1>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

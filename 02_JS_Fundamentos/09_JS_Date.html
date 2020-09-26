@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+//https://www.w3schools.com/js/js_dates.asp
+
+var d = new Date();
+console.log(d)
+
+//new Date(year, month, day, hours, minutes, seconds, milliseconds)
+var d = new Date(2018, 11, 24, 10, 33, 30, 0);
+////new Date(year, month, day
+var d = new Date(2018, 11, 24);
+
+//The ISO 8601 syntax (YYYY-MM-DD) 
+var d = new Date("2015-03-25");
+
+//milisegundos desde 1970
+console.log(d.getTime())
+
+//otros metodos de acceso
+d.getFullYear();//año
+d.getMonth();//mes del 0-11
+d.getDate();//dia
+d.getMinutes();
+d.getSeconds();
+
+//Tenemos los mismos metodos con "set"
+//Ejemplo
+d.setMonth(11);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

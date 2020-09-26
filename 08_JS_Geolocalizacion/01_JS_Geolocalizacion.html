@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<!-- 
+//Mediante la localizacion podemos averiguar la situacion greografica del dispositivo android
+//Podemos tener varios proveedores en nuestro telefono, por ejemplo podemos tener
+//localizado el aparato mediante GPS o WiFi o mediante el operador de red
+
+/*
+   La latitud es la distancia que existe entre un punto cualquiera y el Ecuador(Lineas horizontales)
+
+   - Se expresa en grados sexagesimales.
+   - Se mide de -90 a 90º.
+   - 0º corresponde al ecuador
+   - Los polos Norte y Sur tienen latitud 90º y -90º respectivamente.
+
+   La longitud es la distancia que existe entre un punto cualquiera y el Meridiano de Greenwich
+   (Inglaterra son las Lineas verticales)
+
+   - Se expresa en grados sexagesimales.
+   - Se mide de -180 a 180º.
+   - 0º corresponde al meridiano de Greenwich
+ */
+ -->
+</head>
+<body>
+	<script>
+		function obtener_localizacion() {
+			//le pasamos la función de callback
+			navigator.geolocation.getCurrentPosition(coordenadas);
+		}
+		function coordenadas(position) {
+			var latitud = position.coords.latitude;
+			var longitud = position.coords.longitude;
+			alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
+		}
+	</script>
+	<a href="javascript:obtener_localizacion();">Mostrar Posición</a>
+</body>
+</html>

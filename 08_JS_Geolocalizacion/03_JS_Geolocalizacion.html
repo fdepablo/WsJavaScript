@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+	<script>
+		function obtener_localizacion() {
+			//si no existe, el navegador no soporta geolocalizacion
+			if (navigator.geolocation) {
+				//En este ejemplo dara un timeout ya que el tiempo maximo de espera
+				//es de 0 miisegundos para que nos devuelva la coordenada
+				navigator.geolocation.getCurrentPosition(coordenadas,
+						gestiona_errores,{timeout:0});
+			} else {
+				alert('Tu navegador no soporta la API de geolocalizacion');
+			}
+		}
+		
+		function coordenadas(position) {
+			var latitud = position.coords.latitude;
+			var longitud = position.coords.longitude;
+			alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
+		}
+		
+		function gestiona_errores(err) {
+			if (err.code == 0) {
+				alert("error desconocido");
+			}
+			if (err.code == 1) {
+				alert("El usuario no ha compartido su posicion");
+			}
+			if (err.code == 2) {
+				alert("no se puede obtener la posicion actual");
+			}
+			if (err.code == 3) {
+				alert("timeout recibiendo la posicion");
+			}
+		}
+	</script>
+	<a href="javascript:obtener_localizacion();">Mostrar Posici�n</a>
+</body>
+</html>

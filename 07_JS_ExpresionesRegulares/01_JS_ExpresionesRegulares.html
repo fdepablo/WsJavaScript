@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script type="text/javascript">
+    /*
+        Mas información: https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions
+
+        En el caso de la programación, estas expresiones (consideradas objetos) se denominan expresiones regulares 
+        (Regexp) y son utilizadas para buscar, reemplazar y extraer información de las cadenas de caracteres. 
+        Los patrones especificados por expresiones regulares pueden hacer cosas que las cadenas de caracteres 
+        no pueden hacer, como por ejemplo que alguno de sus elementos coincida con más de un carácter. 
+
+        Las expresiones regulares se utilizan con los métodos:
+            1- exec() y test() de RegExp
+                a) test() -> Prueba una coincidencia en una cadena. Devuelve true o false.
+                b) exec() -> Ejecuta una búsqueda por una coincidencia en una cadena. 
+                             Devuelve un array de información o null en una discrepancia.
+
+            2- match(), matchAll(), replace(), replaceAll(), search() y split() de String. 
+
+        En JavaScript, las expresiones regulares también son objetos.
+
+        Al igual que las cadenas de caracteres se escriben entre comillas dobles ("), los patrones de expresiones 
+        regulares se escriben entre barras (//) o creando su correspondiente objeto (new RegExp(''))
+    */
+        window.onload = function(){
+            //crear una expresion regularl (mas habitual entre barras)
+            let re = /ab+c/;
+            //o
+            re = new RegExp('ab+c');
+            //Un patrón de expresión regular se compone de caracteres simples, 
+            //como /abc/, o una combinación de caracteres simples y especiales, como /ab*c/ 
+            
+            // Patrones simples
+            //------------------
+            //Los patrones simples se construyen con caracteres para los que deseas encontrar una coincidencia directa.
+            re = /pepe/ //buscamos una correpondencia exacta con "pepe"
+            //podenos evaluar expresiones con test, que 
+            console.log(re.test("conoces a pepe?"))//true
+            console.log(re.test("conoces a pe pe?"))//false
+            console.log(re.exec("conoces a pepe?"))//array con informacion
+            console.log(re.exec("conoces a maria?"))//null, ya que no hay coincidencia
+            //Usando la clase String y el método match
+            let cadena = "conoces a pepe?";
+            console.log(cadena.match(re))//array con información
+            cadena = "conoces a pe pe"
+            console.log(cadena.match(re))//null
+
+            // Patrones compuestos
+            //---------------------
+            // Cuando la búsqueda de una coincidencia requiere algo más que una coincidencia exacta
+            // Podemos encontrar los siguientes tipos de caracteres especiales
+            // 1- Aserciones -> ^, $, x(?=y), x(?!y), (?<=y)x, (?<!y)x, \b, \B
+            // 2- Cuantificadores -> *, +, ?, x{n}, x{n,}, x{n,m}
+            // 3- Clases de caracteres -> \, ., \cX, \d, \D, \f, \n, \r, \s, \S, \t, \v, \w, \W, \0, \xhh, \uhhhh, \uhhhhh, [\b]
+            // 4- Grupos y rangos -> (x), (?:x), (?<Name>x), x|y, [xyz], [^xyz], \Number
+            // 5- Escapes de propiedades Unicode -> \p{UnicodeProperty}, \P{UnicodeProperty}
+            
+            // Aserciones
+            //------------
+            console.log("Aserciones")
+            // ^ -> Empieza por dicha letra
+            re = /^A/
+            console.log("Ana".match(re))//array con información
+            console.log("Soy AnA".match(re))//null
+            //$ -> Coincide con el final de la entrada.
+            re = /A$/
+            console.log("Ana".match(re))//null
+            console.log("Soy AnA".match(re))//array con informacion
+
+            // Cuantificadores
+            //-----------------
+            console.log("Cuantificadores")
+            // x* -> Concuerda 0 o más veces con el elemento "x" anterior.
+            re = /bu*/
+            console.log("/bu*/")
+            console.log("bu".match(re))//array con informacion
+            console.log("buuuuu".match(re))//array con informacion
+            console.log("bau".match(re))//array con información
+            console.log("au".match(re))//null
+
+            // x+ -> Encuentra 1 o más veces el elemento "x" anterior
+            re = /bu+/
+            console.log("/bu+/")
+            console.log("bu".match(re))//array con informacion
+            console.log("buuuuu".match(re))//array con informacion
+            console.log("bau".match(re))//null
+            console.log("au".match(re))//null
+
+            // x? -> Halla 0 o 1 vez el elemento "x" anterior
+            re = /bu?/
+            console.log("/bu?/")
+            console.log("bu".match(re))//array con informacion
+            console.log("buuuuu".match(re))//array con informacion
+            console.log("bau".match(re))//array con informacion
+            console.log("au".match(re))//null
+
+            // x{n} -> Donde "n" es un número entero positivo, concuerda exactamente con "n" apariciones del elemento "x" anterior.
+            re = /bu{5}/
+            console.log("/bu{5}/")
+            console.log("bu".match(re))//null
+            console.log("buuuuu".match(re))//array con informacion
+            console.log("buuuu".match(re))//null
+            console.log("au".match(re))//null
+
+            //tambien podemos dar opciones de coincidencia, en este caso 4 o 5 "u"
+            re = /bu{4,5}/
+            console.log("/bu{4,5}/")
+            console.log("bu".match(re))//null
+            console.log("buuuuu".match(re))//array con informacion
+            console.log("buuuu".match(re))//array con informacion
+            console.log("au".match(re))//null
+
+            // Clases de caracteres
+            //----------------------
+            re = /\w/ //algun caracter
+            console.log("/\w/")
+            console.log("a".match(re))//array con informacion
+            console.log("1".match(re))//array con informacion
+            console.log("felix".match(re))//array con informacion
+
+            //podemos unir tipos
+            re = /\w{5}/ //5 caracteres
+            console.log("/\w{5}/")
+            console.log("abcde".match(re))//array con informacion
+            console.log("abcd".match(re))//array con informacion
+            
+            // Grupos y rangos
+            //----------------------
+            re = /[abc]/ //algun caracter de este rango, equivalente a [a-c]
+            console.log("/[abc]/")
+            console.log("a".match(re))//array con informacion
+            console.log("1".match(re))//null
+
+            re = /(abc)/ //grupo de caracteres
+            console.log("/(abc)/")
+            console.log("a".match(re))//array con informacion
+            console.log("abc".match(re))//null
+
+        }   
+
+
+
+    </script>
+</head>
+<body>
+    <form id="formulario">
+        <input type="text" id="texto" />
+    </form>
+
+</body>
+</html>

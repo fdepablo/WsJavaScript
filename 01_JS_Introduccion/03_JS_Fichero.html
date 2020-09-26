@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+	<!-- Podemos incluir JS importando ficheros locales que esten en el
+	mismo directorio -->
+	<script type="text/javascript" src="fechas.js"></script>
+	
+	<!-- Podemos incluir JS importando ficheros locales que esten en otros 
+	directorios -->
+	<script type="text/javascript" src="js/matematicas.js"></script>
+	
+	<!-- Podemos incluir JS importando ficheros remotos CDN (u otro tipo) -->
+	<!-- Mas informacion sobre CDN https://www.webempresa.com/blog/cdn-wordpress.html -->
+	<script type="text/javascript" 
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<!-- Usamos fechas.js -->
+	<script>
+  		document.write('La fecha de hoy es:'+retornarFecha());
+  		document.write('<br>');
+  		document.write('La hora es:'+retornarHora());
+	</script>
+	
+	<hr/>
+	<!-- Usamos matematicas.js -->
+	<script>
+  		document.write('La suma de 3 y 4 es:' + sumar(4,3));
+	</script>
+	
+	<hr/>
+	
+	<p>Pulsame!!</p>
+	
+	<!-- Usamos JQUERY, buscamos todas las etiquetas P y les add esta funci�n -->
+	<!-- OJO! la etiqueta tiene que estar creada antes de este script -->
+	<script>
+  		$("p").click(function(){
+  		  alert("Hola jQuery!");
+  		}); 
+	</script>
+	
+</body>
+</html>

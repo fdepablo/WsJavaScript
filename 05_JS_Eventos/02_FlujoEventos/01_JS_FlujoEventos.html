@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--
+    El orden que se sigue cuando se lanza un evento es desde el elemento más específico hasta el elemento menos específico.
+
+    El primer evento que se tiene en cuenta es el generado por el <div> que contiene el mensaje. 
+    A continuación el navegador recorre los ascendentes del elemento hasta que alcanza el nivel superior, 
+    que es el elemento document. (ver dibujo flujoEventos1.png)
+-->
+
+<html onclick="procesaEvento(this)">
+  <head><title>Ejemplo de flujo de eventos</title></head>
+    <script>
+        function procesaEvento(obj){
+            console.log("Procesando el evento... " + obj)
+        }
+    </script>
+  <body onclick="procesaEvento(this)">
+    <div onclick="procesaEvento(this)">Pincha aqui</div>
+  </body>
+
+</html>
+

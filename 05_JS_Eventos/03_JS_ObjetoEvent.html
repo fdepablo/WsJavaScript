@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        /* 
+            Cuando se produce un evento, no es suficiente con asignarle una función responsable de procesar ese evento. 
+            Normalmente, la función que procesa el evento necesita información relativa al evento producido: 
+            la tecla que se ha pulsado, la posición del ratón, el elemento que ha producido el evento, etc.
+
+            El objeto event es el mecanismo definido por los navegadores para proporcionar toda esa información. 
+            Se trata de un objeto que se crea automáticamente cuando se produce un evento y que se destruye de forma 
+            automática cuando se han ejecutado todas las funciones asignadas al evento.
+
+            
+        */
+        window.onload = function(){
+            /*
+            El estándar DOM especifica que el objeto event es el único parámetro que se debe pasar a las funciones 
+            encargadas de procesar los eventos. Por tanto, en los navegadores que siguen los estándares, se puede 
+            acceder al objeto event a través del array de los argumentos de la función
+            */
+            div_principal.onclick = function() {
+                var elEvento = arguments[0];
+                console.log(elEvento)
+            }
+
+            //tambien se lo podemos pasar de forma explicita
+            div_secundario.onclick = function(event) {
+                console.log(event)
+            }
+
+            /*
+                Podemos ver que el objeto event tiene muchisimas propiedades por la consola, algunas de ellas:
+                PROPIEDAD       RETORNO 	    DESCRIPTCIÓN
+                altKey 	            Boolean 	Devuelve true si se ha pulsado la tecla ALT y false en otro caso
+               *button 	            Integer 	El botón del ratón que ha sido pulsado. Valores: 
+                                                0– Ningún botón pulsado 
+                                                1– Se ha pulsado el botón izquierdo
+                                                2– Se ha pulsado el botón derecho
+                                                3– Se pulsan a la vez el botón izquierdo y el derecho
+                                                4– Se ha pulsado el botón central
+                                                5– Se pulsan a la vez el botón izquierdo y el central
+                                                6– Se pulsan a la vez el botón derecho y el central
+                                                7– Se pulsan a la vez los 3 botones
+
+                charCode 	        Integer 	El código unicode del carácter correspondiente a la tecla pulsada
+                clientX 	        Integer 	Coordenada X de la posición del ratón respecto del área visible de la ventana
+                clientY 	        Integer 	Coordenada Y de la posición del ratón respecto del área visible de la ventana
+                ctrlKey 	        Boolean 	Devuelve true si se ha pulsado la tecla CTRL y false en otro caso
+                currentTarget 	    Element 	El elemento que es el objetivo del evento
+                detail 	            Integer 	El número de veces que se han pulsado los botones del ratón
+                isChar 	            Boolean 	Indica si la tecla pulsada corresponde a un carácter
+               *keyCode 	        Integer 	Indica el código numérico de la tecla pulsada
+                pageX 	Integer 	Coordenada X de la posición del ratón respecto de la página
+                pageY 	Integer 	Coordenada Y de la posición del ratón respecto de la página
+                preventDefault() 	Función 	Se emplea para cancelar la acción predefinida del evento
+                screenX 	        Integer 	Coordenada X de la posición del ratón respecto de la pantalla completa
+                screenY 	        Integer 	Coordenada Y de la posición del ratón respecto de la pantalla completa
+                shiftKey 	        Boolean 	Devuelve true si se ha pulsado la tecla SHIFT y false en otro caso
+                stopPropagation() 	Función 	Se emplea para detener el flujo de eventos
+               *target 	            Element 	El elemento que origina el evento
+               *timeStamp 	        Integer 	Milisegundos desde que se creo la pagina
+               *type 	            String   	El nombre del evento
+            */
+        
+        
+            function procesaEvento(elEvento) {
+                if(elEvento.type == "click") {
+                    console.log("Has pulsado el raton '" + elEvento.target.value + "'");
+                    if(elEvento.ctrlKey){
+                        console.log("Además la has pulsado con el 'Control' apretado")
+                    }
+                }
+                else if(elEvento.type == "mouseover") {
+                    console.log("Has movido el raton");
+                }
+            }
+            
+            boton1.onclick = procesaEvento;
+            boton1.onmouseover = procesaEvento;
+            boton2.onclick = procesaEvento;
+            
+
+            function keyLogger(elEvento) {
+                console.log("Se ha pulsado la letra con codigo " + elEvento.keyCode + " cuyo valor es "
+                            + String.fromCharCode(elEvento.keyCode))
+            }
+
+            texto1.onkeypress  = keyLogger;
+            //Fin Eventos
+        }//end onload
+
+         //Funcion que solo deja escribir un numero maximo de caracteres en un textarea
+         //NOTESE que esta fuera del window.onload, ya que si no el "textArea2" no lo vería
+         function limita(textArea,maximoCaracteres) {
+                if(textArea.value.length >= maximoCaracteres ) {
+                    maxNumeroAlcanzado.style.display = "block"
+                    return false;
+                }else {
+                    maxNumeroAlcanzado.style.display = "none"
+                    return true;
+                }
+            }
+    </script>
+</head>>
+<body>
+    <div id="div_principal">
+        <p>Clickeame para mostrar por console.log</p>
+    </div>
+
+    <div id="div_secundario">
+        <p>Clickeame para mostrar por console.log</p>
+    </div>
+
+    <input type="button" id="boton1" value="Pasa o pulsa el raton"/>
+    <input type="button" id="boton2" value="Pulsa el raton"/>
+
+    <input type="text" id="texto1"/>
+
+    <!--
+        En el modelo básico de eventos también es posible impedir el comportamiento por defecto de algunos eventos. 
+        Si por ejemplo en un elemento <textarea> se indica el siguiente manejador de eventos:
+    -->
+    <p>Text area que no podemos escribir</p>
+    <textarea onkeypress="return false;"></textarea>
+
+    <!--
+        Es posible definir manejadores de eventos que devuelvan true o false en función de algunos parámetros. 
+        Por ejemplo se puede diseñar un limitador del número de caracteres que se pueden escribir en un <textarea>:
+    -->
+
+    <p>Text area que solo podemos escribir 20 caracteres</p>
+    <textarea id="textArea1" onkeypress="return limita(this,20);"></textarea>
+    <p id="maxNumeroAlcanzado" style="color:red;display: none;" > Ha alcanzado el numero maximo de cararcteres!!(20)</p>
+</body>
+</html>

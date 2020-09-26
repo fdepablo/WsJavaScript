@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<script type="application/javascript">
+
+const URL_DESTINO = "http://localhost:80/JS/"
+    const RECURSO = "musica.xml"
+
+    function enviarPeticionAsincrona() {
+
+        let xmlHttp = new XMLHttpRequest()
+
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    procesarRespuesta(this.responseXML)
+                } else {
+                    alert("ZASCA!")
+                }
+            }
+        }
+
+        xmlHttp.open('GET', URL_DESTINO + RECURSO, true)
+        xmlHttp.send(null)
+    }
+
+    function procesarRespuesta(xmlDoc) {
+        var i;
+        //lo suyo seria crear objetos con el DOM, esto es un poco chapus
+        //pero como ejemplo sencillo vale
+        var table = "<tr><th>Title</th><th>Artist</th></tr>";
+        var x = xmlDoc.getElementsByTagName("CD");
+        for (i = 0; i < x.length; i++) {
+            table += "<tr><td>" +
+                x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+                "</td><td>" +
+                x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+                "</td></tr>";
+        }
+        resultadoBusqueda.innerHTML = table;
+    }
+
+</script>
+
+<body>
+
+    <h1>EJEMPLO AJAX XML</h1>
+    <button id="btnBuscarAsincrono" onclick="enviarPeticionAsincrona()">Buscar asíncrono</button>
+    <table id="resultadoBusqueda"></table>
+
+</body>
+
+</html>

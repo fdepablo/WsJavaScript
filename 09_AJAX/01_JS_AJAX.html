@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<script type="application/javascript">
+
+/*
+function XMLHttpRequest(){
+    this.responseText //El body en bruto
+    this.responseXML  //Si el body contenía un XML, el XML procesado
+    this.status       //Código de respuesta
+    this.statusText   //Texto asociado al código de respuesta  
+    this.readyState   //Estado del objeto
+    
+    //Propiedades pensadas para que coloquemos funciones de retrollamada
+    this.onreadystatechange = null 
+    this.onload  = null
+    this.onerror = null
+}
+XMLHttpRequest.prototype.open = function(){...}
+XMLHttpRequest.prototype.send = function(){...}
+
+*/
+
+const URL_DESTINO = "http://localhost:80/JS/"
+const RECURSO = "fichero.txt"
+
+function enviarPeticionSincrona(){
+
+    let xmlHttp = new XMLHttpRequest()
+
+    //xmlHttp.open(método (str), url (str), asíncrono/síncrono (true/false) )
+    xmlHttp.open('GET', URL_DESTINO + RECURSO, false)
+    xmlHttp.send(null) //Lo que queremos que vaya en el body se pasa como
+                       //parámetro a la función send
+    
+    xmlHttp.responseText //El body en bruto
+    xmlHttp.responseXML  //Si el body contenía un XML, el XML procesado
+    xmlHttp.status       //Código de respuesta
+    xmlHttp.statusText   //Texto asociado al código de respuesta
+
+    console.log("================================")
+    console.log("Response text:"+xmlHttp.responseText)
+    console.log("Status       :"+xmlHttp.status)
+    console.log("Status text  :"+xmlHttp.statusText)
+    
+    procesarRespuesta(xmlHttp.responseText)
+}
+
+function enviarPeticionAsincrona(){
+
+    let xmlHttp = new XMLHttpRequest()
+    
+    //Metodos de retrollamada/callbacks
+    xmlHttp.onreadystatechange = function(){
+        //propiedad readyState
+        //0-Valor inicial, simplemente hemos creado el objeto xmlHttpRequest
+        //1-Open
+        //2-Send
+        //3-Comienza a recibirse la respuesta
+        //4-Respuesta completa
+        if( this.readyState == 4){
+            if(this.status == 200){
+                procesarRespuesta(this.responseText)
+            } else {
+                alert("ZASCA!")
+            }
+        }
+    }
+
+    xmlHttp.open('GET',URL_DESTINO + RECURSO, true)
+    xmlHttp.send(null)
+    console.log("responseText:"+xmlHttp.responseText)
+
+}
+
+function peticionAjax(){
+
+    let xmlHttp = new XMLHttpRequest()
+    let parametros = "nombre="+nombre.value
+    xmlHttp.open('GET', URL_DESTINO + RECURSO, true)
+    xmlHttp.send() 
+
+    xmlHttp.onload = function(){
+        procesarRespuesta(this.responseText)
+    }
+
+    xmlHttp.onerror = function(){
+        alert("ZAS!")
+    }
+
+}
+
+function procesarRespuesta(respuesta){
+    resultadoBusqueda.innerHTML = "<h2>"+respuesta+"</h2>"
+}
+
+</script>
+
+<body>
+    <h1>EJEMPLO AJAX</h1>
+
+    <button id="btnBuscarSincrono"  onclick="enviarPeticionSincrona()">Buscar síncrono</button>
+    <button id="btnBuscarAsincrono" onclick="enviarPeticionAsincrona()">Buscar asíncrono</button>
+    <button id="btnBuscarAsincrono" onclick="peticionAjax()">Petición AJAX</button>
+
+    <div id="resultadoBusqueda"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+    function abrir() { 
+        //Abrimos una ventana y nos devuelve la referencia
+        //Pasamos como primer argumento la url de la ventana que queremos abrir, 
+        // como segundo argumento la descripción de la ventana, y como tercero una serie de 
+        // propiedades que nos ayudan a definir cómo queremos que sea la ventana: 
+        // menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes,width=600, height=400
+        pestania = window.open(""," "," ");
+        //Podeos guardar la referencia para más adelante cerrar la pestaña
+        window.focus();
+    }
+
+    function cerrar(){
+        pestania.close();
+    }
+
+</script>
+</head>
+<body>
+    <h3 onclick="abrir()">Click aquí para crear pestaña</h3>
+    <h3 onclick="cerrar()">Click aquí para cerrar la pestaña</h3>
+    <h3 onclick="mover()">Click aquí para cerrar la pestaña</h3>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

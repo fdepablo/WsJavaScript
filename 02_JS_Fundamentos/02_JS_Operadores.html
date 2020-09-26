@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Variables JS</title>
+</head>
+<body>
+
+<script type="text/javascript">
+//Asignacion
+//Es el mss utilizado y sencillo para guardar un valor especifico en una variable. 
+//Su símbolo es = (igual)
+var variable = "Hernion grenjoy"
+var numero = 1;
+
+//incremento y decremento
+console.log("INCREMENTO/DECREMENTO")
+numero++
+numero++;
+numero--
+console.log(numero)
+
+//logicos
+var verdad = true;
+var mentira = false;
+
+console.log("LOGICOS")
+console.log(verdad && mentira)
+console.log(verdad || mentira)
+console.log(!verdad)
+console.log(!mentira)
+
+
+/* MATEMÁTICOS */
+console.log("MATEMATICOS")
+var numero1 = 10;  var numero2 = 5;
+ 
+resultado = numero1 / numero2;  // resultado = 2
+console.log(resultado)
+resultado = 5 + numero1;        // resultado = 15
+console.log(resultado)
+resultado = numero2 - 2;        // resultado = 3
+console.log(resultado)
+resultado = numero1 * numero2; // resultado = 50
+console.log(resultado)
+resultado = numero1 % numero2; // resultado = 0
+console.log(resultado)
+
+//Acumulativos
+var numero1 = 5;
+numero1 += 6;  // numero1= 11
+numero1 -= 1;  // numero1 = 4
+numero1 *= 2;   // numero1 = 10
+numero1 /= 5;   // numero1 = 1
+numero1 %= 4;   // numero1 = 1
+
+/* RELACIONALES */
+console.log("RELACIONALES")
+var numero1 = 3; var numero2 = 5;
+resultado = numero1 > numero2; // resultado = false
+console.log(resultado)
+resultado = numero1 < numero2; // resultado = true
+console.log(resultado)
+ 
+numero1 = 5; numero2 = 5;
+resultado = numero1 >= numero2; // resultado = true
+resultado = numero1 <= numero2; // resultado = true
+resultado = numero1 == numero2; // resultado = true
+resultado = numero1 != numero2; // resultado = false
+
+// El operador "==" compara variables
+var numero1 = 5;
+resultado = numero1 == 3; // numero1 = 5 y resultado = false
+
+var texto1 = "hola"; var texto2 = "hola"; var texto3 = "adios";
+console.log("COMPARADORES")
+resultado = texto1 == texto3; // resultado = false
+console.log(resultado)
+resultado = texto1 != texto2; // resultado = false
+console.log(resultado)
+resultado = texto3 >= texto2; // resultado = false, ya que es menor por caracteres
+console.log(resultado)
+resultado = texto1 == texto2; // resultado = true
+console.log(resultado)
+</script>
+
+<h1> Operadores!! Pulsa F12 para ver la consola</h1>
+
+
+</body>
+</html>

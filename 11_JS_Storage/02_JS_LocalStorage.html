@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	//https://developer.mozilla.org/en-US/docs/Web/Events/storage
+	function onStorageEvent(storageEvent) {
+		alert("storage event: " + storageEvent.key + " "
+				+ storageEvent.oldValue + " " + storageEvent.newValue);
+	}
+	
+	function contadorDePulsaciones() {
+		if (typeof (Storage) !== "undefined") {
+			//Si existe la clave 'contador', accedemos a ella, la convertimos
+			//a número, y le añadimos uno
+			if (localStorage.contador) {
+				localStorage.contador = Number(localStorage.contador) + 1;
+			} else {//Si no existe la clave, la creamos y la inicializamoa a 1
+				localStorage.contador = 1;
+			}
+			//Añadimos a la etiqueta 'resultado' el númeoro de veces que 
+			//hemos pulsado el boton
+			document.getElementById("resultado").innerHTML = "Has pulsado el boton "
+					+ localStorage.contador + " veces.";
+		} else {
+			document.getElementById("resultado").innerHTML = "Lo siento, tu navegador"
+					+ " no soporta WebStorage";
+		}
+	}
+
+	function reset() {
+		localStorage.clear();
+	}
+	function iniciar() {
+		window.addEventListener('storage', onStorageEvent, false);
+	}
+</script>
+</head>
+<body onload="iniciar();">
+	<p>
+		<button onclick="contadorDePulsaciones()" type="button">Pulsame</button>
+		<button onclick="reset()">Reset</button>
+	</p>
+	<div id="resultado"></div>
+</body>
+</html>
+
+

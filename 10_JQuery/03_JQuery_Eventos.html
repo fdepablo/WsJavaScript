@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<script type="text/javascript" src="jquery-3.5.1.min"></script>
+<script type="text/javascript">
+
+function dale(){
+    console.log("====================================");
+    console.log(arguments);
+    alert("Leña al mono que es de goma");
+}
+
+function validar(evento){
+    console.log("====================================");
+    console.log(evento);
+
+    if( $("#dato").val().trim().length == 0){
+        alert("Dato es obligatorio");
+        evento.preventDefault(); 
+    }
+
+    console.log("evento:"+evento.isDefaultPrevented());
+}
+
+$(inicializar);
+
+function inicializar(){
+	
+    //document.getElementById("DALE").onclick = dale;
+    //DALE.onclick = dale;
+    $("#DALE").click(dale);
+    $("#enviar").click(validar);
+
+}
+
+</script>
+
+<body>
+
+    <h1>JQuery. Eventos</h1>
+
+    <input type="button" id="DALE" value="DALE"/>
+
+    <hr/>
+
+    <form action="XXX">
+        <input type="text" id="dato" name="dato" value=""/>
+        <input type="submit" id="enviar" value="Enviar"/>
+    </form>
+
+</body>
+</html>

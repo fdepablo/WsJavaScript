@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+//como las funciones son objetos podemos
+//hacer cositas asin
+let multiplicar = function(m1,m2){
+	return m1 * m2
+}
+
+console.log(multiplicar(4,2))
+console.log(multiplicar(3,6))
+
+console.log("=========================")
+function crearDocumento(datos,funcion){
+	console.log("Creando documento")
+	/*
+	if(tipoDoc == "factura"){
+		//codigo necesario para crear una
+		//factura
+	}else if(tipoDoc == "pedido"){
+		//codigo necesario para crear un 
+		//pedido
+	}*/
+	let codigo = funcion(datos)//invocamos la funcion
+	console.log(codigo)
+}
+
+function crearCodigoFactura(cuerpo){
+	console.log("Creando codigo para la Factura")
+	return ("Fac-1: " + cuerpo)
+}
+function crearCodigoPedido(cuerpo){
+	console.log("Creando codigo para el pedido")
+	return ("Pedido-1: " + cuerpo)
+}
+
+crearDocumento("Datos1", crearCodigoFactura)
+crearDocumento("Datos2", crearCodigoPedido)
+
+//Usando el objeto Function
+var miFuncion = new Function("a", "b", "return a+b;");
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

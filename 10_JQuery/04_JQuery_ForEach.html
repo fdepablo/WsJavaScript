@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<script type="text/javascript" src="jquery-3.5.1.min"></script>
+<script type="text/javascript">
+
+$(inicializar);
+
+function inicializar(){
+
+    $("h2") //Dame los h2: Demasiado genérico
+
+    $("h2[id]") //Dame los h2 que tienen id: casi
+
+    $("h2[id^=color-]") //Fetén
+
+    console.log("===============================")
+    let nodos = $("h2[id^=color-]")
+    for(let nodo of nodos){
+        console.log(nodo.innerText)
+    }
+
+    console.log("===============================")
+    $("h2[id^=color-]").each(function(){
+        console.log(this.innerHTML)
+    })
+
+    console.log("===============================")
+    $("h2[id^=color-]").each(function(){
+        let texto = this.innerText
+        
+        switch(texto){
+            case 'Rojo' : 
+                this.style.color = 'red'
+                break
+            case 'Verde' : 
+                this.style.color = 'green'
+                break
+            case 'Azul' : 
+                this.style.color = 'blue'
+                break
+            case 'Amarillo' : 
+                this.style.color = 'yellow'
+                break
+            case 'Fabada' : 
+                this.style.color = '#FABADA'
+                break
+        }
+
+    })
+
+    console.log("===============================")
+    let colores = {
+        'Rojo'     : 'red',
+        'Verde'    : 'green',
+        'Azul'     : 'blue',
+        'Amarillo' : 'yellow',
+        'Fabada'   : '#FABADA'
+    }
+    $("h2[id^=color-]").each(function(){
+        //this.innerText          : el contenido del h2 
+        //colores[this.innerText] : el color que hay que poner
+        this.style.color = colores[this.innerText]
+    })
+
+}
+
+</script>
+
+<body>
+
+<h1>JQuery for each</h1>
+
+<h2 id="color-1">Rojo</h2>
+<h2 id="color-2">Verde</h2>
+<h2 id="color-3">Azul</h2>
+<h2 id="color-4">Amarillo</h2>
+<h2 id="color-5">Fabada</h2>       
+<h2 id="color-6">Rojo</h2>
+<h2 id="color-7">Verde</h2>
+<h2 id="color-8">Azul</h2>
+<h2 id="color-9">Amarillo</h2>
+<h2 id="color-10">Fabada</h2>       
+    
+</body>
+</html>

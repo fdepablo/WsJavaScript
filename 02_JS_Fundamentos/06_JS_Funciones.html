@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+//En JS las funciones son objetos
+//asociadas SIEMPRE a otro objeto
+
+//JS al no ser tipado no se indica en las funciones
+//el tipo de retorno, tampoco existe una palabra "void"
+function saludar(){
+	console.log("Hola chiquitin! tienes frio y lo sabes")
+}
+
+saludar()
+//aunque no retornemos datos en la funcion, podemos pedirselos
+let respuesta = saludar()
+console.log(respuesta)
+
+//las funciones pueden recibir parametros (no se indica tipo)
+function sumar(n1,n2){
+	return n1 + n2
+}
+
+let resultado2 = sumar(10,20)
+console.log(resultado2)
+
+resultado2 = sumar()
+console.log(resultado2)
+resultado2 = sumar(20)
+console.log(resultado2)
+resultado2 = sumar(12,20,23)
+console.log(resultado2)
+resultado2 = sumar("munon"," soy", " o no!")
+console.log(resultado2)
+
+//las funciones tienen implicitamente un array con los
+//argumentos de entrada
+function pruebaArgumentos(){
+	console.log("===== ARGUMENTOS ======")
+	for(let a=0; a< arguments.length; a++){
+		console.log(arguments[a])
+	}
+}
+
+pruebaArgumentos(1,2)
+pruebaArgumentos()
+pruebaArgumentos(1,2,3,4,5)
+
+
+function sumaTotal(){
+	console.log("===== SUMA TOTAL ======")
+	let total = 0
+	for(let a=0; a< arguments.length; a++){
+		total += arguments[a]
+	}
+	console.log(total)
+}
+
+sumaTotal(1)
+sumaTotal(1,6,7)
+sumaTotal(7,8,9,4,0,5,"cadena")
+
+function imprimir(pelicula){
+	//podemos tener funciones anidadas
+	function imprimirPorConsola(pelicula){
+		console.log(pelicula)
+	}
+	imprimirPorConsola(pelicula)
+}
+
+imprimir("Harry poter eh el prisionero de hazcabal")
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

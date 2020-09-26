@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!-- 
+Conseguir una API key de google
+https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ES
+ -->
+<html>
+<head>
+<title>Simple Map</title>
+<meta name="viewport" content="initial-scale=1.0">
+<meta charset="utf-8">
+<style>
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+	height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+<!-- Ponemos la key, no hace falta función de callback-->
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy77yCKcWuIrbQ_aMazG-YHHkbw--1Cf4"
+	async defer></script>
+	
+<script>
+	var goolgeMap;
+
+	//Esta vez lo vamos a enfocar a dispositivos moviles
+	function startWatch() {
+		//si no existe, el navegador no soporta geolocalización
+		if (navigator.geolocation) {
+			/*
+			enableHighAccuracy: True o false, para activar que el resultado sea lo más preciso posible. 
+				Hay que tener cuidado con esta opción dado que puede tener efectos adversos 
+				(tiempo demasiado largo de espera, consumo de batería algo, etc)
+			timeout: Tiempo (en milisegundos) máximo en responder.
+			maximumAge: Tiempo (en milisegundos) en el que se puede seguir utilizando los 
+				datos de ubicación en caché antes de intentar obtener nuevos datos de ubicación.
+			*/
+			var optn = {
+					enableHighAccuracy : true,
+					timeout : Infinity,
+					maximumAge : 0
+				};
+			//Esto esta más enfocado a dispotivos moviles 
+			//ya que hara una monitorización continua
+			//nos devuelve el id para luego pararlo
+			watchId = navigator.geolocation.watchPosition(cargarMapa, gestiona_errores, optn);
+		} else {
+			alert('Tu navegador no soporta la API de geolocalizacion');
+		}
+	}
+	
+	function stopWatch() {
+		if (watchId) {
+			navigator.geolocation.clearWatch(watchId);
+			watchId = null;
+		}
+	}
+	
+	//Vamos a hacer lo mismo que antes pero un poco más elaborado
+	function cargarMapa(position) {
+		var latitud = position.coords.latitude;
+		var longitud = position.coords.longitude;
+		
+		var mapObj = document.getElementById('map');
+		//podemos crear un objeto LatLng
+		var googlePos = new google.maps.LatLng(latitud, longitud);
+		/*
+		Zoom. Especifica el nivel de zoom
+		Center. Especifica que el mapa debe estar centrado en la ubicación dada
+		MapTypeId. Puede ser mapa de ruta, satélite o híbrido
+		*/
+		var mapOptions = {
+				zoom : 12,
+				center : googlePos,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+		
+		goolgeMap = new google.maps.Map(mapObj, mapOptions);
+		
+		//Por ultimo vamos a add un marker para su mejor visualización
+		
+		/* Algunas opciones
+		Map. Mapa donde aparece el marcador
+		Position. Posición en la que se muestra el marcador
+		Title. Título del marcador
+		Animation. Animación del marcador DROP/BOUNCE (cayendo o moviendose)
+		Image. Icono simple para el marcador
+		Draggable. true para podemos mover el marcador por el mapa
+		*/
+		var markerOpt = {
+				map : goolgeMap,
+				position : googlePos,
+				title : 'Estoy en latitud ' + latitud + " y longitud " + longitud,
+				animation : google.maps.Animation.BOUNCE
+		};
+
+		var googleMarker = new google.maps.Marker(markerOpt);
+		// podriamos eliminarlo
+		//googleMarker.setMap(null);
+		
+		//Tambien podemos add eventos
+		//https://developers.google.com/maps/documentation/javascript/events?hl=es-419
+		goolgeMap.addListener('rightclick', function(e) {
+		    alert(e.latLng);
+		 });
+
+				
+	}
+
+	function gestiona_errores(err) {
+		if (err.code == 0) {
+			alert("error desconocido");
+		}
+		if (err.code == 1) {
+			alert("El usuario no ha compartido su posicion");
+		}
+		if (err.code == 2) {
+			alert("no se puede obtener la posicion actual");
+		}
+		if (err.code == 3) {
+			alert("timeout recibiendo la posicion");
+		}
+	}
+</script>
+</head>
+<body>
+	<a href="javascript:startWatch();">Empezar Monitorización</a>
+	<a href="javascript:stopWatch();">Parar Monitorización</a>
+	<div id="map"></div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script>
+
+//metodo
+function onStorageEvent(storageEvent) {
+	alert("storage event: " + storageEvent.key + " "
+			+ storageEvent.oldValue + " " + storageEvent.newValue);
+}
+
+function ejecutar(){
+	if (typeof (Storage) !== "undefined") {
+		//localStorage.lastname="Smithers";
+		localStorage.setItem("lastname", "Smithers");
+		// Otra manera
+		localStorage.edad = "18";
+	
+		document.getElementById("result").innerHTML = "Last name: "
+				+ localStorage.lastname + "Edad: " + localStorage.edad;
+	} else {
+		document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+	}
+}
+
+function cargarEventos(){
+	window.addEventListener('storage', onStorageEvent, false);
+}
+
+</script>
+<body onload="cargarEventos();">
+	
+	<div id="result"></div>
+	<button onclick="ejecutar();">Guardar</button>
+
+</body>
+</html>

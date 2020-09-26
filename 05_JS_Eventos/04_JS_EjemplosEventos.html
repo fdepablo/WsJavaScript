@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<script type="text/javascript">
+
+function btnDalePulsado(){
+    console.log("Dale leña al mono que es de goma")
+    vaciarFormulario()
+}
+
+function vaciarFormulario(){
+    cajaTexto.value = ""
+    //console.log(arguments)
+}
+
+let cadena = ""
+function concatenarLetra(letra){
+    cadena = cadena+letra
+    console.log(cadena)
+}
+
+function validarFormulario(){
+    let ok = true
+    if(dato.value.trim()==""){
+        espán.innerHTML = "Dato es obligatorio"
+        ok = false
+    }
+    return ok
+}
+
+window.onload = function(){
+
+    //Podemos asociar como manejador de eventos una función
+    //que tengamos ya declarada
+    //btnDale.onclick = btnDalePulsado
+    btnVaciar.onclick = vaciarFormulario
+
+    //Cuando se dispara un evento nos lo proporcionan como
+    //parametro a la funcion asignada
+    cajaTexto.onkeyup = function(e){
+        let letra = e.key //Ya nos da el caracter
+        concatenarLetra(letra)
+    }
+
+    cajaTexto.onfocus = function(e){
+        console.log("Has entrado dentro")
+    }
+
+    cajaTexto.onmouseover = function(e){
+        console.log("Has pasado por encima")
+    }
+
+    cajaTexto.onmouseleave = function(e){
+        console.log("Has salido")
+    }
+
+
+    //
+    btnEnviar.onclick = function(e){
+        if( !validarFormulario() ){
+            e.preventDefault();//Prevenimos el submit del formulario
+        }
+    }
+
+}
+
+</script>
+
+<body>
+
+    <h1>07 Eventos</h1>
+
+    <hr/>
+
+    <button id="btnDale">DALE</button>
+    <input type="text" id="cajaTexto"/>
+    <button id="btnVaciar">Vaciar</button>
+    
+    <hr/>
+    
+    <form id="" action="xxx">
+        Dato <input type="text" name="dato" id="dato"/>
+        <input type="submit" id="btnEnviar" value="Enviar"/>
+        <span id="espán"></span>
+    </form>
+
+</body>
+</html>

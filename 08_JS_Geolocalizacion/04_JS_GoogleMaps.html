@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<!-- 
+Conseguir una API key de google
+https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ES
+ -->
+<html>
+<head>
+<title>Simple Map</title>
+<meta name="viewport" content="initial-scale=1.0">
+<meta charset="utf-8">
+<style>
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+	height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+<!--
+	Aqui cargamos la api de google maps 
+	Ponemos la key y la función de callback. Nota, si lo ejecutamos sin servidor no necesitamos
+	poner la key
+	defer -> Ejecutamos el script una vez se haya descargado
+ -->
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy77yCKcWuIrbQ_aMazG-YHHkbw--1Cf4&callback=apiCargada"
+	async defer></script>
+	
+<script>
+	var map;
+	function apiCargada() {
+		alert("api cargada");
+	}
+	
+	function obtener_localizacion() {
+		//si no existe, el navegador no soporta geolocalización
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(cargarMapa,
+					gestiona_errores);
+		} else {
+			alert('Tu navegador no soporta la API de geolocalizacion');
+		}
+	}
+	function cargarMapa(position) {
+		var latitud = position.coords.latitude;
+		var longitud = position.coords.longitude;
+		
+		map = new google.maps.Map(document.getElementById('map'), {
+			center : {
+				lat : latitud,
+				lng : longitud
+			},
+		zoom : 8 
+		});
+	}
+
+	function gestiona_errores(err) {
+		if (err.code == 0) {
+			alert("error desconocido");
+		}
+		if (err.code == 1) {
+			alert("El usuario no ha compartido su posicion");
+		}
+		if (err.code == 2) {
+			alert("no se puede obtener la posicion actual");
+		}
+		if (err.code == 3) {
+			alert("timeout recibiendo la posicion");
+		}
+	}
+</script>
+</head>
+<body>
+	<a href="javascript:obtener_localizacion();">Mostrar Mapa</a>
+	<div id="map"></div>	
+</body>
+</html>

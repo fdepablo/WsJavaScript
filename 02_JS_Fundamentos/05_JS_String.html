@@ -1,0 +1,66 @@
+<html>
+    
+    <head></head>
+    
+    <script>
+    //Los string en JS son objetos y como tales tienen atributos y 
+    //funciones. Podemos crear el String para que sea tratado como primitivo
+    let texto = "Esto es una cadena de caracteres";
+    //O como objeto (mejor evitar esta manera)
+    let textoObjeto = new String("Esto es otra cadena de caracteres")
+    
+    //Longitud de la cadena
+    console.log(texto.length); 
+    
+    //Algunas funciones
+    texto.toUpperCase();
+    console.log(texto); //cuidado que las cadenas de texto en JS son inmutables
+
+    console.log("===================================");
+    let texto2 = texto.toUpperCase();
+    console.log(texto2);
+
+    //Lo normal es no crear una segunda variable:
+    texto = texto.toUpperCase();
+
+   
+    //Aceder a un caracter concreto
+    console.log("====================================");
+    console.log("CharAt:"+texto.charAt(10));
+    console.log("CharAt:"+texto.charAt(100000)); //Si te pasas del tamaño TJ porque no te avisan
+    
+    /* INDEXOF & LASTINDEXOF */
+    var mensaje = "Hola";
+    var posicion = mensaje.indexOf('a'); // posicion = 3
+    posicion = mensaje.indexOf('b');     // posicion = -1
+
+    /* TRIM - Elimina espacios en blanco finales e iniciales*/
+    var mensaje = "  Hola        ";
+    var sinEspacios = mensaje.trim();
+    console.log(sinEspacios)
+    
+    /* SUBSTRING */
+    var mensaje = "Hola usuario";
+    var porcion = mensaje.substring(2); // porcion = "la usuario"
+    porcion = mensaje.substring(5);     // porcion = "usuario"
+    porcion = mensaje.substring(7);     // porcion = "rio"
+
+    var porcion = mensaje.substring(5, 0); // porcion = "Hola "
+    porcion = mensaje.substring(0, 5);     // porcion = "Hola "
+
+    //Split
+    let trozos = texto.split(" "); //Trozos es un array con los fragmentos
+    for(let a=0; a<trozos.length; a++){
+        console.log(trozos[a]);
+    }
+
+    </script>
+    
+    <body>
+    
+        <h1>04 Strings</h1>
+    
+    </body>
+    
+</html>
+    
