@@ -17,3 +17,7 @@ Para elegir otro buscador web con el que abrir
  Para abrir los fichero .js podemos abrirlos con 
  boton derecho -> open with -> other -> js editor
  De esta manera se facilita la lectura
+
+----------------------------------------------------------------------------  
+Para abrir paginas directamente podemos usar la extension "open in browser" de visual studio code
+Luego pulsar ALT-B

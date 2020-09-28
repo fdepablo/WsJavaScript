@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Si tenemos problemas con los acentos y caracteres especiales podemos establecer UTF8 -->
+<!-- Si tenemos problemas con las tildes y caracteres especiales podemos establecer UTF8 -->
 <meta charset="UTF-8">
 <title>Variables JS</title>
 </head>
@@ -20,9 +20,10 @@ de comentarios
 //Secuencial
 //Orientado a objetos por prototipado
 //Funcional, orientado a funciones
-//Fuertemente NO tipado
+//Fuertemente NO tipado, el tipo de las variables no se decide en tiempo de interpretacion 
+// o compilacion, se decide en tiempo de ejecucion.
 
-// Para probar codigo en js podemos usar la funci�n alert o usar logs
+// Para probar codigo en js podemos usar la funcion alert o usar logs
 //alert("Es mejor evitar alerts");
 console.log("Esto es un poco mejor que los alerts, f12 para verlos");
 
@@ -30,15 +31,15 @@ console.log("Esto es un poco mejor que los alerts, f12 para verlos");
 //-----------
 //Podemos guardar cualquier cosa y no tienen declaracion
 
-//S�lo puede estar formado por letras, n�meros, 
-// y los s�mbolos $ (d�lar) y _ (gui�n bajo).
-// El primer car�cter no puede ser un n�mero.
+//Solo puede estar formado por letras, numeros, 
+// y los simbolos $ (dolar) y _ (guion bajo).
+// El primer caracter no puede ser un numero.
 
-//4 Tipos basicos, enteras, decimales, cadenas de texto, booleanas y arrays
+//5 Tipos basicos, enteros, decimales, cadenas de texto, booleanos y arrays
 numero1 = 1;
 numero2 = 1.5;
-texto1= 'hola';
-texto2= "Adios";
+texto1 = 'hola';
+texto2 = "Adios";
 boolean1 = true;
 boolean2 = false;
 
@@ -61,6 +62,7 @@ console.log(texto5);
 console.log(texto6);
 
 //Si algo vale "0" era false, si vale cualquier otra cosa será true
+//Esto se ve mejor con condicionales
 boolean3 = 0;
 console.log("valor 0: " + boolean3)
 boolean3 = 2;
@@ -68,8 +70,8 @@ console.log("valor 2: " + boolean3)
 //hay varias cositas de estas por javascript...
 
 //podemos poner "var" para declarar variables, en este caso su ambito
-//es el de la funci�n, si no ponemos nada el ambito ser�a global
-//y se asignar�a al objeto de windows (del DOM, se ver� m�s adelante)
+//es el de la funcion, si no ponemos nada el ambito sera global
+//y se asignara al objeto de windows (del DOM, se vera mas adelante)
 var dato = 5;
 var dato = 7;//estoy redefiniendo
 var movida;//podemos dejar variables sin declarar
@@ -80,7 +82,7 @@ console.log(movida);
 //variable guardar� una referencia pero no sabemos a donde
 var referencia = null;
 
-//podemos reasignar valores
+//podemos reasignar valores de distinto tipo
 referencia = 7;
 referencia = "Siete";
 referencia = true;
@@ -97,7 +99,7 @@ console.log(isNaN(numero1));//false
 
 //Hay otros dos tipos especiales en las variables
 //undefined, cuando no le asingamos ningun valor
-//object, se veran m�s adelante
+//object, se veran mas adelante
 if(typeof dato == 'number'){
 	console.log("el dato es un numero");
 }
@@ -108,7 +110,7 @@ if(typeof movida == 'undefined'){
 //let es a partir de las ultimas versiones de js
 let num1 = 5;
 let txt1 = "otro texto";
-//con let no se puede redefinir una variable
+//con let NO se puede redefinir una variable
 let v1 = 9;
 //let v1 = 7; //esto daria un error
 
@@ -118,13 +120,13 @@ const PI = 3.1416;
 console.log(PI);
 
 //AMBITO de las variables
-console.log("========================")
+console.log("=========== AMBITO ==============")
 function pruebaVar(){
 	//las variables que no tienen declaracion
 	//(no tienen ni var ni let) son de ambito global
 	variable1 = "Esta variable es global"
 	//las variables con var su ambito es el de funcion
-	var variable2 = "El ambito de esta variable es de la funci�n"
+	var variable2 = "El ambito de esta variable es de la funcion"
 	console.log(variable1)
 	console.log(variable2)
 	
@@ -137,19 +139,25 @@ function pruebaVar(){
 //console.log(variable1);//no existe
 pruebaVar()
 console.log(variable1)
+//Esta de aquí daria error ya que no tiene alcance
 //console.log(variable2)
 
 
 //LET es basicamente como en java
 //el ambito de LET es el de bloque
+console.log("========= LET=========")
 function pruebaLet(){
 	let var1 = 10
 	if(true){
 		let var2 = 20
 	}
 	console.log("var1: " + var1)
-	//console.log("var2: " + var2) CASCA!! Esta fuera de su ambito
+	//console.log("var2: " + var2) //CASCA!! Esta fuera de su ambito
 }
+//Esto tambien cascaria
+//console.log(var1)
+
+pruebaLet()
 </script>
 
 <h1> Variables y ambito!! Pulsa F12 para ver la consola</h1>
