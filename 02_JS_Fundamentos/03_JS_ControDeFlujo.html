@@ -1,165 +1,168 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Variables JS</title>
+  <meta charset="UTF-8">
+  <title>Variables JS</title>
 </head>
+
 <body>
 
-<script type="text/javascript">
-var mensaje = true;
-//ESTRUCTURA IF
-//Preguntar directamente si algo es cierto
- if(mensaje) { console.log("Hola usuario!!");}
- 
- // Se comparan los dos valores
- if(mensaje == false) { console.log("Esto no sale :(")}
-  
- // Error - Se asigna el valor "false" a la variable
- //if(mostrarMensaje = false) { ...}
- 
- var mostrado = false; 
- var permiteMensajes = true;
-  
- //podemos usar estructuras logicas
- if(!mostrado && permiteMensajes) { 
-     console.log("¡¡Es la primera vez que se muestra el mensaje al nuevo usuario!!");
-}
+  <script type="text/javascript">
+    var mensaje = true;
+    //ESTRUCTURA IF
+    //Preguntar directamente si algo es cierto
+    if (mensaje) { console.log("Hola usuario!!"); }
 
-//ESTRUCTURA IF-ELSE
-var nombre = "";
- 
-if(nombre == "") { 
-    console.log("¿Cuál es tu nombre de pila");
-}else {
-    console.log("Hemos guardado tu nombre respetando la LPD");
-}
+    // Se comparan los dos valores
+    if (mensaje == false) { console.log("Esto no sale :(") }
 
-//IF-ELSE_IF-ELSE
-var edad = 8;
-if(edad < 12) {
-    console.log("Todavía eres muy pequeño para entrar en este programa");
-}else if(edad < 19) {
-    console.log("Estás en plena adolescencia");
-}else if(edad < 35) {
-    console.log("Aun sigues siendo joven, ¡¡sigue así!!");
-}else {
-    console.log("Piensa en cuidarte un poco más");
-}
+    // Error - Se asigna el valor "false" a la variable
+    //if(mostrarMensaje = false) { ...}
 
-//ESTRUCTURA FOR
-var mensaje = "Hola, estoy dentro de un bucle dando muchas vueltas";
-//1- VALOR INICIAL; 2- CONDICION DE EJECUCION DE BUCLE; 3- INCREMENTO EN CADA ITERACION 
-for(var i = 0; i < 5; i++) { 
-    console.log("iteracion: " + i)
-    console.log(mensaje);
-}
+    var mostrado = false;
+    var permiteMensajes = true;
 
-//una declaración de un array
-var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-console.log("FOR CLASICO")
-for(var i=0; i<7; i++) {
-    console.log(dias[i]);//Mostrará cada uno de los día de la semana en cada vuelta.
-}   
+    //podemos usar estructuras logicas
+    if (!mostrado && permiteMensajes) {
+      console.log("¡¡Es la primera vez que se muestra el mensaje al nuevo usuario!!");
+    }
 
-//ESTRUCTURA FOR-IN, ideal para recorrer arrays
-console.log("FOR IN - FOR EACH")
-for(let indice in dias) { 
-    //OJO El valor que guarda es el indice el array y no el valor como en otro lenguajes como JAVA
-    console.log(dias[indice]);//Mostraría los días de la semana
-}  
+    //ESTRUCTURA IF-ELSE
+    var nombre = "";
 
-//ESTRUCTURA WHILE
-//OJO! CON LOS BUCLES INFINITOS
-console.log("WHILE")
-var resultado = 0;  var num = 10;  var i = 0;
-while(i <= num) {
-  resultado += i;//acumulacion
-  i++;
-}
- 
-console.log(resultado);
-
-//ESTRUCTURA DO-WHILE
-console.log("DO-WHILE")
-var resultado = 1;   var num = 5; 
-do {
-  resultado *= num;    // resultado = resultado * num
-  num--;
-} while(num > 0);
- 
-console.log(resultado);
-
-//ESTRUCTUA SWITCH
-//misma funcionalidad que el ELSE-IF
-console.log("SWITCH")
-var numero = 5
-switch(numero) {
-  case 5:
-    console.log("El numero es el 5")
-    break;//cuidado con la ejecucion en cascada si no poneis el break!
-  case 8:
-    console.log("El numero es el 8")
-    break;
-  case 20:
-    console.log("El numero es el 20")
-    break;
-  default:
-    console.log("El numero es otro diferente")
-    break;
-}
-
-var diaSemana = "DOMINGO"
-switch(diaSemana) {
-  case "LUNES":
-  case "MARTES":
-  case "MIERCOLES":
-  case "JUEVES":
-  case "VIERNES":
-    console.log("VAYA CACA ES A DIARIO :( :(")
-    break;
-  case "SABADO":
-  case "DOMINGO":
-    console.log("YUJUUUUU!!! ES FINDE!!! AL MEDIAS!!!")
-    break;
-  default:
-    console.log("NO SE EN QUE DIA ESTOY :/")
-}
-
-/* BREAK */
-console.log(" BREAK ")
-var cadena = "Esto es un texto muy largo que tomamos como ejemplo...";
-var letras = cadena.split("");//Devuelve un array partiendo el string por dicho caracterf
-var resultado = "";
-console.log(letras)
-
-//vamos concatenando letras hasta que encontremos una 'a'
-for(i in letras) {
-    if(letras[i] == 'a') { 
-      break; //salimos del for!
+    if (nombre == "") {
+      console.log("¿Cuál es tu nombre de pila");
     } else {
+      console.log("Hemos guardado tu nombre respetando la LPD");
+    }
+
+    //IF-ELSE_IF-ELSE
+    var edad = 8;
+    if (edad < 12) {
+      console.log("Todavía eres muy pequeño para entrar en este programa");
+    } else if (edad < 19) {
+      console.log("Estás en plena adolescencia");
+    } else if (edad < 35) {
+      console.log("Aun sigues siendo joven, ¡¡sigue así!!");
+    } else {
+      console.log("Piensa en cuidarte un poco más");
+    }
+
+    //ESTRUCTURA FOR
+    var mensaje = "Hola, estoy dentro de un bucle dando muchas vueltas";
+    //1- VALOR INICIAL; 2- CONDICION DE EJECUCION DE BUCLE; 3- INCREMENTO EN CADA ITERACION 
+    for (var i = 0; i < 5; i++) {
+      console.log("iteracion: " + i)
+      console.log(mensaje);
+    }
+
+    //una declaración de un array
+    var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    console.log("FOR CLASICO")
+    for (var i = 0; i < 7; i++) {
+      console.log(dias[i]);//Mostrará cada uno de los día de la semana en cada vuelta.
+    }
+
+    //ESTRUCTURA FOR-IN, ideal para recorrer arrays
+    console.log("FOR IN - FOR EACH")
+    for (let indice in dias) {
+      //OJO El valor que guarda es el indice el array y no el valor como en otro lenguajes como JAVA
+      console.log(dias[indice]);//Mostraría los días de la semana
+    }
+
+    //ESTRUCTURA WHILE
+    //OJO! CON LOS BUCLES INFINITOS
+    console.log("WHILE")
+    var resultado = 0; var num = 10; var i = 0;
+    while (i <= num) {
+      resultado += i;//acumulacion
+      i++;
+    }
+
+    console.log(resultado);
+
+    //ESTRUCTURA DO-WHILE
+    console.log("DO-WHILE")
+    var resultado = 1; var num = 5;
+    do {
+      resultado *= num;    // resultado = resultado * num
+      num--;
+    } while (num > 0);
+
+    console.log(resultado);
+
+    //ESTRUCTUA SWITCH
+    //misma funcionalidad que el ELSE-IF
+    console.log("SWITCH")
+    var numero = 5
+    switch (numero) {
+      case 5:
+        console.log("El numero es el 5")
+        break;//cuidado con la ejecucion en cascada si no poneis el break!
+      case 8:
+        console.log("El numero es el 8")
+        break;
+      case 20:
+        console.log("El numero es el 20")
+        break;
+      default:
+        console.log("El numero es otro diferente")
+        break;
+    }
+
+    var diaSemana = "DOMINGO"
+    switch (diaSemana) {
+      case "LUNES":
+      case "MARTES":
+      case "MIERCOLES":
+      case "JUEVES":
+      case "VIERNES":
+        console.log("VAYA CACA ES A DIARIO :( :(")
+        break;
+      case "SABADO":
+      case "DOMINGO":
+        console.log("YUJUUUUU!!! ES FINDE!!! AL MEDIAS!!!")
+        break;
+      default:
+        console.log("NO SE EN QUE DIA ESTOY :/")
+    }
+
+    /* BREAK */
+    console.log(" BREAK ")
+    var cadena = "Esto es un texto muy largo que tomamos como ejemplo...";
+    var letras = cadena.split("");//Devuelve un array partiendo el string por dicho caracterf
+    var resultado = "";
+    console.log(letras)
+
+    //vamos concatenando letras hasta que encontremos una 'a'
+    for (i in letras) {
+      if (letras[i] == 'a') {
+        break; //salimos del for!
+      } else {
         resultado += letras[i];
+      }
     }
-}
-console.log(resultado);  // Aparecerá en pantalla  "Esto es un texto muy l"
+    console.log(resultado);  // Aparecerá en pantalla  "Esto es un texto muy l"
 
-/* CONTINUE */
-console.log(" CONTINUE ")
-var cadena = "En un lugar de la Mancha de cuyo nombre no quiero acordarme...";
-var letras = cadena.split("");  
-var resultado = "";
- 
-for(i in letras) {
-    if(letras[i] == 'a') { 
-      continue; //en luegar de romper el bucle, volvemos al bucle pasando al siguiente valor
-    }  else { 
+    /* CONTINUE */
+    console.log(" CONTINUE ")
+    var cadena = "En un lugar de la Mancha de cuyo nombre no quiero acordarme...";
+    var letras = cadena.split("");
+    var resultado = "";
+
+    for (i in letras) {
+      if (letras[i] == 'a') {
+        continue; //en luegar de romper el bucle, volvemos al bucle pasando al siguiente valor
+      } else {
         resultado += letras[i];  //en este caso, volvemos a escribir la cadena pero sin ninguna 'a'
+      }c
     }
-}
-console.log(resultado);// muestra "En un lugr de l Mnch de cuyo nombre no quiero cordrme..."
-</script>
+    console.log(resultado);// muestra "En un lugr de l Mnch de cuyo nombre no quiero cordrme..."
+  </script>
 
-<h1> Control de Flujo!! Pulsa F12 para ver la consola</h1>
+  <h1> Control de Flujo!! Pulsa F12 para ver la consola</h1>
 
 </body>
+
 </html>
