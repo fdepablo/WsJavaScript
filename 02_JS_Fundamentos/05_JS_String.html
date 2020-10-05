@@ -17,7 +17,7 @@
     console.log(texto); //cuidado que las cadenas de texto en JS son inmutables
 
     console.log("===================================");
-    let texto2 = texto.toUpperCase();
+    let texto2 = texto.toUpperCase();//los metodos de string te devuelven una cadena resultante
     console.log(texto2);
 
     //Lo normal es no crear una segunda variable:
@@ -37,7 +37,7 @@
     /* TRIM - Elimina espacios en blanco finales e iniciales*/
     var mensaje = "  Hola        ";
     var sinEspacios = mensaje.trim();
-    console.log(sinEspacios)
+    console.log(sinEspacios)//"Hola"
     
     /* SUBSTRING */
     var mensaje = "Hola usuario";
@@ -47,6 +47,7 @@
 
     var porcion = mensaje.substring(5, 0); // porcion = "Hola "
     porcion = mensaje.substring(0, 5);     // porcion = "Hola "
+    console.log("porcion: " + porcion)
 
     //Split
     let trozos = texto.split(" "); //Trozos es un array con los fragmentos

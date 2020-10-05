@@ -7,6 +7,7 @@
 <script type="text/javascript">
 //los arrays en js no son verdaderos arrays
 //los arrays en js SON OBJETOS
+//los arrays son una coleccion ordenada de elementos
 
 let array1 = []//array vacio
 let array2 = [1,2,3,4,5]
@@ -14,8 +15,8 @@ let array2 = [1,2,3,4,5]
 let array3 = [1,2,3,4,5,true,"pepe","Lo que querais"]
 //En js solo hay un tipo de array PERO se pueden
 //usar de 2 maneras diferentes
-//1- Manera indexada
-//2- Manera asociativa
+//1- Manera indexada -> Array de toda la vida, tienen un indice y un valor
+//2- Manera asociativa -> Serian equivalente a los mapas de java o HashMaps
 
 //INDEXADOS 
 //tienen un indice automatico que empieza por 0
@@ -31,6 +32,7 @@ console.log(valor2)//undefined
 
 //los arrays son objetos y como tales tienen propiedades
 console.log(array1.length)//ojo esto es para indexados
+//add valores
 let array4 = []
 //
 array4.push("A")//add al final
@@ -40,16 +42,17 @@ array4.push("D","E","F")
 
 console.log(array4.length)
 
-console.log(array4.shift());//sacamos el primer elemento
 //FIFO First in first out
-console.log(array4.pop());//sacamos el ultimo elemento
-//LIFO
+console.log(array4.shift());//sacamos el primer elemento
 
+//LIFO
+console.log(array4.pop());//sacamos el ultimo elemento
 
 /* JOIN */
 var array = ["hola", "ususario"];
 var mensaje = array.join(""); // mensaje = "holausuario"
 mensaje = array.join(" ");    // mensaje = "hola usuario"
+mensaje = array.join("-");    // mensaje = "hola-usuario"
 
 /* REVERSE */
 var array = [1, 2, 3];
@@ -57,20 +60,23 @@ array.reverse();   // array = [3, 2, 1]
 
 //Arrays asociativos (Estructuras HASH de toda la vida)
 //No estan indexados
-//basados en duplas de clave-valor
+//colecciono de duplas de clave-valor
 //una sola clave, la clave es unica
 //la clave y el valor son objetos de cualquie tipo
 
 let cervezas = []
+//clave -> Mahou - Valor --> 4.8
 cervezas["Mahou"] = "4.8"
 cervezas["San miguel"] = "4.6"
 cervezas["Guinness"] = "5.1"
 
-console.log(cervezas["Mahou"])
+//Accedemos siempre a traves de la clave
+console.log(cervezas["Mahou"])// 4.8
 //eliminar
 delete cervezas["San miguel"]
-console.log(cervezas)
-
+console.log("Cerveza Eliminada: " + cervezas["San Miguel"])
+console.log("Cerveza Existiendo: " + cervezas["Mahou"])
+console.log(cervezas)//si queremos concatenar hay que usar un for o algo asi
 
 //Sintaxis especifica de los arrays asociativos
 let persona = []
@@ -79,28 +85,34 @@ persona["direccion"] = "Japon"
 persona["telefono"] = "no tenia"
 //como podemos acceder????, asi:
 let nombre = persona["nombre"]
+//esto recuerda a los objetos accediendo a sus atributos y a sus metodos
+//en javascript los objetos son arrays asociativos
 let direccion = persona.direccion
 let telefono = persona.telefono
 let tacata = persona.tacata //undefined
 
 console.log(nombre + " " + direccion + " " + telefono + " " + tacata);
 
+//podemos operar con arrays asociativos de esta maera
 let coche = []
-coche.marca = "Renault"
+coche.marca = "Renault"//coche["marca"] = "Ranault"
 coche.modelo = "207"
 coche.matricula = "9876-CWX"
 console.log(coche)
 
+//otra manera como si fuera notacion JSON (proximamente en sus mejores cines... :) :) :)
 let pelicula = {
     titulo : "Todo sobre mi madre",
     director : "Almodovar",
     anio : 1999
 }
+
 //podemos add atributos
 pelicula.actor = "Bardem"
 
 console.log(pelicula)
 
+//Meter hasta metodos, como los objetos en java con atributos y metodos (funciones)
 let cliente = {
     nombre : "Bender Bending Rodriguez",
     direccion : "NYC",
@@ -124,7 +136,7 @@ for(let numero of array2){
 
 //Para arrays asociativos
 for(let clave in cliente){
-    console.log(clave + ":" + cliente[clave])
+    console.log(clave + ":" + cliente[clave])//clave - valor
 }
 
 </script>
