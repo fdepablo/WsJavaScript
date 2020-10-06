@@ -8,6 +8,8 @@
 <script type="text/javascript">
 //https://www.w3schools.com/js/js_dates.asp
 
+//para crear una fecha usamos new 
+//nos devuelve la fecha del sistema, normalmente sera la fecha del cliente
 var d = new Date();
 console.log(d)
 
@@ -25,14 +27,28 @@ console.log(d.getTime())
 //otros metodos de acceso
 d.getFullYear();//año
 d.getMonth();//mes del 0-11
-d.getDate();//dia
-d.getMinutes();
-d.getSeconds();
+console.log(d.getDate());//dia de mes
+d.getMinutes();//minutos
+d.getSeconds();//segundos
 
 //Tenemos los mismos metodos con "set"
 //Ejemplo
-d.setMonth(11);
+d.setMonth(11);//Diciembre
 
+/* Resumen metodos (w3school)
+
+getFullYear() 	Get the year as a four digit number (yyyy)
+getMonth() 	Get the month as a number (0-11)
+getDate() 	Get the day as a number (1-31)
+getHours() 	Get the hour (0-23)
+getMinutes() 	Get the minute (0-59)
+getSeconds() 	Get the second (0-59)
+getMilliseconds() 	Get the millisecond (0-999)
+getTime() 	Get the time (milliseconds since January 1, 1970)
+getDay() 	Get the weekday as a number (0-6)
+Date.now() 	Get the time. ECMAScript 5.
+
+*/
 </script>
 </body>
 </html>
