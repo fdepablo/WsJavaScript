@@ -12,12 +12,14 @@
 
 //Funcion que manipulamos directamente todo el documento mediante el document.write
 function usarDocumentWrite(){
-    //Document.write es una finísima herramienta de relojero 
-    //para actuar sobre el arbol DOM con precisión milimétrica
+    // Document.write es una finísima herramienta de relojero 
+    // para actuar sobre el arbol DOM con precisión milimétrica
+    // (Ironic mode off)
     document.write("<h1>Document.write</h1>")
     document.write("<h2>Hola</h2>")
     document.write("<h2>que</h2>")
     document.write("<h2>tal</h2>")
+    //con esto nos cargamos todo el html anterior
 }
 
 //Funcion que llenamos contenido de un elemento con nodos en HTML
@@ -60,30 +62,33 @@ function crerarNodosDOM(){
 
     let peliculas = listarPeliculas();
 
-    let tabla = document.createElement("table")
+    let tabla = document.createElement("table")//<table></table>
     //Manera antigua de crear atributos:
-    let atr = document.createAttribute("align")
-    atr.value = "center"
-    tabla.setAttributeNode(atr)
+    let atr = document.createAttribute("align")//align
+    atr.value = "center"//align="center"
+    tabla.setAttributeNode(atr)//<table align="center"></table>
+
     //Manera actual:
-    tabla.setAttribute("border", "1")
+    tabla.setAttribute("border", "1")//<table align="center" border="1"></table>
 
-    let trCabecera = document.createElement("tr")
-    let th1 = document.createElement("th")
-    let th2 = document.createElement("th")
-    let th3 = document.createElement("th")
-    let txt1 = document.createTextNode("Título")
-    let txt2 = document.createTextNode("Director")
-    let txt3 = document.createTextNode("Género")
+    let trCabecera = document.createElement("tr")//<tr></tr>
+    let th1 = document.createElement("th")//<th></th>
+    let th2 = document.createElement("th")//<th></th>
+    let th3 = document.createElement("th")//<th></th>
+    let txt1 = document.createTextNode("Título")//Titulo
+    let txt2 = document.createTextNode("Director")//Director
+    let txt3 = document.createTextNode("Género")//Director
 
-    th1.appendChild(txt1)
-    th2.appendChild(txt2)
-    th3.appendChild(txt3)
-    trCabecera.appendChild(th1)
-    trCabecera.appendChild(th2)
-    trCabecera.appendChild(th3)
+    th1.appendChild(txt1)//<th>Titulo</th>
+    th2.appendChild(txt2)//<th>Director</th>
+    th3.appendChild(txt3)//<th>Genero</th>
+    trCabecera.appendChild(th1)//<tr><th>Titulo</th></tr>
+    trCabecera.appendChild(th2)//<tr><th>Titulo</th><th>Director</th></tr>
+    trCabecera.appendChild(th3)//<tr><th>Titulo</th><th>Director</th><th>Genero</th></tr>
     tabla.appendChild(trCabecera)
+    //<table align="center" border="1"><tr><th>Titulo</th><th>Director</th><th>Genero</th></tr></table>
 
+    //ahora vamos con las filas de las peliculas, por cada pelicula creo una fila nueva en la tabla
     //Put your bloody code here
     for(let pelicula of peliculas){
         let tr = document.createElement("tr")
@@ -99,11 +104,12 @@ function crerarNodosDOM(){
         tr.appendChild(td1)
         tr.appendChild(td2)
         tr.appendChild(td3)
+
         tabla.appendChild(tr)
     }
 
     //Añadimos la tabla al div
-    div2.innerHTML = ""
+    //div2.innerHTML = ""
     div2.appendChild(tabla)
 
 }
@@ -120,6 +126,7 @@ function crerarNodosHTML(){
                 "<th>Director</th>"+
                 "<th>Género</th>"+
             "</tr>"
+
     for(let pelicula of peliculas){
         tabla = tabla +
             "<tr>"+
@@ -128,11 +135,12 @@ function crerarNodosHTML(){
                 "<td>"+pelicula.genero+"</td>"+
             "</tr>"
     }
+
     tabla = tabla+
         "</table>"
 
     div3.innerHTML = tabla
-    console.log(tabla)
+    //console.log(tabla)
 
 }
 
@@ -166,10 +174,6 @@ function vaciarSelect(){
     }
     */
 }
-
-//for( clave in window ){
-//    console.log(clave+":"+window[clave])
-//}
 
 // Esto es la manera 100% JS de hacer el <body onload="">
 // Es un ejemplo usando Manejadores de eventos semánticos de JS
@@ -205,7 +209,7 @@ window.onload = function(){
     <hr/>
     
     <div align="center">
-        <input type="button" id="btn_documentWrite" onclick="usardocumentWrite()"   value="Document.write"/>
+        <input type="button" id="btn_documentWrite" onclick="usarDocumentWrite()"   value="Document.write"/>
         <input type="button" id="btn_innerHTML"     onclick="usarInnerHTML()"      value="Usar innerHTML"/>       
         <input type="button" id="btn_vaciarInnerHTML" onclick="vaciarInnerHTML()"  value="Vaciar innerHTML"/>
         <input type="button" id="btn_crerarNodosDOM"    onclick="crerarNodosDOM()"      value="Crear nodos"/>      
@@ -229,7 +233,9 @@ window.onload = function(){
     
     <div align="center">
         <select id="ciudades">
-            <option value="Getafe">Getafe</option><option value="Madrid">Madrid</option><option value="Salamanca">Salamanca</option>
+            <option value="Getafe">Getafe</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Salamanca">Salamanca</option>
             <option value="Santa Pola">Santa Pola</option>
             <option value="Chinchón">Chinchón</option>
         </select>

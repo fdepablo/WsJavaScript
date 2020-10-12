@@ -10,14 +10,14 @@ function cargar(){
     /* CREACIÓN DE NODO */
 
     // Crear nodo de tipo Element
-    var parrafo = document.createElement("p");
-    parrafo.id = "parrafo1"
+    var parrafo = document.createElement("p");//<p></p>
+    parrafo.id = "parrafo1" //<p id="parrafo1"></p>
     
     // Crear nodo de tipo Text
-    var contenido = document.createTextNode("Hola Mundo!");
+    var contenido = document.createTextNode("Hola Mundo!");//Hola Mundo!
     
     // Añadir el nodo Text como hijo del nodo Element
-    parrafo.appendChild(contenido);
+    parrafo.appendChild(contenido);//<p id="parrafo1">Hola Mundo!</p>
     
     // Añadir el nodo Element como hijo de la pagina
     document.body.appendChild(parrafo);
@@ -38,6 +38,7 @@ function cargar(){
     </div>
 
     <!-- Aquí aparecerá la etiquta p que hemos creado alterando el DOM-->
+    <!-- <p id="parrafo1">Hola Mundo!</p> -->
 </body>
 
 
