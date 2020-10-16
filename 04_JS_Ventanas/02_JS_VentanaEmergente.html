@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script>
+    // En este ejemplo vamos a ver un pequeño ejemplo sobre VENTANAS EMERGENTES o MODALES
+    // Aunque, a nivel personal,  recomiendo algun tipo de librería o framework para hacer estas cosas
+    // https://www.hongkiat.com/blog/best-free-javascript-modal-window-plugins/
+    function mostrarVentana(){
+        // Accedemos al contenedor
+        var ventana = document.getElementById('miVentana'); 		    		    
+        // Definimos su posición vertical. La ponemos fija para simplificar el código
+        ventana.style.marginTop = "100px";
+        // Definimos su posición horizontal, en base a la anchura del cliente
+        ventana.style.marginLeft = ((document.body.clientWidth-350) / 2) +  "px"; 
+        // Y lo hacemos visible
+        ventana.style.display = 'block'; //en el stylo del div esta puesto a "none", con block lo hacemos visible
+    }
+    
+    function ocultarVentana(){
+        //Accedemos al contenedor 
+        var ventana = document.getElementById('miVentana'); 
+        //Y lo hacemos visible
+        ventana.style.display = 'none'; // Y lo hacemos invisible
+    }   
+ </script>
+</head>
+<body>
+    <h2>Pincha en el boton 😀 &#x1F604;</h2>
+    <!-- Mas informacion sobre emojis en html y css: https://www.kirupa.com/html5/emoji.htm-->
+    <button onclick="mostrarVentana();">Abrir Ventana</button>
+    <div id="miVentana" style="position: fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; border: #333333 3px solid; background-color: #FAFAFA; color: #000000; display:none;">
+        <div style="font-weight: bold; text-align: left; color: #FFFFFF; padding: 5px; background-color:#006394">Título de la ventana</div>
+        <p style="padding: 5px; text-align: justify; line-height:normal">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum a est. Suspendisse vehicula, nisl vitae molestie pulvinar.</p>
+        <div style="padding: 10px; background-color: #F0F0F0; text-align: center; margin-top: 44px;">
+            <input id="btnAceptar" onclick="ocultarVentana();" name="btnAceptar" size="20" type="button" value="Aceptar" />
+        </div>
+    </div>
+</body>
+</html>
