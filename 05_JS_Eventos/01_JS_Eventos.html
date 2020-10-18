@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
     <script type="text/javascript">
@@ -15,7 +14,7 @@
         el que dirije el flujo del mismo. 
 
         En la programación tradicional, las aplicaciones se ejecutan secuencialmente de principio a fin para producir sus 
-        resultados. Sin embargo, en la actualidad el modelo predominante es el de la programación basada en eventos. 
+        resultados. Sin embargo, en el mundo web, el modelo más usual es el de la programación basada en eventos. 
         Los scripts y programas esperan sin realizar ninguna tarea hasta que se produzca un evento. 
         Una vez producido, ejecutan alguna tarea asociada a la aparición de ese evento y cuando concluye, 
         el script o programa vuelve al estado de espera.
@@ -24,14 +23,14 @@
         Los eventos de JavaScript permiten la interacción entre las aplicaciones JavaScript y los usuarios. 
         Cada vez que se pulsa un botón, se produce un evento. Cada vez que se pulsa una tecla, también se produce un 
         evento. No obstante, para que se produzca un evento no es obligatorio que intervenga el usuario, ya que por 
-        ejemplo, cada vez que se carga una página, también se produce un evento.
+        ejemplo, cada vez que se carga una página, también se produce un evento (onload).
 
         Cada elemento HTML tiene definida su propia lista de posibles eventos que se le pueden asignar. 
         Un mismo tipo de evento (por ejemplo, pinchar el botón izquierdo del ratón) puede estar definido para 
         varios elementos HTML y un mismo elemento HTML puede tener asociados diferentes eventos.
 
                                                 EVENTOS
-         EVENTO 	       DESCRIPCION 	                   ELEMENTOS PARA LOS QUE ESTA DEFINIDO
+         EVENTO 	       DESCRIPCION 	                       ELEMENTOS PARA LOS QUE ESTA DEFINIDO
         onblur 	    Un elemento pierde el foco 	            <button>, <input>, <label>, <select>, <textarea>, <body>
         onchange 	Un elemento ha sido modificado 	        <input>, <select>, <textarea>
         onclick 	Pulsar y soltar el ratón 	            Todos los elementos
@@ -60,34 +59,35 @@
     </script>
 </head>>
 <body>
-    <!-- Manejadores como atributos de los elementos HTML.
-    En este caso el codigo JS se incluye dentro del propoio atributo
+    <!-- 1) Manejadores como atributos de los elementos HTML.
+    En este caso el codigo JS se incluye dentro del propoio atributo del evento
     -->
 
-    <input type="button" value="Pinchame y verás" onclick="console.log('Gracias por pinchar');" />
+    <input type="button" value="Pinchame y verás" onclick="alert('Gracias por pinchar');" />
 
-    <div onclick="console.log('Has pinchado con el ratón');" onmouseover="console.log('Acabas de pasar el ratón por encima');">
+    <div onclick="console.log('Has pinchado con el ratón');" 
+         onmouseover="console.log('Acabas de pasar el ratón por encima');">
         Puedes pinchar sobre este elemento o simplemente pasar el ratón por encima
     </div>
-    <!-- 1 - Manejadores de eventos y variable this
+    <!-- 1.1) Manejadores de eventos y variable this
     This es una referencia al propio objeto, y puede ser muy util
 
     Ejemplo: 
-    Cuando el usuario pasa el ratón por encima del <div>, el color del borde se muestra de color negro. 
-        Cuando el ratón sale del <div>, se vuelve a mostrar el borde con el color gris claro original.
+    Cuando el usuario pasa el ratón por encima del <div>, el color del borde se muestra de color azul. 
+        Cuando el ratón sale del <div>, se vuelve a mostrar el borde con el color red.
     -->
     
     <!-- Sin this -->
 
-    <div id="contenidos" style="width:150px; height:60px; border:4px solid silver" 
-        onmouseover="document.getElementById('contenidos').style.borderColor='blue';" 
-        onmouseout="document.getElementById('contenidos').style.borderColor='red';">
+    <div id="contenidos1" style="width:150px; height:60px; border:4px solid silver" 
+        onmouseover="document.getElementById('contenidos1').style.borderColor='blue';" 
+        onmouseout="document.getElementById('contenidos1').style.borderColor='red';">
         Sección de contenidos...
     </div>
 
     <!-- Con this -->
 
-    <div id="contenidos" style="width:150px; height:60px; border:4px solid silver" 
+    <div id="contenidos2" style="width:150px; height:60px; border:4px solid silver" 
         onmouseover="this.style.borderColor='blue';" 
         onmouseout="this.style.borderColor='red';">
         Sección de contenidos...
@@ -105,34 +105,49 @@
 
     <!-- 3- Manejadores de eventos "semánticos". -->
     <!--
-        Utilizar los atributos HTML o las funciones externas para añadir manejadores de eventos tiene un grave 
+        Utilizar los atributos HTML(1) o las funciones externas para añadir manejadores de eventos(2) tiene un grave 
         inconveniente: "ensucian" el código HTML de la página.
 
         Como es conocido, al crear páginas web se recomienda separar los contenidos (HTML) de la presentación (CSS). 
         En lo posible, también se recomienda separar los contenidos (HTML) de la programación (JavaScript). 
+
+        Lo suyo es tener tres ficheros diferentes, cada uno con su lenguaje, es decir, un .js un .css y un .html
+
         Mezclar JavaScript y HTML complica excesivamente el código fuente de la página, dificulta su mantenimiento y 
         reduce la semántica del documento final producido.
 
         Afortunadamente, existe un método alternativo para definir los manejadores de eventos de JavaScript. 
         Esta técnica consiste en asignar las funciones externas mediante las propiedades DOM de los elementos HTML. 
-        Ejemplo
+        Vamos a ver un ejemplo:
     -->
     <hr/>
+
+    <!-- Primero creamos el boton, ya que tiene que estar creado, y notese que no tiene ningun evento asociado
+    en este momento -->
     <input id="pinchable" type="button" value="Pinchame y verás el ejemplo semantico" /> 
 
     <script>
-        //ponemos el script despues ya que si lo ponemoms antes, el id del elemento no se habría creado
-        //Lo mejor en otros entornos en poner todo el código JS con el evento "window.onload" ya que
-        //se lanza el evento cuando toda la página estar cargada (ver 03_JS_DOM -> 04_JS_DinamicHTML)
         function muestraMensaje() {
             console.log('Gracias por pinchar en la función con el ejemplo semantico');
         }
-        document.getElementById("pinchable").onclick = muestraMensaje;
+
+        //Ponemos el script despues de crear el boton ya que si lo ponemos antes, el id del elemento 
+        //no se habría creado.
+        document.getElementById("pinchable").onclick = muestraMensaje;//mediante el DOM asignamos el onlclick
+                                                                    //y le asingamos la funcion que queremos ejecutar
         //recordemos que tambien se crea una variable por cada ID
         //mas sencillo que lo de arriba y equivalente
         pinchable.onclick = muestraMensaje;
+
+        //NOTA: Lo mejor sería poner todo el código JS con el evento "window.onload" ya que
+        //se lanza el evento cuando toda la página estar cargada (ver 03_JS_DOM -> 04_JS_HTML_DINAMICO) 
     </script>
 
-    <!-- El código HTML resultante es muy "limpio", ya que no se mezcla con el código JavaScript con HTML  -->
+    <!-- La ventaja principal de los manejadores de eventos semanticos es que el código HTML de la pagina 
+        resultante quedaría muy "limpio", ya que no se mezcla con el código JavaScript con HTML  
+        Una de las desventajas es que hay que tener muy claro que para usarlo, se tiene que haber creado
+        primero el elmentos html y despues aceder a el para meterle el evento que queramos
+        Normalmente para hacer las cosas de esta manera se juega mucho en el evento "onload"
+    -->
 </body>
 </html>
