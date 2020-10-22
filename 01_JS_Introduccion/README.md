@@ -5,6 +5,7 @@ https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Introducci%C3%B3n
  Proyecto creado con Visual Studio Code
 ----------------------------------------
 Simplemente crear una carpeta y luego los ficheros correspondientes
+Se puede salvar luego como workspace
 
  Para crear un proyecto JS con Eclipse
 --------------------------------------
@@ -20,4 +21,4 @@ Para elegir otro buscador web con el que abrir
 
 ----------------------------------------------------------------------------  
 Para abrir paginas directamente podemos usar la extension "open in browser" de visual studio code
-Luego pulsar ALT-B
+Luego pulsar ALT+B
