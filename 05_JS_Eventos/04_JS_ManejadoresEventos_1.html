@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manejadores de eventos Semanticos (1)</title>
+</head>
+
+<script type="text/javascript">
+
+function btnDalePulsado(){
+    console.log("Dale leña al mono que es de goma")
+    vaciarFormulario()
+}
+
+function vaciarFormulario(){
+    cajaTexto.value = ""
+    //console.log(arguments)
+}
+
+//función que evita poner mas de 10 caracteres en un textArea
+function limitaOnLoad(textArea,maximoCaracteres) {
+    if(textArea.value.length >= maximoCaracteres ) {
+        maxNumeroAlcanzadoOnLoad.style.display = "block"
+        return false;
+    }else {
+        maxNumeroAlcanzadoOnLoad.style.display = "none"
+        return true;
+    }
+} 
+
+let cadena = ""
+function concatenarLetra(letra){
+    cadena = cadena+letra
+    console.log(cadena)
+}
+
+function validarFormulario(){
+    let ok = true
+    if(dato.value.trim()==""){
+        espán.innerHTML = "Dato es obligatorio"
+        ok = false
+    }
+    return ok
+}
+
+window.onload = function(){
+
+    //Podemos asociar como manejador de eventos una función que tengamos ya declarada, 
+    //pero OJO, siempre y cuando la función NO tenga parametros de entrada
+    btnDale.onclick = btnDalePulsado
+    btnVaciar.onclick = vaciarFormulario
+
+    //Podemos tambien inyectar una funcion anonima directamente, es decir que no tenga nombre
+    //o no se haya creado antes
+    cajaTexto.onfocus = function(e){//funcion que se ejecuta cuando el elemento coje el foco
+        console.log("Has entrado dentro")
+    }
+
+    //Podemos usar cualquier evento
+    cajaTexto.onmouseover = function(e){
+        console.log("Has pasado por encima")
+    }
+
+    cajaTexto.onmouseleave = function(e){
+        console.log("Has salido")
+    }
+
+    //Cuando se dispara un evento nos lo proporcionan como
+    //parametro a la funcion asignada
+    cajaTexto.onkeyup = function(e){
+        let letra = e.key //Ya nos da el caracter
+        concatenarLetra(letra)
+    }
+
+    //CUIDADO ESPECIAL, cuando queremos pasar una funcion CON PARAMETROS creada con anterioridad
+    //a un manejador de eventos.
+    //¡NO! podemos hacer algo así
+    //textArea.onkeypress = limitaOnLoad(textArea,10)
+    //En este caso debemos de crear obligatoriamente una función anonima y dentro
+    //de la función anonima invocar a la función con parametros que queramos.
+    //En este caso no podemos simplemente devolver "false" para prevenir el comportamiento
+    //por defecto de onkeypress y evitar así que se escriba el caracter en el textArea,
+    //para hacer esto debemos de usar la función "e.preventDefault()"
+    textArea.onkeypress = function(e){
+        if(!limitaOnLoad(textArea,10)){
+            e.preventDefault()//prevenimos el evento de escribir en el textarea
+                                //la tecla pulsada, que es el comportamiento por defecto
+                                //que tiene el manejador de evento "onkeypress"
+        }
+    }
+
+    //En este ejemplo vemos que podemos invocar la funcion validarFormulario
+    //y en caso de que nos devuelva false, evitar el evento por defecto que seria
+    //mandar el formulario al servidor
+    btnEnviar.onclick = function(e){
+        if( !validarFormulario() ){
+            e.preventDefault();//Prevenimos el evento por defecto del submit del formulario,
+                            //ya que submit manda el formulario al sevidor cuando sea
+                            //"clickeado", y en caso de que no sea validado el formulario
+                            //no lo mandaremos
+        }
+    }
+
+    //Notese que como es una función que no tiene parametros de entrada, tambien podriamos
+    //hacer algo así y el comportamiento sería igual que la función anterior
+    btnEnviar.onclick = validarFormulario
+}
+
+</script>
+
+<body>
+
+    <div style="text-align: center;">
+        <h1>Manejadores de eventos semanticos de DOM (1)</h1>
+
+        <hr/>
+
+        <button id="btnDale">DALE</button>
+
+        <hr/>
+
+        <input type="text" id="cajaTexto"/>
+        <button id="btnVaciar">Vaciar</button>
+        
+        <hr/>
+        
+        <p>Text area que solo podemos escribir 10 caracteres</p>
+        <textarea id="textArea"></textarea>
+        <p id="maxNumeroAlcanzadoOnLoad" style="color:red;display: none;" >
+            Ha alcanzado el numero maximo de cararcteres!!
+        </p>
+
+        <hr/>
+
+        <form id="" action="xxx"><!-- xxx seria la dirección del servidor-->
+            Dato <input type="text" name="dato" id="dato"/>
+            <input type="submit" id="btnEnviar" value="Enviar"/>
+            <span id="espán"></span>
+        </form>
+    </div>
+</body>
+</html>

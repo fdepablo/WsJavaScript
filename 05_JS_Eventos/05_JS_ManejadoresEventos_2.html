@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manejadores de eventos semanticos de DOM (2)</title>
+
+    <script type="text/javascript">
+        /* 
+            Manejadores de eventos semanticos de DOM (2)
+           ------------------------------------------
+        La especificación DOM define otros dos métodos similares a los disponibles: 
+            addEventListener() -> add a un evento y una funcion a un elemento
+            removeEventListener() -> quitamos un evento y una funcion a un elemento
+
+        La principal diferencia entre estos métodos y los anteriores es que en este caso se requieren 
+        dos parámetros: 
+            1- el nombre del "event listener" o manejador de enveto
+            2- una referencia a la función encargada de procesar el evento, pudiendo ser
+            tambien una función anonima
+
+        El primer argumento se debe eliminar el prefijo "on" del manejador del evento. 
+        Es decir si se utilizaba el manejador "onclick", ahora se debe utilizar "click".
+
+        */
+
+        function muestraMensaje() {
+            console.log("Has pulsado el ratón");
+        }
+
+        function muestraMensajeConParametros(parametro1) {
+            console.log("Has pulsado el ratón y ha entrado por parametro " + parametro1 );
+        }
+
+        function quitarMensaje(){
+            var elDiv = document.getElementById("div_principal");
+            alert("Evento removido!")
+            //add la funcion muestraMensaje al evento onClick
+            elDiv.removeEventListener("click", muestraMensaje);
+        }
+
+        function ponerMensaje(){
+            var elDiv = document.getElementById("div_principal");
+
+            alert("Evento añadido!")
+            //quitamos la funcion muestraMensaje del evento onClick
+            elDiv.addEventListener("click", muestraMensaje);
+        }
+
+        //Esta funcion se ejecuta cuando la pagina esta totalmente cargada
+        window.onload = function(){
+            var elDiv = document.getElementById("div_principal");
+            var elDivSecundario = document.getElementById("div_secundario");
+
+            //nada mas empezar, la funcion muestraMensaje se add al evento onclick
+            elDiv.addEventListener("click", muestraMensaje);
+            //sería equivalente a:
+            //elDiv.onclick = muestraMensaje;
+
+            //Si queremos pasar una funcion con parametros de entrada por parametro no 
+            //podemos hacer directamente:
+            //elDivSecundario.onclick = muestraMensajeConParametros("hola");
+            //Debemos de crear una funcion que la llame (ejemplo anterior)
+            elDivSecundario.addEventListener("click", 
+                function(){
+                    muestraMensajeConParametros("Hommer")
+                }
+            );
+
+            //add a los botones las siguientes funciones al evento onClick
+            botonQuitar.addEventListener("click", quitarMensaje);
+            botonPoner.addEventListener("click", ponerMensaje);
+        }
+         
+    </script>
+</head>>
+<body>
+    <div style="text-align:center">
+        <h1>Manejadores de eventos semanticos de DOM (2)</h1>
+        <div id="div_principal">
+            <p>Clickeame para mostrar por console.log</p>
+        </div>
+    
+        <button id="botonQuitar">Quitar el evento</button>
+        <button id="botonPoner">Poner el evento</button>
+
+        <div id="div_secundario">
+            <p>Clickeame para mostrar otra cosa por console.log</p>
+        </div>
+    </div>    
+</body>
+</html>

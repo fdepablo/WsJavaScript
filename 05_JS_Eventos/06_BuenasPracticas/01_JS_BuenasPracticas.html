@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Buenas practicas de JS</title>
+	<!-- 
+		Buenas practicas de programación en JS
+	--------------------------------------------
+	Vamos a ver algunas reglas para programar nuestros JS en nuestras páginas web.
+	Estas reglas busca la limpieza de codigo, la separacion de la logica de la presentación o
+	hacer nuestro código más seguro frente a ataques XSS (Cross-Side Scripting)
+
+	1) El codigo JS nunca debe de estar dentro del html, en ninguna de sus formas.
+	 Debería ser codificado e importado en un fichero js externo.
+	 Ej: <script type="text/javascript" src="js/funciones.js"></script>
+
+	2) Toda la asignación de eventos a elementos html debe de estar en el fichero js externo
+	dentro de la función window.onload, es decir, debemos usar los manejadores de eventos 
+	"semánticos".
+
+	3) Para saber si hemos hecho bien el codigo, la regla de oro sería no ver nada de JS en las
+	páginas html
+
+	Esta pagína puede servir de ejemplo a la hora de desarrollar JS
+	-->
+	<script type="text/javascript" src="js/funciones.js"></script>
+</head>
+<body>
+	<!-- Aqui deberia ir solamente HTML, nada de JS -->	
+
+	<div style="text-align:center">
+		<h1>Buenas practicas</h1>
+		
+        <div id="div_principal">
+            <p>Clickeame para mostrar por console.log</p>
+		</div>
+		
+		<hr/>
+
+		<p>Text area que solo podemos escribir 10 caracteres</p>
+    	<textarea id="textArea"></textarea>
+    	<p id="maxNumeroAlcanzadoOnLoad" style="color:red;display: none;" > Ha alcanzado el numero maximo de cararcteres!!</p>
+
+		<hr/>
+		<h3>Suma de dos numeros</h3>
+		<input type="text" id="numero1"/>
+		<input type="text" id="numero2"/>
+		<button id="botonSumar">Sumar</button>
+		<input type="text" id="resultado"/>
+    </div>   
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Eventos</title>
 
     <script type="text/javascript">
         /*
@@ -63,7 +63,8 @@
     En este caso el codigo JS se incluye dentro del propoio atributo del evento
     -->
 
-    <input type="button" value="Pinchame y verás" onclick="alert('Gracias por pinchar');" />
+    <!-- Mejor usar <button> que <input type="button"/>->
+    <button onclick="alert('Gracias por pinchar');">Pinchame y verás</button>
 
     <div onclick="console.log('Has pinchado con el ratón');" 
          onmouseover="console.log('Acabas de pasar el ratón por encima');">
@@ -101,7 +102,7 @@
         }
     </script>
     
-    <input type="button" value="Pinchame y verás" onclick="muestraMensaje()" />
+    <button onclick="muestraMensaje()">Pincha aquí también</button>
 
     <!-- 3- Manejadores de eventos "semánticos". -->
     <!--
@@ -124,7 +125,7 @@
 
     <!-- Primero creamos el boton, ya que tiene que estar creado, y notese que no tiene ningun evento asociado
     en este momento -->
-    <input id="pinchable" type="button" value="Pinchame y verás el ejemplo semantico" /> 
+    <button id="pinchable">Pinchame y verás el ejemplo semantico</button> 
 
     <script>
         function muestraMensaje() {
