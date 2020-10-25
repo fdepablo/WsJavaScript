@@ -48,10 +48,14 @@ window.onload = function () {
 
   //add evento div
   elDiv.addEventListener("click", muestraMensaje);
+  //equivalente a:
+  //elDiv.onclick = muestraMensaje //ya que no tiene parametros de entrada
 
   //add evento botonSumar
-  botonSumar.onclick = function (e){
-    let valor1 = parseInt(numero1.value)
+  //Notar, que podemos crear una funcion que llame a otra funcion cuando queremos
+  //ejecutar más logica que la propia de la función
+  botonSumar.onclick = function (){
+    let valor1 = parseInt(numero1.value)//lo convertimos a int, todo lo escrito en html son Strings
     let valor2 = parseInt(numero2.value)
     let resultadoSuma = sumar(valor1, valor2)
 

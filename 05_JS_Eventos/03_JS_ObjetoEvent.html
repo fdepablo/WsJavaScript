@@ -51,7 +51,7 @@
 
             /*
             Podemos ver que el objeto event tiene muchas propiedades por la consola, algunas de ellas:
-            PROPIEDAD       RETORNO 	    DESCRIPTCIÓN
+            PROPIEDAD           RETORNO 	    DESCRIPTCIÓN
             altKey 	            Boolean 	Devuelve true si se ha pulsado la tecla ALT y false en otro caso
             *button 	        Integer 	El botón del ratón que ha sido pulsado. Valores: 
                                             0– Ningún botón pulsado 
@@ -86,7 +86,7 @@
             //vamos a crear una función que sea manejada por diferentes eventos
             function procesaEvento(elEvento) {
                 if (elEvento.type == "click") {
-                    console.log("Has pulsado el raton '" + elEvento.target.value + "'");
+                    console.log("Has pulsado el raton '" + elEvento.target.id + "'");
                     if (elEvento.ctrlKey) {
                         console.log("Además la has pulsado con el 'Control' apretado")
                     }
@@ -104,7 +104,8 @@
             //función que escribe por log la tecla pulsada
             function keyLogger(elEvento) {
                 console.log("Se ha pulsado la letra con codigo " + elEvento.keyCode + 
-                    " cuyo valor es " + String.fromCharCode(elEvento.keyCode))
+                    " cuyo valor es " + String.fromCharCode(elEvento.keyCode))//con e.key tambien
+                                                                            //valdria
             }
 
             // Asignamos la funcion KeyLogger al evento keypress del elemento texto1
@@ -115,11 +116,11 @@
         //OJO! Esta fuera del window.onload, ya que si no el "textArea" no lo vería
         function limitaNormal(textArea, maximoCaracteres) {
             if (textArea.value.length >= maximoCaracteres) {
-                maxNumeroAlcanzadoNormal.style.display = "block"
-                return false;
+                maxNumeroAlcanzadoNormal.style.display = "block"//mostramos la etiqueta
+                return false;//prevenimos el que escriba la tecla pulsada en el textarea
             } else {
                 maxNumeroAlcanzadoNormal.style.display = "none"
-                return true;
+                return true;//permitimos escribir el caracter en el textarea
             }
         }
         //De todas maneras, normalmente las funciones deben ir fuera del "window.onload", 
@@ -145,7 +146,7 @@
 
     <!--
         En el modelo básico de eventos también es posible impedir el comportamiento por defecto de 
-        algunos eventos. 
+        algunos manejadores de eventos. 
 
         Por ejemplo, el manejador de evento onkeypress de un textarea tiene un comportamiento por 
         defecto asociado, este es que cuando pulses una tecla pinte dicha tecla pulsada en el 

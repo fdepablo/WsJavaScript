@@ -7,6 +7,13 @@
     <title>Manejadores de eventos Semanticos (1)</title>
 </head>
 
+    <!-- 
+            Manejadores de eventos semanticos de DOM (1)
+           ----------------------------------------------
+        El objetivo de esta parte es entender como podemos asignar funciones a los manejadores
+        de eventos 
+    -->
+
 <script type="text/javascript">
 
 function btnDalePulsado(){
@@ -36,9 +43,10 @@ function concatenarLetra(letra){
     console.log(cadena)
 }
 
+//Valida que el formulario no este vacio
 function validarFormulario(){
     let ok = true
-    if(dato.value.trim()==""){
+    if(dato.value.trim() == ""){
         espán.innerHTML = "Dato es obligatorio"
         ok = false
     }
@@ -48,18 +56,19 @@ function validarFormulario(){
 window.onload = function(){
 
     //Podemos asociar como manejador de eventos una función que tengamos ya declarada, 
-    //pero OJO, siempre y cuando la función NO tenga parametros de entrada
+    //pero OJO!!, siempre y cuando la función NO tenga parametros de entrada
     btnDale.onclick = btnDalePulsado
     btnVaciar.onclick = vaciarFormulario
 
     //Podemos tambien inyectar una funcion anonima directamente, es decir que no tenga nombre
     //o no se haya creado antes
-    cajaTexto.onfocus = function(e){//funcion que se ejecuta cuando el elemento coje el foco
+    cajaTexto.onfocus = function(){//funcion que se ejecuta cuando el elemento coje el foco
         console.log("Has entrado dentro")
     }
 
-    //Podemos usar cualquier evento
-    cajaTexto.onmouseover = function(e){
+    //Podemos usar cualquier evento que pueda asociarse
+    cajaTexto.onmouseover = function(){
+        //arguments[0] contendria el evento, siempre nos llega el evento
         console.log("Has pasado por encima")
     }
 
@@ -68,7 +77,7 @@ window.onload = function(){
     }
 
     //Cuando se dispara un evento nos lo proporcionan como
-    //parametro a la funcion asignada
+    //parametro a la funcion asignada. Ejemplo de key logger
     cajaTexto.onkeyup = function(e){
         let letra = e.key //Ya nos da el caracter
         concatenarLetra(letra)
@@ -83,11 +92,12 @@ window.onload = function(){
     //En este caso no podemos simplemente devolver "false" para prevenir el comportamiento
     //por defecto de onkeypress y evitar así que se escriba el caracter en el textArea,
     //para hacer esto debemos de usar la función "e.preventDefault()"
-    textArea.onkeypress = function(e){
+    textArea.onkeypress = function (e){
         if(!limitaOnLoad(textArea,10)){
             e.preventDefault()//prevenimos el evento de escribir en el textarea
                                 //la tecla pulsada, que es el comportamiento por defecto
                                 //que tiene el manejador de evento "onkeypress"
+            //return false; //Tambien podriamos hacer esto en su lugar
         }
     }
 

@@ -9,15 +9,16 @@
     <script type="text/javascript">
         /* 
             Manejadores de eventos semanticos de DOM (2)
-           ------------------------------------------
+           ----------------------------------------------
         La especificación DOM define otros dos métodos similares a los disponibles: 
+
             addEventListener() -> add a un evento y una funcion a un elemento
             removeEventListener() -> quitamos un evento y una funcion a un elemento
 
         La principal diferencia entre estos métodos y los anteriores es que en este caso se requieren 
         dos parámetros: 
-            1- el nombre del "event listener" o manejador de enveto
-            2- una referencia a la función encargada de procesar el evento, pudiendo ser
+            1- El nombre del "event listener" o manejador de evento
+            2- Una referencia a la función encargada de procesar el evento, pudiendo ser
             tambien una función anonima
 
         El primer argumento se debe eliminar el prefijo "on" del manejador del evento. 
@@ -58,13 +59,13 @@
             //sería equivalente a:
             //elDiv.onclick = muestraMensaje;
 
-            //Si queremos pasar una funcion con parametros de entrada por parametro no 
+            //Si queremos pasar una funcion con parametros de entrada por parametro NO 
             //podemos hacer directamente:
             //elDivSecundario.onclick = muestraMensajeConParametros("hola");
             //Debemos de crear una funcion que la llame (ejemplo anterior)
             elDivSecundario.addEventListener("click", 
                 function(){
-                    muestraMensajeConParametros("Hommer")
+                    muestraMensajeConParametros("Homer")
                 }
             );
 
