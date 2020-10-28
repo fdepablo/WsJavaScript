@@ -11,7 +11,7 @@
            ---------------------------------- 
         Mientras en la programación secuencial (o estructurada) es el programador el que define cuál va a ser el 
         flujo del programa, en la programación dirigida a eventos es el propio usuario — o lo que active el programa — 
-        el que dirije el flujo del mismo. 
+        el que dirige el flujo del mismo. 
 
         En la programación tradicional, las aplicaciones se ejecutan secuencialmente de principio a fin para producir sus 
         resultados. Sin embargo, en el mundo web, el modelo más usual es el de la programación basada en eventos. 
@@ -132,7 +132,7 @@
             console.log('Gracias por pinchar en la función con el ejemplo semantico');
         }
 
-        //Ponemos el script despues de crear el boton ya que si lo ponemos antes, el id del elemento 
+        //Ponemos el script despues de crear el boton ya que, si lo ponemos antes, el id del elemento 
         //no se habría creado.
         document.getElementById("pinchable").onclick = muestraMensaje;//mediante el DOM asignamos el onlclick
                                                                     //y le asingamos la funcion que queremos ejecutar
@@ -146,7 +146,7 @@
 
     <!-- La ventaja principal de los manejadores de eventos semanticos es que el código HTML de la pagina 
         resultante quedaría muy "limpio", ya que no se mezcla con el código JavaScript con HTML  
-        Una de las desventajas es que hay que tener muy claro que para usarlo, se tiene que haber creado
+        Una de las desventajas es que hay que tener muy claro que, para usarlo, se tiene que haber creado
         primero el elmentos html y despues aceder a el para meterle el evento que queramos
         Normalmente para hacer las cosas de esta manera se juega mucho en el evento "onload"
     -->

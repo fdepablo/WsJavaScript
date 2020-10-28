@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Manejadores de eventos Semanticos (1)</title>
+    <title>Manejadores de eventos Semánticos (1)</title>
 </head>
 
     <!-- 
-            Manejadores de eventos semanticos de DOM (1)
+            Manejadores de eventos semánticos de DOM (1)
            ----------------------------------------------
         El objetivo de esta parte es entender como podemos asignar funciones a los manejadores
         de eventos 
@@ -43,7 +43,7 @@ function concatenarLetra(letra){
     console.log(cadena)
 }
 
-//Valida que el formulario no este vacio
+//Valida que el formulario no este vacío
 function validarFormulario(){
     let ok = true
     if(dato.value.trim() == ""){
@@ -77,7 +77,7 @@ window.onload = function(){
     }
 
     //Cuando se dispara un evento nos lo proporcionan como
-    //parametro a la funcion asignada. Ejemplo de key logger
+    //parámetro a la funcián asignada. Ejemplo de key logger
     cajaTexto.onkeyup = function(e){
         let letra = e.key //Ya nos da el caracter
         concatenarLetra(letra)
@@ -123,7 +123,7 @@ window.onload = function(){
 <body>
 
     <div style="text-align: center;">
-        <h1>Manejadores de eventos semanticos de DOM (1)</h1>
+        <h1>Manejadores de eventos semánticos de DOM (1)</h1>
 
         <hr/>
 
@@ -139,12 +139,12 @@ window.onload = function(){
         <p>Text area que solo podemos escribir 10 caracteres</p>
         <textarea id="textArea"></textarea>
         <p id="maxNumeroAlcanzadoOnLoad" style="color:red;display: none;" >
-            Ha alcanzado el numero maximo de cararcteres!!
+            Ha alcanzado el numero máximo de cararcteres!!
         </p>
 
         <hr/>
 
-        <form id="" action="xxx"><!-- xxx seria la dirección del servidor-->
+        <form id="" action="xxx"><!-- xxx sería la dirección del servidor-->
             Dato <input type="text" name="dato" id="dato"/>
             <input type="submit" id="btnEnviar" value="Enviar"/>
             <span id="espán"></span>
