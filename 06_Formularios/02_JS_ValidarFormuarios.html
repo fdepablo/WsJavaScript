@@ -4,50 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Validar Formularios</title>
 
     <script type="text/javascript">
-        window.onload = function(){
-            // funcion basica de validación de un formulario
-            function validacion() {
-                console.log("validando los datos del formulario...")
-                if (texto.value.trim()=="") {
-                    // Si no se cumple la condicion...
-                    alert('[ERROR] El campo debe de estar relleno');
-                    return false;
-                } else if (!condiciones.checked) {
-                    // Si no se cumple la condicion...
-                    alert('[ERROR] Debe de aceptar las condiciones de uso');
-                    return false;
-                } 
+        //Las validaciones en el cliente son importantes ya que ayudan a evitar mandar información
+        //erronea al servidor. 
+        //OJO! Las validaciones en cliente son importantes pero no unicas. SIEMPRE se tienen
+        //que hacer las validaciones tambien en el servidor
 
-                //Validando que se haya elegido alguna opción del radio
-                //notese que seleccionamos por name
-                pregunta = document.getElementsByName("pregunta");
-                var seleccionado = false;
-                for(var i=0; i<pregunta.length; i++) {
-                    if(pregunta[i].checked) {
-                        seleccionado = true;
-                        break;
-                    }
+        // funcion basica de validación de un formulario
+        function validacion() {
+            console.log("validando los datos del formulario...")
+            if (texto.value.trim() == "") {
+                // Si no se cumple la condicion...
+                alert('[ERROR] El campo debe de estar relleno');
+                return false;
+            }
+            
+            //Validando que se haya elegido alguna opción del radio
+            //notese que seleccionamos por name ya que queremos todos
+            //los radio button
+            pregunta = document.getElementsByName("pregunta");
+            var seleccionado = false;
+            for(var i=0; i<pregunta.length; i++) {
+                if(pregunta[i].checked) {
+                    seleccionado = true;
+                    break;//en cuanto alguna pregunta este seleccionada
+                        //paramos la ejecución
                 }
-                if(!seleccionado) {
-                    alert('[ERROR] Debe seleccionar alguna opcion de la pregunta');
-                    return false;
-                }
-                // Si el script ha llegado a este punto, todas las condiciones
-                // se han cumplido, por lo que se devuelve el valor true
-                alert("Mandamos el formulario!")
-                return true;
             }
 
-            formulario.onsubmit = validacion;
+            if(!seleccionado) {
+                alert('[ERROR] Debe seleccionar SI, NO o NS/NC');
+                return false;
+            }
+
+            if(opciones.selectedIndex == 0){
+                alert('[ERROR] Debe seleccionar algun valor del desplegable');
+                return false;
+            }
+
+            if (!condiciones.checked) {
+                // Si no se cumple la condicion...
+                alert('[ERROR] Debe de aceptar las condiciones de uso');
+                return false;
+            } 
+            
+            if (!privacidad.checked) {
+                // Si no se cumple la condicion...
+                alert('[ERROR] Debe haber leido la privacidad');
+                return false;
+            } 
+
+            // Si el script ha llegado a este punto, todas las condiciones
+            // se han cumplido, por lo que se devuelve el valor true
+            // para que se propague el evento de mandar el formulario
+            alert("Mandamos el formulario!")
+            return true;
+        }
+
+        window.onload = function(){
+            formulario.onsubmit = validacion;//si la funcion validacion me retorna true, mando la 
+                                            //información
         }
     </script>
 </head>
 <body>
     <form id="formulario" action="URL">
-        <h1 style="text-align: center;color: blue;text-decoration: underline;">Formularios</h1>
+        <h1 style="text-align: center;color: blue;text-decoration: underline;">Validar Formularios</h1>
         <input type="text" id="texto" value=""/>
         <br/>
         <input type="radio" value="si" name="pregunta" id="pregunta_si"/> SI
@@ -55,6 +79,7 @@
         <input type="radio" value="nsnc" name="pregunta" id="pregunta_nsnc"/> NS/NC
         <br/>
         <select id="opciones" name="opciones">
+            <option value="0">Seleccione una opcion..</option>
             <option value="1">Primer valor</option>
             <option value="2">Segundo valor</option>
             <option value="3">Tercer valor</option>	
