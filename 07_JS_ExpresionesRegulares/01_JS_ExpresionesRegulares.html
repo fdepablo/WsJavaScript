@@ -182,7 +182,13 @@
     <div style="text-align: center;">
         <h1>Expresines regulares</h1>
         <form id="formulario">
-            <input type="text" id="texto" />
+            <!-- Dentro de pattern podemos hacer que valide expresiones regulares
+            Salio con el estandar HTML5 -->
+            <input type="text" id="texto" pattern="[A-Za-z]{3}" 
+                                        placeholder="Escribe algo..."
+                                        title="PATRON CON TRES CARACTERES"/>
+            <br/><br/>
+            <input type="submit" value="Enviar">
         </form>
     <div>
 </body>
