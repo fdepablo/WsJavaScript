@@ -95,28 +95,28 @@
             //-----------------
             console.log("Cuantificadores")
             // x* -> Concuerda 0 o más veces con el elemento "x" anterior.
-            re = /bu*/ // 0 o mas veces la"u"
-            console.log("/bu*/")
-            console.log("bu".match(re))//array con informacion
-            console.log("buuuuu".match(re))//array con informacion
-            console.log("bau".match(re))//array con información
-            console.log("au".match(re))//null
+            re = /bu*bu/ // 0 o mas veces la"u"
+            console.log("bubu".match(re))//array con informacion ya que hay 1 "u"
+            console.log("buuuuubu".match(re))//array con informacion ya que hay muchas. "u"
+            console.log("bbu".match(re))//array con informacion despues de la "b" no tiene porque
+                                        //haber una "u"
+            console.log("aubu".match(re))//null tiene que empezar por "b"
 
             // x+ -> Encuentra 1 o más veces el elemento "x" anterior
-            re = /bu+/ // 1 o mas veces la"u"
-            console.log("/bu+/")
-            console.log("bu".match(re))//array con informacion
-            console.log("buuuuu".match(re))//array con informacion
-            console.log("bau".match(re))//null
-            console.log("au".match(re))//null
+            re = /bu+bu/ // 1 o mas veces la"u"
+            console.log("/bu+bu/")
+            console.log("bubu".match(re))//array con informacion hay 1 "u"
+            console.log("buuuuubu".match(re))//array con informacion hay muchas "u"
+            console.log("bbu".match(re))//null al menos tiene que haber 1 "u"
+            console.log("aubu".match(re))//null tiene que empezar por "b"
 
             // x? -> Halla 0 o 1 vez el elemento "x" anterior
-            re = /bu?/
-            console.log("/bu?/")
-            console.log("bu".match(re))//array con informacion
-            console.log("buuuuu".match(re))//array con informacion
-            console.log("bau".match(re))//array con informacion
-            console.log("au".match(re))//null
+            re = /bu?bu/
+            console.log("/bu?bu/")
+            console.log("bubu".match(re))//array con informacion hay 1 "u"
+            console.log("buuuuubu".match(re))//null NO puede haber muchas "u"
+            console.log("bbu".match(re))//array con informacion ya que NO hay "u"
+            console.log("aubu".match(re))//null tiene que empezar por "b"
 
             // x{n} -> Donde "n" es un número entero positivo, concuerda exactamente con "n" 
             //apariciones del elemento "x" anterior.
