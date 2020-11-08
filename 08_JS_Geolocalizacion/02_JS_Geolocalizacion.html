@@ -1,35 +1,45 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geolocalizacion 2</title>
 </head>
+<script>
+
+	function obtenerLocalizacion() {
+		//Esta vez ademas de la función de callback para que la ejecute en caso
+		//de que todo haya ido bien, tambien la paso otra función de callback
+		//para el caso en el que haya ido algo mal
+		navigator.geolocation.getCurrentPosition(coordenadas,
+				gestionaErrores);
+	}
+
+	function coordenadas(position) {
+		var latitud = position.coords.latitude;
+		var longitud = position.coords.longitude;
+		alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
+	}
+	
+	//Por esta funcion entra en caso de que haya habido algu error al intentar
+	//geolocalizar al usuario, js crea el objeto error y lo pasa a la funcion
+	function gestionaErrores(err) {
+		if (err.code == 0) {
+			alert("error desconocido");
+		}
+		if (err.code == 1) {
+			alert("El usuario no ha compartido su posicion");
+		}
+		if (err.code == 2) {
+			alert("no se puede obtener la posicion actual");
+		}
+		if (err.code == 3) {
+			alert("timeout recibiendo la posicion");
+		}
+	}
+</script>
 <body>
-	<script>
-		function obtener_localizacion() {
-			navigator.geolocation.getCurrentPosition(coordenadas,
-					gestiona_errores);
-		}
-		function coordenadas(position) {
-			var latitud = position.coords.latitude;
-			var longitud = position.coords.longitude;
-			alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
-		}
-		
-		function gestiona_errores(err) {
-			if (err.code == 0) {
-				alert("error desconocido");
-			}
-			if (err.code == 1) {
-				alert("El usuario no ha compartido su posicion");
-			}
-			if (err.code == 2) {
-				alert("no se puede obtener la posicion actual");
-			}
-			if (err.code == 3) {
-				alert("timeout recibiendo la posicion");
-			}
-		}
-	</script>
-	<a href="javascript:obtener_localizacion();">Mostrar Posici�n</a>
+	<a href="javascript:obtenerLocalizacion();">Mostrar Posicion</a>
 </body>
 </html>

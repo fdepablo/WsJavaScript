@@ -1,41 +1,56 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<title></title>
-<!-- 
-//Mediante la localizacion podemos averiguar la situacion greografica del dispositivo android
-//Podemos tener varios proveedores en nuestro telefono, por ejemplo podemos tener
-//localizado el aparato mediante GPS o WiFi o mediante el operador de red
 
-/*
-   La latitud es la distancia que existe entre un punto cualquiera y el Ecuador(Lineas horizontales)
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Geolocalizacion 1</title>
+  <!-- 
+  Mediante la localizacion podemos averiguar la situacion greografica del dispositivo movil
+  o de nuestro ordenador
+  Podemos tener varios proveedores de geolocalizacion en nuestro telefono u ordenador, 
+  por ejemplo podemos tener localizado el dispositivo mediante GPS o mediante el operador de red
+
+  La latitud es la distancia que existe entre un punto cualquiera y el Ecuador(Lineas horizontales)
 
    - Se expresa en grados sexagesimales.
-   - Se mide de -90 a 90º.
-   - 0º corresponde al ecuador
-   - Los polos Norte y Sur tienen latitud 90º y -90º respectivamente.
+   - Se mide de -90 a 90 grados.
+   - 0 grados corresponde al ecuador
+   - Los polos Norte y Sur tienen latitud 90 grados y -90 grados respectivamente.
 
    La longitud es la distancia que existe entre un punto cualquiera y el Meridiano de Greenwich
    (Inglaterra son las Lineas verticales)
 
    - Se expresa en grados sexagesimales.
-   - Se mide de -180 a 180º.
-   - 0º corresponde al meridiano de Greenwich
- */
+   - Se mide de -180 a 180 grados.
+   - 0 grados corresponde al meridiano de Greenwich
+
  -->
+  <script>
+    function obtenerLocalizacion() {
+      //El objeto geolocalizacion nos permite saber la latitud y la longitud de nuestros
+      //usuarios
+      //Siempre que intentemos geolocalizar a nuestros usuarios, estos nos tienen que dar
+      //permiso, siermpre que usemos la funcion getCurrentPosition
+      //Por otro lado a dicha funcion le tenemos que pasar una funcion de callback
+      //es decir, cuando el usuario acepte el navegador creara un objeto con las coordenadas
+      //e invocara a la funcion que le hayamos pasado por parametro
+      navigator.geolocation.getCurrentPosition(coordenadas);
+    }
+
+    //position es un objeto creado por JS que contendrÃ¡ la informaciÃ³n sobre la localizacion
+    //del usuario en cuestion
+    function coordenadas(position) {
+      var latitud = position.coords.latitude;
+      var longitud = position.coords.longitude;
+      alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
+    }
+  </script>
 </head>
+
 <body>
-	<script>
-		function obtener_localizacion() {
-			//le pasamos la función de callback
-			navigator.geolocation.getCurrentPosition(coordenadas);
-		}
-		function coordenadas(position) {
-			var latitud = position.coords.latitude;
-			var longitud = position.coords.longitude;
-			alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
-		}
-	</script>
-	<a href="javascript:obtener_localizacion();">Mostrar Posición</a>
+  <a href="javascript:obtenerLocalizacion();">Mostrar Posicion</a>
 </body>
+
 </html>
