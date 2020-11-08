@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
+<!--
+    Ejemplo igual que el anterior pero ahora el servidor nos devuelve un objeto JSON
+    Mas informacion sobre JSON:
+    https://www.json.org/json-es.html
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ejemplo AJAX XML</title>
+    <title>Ejemplo AJAX JSON</title>
 </head>
 
 <script type="application/javascript">
 
 const URL_DESTINO = "http://localhost:5500/09_AJAX/"
-const RECURSO = "musica.xml"
+const RECURSO = "musica.json"
 
     function enviarPeticionAsincrona() {
 
@@ -20,7 +24,7 @@ const RECURSO = "musica.xml"
         xmlHttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 if (this.status == 200) {
-                    procesarRespuesta(this.responseXML)
+                    procesarRespuesta(this.responseText)
                 } else {
                     alert("ZASCA!")
                 }
@@ -31,26 +35,36 @@ const RECURSO = "musica.xml"
         xmlHttp.send(null)
     }
 
-    function procesarRespuesta(xmlDoc) {
+    function procesarRespuesta(jsonDoc) {
+
+        var objetoJson = JSON.parse(jsonDoc)
+        console.log(objetoJson)
+
         //Lo suyo seria crear objetos con el DOM, esto es un poco chapus
         //pero como ejemplo sencillo vale
         var table = "<tr><th>Title</th><th>Artist</th></tr>";
-        var cds = xmlDoc.getElementsByTagName("CD");
-        for (let i = 0; i < cds.length; i++) {
-            table += "<tr><td>" +
-                cds[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
-                "</td><td>" +
-                cds[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
-                "</td></tr>";
+        var arrayCDs = objetoJson.CATALOG.CD;//Ojo mayusculas y minusculas, es como este en el json original
+        
+        //Iteramos el array de CDs y formamos las filas y columnas
+        for(let cd of arrayCDs){
+            table += "<tr><td>" + cd.TITLE + "</td>" + 
+                "<td>" + cd.ARTIST + "</td></tr>";
+        }
+
+        resultadoBusqueda.innerHTML = table;
+
+        /*Tambien podemos hacerlo así, de manera clasica
+        for (let i = 0; i < arrayCDs.length; i++) {
+            table += "<tr><td>" + arrayCDs[i].TITLE + "</td>" + 
+                "<td>" + arrayCDs[i].ARTIST + "</td></tr>";
         }
         resultadoBusqueda.innerHTML = table;
+        */
     }
-
 </script>
-
 <body>
 
-    <h1>EJEMPLO AJAX XML</h1>
+    <h1>EJEMPLO AJAX JSON</h1>
     <button id="btnBuscarAsincrono" onclick="enviarPeticionAsincrona()">Buscar asíncrono</button>
     <table id="resultadoBusqueda"></table>
 

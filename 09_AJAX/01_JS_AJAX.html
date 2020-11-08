@@ -4,30 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Ejemplo AJAX</title>
 </head>
 
 <script type="application/javascript">
 
 /*
-function XMLHttpRequest(){
+Podríamos decir que AJAX es un conjunto de APIs utilizadas por el navegador web y lenguajes 
+de scripting, como JavaScript, para transferir XML y otros datos en formato de texto, desde 
+y hacia un servidor web, mediante el protocolo de comunicaciones HTTP. 
+
+Ventajas:
+    1) Reducimos el ancho de banda requerido, al no tener que recuperar toda la página.
+    2) Agilizamos la actualización y eliminamos el parpadeo de la página.
+Inconvenientes:
+    1) No es posible volver a la página anterior. Además, si guardamos la página en favoritos 
+    puede ser almacenada una diferente a aquella en la que estamos.
+    2) Puede causar problemas con navegadores antiguos que no implementan esta tecnología.
+    3) No funciona si el usuario tiene desactivado Javascript en su navegador.
+
+Pasos de ejecución en AJAX (Dibujo 6_LlamadaAjax.png)
+    1) Se produce un evento en la web, como la carga de la página, un clic en un botón...
+        1.1 ) JavaScript crea un objeto XMLHttpRequest.
+    2) El nuevo objeto XMLHttpRequest envía una solicitud a un servidor web.
+    3) El servidor procesa la solicitud aplicando la logica de negocio oportuna
+    4) El servidor normalmente accede a una BBDD para acceder a la información
+    5) El servidor envía la respuesta a la web en un formato (normalmente JSON o XML)
+    6) JavaScript lee la respuesta y realiza la acción adecuada a esa respuesta (normalmente mostrar
+    la informacion al usuario).
+
+Propiedades mas imporantes del objeto XMLHttpRequest:
     this.responseText //El body en bruto
     this.responseXML  //Si el body contenía un XML, el XML procesado
     this.status       //Código de respuesta
     this.statusText   //Texto asociado al código de respuesta  
     this.readyState   //Estado del objeto
     
-    //Propiedades pensadas para que coloquemos funciones de retrollamada
+    - Propiedades pensadas para que coloquemos funciones de retrollamada
+    o "callback"
+
     this.onreadystatechange = null 
     this.onload  = null
     this.onerror = null
-}
-XMLHttpRequest.prototype.open = function(){...}
-XMLHttpRequest.prototype.send = function(){...}
+
+Metodos mas importantes del objeto XMLHttpRequest
+    XMLHttpRequest.open() //Decimos la URL donde queremos ir a buscar la información
+    XMLHttpRequest.send() //Enviamos la información al servidor
 
 */
 
-const URL_DESTINO = "http://localhost:80/JS/"
+//En caso de TOMCAT habria que cambiar al puerto 8080, en apache al 80
+const URL_DESTINO = "http://localhost:5500/09_AJAX/"
 const RECURSO = "fichero.txt"
 
 function enviarPeticionSincrona(){
