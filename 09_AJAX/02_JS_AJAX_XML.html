@@ -20,7 +20,7 @@ const RECURSO = "musica.xml"
         xmlHttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 if (this.status == 200) {
-                    procesarRespuesta(this.responseXML)
+                    procesarRespuesta(this.responseXML)//obtenemos el valor en XML
                 } else {
                     alert("ZASCA!")
                 }
@@ -32,10 +32,11 @@ const RECURSO = "musica.xml"
     }
 
     function procesarRespuesta(xmlDoc) {
-        //Lo suyo seria crear objetos con el DOM, esto es un poco chapus
+        //Lo suyo seria crear objetos con el DOM, esto esta regulín
         //pero como ejemplo sencillo vale
         var table = "<tr><th>Title</th><th>Artist</th></tr>";
-        var cds = xmlDoc.getElementsByTagName("CD");
+        //podemos acceder a los elementos del XML de igual manera que lo haciamos con el DOM de HTML
+        var cds = xmlDoc.getElementsByTagName("CD");//me devuelve un array con todas las etiquetas CD
         for (let i = 0; i < cds.length; i++) {
             table += "<tr><td>" +
                 cds[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +

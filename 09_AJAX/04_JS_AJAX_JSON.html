@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!--
-    Ejemplo igual que el anterior pero ahora el servidor nos devuelve un objeto JSON
-    Mas informacion sobre JSON:
-    https://www.json.org/json-es.html
--->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +19,7 @@ const RECURSO = "musica.json"
         xmlHttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 if (this.status == 200) {
-                    procesarRespuesta(this.responseText)
+                    procesarRespuesta(this.responseText)//Obtenemos el valor en texto
                 } else {
                     alert("ZASCA!")
                 }
@@ -36,11 +31,12 @@ const RECURSO = "musica.json"
     }
 
     function procesarRespuesta(jsonDoc) {
-
+        //Convertimos un texto a un objeto JSON
         var objetoJson = JSON.parse(jsonDoc)
+        //Podemos hacer lo contrario con "JSON.stringify(obj)"
         console.log(objetoJson)
 
-        //Lo suyo seria crear objetos con el DOM, esto es un poco chapus
+        //Lo suyo seria crear objetos con el DOM, esto esta regulín
         //pero como ejemplo sencillo vale
         var table = "<tr><th>Title</th><th>Artist</th></tr>";
         var arrayCDs = objetoJson.CATALOG.CD;//Ojo mayusculas y minusculas, es como este en el json original
@@ -53,7 +49,7 @@ const RECURSO = "musica.json"
 
         resultadoBusqueda.innerHTML = table;
 
-        /*Tambien podemos hacerlo así, de manera clasica
+        /*Tambien podemos hacerlo así, con un for clasico
         for (let i = 0; i < arrayCDs.length; i++) {
             table += "<tr><td>" + arrayCDs[i].TITLE + "</td>" + 
                 "<td>" + arrayCDs[i].ARTIST + "</td></tr>";

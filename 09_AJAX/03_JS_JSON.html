@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+    <script>
+        //JSON (JavaScript Object Notation - Notación de Objetos de JavaScript) es un formato 
+        //ligero de intercambio de datos. Leerlo y escribirlo es simple para humanos, mientras que 
+        //para las máquinas es simple interpretarlo y generarlo. 
+        //Está basado en un subconjunto del Lenguaje de Programación JavaScript, 
+
+        //Actualmente es un formato de intercambio de texto más popular que XML ya que
+        //ocupa menos espacio respecto a XML transmitiendo la misma información.
+
+        //JSON está constituído por dos estructuras:
+        // 1) Una colección de pares de nombre/valor. En varios lenguajes esto es conocido como un 
+        //objeto, registro, estructura, diccionario, tabla hash, lista de claves o un arreglo asociativo.
+        // 2) Una lista ordenada de valores. En la mayoría de los lenguajes, esto se implementa como 
+        //arreglos, vectores, listas o sequencias.
+
+        //Un objeto es un conjunto desordenado de pares nombre/valor. Un objeto comienza 
+        //con "{" llave de apertura y termine con "}" llave de cierre. Cada nombre es seguido 
+        //por ":" dos puntos y los pares nombre/valor están separados por "," coma.
+
+        //Mas informacion:
+        //https://www.json.org/json-es.html
+
+        //Formando un objeto JSON
+        var objetoJsonBasico = {"atributo1" : "valor1"}
+        console.log(objetoJsonBasico)
+
+        objetoJsonBasico = {"atributo1" : "valor1","atributo2" : "valor2"}
+        console.log(objetoJsonBasico)
+        //EQUIVALENTE A XML
+        /*
+        <objeto>
+            <atributo1>valor1</atributo1>
+            <atributo2>valor2</atributo2>
+        </objeto>
+        */
+
+        //Formando un array, empieza por "[" separados por "," y acaba con "]"
+        var arrayBasico = ["valor1","valor2","valor3",5,true,false,null,{"atributo1" : "valor1"}]
+        console.log(arrayBasico)
+        
+        //Los valores de los atributos o de los arrays pueden ser de los siguientes tipo:
+        /*
+            1) string
+            2) number
+            3) true
+            4) false
+            5) null
+            6) otro "object" JSON
+            7) array
+        */
+
+        //Ejemplo mas completo de un objeto JSON
+        var homer = {
+            "nombre" : "Homer",
+            "apellidos" : "Simpson",
+            "edad" : 40,
+            "estaCasado" : true,
+            "cervezasFavoritas" : ["Mahou", "Aguila", "San Miguel" ],
+            "direccion" : {
+                "tipoVia" : "Calle",
+                "nombreVia" : "742 Evergreen Terrace",
+                "CIUDAD" : "Springfield" 
+            }
+        }
+
+        //Accediendo a los atributos, OJO! con mayusculas y minusculas, hay que respetarlas
+        console.log(homer)
+        console.log(homer.nombre)
+        console.log(homer.edad)
+        console.log(homer.estaCasado)
+        console.log(homer.cervezasFavoritas[0])
+        console.log(homer.direccion.tipoVia)
+        console.log(homer.direccion.CIUDAD)
+
+        //Aglunas operaciones
+        //Conviertir un JSON a texto
+        var textoJson = JSON.stringify(homer)//lo paso a un String
+        console.log("Texto json: " + textoJson)
+
+        //Convertir un texto a JSON, habitual cuando recibimos el json del servidor
+        textoJson = '{"nombre" : "Marge","edad" : 38}'
+        var objetoJson = JSON.parse(textoJson)
+        console.log(objetoJson)
+        console.log(objetoJson.nombre)
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">JSON</h1>
+</body>
+</html>
