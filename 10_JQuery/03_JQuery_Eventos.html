@@ -2,48 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>JQuery Eventos</title>
 </head>
 
-<script type="text/javascript" src="jquery-3.5.1.min"></script>
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
-function dale(){
+$(inicializar);
+
+function inicializar(){	
+    //document.getElementById("dale").onclick = doDale;
+    //dale.onclick = dale;
+    $("#dale").click(doDale);
+    $("#enviar").click(validar);
+}
+
+function doDale(){
     console.log("====================================");
+    //Tambien nos entra el evento por argumento, pero esta vez
+    //es un evento JQUERY
     console.log(arguments);
     alert("Leña al mono que es de goma");
 }
 
 function validar(evento){
     console.log("====================================");
-    console.log(evento);
+    console.log(evento);//podemos recoger el evento JQUERY
 
     if( $("#dato").val().trim().length == 0){
         alert("Dato es obligatorio");
+        //Evitamos que se ejecute el evento de mandar el formulario
         evento.preventDefault(); 
     }
 
-    console.log("evento:"+evento.isDefaultPrevented());
+    console.log("evento prevenido?: " + evento.isDefaultPrevented());
 }
-
-$(inicializar);
-
-function inicializar(){
-	
-    //document.getElementById("DALE").onclick = dale;
-    //DALE.onclick = dale;
-    $("#DALE").click(dale);
-    $("#enviar").click(validar);
-
-}
-
 </script>
 
 <body>
 
     <h1>JQuery. Eventos</h1>
 
-    <input type="button" id="DALE" value="DALE"/>
+    <input type="button" id="dale" value="DALE"/>
 
     <hr/>
 

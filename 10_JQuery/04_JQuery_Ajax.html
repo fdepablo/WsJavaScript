@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery AJAX</title>
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+</head>
+
+<script type="text/javascript">
+
+const URL_DESTINO = "http://localhost:5500/10_JQuery/"
+const RECURSO = "musica.json"
+
+$(inicializar);
+
+function inicializar(){
+    //metemos el evento onclic al boton
+    $("#boton").click(peticionAJAX);
+}
+
+function peticionAJAX(){
+    //Con JQuery se hace así
+    $.ajax({
+            'type'  : 'GET', //Por defecto es GET
+            'url'   : URL_DESTINO + RECURSO,
+            'async' : true, //Por defecto es true
+        }
+    ).done(procesarRespuesta)//funcion de callback que ejecutamos si todo ha ido bien
+    .fail(procesarError)//funcion de callback que ejecutamos si ha ido mal, optativa
+    .always(fin)//funcion de callback que ejecutamos siempre, optativa
+        
+    //En jquery tambien disponemos de las funciones con todos los metodos HTTP
+    //por si queremos simplificar
+
+    //$.get({})
+    //$.post({})
+    //$.put({})
+    //$.delete({})
+    //...
+}
+
+//Funcion que se ejecuta en caso de que haya ido todo bien, NOTESE que JQUERY
+//me pasa el mensaje resultante en formato JSON
+function procesarRespuesta(musica){
+    console.log(arguments)//nos dan toda la información disponible de la respuesta HTTP
+    console.log(musica)   
+
+    //accedemos al array de CDs dentro del catalogo
+    let CDs =  musica.CATALOG.CD
+
+    //Antes de cargar las filas, borramos las anteriores
+    //para evitar add cada vez que pulsemos el boton
+    $("#tbodyMusica").html('')
+
+    //usamos un for-each para cargar la respuesta AJAX en la tabla
+    $.each(CDs,function(i, cd){
+        //Por cada iteracion creamos el elemento TR con los datos
+        //Con "${}" podemos extraer el valor de las variables y ponerlas
+        //directamene en un String (seria como concatenar). OJO!
+        //el String debe crearse con "`"
+        let tr = $(`<tr>
+                <td>${i}</td>
+                <td>${cd.TITLE}</td>
+                <td>${cd.ARTIST}</td>
+           </tr>`)
+        //añadimos el tr al tbody de la tablaMusica
+        tr.appendTo("#tbodyMusica")
+    })
+}
+
+//Cuando ocurre algun tipo de error. Ej: Servidor sin respuesta, no encuentra el recurso,...
+function procesarError(error){
+    alert("ZASCA!")
+    console.log(error)
+}
+
+//Funcion que se ejecutará siempre, haya habido error o no
+function fin(){
+    console.log("Este metodo siempre se ejecutará")
+}
+    
+</script>
+
+<body>
+
+    <h1>Peticiones AJAX con jQuery</h1>
+
+    <button id="boton">Pulsa para acceder por AJAX a la música</button>
+
+    <hr/>
+
+    <table id="tablaMusica">
+        <thead>
+            <tr>
+                <th>CONTADOR</th>
+                <th>TITULO</th>
+                <th>ARTISTA</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyMusica">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

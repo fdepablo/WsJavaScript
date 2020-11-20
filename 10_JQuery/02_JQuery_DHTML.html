@@ -2,41 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>JQuery DHTML</title>
 </head>
 
-<!--
-<script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
--->
-<script type="text/javascript" src="jquery-3.5.1.min"></script>
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
+//Nada más cargar el HTML de la página, ejecutamos la función "pruebasDHTML"
+$(pruebasDHTML);
 
-$(pruebas);
-
-function pruebas(){    
+function pruebasDHTML(){    
 
     //SPAN 1
     console.log("==========================================");
     //Si a la funcion $ le pasamos un string con html se crean los nodos
-    //y nos devuelven un objeto jQuery que los contiene
-    let nodos = $("<table><tr><td>HOLA</td></tr></table>"); //Se crean XXX nodos
-    console.log(nodos); //En el array hay YYY nodos
+    //y nos devuelve un objeto jQuery que los contiene
+    let nodo = $("<table>")//NOTA! Observar que es diferente al selector.
+                        // En el selector se pondría solamente "table"
+                        //En este caso se pone "<table>"
+    console.log(nodo)
+    console.log(nodo[0])//recordar que $ siempre trabaja con objetos JQUERY
+
+    //Podemos crear una serie de etiquetas
+    let nodos = $("<table><tr><td>HOLA</td></tr></table>"); //Se crean todos esos nodos
+    console.log(nodos); //En el array hay un nodos
+    console.log(nodos[0])
 
     nodos = $("<table><tr><td>HOLA</td></tr></table><h2>Movida gordísima</h2>"); //Se crean XXX nodos
-    console.log(nodos); //En el array hay YYY nodos
+    console.log(nodos); //En el array hay dos nodos
+    console.log(nodos[0])
+    console.log(nodos[1])
 
            
     //SPAN 2
     console.log("==========================================");
-    $("#span2").html("Mi mente se va"); //Cambia el innerHTML
+    $("#span1").html("Mi mente se va"); //Cambia el innerHTML
     
 
     let span2 = $("#span2")[0];
     //span2.html("ESTO ES UN ZASCA DE LOS GRANDES");
+    //ya que "html" es una funcion del objeto JQUERY
     span2.innerHTML = "ASI SI"
     
     //SPAN 3
@@ -44,17 +49,19 @@ function pruebas(){
     
     //Añadiendo los hijos con js a palo seco 
     nodos = $("<h3>UNO</h3><h3>DOS</h3><h3>TRES</h3>")
+    //Todas las funciones JS no se pueden usar sobre objetos JQUERY
+    //por lo que siempre hay que sacarlo de ahí
     let span = $("#span1")[0]; 
     span.appendChild(nodos[0]);
     span.appendChild(nodos[1]);
     span.appendChild(nodos[2]);
 
     //Mucho mejor así
-    let span3 = $("#span3").get(0); //tambien [0]
-    $("<h3>UNO</h3><h3>DOS</h3><h3>TRES</h3>").appendTo(span3);
+    let span3 = $("#span3")[0]; //tambien .get(0)
+    $("<h3>UNO</h3><h3>DOS</h3><h3>TRES</h3>").appendTo(span3);//podemos pasar un objeto HTML
 
     //Mas corto:    
-    $("<h3>UNO</h3><h3>DOS</h3><h3>TRES</h3>").appendTo( $("#span3") );
+    $("<h3>UNO</h3><h3>DOS</h3><h3>TRES</h3>").appendTo( $("#span3") );//podemos pasar un objeto JQUERY
 
     //Nodos de texto
     //La función text afecta únicamente a nodos de texto
@@ -62,11 +69,12 @@ function pruebas(){
     console.log($("#div2").text()); //Sin parámetro obtenemos el valor
     //Con parámetro cambiamos el valor del nodo de texto
     $("#div2").text("A tope con el JQuery!");
-    $("#div2").text("<b>A tope con el JQuery</b>");
+    $("#div2").text("<b>A tope con el JQuery</b>");//al decir que es texto, NO crea la etiqueta <b>
 
     //innerHTML
     console.log("==========================================");
     $("#div3").html("<h3><font color='lightgreen'>A disfrutar con el Javascript</font></h3>");
+    //NOTESE que en este caso, SI me crea las etiquetas y me aplica los estilos
     console.log( $("#div4").html() );
 
     //Trabajando con nodos
@@ -75,17 +83,17 @@ function pruebas(){
     $("<b>Super diversión a tope </b>").appendTo(nodo2); //ok
 
     $("<b>Super diversión a tope </b>").appendTo($("#div5")[0]); //escribiendo menos
-    $("<b>Super diversión a tope </b>").appendTo($("#div5"));    //escribiendo aun menos pero cuidado!
+    $("<b>Super diversión a tope </b>").appendTo($("#div5"));    //escribiendo aun menos pasandole
+                                                        //directamente el objeto JQUERY
 
     //append: añade al final, como último hijo
-
     let li = document.createElement("li");
     let txtN = document.createTextNode("hal, abreme la puerta. abreme la puerta, hal!, HAL ABREME LA PUERTA MCEMPV!!!");
+    
     li.appendChild(txtN); //Con JS
+    $("#lista").append(li); //Con JQUERY
 
-    $("#lista").append(li);
-
-
+    //Se puede simplificar aun mas
     $("#lista").append("<li>y no le encuentro las piernas</li>");
     $('#lista').append("<li id='separador'>=====================</li>");
     $("#lista").append("<li>aaaaaaaaaaaaaaaa</li>");
@@ -97,16 +105,12 @@ function pruebas(){
     $('#separador').after("<li>AFTER</li>");
 
     //Eliminando nodos
-    //document.getElementById("texto").remove();
+    //En JS: document.getElementById("texto").remove();
     $("#texto").remove();
-
 }
-
-
 </script>
 
 <body>
-
 <h1>JQuery DHtml</h1>
 
     <div id="div1">
