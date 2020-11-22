@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejemplo Session Storage</title>
+</head>
+<script>
+	/*
+		Mismo ejemplo que el anterior del contador de numeros pero esta vez el ciclo de vida de 
+		donde se guardan los datos esta ligada a la session
+
+		Esta vez, si cerramos el navegador y lo volvemos a abrir los datos se pierden
+
+		NOTESE que es exactamente igual pero en vez de usar "localStorage" se usa
+		"sessionStorage"
+	*/
+	
+function guardarValores(){
+	//Para saber si el navegador soporta el API STORAGE tiene que exisistir "Storage"
+	if (typeof (Storage) !== "undefined") {
+		//Como existe Storage, podemos guardar información en el navegador
+		//Podemos ver la información guardada en: F12 -> Almacenamiento -> Storage
+		//Aqui estarían las dos Storage, local y session
+
+		//Tenemos dos opciones para guardar elementos
+		sessionStorage.setItem("nombre", nombre.value);
+		//Y la otra manera mas breve
+		sessionStorage.apellido = apellido.value
+		sessionStorage.edad = edad.value;
+		alert("Informacion guardada!")
+	} else {
+		resultadoPersona.innerHTML = "Sorry, your browser does not support web storage...";
+	}
+}
+
+function cargarValores(){
+	resultadoPersona.innerHTML = 
+				" Nombre: " + sessionStorage.nombre + 
+				" Apellido: " + sessionStorage.apellido +
+				" Edad: " + sessionStorage.edad;
+}
+
+function contadorDePulsaciones() {
+	if (typeof (Storage) !== "undefined") {
+		//Si existe la clave 'contador', accedemos a ella, la convertimos
+		//a numero, y le añadimos uno
+		if (sessionStorage.contador) {
+			sessionStorage.contador = Number(sessionStorage.contador) + 1;
+		} else {//Si no existe la clave, la creamos y la inicializamoa a 1
+			sessionStorage.contador = 1;
+		}
+		//Añadimos a la etiqueta 'resultado' el numero de veces que 
+		//hemos pulsado el boton
+		resultadoContador.innerHTML = "Has pulsado el boton " + sessionStorage.contador + " veces.";
+	} 
+}
+
+function eliminarContador(){
+	//podemos eliminar una clave del Storage con el siguiente metodo
+	sessionStorage.removeItem("contador");
+	resultadoContador.innerHTML = "";
+}
+
+function reset() {
+	//Podemos borrar toda la informacion del Storage
+	sessionStorage.clear();
+	resultadoContador.innerHTML = "";
+	resultadoPersona.innerHTML = "";
+}
+
+</script>
+<body>
+
+	<h1 style="text-align: center;">Session Storage</h1>
+
+	Nombre: <input type="text" id="nombre"/>
+	Apellidos: <input type="text" id="apellido"/>
+	Edad: <input type="number" id="edad"/>
+
+	<hr/>
+
+	<button onclick="guardarValores();">Guardar</button>
+	<button onclick="cargarValores();">Cargar</button>
+	<button onclick="contadorDePulsaciones()" type="button">Incrementar Contador</button>
+	<button onclick="eliminarContador()" type="button">Eliminar Contador</button>
+	<button onclick="reset()">Reset Total</button>
+	
+	<hr/>
+
+	<div id="resultadoPersona"></div>
+	<hr/>
+	<div id="resultadoContador"></div>
+</body>
+</html>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejemplo Local Storage</title>
+</head>
+<script>
+/*
+La API de almacenamiento web (WebStorage) proporciona los mecanismos mediante los cuales el navegador 
+puede almacenar información de tipo clave/valor, de una forma mucho más intuitiva que utilizando cookies.
+
+La interfaz Storage de la API de almacenamiento web provee acceso al almacenamiento de la sesión 
+o al almacenamiento local para un dominio en particular, permitiéndote por ejemplo añadir, 
+modificar o eliminar elementos de dato almacenados.
+
+Los dos mecanismos en el almacenamiento web son muy parecidos, y serian los siguientes:
+
+	1) sessionStorage -> mantiene un área de almacenamiento separada para cada origen que está disponible 
+	mientras dure la sesión de la página (mientras el navegador esté abierto, incluyendo recargas de 
+	página y restablecimientos).
+
+	2) localStorage -> hace lo mismo, pero persiste incluso cuando el navegador se cierre y se reabra.
+
+Estos mecanismos están disponibles mediante las propiedades Window.sessionStorage y Window.localStorage 
+Al invocar uno de éstos, se creará una instancia del objeto Storage, a través del cual los datos 
+pueden ser creados, recuperados y eliminados. 
+
+sessionStorage y localStorage utilizan un objeto de almacenamiento diferente según su origen y ambos
+tienen los mismos metodos y propiedades, lo unico en lo que se diferencian es en el ciclo de vida
+de los objetos.
+	
+Mas información:
+https://developer.mozilla.org/es/docs/Web/API/API_de_almacenamiento_web
+
+En este ejemplo vamos a ver la "localStorage", si cerramos el navegador y lo volvemos a abrir
+los datos se persisten
+*/
+
+function guardarValores(){
+	//Para saber si el navegador soporta el API STORAGE tiene que exisistir "Storage"
+	//Actualmente todos los navegadores lo soportan pero versiones antiguas pueden
+	//no tenerlo
+	if (typeof (Storage) !== "undefined") {
+		//Como existe Storage, podemos guardar información en el navegador
+		//Podemos ver la información guardada en: F12 -> Almacenamiento -> Storage
+		//Aqui estarían las dos Storage, local y session
+
+		//Tenemos dos opciones para guardar elementos
+		localStorage.setItem("nombre", nombre.value);
+		//Y la otra manera mas breve
+		localStorage.apellido = apellido.value
+		localStorage.edad = edad.value;
+		alert("Informacion guardada!")
+	} else {
+		resultadoPersona.innerHTML = "Sorry, your browser does not support web storage...";
+	}
+}
+
+function cargarValores(){
+	resultadoPersona.innerHTML = 
+				" Nombre: " + localStorage.nombre + 
+				" Apellido: " + localStorage.apellido +
+				" Edad: " + localStorage.edad;
+}
+
+function contadorDePulsaciones() {
+	if (typeof (Storage) !== "undefined") {
+		//Si existe la clave 'contador', accedemos a ella, la convertimos
+		//a numero, y le añadimos uno
+		if (localStorage.contador) {
+			localStorage.contador = Number(localStorage.contador) + 1;
+		} else {//Si no existe la clave, la creamos y la inicializamoa a 1
+			localStorage.contador = 1;
+		}
+		//Añadimos a la etiqueta 'resultado' el numero de veces que 
+		//hemos pulsado el boton
+		resultadoContador.innerHTML = "Has pulsado el boton " + localStorage.contador + " veces.";
+	} 
+}
+
+function eliminarContador(){
+	//podemos eliminar una clave del Storage con el siguiente metodo
+	localStorage.removeItem("contador");
+	resultadoContador.innerHTML = "";
+}
+
+function reset() {
+	//Podemos borrar toda la informacion del Storage
+	localStorage.clear();
+	resultadoContador.innerHTML = "";
+	resultadoPersona.innerHTML = "";
+}
+
+</script>
+<body>
+
+	<h1 style="text-align: center;">Local Storage</h1>
+
+	Nombre: <input type="text" id="nombre"/>
+	Apellidos: <input type="text" id="apellido"/>
+	Edad: <input type="number" id="edad"/>
+
+	<hr/>
+
+	<button onclick="guardarValores();">Guardar</button>
+	<button onclick="cargarValores();">Cargar</button>
+	<button onclick="contadorDePulsaciones()" type="button">Incrementar Contador</button>
+	<button onclick="eliminarContador()" type="button">Eliminar Contador</button>
+	<button onclick="reset()">Reset Total</button>
+	
+	<hr/>
+
+	<div id="resultadoPersona"></div>
+	<hr/>
+	<div id="resultadoContador"></div>
+</body>
+</html>
