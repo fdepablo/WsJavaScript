@@ -9,3 +9,8 @@ function retornarHora(){
   var cadena = fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
   return cadena; 
 }
+
+function retornarMilisegundos(){
+  var fecha = new Date();
+  return fecha.getTime();
+}
