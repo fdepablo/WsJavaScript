@@ -12,5 +12,5 @@ function retornarHora(){
 
 function retornarMilisegundos(){
   var fecha = new Date();
-  return fecha.getTime();
+  return fecha.getTime();//devolvemos el numero de milisegundos desde 1970
 }

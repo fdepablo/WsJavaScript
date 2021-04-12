@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ficheros JS</title>
 	<!-- Podemos incluir JS importando ficheros locales que esten en el
 	mismo directorio -->
 	<script type="text/javascript" src="js/fechas.js"></script>
 	
 	<!-- Podemos incluir JS importando ficheros locales que esten en otros 
-	directorios de manera relativa o absoluta, siempre mejor relativa -->
+	directorios de manera relativa o absoluta, suele ser mejor relativa -->
 	<script type="text/javascript" src="js/matematicas.js"></script>
 	
 	<!-- Podemos incluir JS importando ficheros remotos CDN (u otro tipo) -->
@@ -19,7 +21,10 @@
 <body>
 	<!-- Usamos fechas.js -->
 	<script>
-		//Document.write escribimos directamente en el html
+		//Esto sería un comentario en JS, es decir, no se va a procesar
+
+		//Document.write, es una función la cual podemos escribimos directamente en el html
+		//de nuestra pagina
   		document.write('<h1>La fecha de hoy es:'+retornarFecha()+'</h1>');
   		document.write('<br/>');
   		document.write('La hora es: '+retornarHora());
@@ -37,7 +42,7 @@
 	
 	<p>Pulsame!!</p>
 	
-	<!-- Usamos JQUERY, buscamos todas las etiquetas P y les add esta funci�n -->
+	<!-- Usamos JQUERY, buscamos todas las etiquetas P y les add esta funcion -->
 	<!-- OJO! la etiqueta tiene que estar creada antes de este script -->
 	<script>
   		$("p").click(function(){

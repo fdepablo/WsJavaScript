@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
-	<!-- Podemos incluir JS dentro de la etiqueta <script>
-		Puede haber todas las etiqetas que queramos, aunque normalmente
-		las podemos ver dentro de <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Script</title>
+
+	<!-- Podemos incluir JS dentro de la etiqueta <script>. Puede haber todas las etiqetas que 
+		queramos, aunque normalmente las podemos ver dentro de <head>
+
+		Hay que tener en cuenta que cuando se carga una página en el navegador se ejecuta linea a
+		linea
 	-->
 	<script type="text/javascript">
-		// Nada más arrancar la pagina se ejecutara la siguiente linea
+		// Cuando el navegador llege a esta linea, la ejecutará
 		alert('Bienvenido!!');
 
+		//Cargamos la función saludar(), para ser usada más adelante
 		function saludar() {
 			alert("hola Caracola!!!")
 		}
 	</script>
 </head>
-
 <body>
-	<span>Bienvenido Usuario!</span>
+	<h1>Bienvenido Usuario!</h1>
 	<h1 onclick="saludar()">Pulsame para saludar</h1>
 </body>
-
 </html>
