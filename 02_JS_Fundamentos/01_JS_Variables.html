@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- Si tenemos problemas con las tildes y caracteres especiales podemos establecer UTF8 -->
-<meta charset="UTF-8">
-<title>Variables JS</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Variables JS</title>
 </head>
 <body>
 
@@ -14,15 +15,6 @@ Esto son varias lineas
 de comentarios
 */
 
-// Caracteristicas JS
-//--------------------
-//Interpretado
-//Secuencial
-//Orientado a objetos
-//Funcional, orientado a funciones
-//Fuertemente NO tipado, el tipo de las variables no se decide en tiempo de interpretacion 
-// o compilacion, se decide en tiempo de ejecucion.
-
 // Para probar codigo en js podemos usar la funcion alert o usar logs
 //alert("Es mejor evitar alerts");
 console.log("Esto es un poco mejor que los alerts, f12 para verlos");
@@ -31,9 +23,9 @@ console.log("Esto es un poco mejor que los alerts, f12 para verlos");
 //-----------
 //Podemos guardar cualquier cosa y no tienen declaracion
 
-//Solo puede estar formado por letras, numeros, 
-// y los simbolos $ (dolar) y _ (guion bajo).
-// El primer caracter no puede ser un numero.
+//Las variables solo pueden estar formadas por letras, numeros, 
+//y los simbolos $ (dolar) y _ (guion bajo).
+//El primer caracter no puede ser un numero.
 
 //5 Tipos basicos, enteros, decimales, cadenas de texto, booleanos y arrays
 numero1 = 1;
@@ -43,6 +35,7 @@ texto2 = "Adios";
 boolean1 = true;
 boolean2 = false;
 
+//Si queremoes escribir comillas dentro
 texto3 = "Una frase con 'comillas simples' dentro";
 texto4 = 'Una frase con "comillas dobles" dentro';
 
@@ -63,18 +56,17 @@ console.log(texto4);
 console.log(texto5);
 console.log(texto6);
 
-//podemos concatenar a un String
-console.log("Vamos a concatenar la variable numero1: " + numero1)
-//podemos expandir variables ("`" es la letra al lado de la P)
-console.log(`Vamos a expandir la variable numero1: ${numero1}`)
+//Como JS es un lenguaje NO TIPADO, podemos guardar cualquier valor en una variable
+console.log("JS ES NO TIPADO:")
+numero1 = "esto es un numero"
+console.log(numero1)
+numero1 = true
+console.log(numero1)
 
-//Si algo vale "0" era false, si vale cualquier otra cosa será true
-//Esto se ve mejor con condicionales
-boolean3 = 0;
-console.log("valor 0: " + boolean3)
-boolean3 = 2;
-console.log("valor 2: " + boolean3)
-//hay varias cositas de estas por javascript...
+//podemos concatenar a un String
+console.log("Vamos a concatenar la variable numero2: " + numero2)
+//podemos expandir variables ("`" es la letra al lado de la P)
+console.log(`Vamos a expandir la variable numero2: ${numero2}`)
 
 //podemos poner "var" para declarar variables, en este caso su ambito
 //es el de la funcion, si no ponemos nada el ambito sera global
