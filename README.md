@@ -11,12 +11,12 @@ https://github.com/fdepablo/WsJavaScript
 
 2) Instalar VSC
 
-3) Abrir Visual Studio Code -> File -> OpenFolder -> Elegir la carpeta raiz de este repositorio
+3) Abrir Visual Studio Code -> File -> Open Workspace -> Elegir el fichero WorkspaceJS.code-workspace
 
 4) Algunas extensiones recomendadas (ultimo icono de la barra de la derecha)
     - Open in browse, para abrir directamente una pagina web en un navegador
-    - Beautify, para que nos ayude para hacer html, css y js
-    - (optativa) Live Server
+    - Beautify, para que nos ayude para hacer HTML, CSS y JS
+    - (optativa) Live Server, para la parte de AJAX
 
 Crear proyecto JS con Visual Studio Code
 -
