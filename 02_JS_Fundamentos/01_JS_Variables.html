@@ -135,7 +135,6 @@ function pruebaVar(){
 	
 	console.log(variable3)//notese que llevo un buen rato sin poner ";" :) :)
 }
-//console.log(variable1);//no existe
 pruebaVar()
 console.log(variable1)
 //Esta de aquí daria error ya que no tiene alcance
@@ -149,9 +148,11 @@ function pruebaLet(){
 	let var1 = 10
 	if(true){
 		let var2 = 20
+		console.log("var1: " + var1)
+		console.log("var2: " + var2)
 	}
 	console.log("var1: " + var1)
-	//console.log("var2: " + var2) //CASCA!! Esta fuera de su ambito
+	console.log("var2: " + var2) //CASCA!! Esta fuera de su ambito
 }
 //Esto tambien cascaria
 //console.log(var1)
@@ -161,26 +162,26 @@ pruebaLet()
 /*
 RESUMEN DEL ALCANCE DE LAS VARIABLES
 *************
-Si no ponemos nada, será global, la pongamos donde la pongamos -> dentro del script, dentro de una función o de un bloque. 
-Será reescribible
+Si no ponemos nada, será global, la pongamos donde la pongamos -> dentro del script, dentro de 
+una función o de un bloque. Podrá ser cambiado su valor
 
 Si ponemos var:
 -Dentro de un script, será global
--Dentro de una función, será legible dentro de la función y de los bloques "hijos"
--Dentro de un bloque, será legible dentro de la función "padre" y del propio bloque
-*Será reescribible
+-Dentro de una función, será legible dentro de la función, entera
+-Dentro de un bloque, será legible dentro de la función, entera
+-Podrá ser cambiado su valor
 
 Si ponemos let:
 -Dentro de un script, será global
 -Dentro de una función, será legible dentro de la función y de los bloques "hijos"
 -Dentro de un bloque, será legible solamente dentro del propio bloque
-*Será reescribible
+-Podrá ser cambiado su valor
 
 Si ponemos const:
 -Dentro de un script, será global
 -Dentro de una función, será legible dentro de la función y de los bloques "hijos"
 -Dentro de un bloque, será legible solamente dentro del propio bloque
-*NO es reescribible (salvo que quede fuera del ámbito, que sería como una variable "nueva")
+-No podrá ser cambiado su valor
 
 *************
 */
