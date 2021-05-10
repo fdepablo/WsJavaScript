@@ -52,7 +52,7 @@
     //ESTRUCTURA FOR
     var mensaje = "Hola, estoy dentro de un bucle dando muchas vueltas";
     //1- VALOR INICIAL; 2- CONDICION DE EJECUCION DE BUCLE; 3- INCREMENTO EN CADA ITERACION 
-    for (var i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       console.log("iteracion: " + i)
       console.log(mensaje);
     }
@@ -60,14 +60,15 @@
     //una declaración de un array
     var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
     console.log("FOR CLASICO")
-    for (var i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       console.log(dias[i]);//Mostrará cada uno de los día de la semana en cada vuelta.
     }
 
     //ESTRUCTURA FOR-IN, ideal para recorrer arrays
     console.log("FOR IN - FOR EACH")
     for (let indice in dias) {
-      //OJO El valor que guarda es el indice el array y no el valor como en otro lenguajes como JAVA
+      //OJO El valor que guarda es el indice del array y no el valor como en otro lenguajes 
+      //como JAVA
       console.log(dias[indice]);//Mostraría los días de la semana
     }
 
@@ -80,7 +81,7 @@
       i++;
     }
 
-    console.log(resultado);
+    console.log(resultado);//55
 
     //ESTRUCTURA DO-WHILE
     console.log("DO-WHILE")
@@ -90,7 +91,7 @@
       num--;
     } while (num > 0);
 
-    console.log(resultado);
+    console.log(resultado);//120
 
     //ESTRUCTUA SWITCH
     //misma funcionalidad que el ELSE-IF
@@ -156,7 +157,7 @@
         continue; //en luegar de romper el bucle, volvemos al bucle pasando al siguiente valor
       } else {
         resultado += letras[i];  //en este caso, volvemos a escribir la cadena pero sin ninguna 'a'
-      }c
+      }
     }
     console.log(resultado);// muestra "En un lugr de l Mnch de cuyo nombre no quiero cordrme..."
   </script>
