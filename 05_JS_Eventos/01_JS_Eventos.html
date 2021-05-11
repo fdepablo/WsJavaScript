@@ -63,7 +63,7 @@
     En este caso el codigo JS se incluye dentro del propoio atributo del evento
     -->
 
-    <!-- Mejor usar <button> que <input type="button"/>->
+    <!-- Mejor usar <button> que <input type="button"/>-->
     <button onclick="alert('Gracias por pinchar');">Pinchame y verás</button>
 
     <div onclick="console.log('Has pinchado con el ratón');" 
@@ -100,9 +100,14 @@
         function muestraMensaje() {
             console.log('Gracias por pinchar en la función');
         }
+
+        function muestraMensajeParametro(mensaje){
+            console.log(mensaje);
+        }
     </script>
     
     <button onclick="muestraMensaje()">Pincha aquí también</button>
+    <button onclick="muestraMensajeParametro('Hola caracola')">Pincha aquí también</button>
 
     <!-- 3- Manejadores de eventos "semánticos". -->
     <!--
