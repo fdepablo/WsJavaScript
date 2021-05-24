@@ -55,11 +55,13 @@
             Cambiamos aletoriamente el color del body
         */
         function cambiarColorBody(){
-            let rojo = Math.floor(Math.random() * 255); 
-            let verde = Math.floor(Math.random() * 255); 
-            let azul = Math.floor(Math.random() * 255); 
+            let rojo = Math.floor(Math.random() * 256); 
+            let verde = Math.floor(Math.random() * 256); 
+            let azul = Math.floor(Math.random() * 256); 
 
             let color = `rgb(${rojo},${verde},${azul})`
+
+            // Para acceder al body no hace falta que se por id
             document.body.style.backgroundColor = color
         }
 
@@ -82,9 +84,14 @@
         -->
         <button onclick="copiarTexto()">Pulsame para copiar el texto</button>
         <br/>
-        <!-- Existen muchos eventos, por ejemplo cuando pasamos el raton por encima
-        del elemento ejecutamos "copiarTexto()" y cuando salimos ejecutamos "borrarTexto()"-->
-        <p onmouseover="copiarTexto()" onmouseout="borrarTexto()">Pasame por encima :)</p>
+        <!-- 
+            Existen muchos eventos, por ejemplo cuando pasamos el raton por encima
+            del elemento ejecutamos "copiarTexto()" y cuando salimos ejecutamos "borrarTexto()"
+        
+            Con display: inline-block; hacemos que el elemento no ocupe todo el ancho, sino que se
+            ajuste al texto de dentro
+        -->
+        <p style="display: inline-block;border: 1px solid blue" onmouseover="copiarTexto()" onmouseout="borrarTexto()">Pasame por encima :)</p>
         <br/>
         Texto resultante: <input id="campo2" type="text">
         <br/><br/>
