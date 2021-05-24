@@ -6,6 +6,23 @@
 </head>
 <body>
 <script type="text/javascript">
+
+//Algunas peculiaridades de JS, podemos tener funciones dentro de funciones
+function imprimir(pelicula){
+	//podemos tener funciones anidadas
+	function imprimirPorConsola(pelicula){
+		console.log(pelicula)
+	}
+
+	function imprimirPorDivHtml(pelicula){
+		//codigo necesario para imprimir en html
+	}
+
+	imprimirPorConsola(pelicula)	
+}
+
+imprimir("Harry poter eh el prisionero de hazcabal")
+
 //como las funciones son objetos podemos
 //hacer cositas asin
 let multiplicar = function(m1,m2){
