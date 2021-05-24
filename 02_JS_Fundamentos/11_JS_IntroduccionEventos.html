@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduccion a eventos</title>
+    <script>
+        function copiarTexto(){
+            // Tenemos que tener claro, que una pagina HTML se convierte en el navegador en un 
+            // arbol DOM en el que todas las etiquetas HTML se convierten a objetos
+
+            // Con JS podemos manipular dicho arbol y cambiarlo a nuestro antojo
+            // Para acceder a un nodo del arbol DOM podemos utilizar funciones del objeto
+            // "document" que sería el elemento nodo padre de todo HTML (ver img/dom.png)
+
+            // En JS normalmente podemos obtener los objetos JS (que se crean en el arbol dom)
+            // mediante la funcion document.getElementById(ID_ELEMENTO)
+
+            // Si nos fijamos, nosotros en ningun momento hemos creado los objetos que hay en el
+            // arbol dom, pero podemos acceder a ellos. Este concepto esta muy extendido en poo
+            // y se llama inversion de control (IoC), el cual nosotros como programadores no
+            // creamos los objetos, pero los programamos y podemos cambiar sus valores
+
+            let referenciaCampo1 = document.getElementById("campo1")
+
+            // Una vez accedido al objeto, podemos acceder o modificar sus propiedades
+
+            // Con la propiedad value, accedemos a el valor del nodo. Notese que podemos
+            // acceder a todas las propiedades del objeto según su nombre.
+            let valueCampo1 = referenciaCampo1.value
+
+            // A parte de acceder a los valores, tambien podemos cambiarlos con la misma idea
+
+            let referenciaCampo2 = document.getElementById("campo2")
+            referenciaCampo2.value = valueCampo1
+        }
+
+        /*
+            Con esta funcion borramos el valor del texto del campo2
+        */
+        function borrarTexto(){
+            // IMPORTANTE: Desde las ultimas versiones de JS los navegadores crean
+            // automáticamente referencias a los objetos a partir de su atributo "id"
+            // Es decir, nostros vamos a tener por cada elemento con id en nuestro HTML
+            // una referencia creada a dicho elemento, cuyo nombre será su id.
+
+            // Por ejemplo, no es necesario desde hace unos pocos años, utilizar la
+            // función "document.getElementById" si no queremows, podemos usar directamente
+            // la variable con su id
+             campo2.value = ""
+        }
+
+        /*
+            Cambiamos aletoriamente el color del body
+        */
+        function cambiarColorBody(){
+            let rojo = Math.floor(Math.random() * 255); 
+            let verde = Math.floor(Math.random() * 255); 
+            let azul = Math.floor(Math.random() * 255); 
+
+            let color = `rgb(${rojo},${verde},${azul})`
+            document.body.style.backgroundColor = color
+        }
+
+    </script>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Introducción a evento en JavaSctipt</h1>
+
+        Introduce un texto: <input id="campo1" type="text" value="Este seria el valor"/> 
+        <!-- Tenemos dos maneras de hacer botones
+            1- Mediante la etiqueta input type="button"
+            2- Mediante al etiqueta button
+
+            Para desencadenar un evento, debemos de poner que evento queremos desencadenar
+            en el elemento HTML y su funcion asociada
+
+            Tenemos varios eventos, por ejemplo "onclick" que cuando hagamos click sobre
+            el elemento html, ejecutaremos una función
+        -->
+        <button onclick="copiarTexto()">Pulsame para copiar el texto</button>
+        <br/>
+        <!-- Existen muchos eventos, por ejemplo cuando pasamos el raton por encima
+        del elemento ejecutamos "copiarTexto()" y cuando salimos ejecutamos "borrarTexto()"-->
+        <p onmouseover="copiarTexto()" onmouseout="borrarTexto()">Pasame por encima :)</p>
+        <br/>
+        Texto resultante: <input id="campo2" type="text">
+        <br/><br/>
+        <button onclick="cambiarColorBody()">Pulsame para cambiar de color</button>
+    </div>
+ </body>
+</html>
