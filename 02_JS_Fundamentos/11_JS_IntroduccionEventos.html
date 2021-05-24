@@ -45,9 +45,9 @@
             // Es decir, nostros vamos a tener por cada elemento con id en nuestro HTML
             // una referencia creada a dicho elemento, cuyo nombre será su id.
 
-            // Por ejemplo, no es necesario desde hace unos pocos años, utilizar la
-            // función "document.getElementById" si no queremows, podemos usar directamente
-            // la variable con su id
+            // Por ejemplo, ya no es necesario utilizar la función "document.getElementById" 
+            // podemos usar directamente la variable con su id que el navegador ha creado
+            // por nosotros.
              campo2.value = ""
         }
 
@@ -55,13 +55,16 @@
             Cambiamos aletoriamente el color del body
         */
         function cambiarColorBody(){
+            // Creamos aleatoriamente numeros entre el 0 y el 255 para asignarlo como colores
             let rojo = Math.floor(Math.random() * 256); 
             let verde = Math.floor(Math.random() * 256); 
             let azul = Math.floor(Math.random() * 256); 
 
+            // la funcion rbg nos permite cambiar los colores de un elemento
             let color = `rgb(${rojo},${verde},${azul})`
 
-            // Para acceder al body no hace falta que se por id
+            // Para acceder al body no hace falta que se por id, accedemos luego a la 
+            // propiedad backgroundColor dentro de la propiedad style
             document.body.style.backgroundColor = color
         }
 
@@ -90,8 +93,12 @@
         
             Con display: inline-block; hacemos que el elemento no ocupe todo el ancho, sino que se
             ajuste al texto de dentro
+
+            Ponemos tambien un border para ver la caja del elemento P
         -->
-        <p style="display: inline-block;border: 1px solid blue" onmouseover="copiarTexto()" onmouseout="borrarTexto()">Pasame por encima :)</p>
+        <p style="display: inline-block;border: 1px solid blue" 
+            onmouseover="copiarTexto()" 
+            onmouseout="borrarTexto()">Pasame por encima :)</p>
         <br/>
         Texto resultante: <input id="campo2" type="text">
         <br/><br/>
