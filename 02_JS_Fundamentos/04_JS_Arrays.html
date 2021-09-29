@@ -32,21 +32,22 @@ console.log(valor2)//undefined
 
 //los arrays son objetos y como tales tienen propiedades
 console.log(array1.length)//ojo esto es para indexados
+
 //add valores
 let array4 = []
 //
-array4.push("A")//add al final
+array4.push("A")//add al final. Equivalente al metodo add de java
 array4.push("B")
 array4.push("C")
 array4.push("D","E","F")
 
-console.log(array4.length)
+console.log(array4.length)//6
 
 //FIFO First in first out
-console.log(array4.shift());//sacamos el primer elemento
+console.log(array4.shift());//sacamos el primer elemento que introdujimos
 
-//LIFO
-console.log(array4.pop());//sacamos el ultimo elemento
+//LIFO Last in first out
+console.log(array4.pop());//sacamos el ultimo elemento que introdujimos
 
 /* JOIN */
 var array = ["hola", "ususario"];
@@ -55,17 +56,19 @@ mensaje = array.join(" ");    // mensaje = "hola usuario"
 mensaje = array.join("-");    // mensaje = "hola-usuario"
 
 /* REVERSE */
-var array = [1, 2, 3];
-array.reverse();   // array = [3, 2, 1]
+var array = [1, 2, 3, 4];
+array.reverse();   // array = [4, 3, 2, 1]
 
 //Arrays asociativos (Estructuras HASH de toda la vida)
 //No estan indexados
 //colecciono de duplas de clave-valor
 //una sola clave, la clave es unica
 //la clave y el valor son objetos de cualquie tipo
+//Tambien podemos usar objetos Map()
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 
 let cervezas = []
-//clave -> Mahou - Valor --> 4.8
+//clave -> Mahou (marca) - Valor --> 4.8 (grados)
 cervezas["Mahou"] = "4.8"
 cervezas["San miguel"] = "4.6"
 cervezas["Guinness"] = "5.1"
@@ -108,7 +111,7 @@ let pelicula = {
 }
 
 //podemos add atributos
-pelicula.actor = "Bardem"
+pelicula.actor = "Bardem"//pelicula["actor"] = "Bardem"
 
 console.log(pelicula)
 
@@ -123,14 +126,15 @@ let cliente = {
 
 console.log(cliente.nombre)
 console.log(cliente.direccion)
-console.log(cliente.saludar)
-cliente.saludar()
+console.log(cliente.saludar)//Asi no se ejecuta el metodo, te imprime la funcion
+cliente.saludar()//Con parentesis ejecutariamos la funcion
 
 //Recorriendo arays
 //como siempre con un for... for(let i....)
 //otras maneras
 //arrays indexados
-for(let numero of array2){
+array2 = [1,2,3,4,5]
+for(let numero of array2){//notese la diferencia de poner "in" o poner "of"
     console.log(numero)
 }
 
