@@ -1,8 +1,10 @@
+<!DOCTYPE html>
 <html>
-    
-    <head></head>
-    
-    <script>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
     //Los string en JS son objetos y como tales tienen atributos y 
     //funciones. Podemos crear el String para que sea tratado como primitivo
     let texto = "Esto es una cadena de caracteres";
@@ -14,7 +16,10 @@
     
     //Algunas funciones
     texto.toUpperCase();
-    console.log(texto); //cuidado que las cadenas de texto en JS son inmutables
+    console.log(texto); //cuidado que las cadenas de texto en JS son inmutables (como en java)
+    //El concepto de inmutabilidad dice que una vez creado un objeto su estado no puede cambiar
+    //nunca, permanece inmutable en el tiempo. El estado de un objeto es el valor de sus 
+    //atributos
 
     console.log("===================================");
     let texto2 = texto.toUpperCase();//los metodos de string te devuelven una cadena resultante
@@ -43,10 +48,12 @@
     var mensaje = "Hola usuario";
     var porcion = mensaje.substring(2); // porcion = "la usuario"
     porcion = mensaje.substring(5);     // porcion = "usuario"
-    porcion = mensaje.substring(7);     // porcion = "rio"
+    porcion = mensaje.substring(7);     // porcion = "rio" 
 
-    var porcion = mensaje.substring(5, 0); // porcion = "Hola "
-    porcion = mensaje.substring(0, 5);     // porcion = "Hola "
+    var porcion = mensaje.substring(0, 5);     // porcion = "Hola "
+    // Si indiceA es mayor que indiceB, entonces el efecto de substring es como si los 
+    // dos argumentos se intercambiasen;
+    porcion = mensaje.substring(5, 0); // porcion = "Hola "
     console.log("porcion: " + porcion)
 
     //Split
