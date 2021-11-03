@@ -33,7 +33,8 @@
         Mas información: 
         https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions
         https://lenguajejs.com/javascript/caracteristicas/expresiones-regulares/
-
+        https://ihateregex.io/
+        html5pattern.com
     */
         window.onload = function(){
             //crear una expresion regularl (lo mas habitual es crearla entre barras '/'')
@@ -177,6 +178,25 @@
             console.log("abc".match(re))//array con informacion
             console.log("abcabcabc".match(re))//array con informacion
             console.log("".match(re))//null
+
+            //Validar DNI
+            //Exigimos que solamente puede empezar con 8 digitos con "^"
+            //Exigimos que solamente puede acabar con una letra con "$"
+            re = /^([0-9]{8})[A-Z]$/ 
+            console.log("/^([0-9]{8})[TRWAGMYFPDXBNJZSQVHLCKE]$/")
+            console.log("52998877S".match(re))//array con informacion
+            console.log("5299887D".match(re))//null
+            console.log("529988777R".match(re))//null
+            console.log("7899444RRR".match(re))//null
+            console.log("52998877Ñ".match(re))//null
+
+            //Validar Matricula de un coche
+            re = /^[A-Z]{3}[0-9]{4}$/ 
+            console.log("/^[A-Z]{3}[0-9]{4}$/")
+            console.log("CMD1234".match(re))//array con informacion
+            console.log("CM1234".match(re))//null
+            console.log("CMD123".match(re))//null
+            console.log("CMDR1234".match(re))//null
         }   
     </script>
 </head>
