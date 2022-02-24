@@ -151,9 +151,5 @@ Son ejemplos, pero tenemos infinitas combinaciones entre ellos.
 
 - [https://www.freeformatter.com/xml-to-json-converter.html](https://www.freeformatter.com/xml-to-json-converter.html)
 
-## Ejemplo practico con Java
-
-En este ejemplo vamos a usar unas librerías de google para hacer la transformación de objeto a json (serializacion) y de json a objeto (deserializacion). La libreria se llama <b>GSON</b>, aunque hay otras implementaciones en el mercado igual de validas (como Jackson), teniendo todas sus pros y sus contras. En este caso se ha elegido GSON por su simplicidad de usar de manera simple.
-
 ## Bibliografia
 [https://www.json.org/json-es.html](https://www.json.org/json-es.html)
