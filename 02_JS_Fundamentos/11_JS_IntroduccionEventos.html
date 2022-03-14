@@ -34,6 +34,7 @@
 
             let referenciaCampo2 = document.getElementById("campo2")
             referenciaCampo2.value = valueCampo1
+            //referenciaCampo2.type = "password"
         }
 
         /*
@@ -56,9 +57,9 @@
         */
         function cambiarColorBody(){
             // Creamos aleatoriamente numeros entre el 0 y el 255 para asignarlo como colores
-            let rojo = Math.floor(Math.random() * 256); 
-            let verde = Math.floor(Math.random() * 256); 
-            let azul = Math.floor(Math.random() * 256); 
+            let rojo = Math.round(Math.random() * 255); 
+            let verde = Math.round(Math.random() * 255); 
+            let azul = Math.round(Math.random() * 255); 
 
             // la funcion rbg nos permite cambiar los colores de un elemento
             let color = `rgb(${rojo},${verde},${azul})`
@@ -68,6 +69,18 @@
             document.body.style.backgroundColor = color
         }
 
+        function sumar10(){
+            //Todas las entradas de campos de texto (no importa que sean de tipo number)
+            //son cadenas, por lo tanto debemos de convertir el valor a el tipo que 
+            //necesitemos. En este caso tenemos que convertirlo a un numero
+
+            //let resultado = campo3.value + 10 //esto concatena el numero del campo3 con el valor 10
+            
+            // Convertimos el valor del campo3 a tipo numerico
+            let numero = parseInt(campo3.value)
+            let resultado = numero + 10
+            campo4.value = resultado
+        }
     </script>
 </head>
 <body>
@@ -103,6 +116,10 @@
         Texto resultante: <input id="campo2" type="text">
         <br/><br/>
         <button onclick="cambiarColorBody()">Pulsame para cambiar de color</button>
+        <br/><br/>
+        Numero: <input id="campo3" type="number">
+        <button onclick="sumar10()">Pulsame para sumar 10</button>
+        Suma resultante: <input id="campo4" type="text">
     </div>
  </body>
 </html>
