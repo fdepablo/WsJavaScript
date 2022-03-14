@@ -15,7 +15,8 @@ Esto son varias lineas
 de comentarios
 */
 
-// Para probar codigo en js podemos usar la funcion alert o usar logs
+// Para mostrar valores en js podemos usar la funcion alert o usar logs
+//mejor usar logs
 //alert("Es mejor evitar alerts");
 console.log("Esto es un poco mejor que los alerts, f12 para verlos");
 
@@ -25,30 +26,33 @@ console.log("Esto es un poco mejor que los alerts, f12 para verlos");
 
 //Las variables solo pueden estar formadas por letras, numeros, 
 //y los simbolos $ (dolar) y _ (guion bajo).
-//El primer caracter no puede ser un numero.
+//El primer caracter NO puede ser un numero.
 
-//5 Tipos basicos, enteros, decimales, cadenas de texto, booleanos y arrays
+//6 Tipos basicos-> enteros, decimales, cadenas de texto, booleanos, arrays y objetos
 numero1 = 1;
 numero2 = 1.5;
 texto1 = 'hola';
 texto2 = "Adios";
 boolean1 = true;
 boolean2 = false;
+array = [];
+objeto = new Date();
 
 //Si queremoes escribir comillas dentro
 texto3 = "Una frase con 'comillas simples' dentro";
 texto4 = 'Una frase con "comillas dobles" dentro';
 
 //De la siguiente forma tambien podemos hacerlo
+//Con el caracter '\' podemos escribir caracteres especiales
 texto5 = 'Una frase con \'comillas simples\' dentro';
 texto6 = "Una frase con \"comillas dobles\" dentro";
 
 //Tambien podemos hacer varias lineas de texto ("`" es la letra al lado de la P)
-//texto7 = ```
-//Podemos escribir 
-//varias lineas 
-//de esta manera
-//```;
+/*texto7 = ```
+Podemos escribir 
+varias lineas 
+de esta manera
+```;*/
 
 //La consola la podemos ver pulsado f12 en el navegador que usemos, una vez
 //hayamos cargado la pagina
@@ -73,20 +77,21 @@ console.log(numero1)
 
 //podemos concatenar a un String
 console.log("Vamos a concatenar la variable numero2: " + numero2)
-//podemos expandir variables con el acento grave ("`" es la letra a la derecha de la 'P' :))
+//podemos expandir variables creando la cadena con el acento grave 
+//("`" es la letra a la derecha de la 'P' :))
+//y dentro de la cadena usar "${NOMBRE_VARIABLE}"
 console.log(`Vamos a expandir la variable numero2: ${numero2}`)
 
 //podemos poner "var" para declarar variables, en este caso su ambito
 //es el de la funcion, si no ponemos nada el ambito sera global
 //y se asignara al objeto de windows (del DOM, se vera mas adelante)
 var dato = 5;
-var dato = 7;//estoy redefiniendo
+var dato = 7;//Aqui no estamos creando la variable de nuevo, estamos redefiniendola
 var movida;//podemos dejar variables sin declarar
 //el valor sera undefined
 console.log(movida);
 
-//null es un tipo de valor en JS, null indica que la 
-//variable guarda una referencia pero no sabemos a donde
+//null es un tipo de valor en JS, null indica ausencia de valor
 var referencia = null;
 console.log(referencia)
 
@@ -96,14 +101,15 @@ referencia = "Siete";
 referencia = true;
 
 //OJO con operaciones imposibles
-/* NAN */
-var numero1 = 0;   var numero2 = 0;
+/* NaN */
+var numero1 = "cadena";   
+var numero2 = 0;
 console.log(numero1/numero2);   //muestra el valor NaN
 
 //alguna funcion interesante para siaber si es un numero
 //podemos comprobar los tipos que guarda una variable
 console.log(isNaN(texto1));//pregunta si es NO es un numero - true
-console.log(isNaN(numero1));//false
+console.log(isNaN(numero2));//false
 
 //Hay otros dos tipos especiales en las variables
 //undefined, cuando no le asingamos ningun valor
@@ -135,7 +141,7 @@ function pruebaVar(){
 	//(no tienen ni var ni let) son de ambito global
 	variable1 = "Esta variable es global"
 	//las variables con var su ambito es el de funcion
-	var variable2 = "El ambito de esta variable es de la funcion"
+	var variable2 = "El ambito de esta variable es de ESTA funcion"
 	console.log(variable1)
 	console.log(variable2)
 	
@@ -144,7 +150,8 @@ function pruebaVar(){
 	}
 	
 	console.log(variable3)//notese que llevo un buen rato sin poner ";" :) :)
-}
+}//Aqui mueren las variables variable2 y variable3.
+
 pruebaVar()
 console.log(variable1)
 //Esta de aquí daria error ya que no tiene alcance
@@ -160,10 +167,11 @@ function pruebaLet(){
 		let var2 = 20
 		console.log("var1: " + var1)
 		console.log("var2: " + var2)
-	}
+	}//aqui muere var2
 	console.log("var1: " + var1)
 	//console.log("var2: " + var2) //CASCA!! Esta fuera de su ambito
-}
+}//aqui muere var1
+
 //Esto tambien cascaria
 //console.log(var1)
 
