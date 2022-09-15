@@ -7,30 +7,30 @@
     <title>Introduccion a eventos</title>
     <script>
         function copiarTexto(){
-            // Tenemos que tener claro, que una pagina HTML se convierte en el navegador en un 
-            // arbol DOM en el que todas las etiquetas HTML se convierten a objetos
+            // Debemos tener claro, que una página HTML se convierte en el navegador en un 
+            // árbol DOM en el que todas las etiquetas HTML se convierten a objetos
 
-            // Con JS podemos manipular dicho arbol y cambiarlo a nuestro antojo
-            // Para acceder a un nodo del arbol DOM podemos utilizar funciones del objeto
+            // Con JS podemos manipular dicho árbol y cambiarlo a nuestro antojo
+            // Para acceder a un nodo del árbol DOM podemos utilizar funciones del objeto
             // "document" que sería el elemento nodo padre de todo HTML (ver img/dom.png)
 
-            // En JS normalmente podemos obtener los objetos JS (que se crean en el arbol dom)
-            // mediante la funcion document.getElementById(ID_ELEMENTO)
+            // En JS normalmente podemos obtener los objetos JS (que se crean en el árbol dom)
+            // mediante la función document.getElementById(ID_ELEMENTO)
 
-            // Si nos fijamos, nosotros en ningun momento hemos creado los objetos que hay en el
-            // arbol dom, pero podemos acceder a ellos. Este concepto esta muy extendido en poo
-            // y se llama inversion de control (IoC), el cual nosotros como programadores no
-            // creamos los objetos, pero los programamos y podemos cambiar sus valores
+            // Si nos fijamos, nosotros en ningún momento hemos creado los objetos que hay en el
+            // árbol dom, pero podemos acceder a ellos. Este concepto está muy extendido en poo
+            // y se llama inversión de control (IoC), el cual nosotros como programadores NO
+            // creamos los objetos, pero los podemos usar y cambiar su estado
 
             let referenciaCampo1 = document.getElementById("campo1")
 
-            // Una vez accedido al objeto, podemos acceder o modificar sus propiedades
+            // Una vez que tengamos referenciado al objeto, podemos acceder o modificar sus propiedades
 
-            // Con la propiedad value, accedemos a el valor del nodo. Notese que podemos
+            // Con la propiedad ‘value’, accedemos a el valor del nodo. Nótese que podemos
             // acceder a todas las propiedades del objeto según su nombre.
             let valueCampo1 = referenciaCampo1.value
 
-            // A parte de acceder a los valores, tambien podemos cambiarlos con la misma idea
+            // A parte de acceder a los valores, también podemos cambiarlos con la misma idea
 
             let referenciaCampo2 = document.getElementById("campo2")
             referenciaCampo2.value = valueCampo1
@@ -38,12 +38,12 @@
         }
 
         /*
-            Con esta funcion borramos el valor del texto del campo2
+            Con esta función borramos el valor del texto del campo2
         */
         function borrarTexto(){
-            // IMPORTANTE: Desde las ultimas versiones de JS los navegadores crean
+            // IMPORTANTE: Desde las últimas versiones de JS los navegadores crean
             // automáticamente referencias a los objetos a partir de su atributo "id"
-            // Es decir, nostros vamos a tener por cada elemento con id en nuestro HTML
+            // Es decir, nosotros vamos a tener por cada elemento con id en nuestro HTML
             // una referencia creada a dicho elemento, cuyo nombre será su id.
 
             // Por ejemplo, ya no es necesario utilizar la función "document.getElementById" 
@@ -53,7 +53,7 @@
         }
 
         /*
-            Cambiamos aletoriamente el color del body
+            Cambiamos aleatoriamente el color del body
         */
         function cambiarColorBody(){
             // Creamos aleatoriamente numeros entre el 0 y el 255 para asignarlo como colores
@@ -61,7 +61,7 @@
             let verde = Math.round(Math.random() * 255); 
             let azul = Math.round(Math.random() * 255); 
 
-            // la funcion rbg nos permite cambiar los colores de un elemento
+            // la función rbg nos permite cambiar los colores de un elemento
             let color = `rgb(${rojo},${verde},${azul})`
 
             // Para acceder al body no hace falta que se por id, accedemos luego a la 
@@ -76,7 +76,7 @@
 
             //let resultado = campo3.value + 10 //esto concatena el numero del campo3 con el valor 10
             
-            // Convertimos el valor del campo3 a tipo numerico
+            // Convertimos el valor del campo3 a tipo numérico
             let numero = parseInt(campo3.value)
             let resultado = numero + 10
             campo4.value = resultado
@@ -93,32 +93,32 @@
             2- Mediante al etiqueta button
 
             Para desencadenar un evento, debemos de poner que evento queremos desencadenar
-            en el elemento HTML y su funcion asociada
+            en el elemento HTML y su función asociada
 
             Tenemos varios eventos, por ejemplo "onclick" que cuando hagamos click sobre
             el elemento html, ejecutaremos una función
         -->
-        <button onclick="copiarTexto()">Pulsame para copiar el texto</button>
+        <button onclick="copiarTexto()">Púlsame para copiar el texto</button>
         <br/>
         <!-- 
-            Existen muchos eventos, por ejemplo cuando pasamos el raton por encima
+            Existen muchos eventos, por ejemplo, cuando pasamos el ratón por encima
             del elemento ejecutamos "copiarTexto()" y cuando salimos ejecutamos "borrarTexto()"
         
             Con display: inline-block; hacemos que el borde del elemento no ocupe todo el ancho, 
             sino que se ajuste al texto de dentro
 
-            Ponemos tambien un border para ver la caja del elemento P
+            Ponemos también un ‘border’ para ver la caja del elemento P
         -->
         <p style="display: inline-block;border: 1px solid blue" 
             onmouseover="copiarTexto()" 
-            onmouseout="borrarTexto()">Pasame por encima :)</p>
+            onmouseout="borrarTexto()">Pásame por encima :)</p>
         <br/>
         Texto resultante: <input id="campo2" type="text">
         <br/><br/>
-        <button onclick="cambiarColorBody()">Pulsame para cambiar de color</button>
+        <button onclick="cambiarColorBody()">Púlsame para cambiar de color</button>
         <br/><br/>
         Numero: <input id="campo3" type="number">
-        <button onclick="sumar10()">Pulsame para sumar 10</button>
+        <button onclick="sumar10()">Púlsame para sumar 10</button>
         Suma resultante: <input id="campo4" type="text">
     </div>
  </body>

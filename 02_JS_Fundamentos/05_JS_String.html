@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
-    //Los string en JS son objetos y como tales tienen atributos y 
+    //Los String en JS son objetos y como tales tienen atributos y 
     //funciones. Podemos crear el String para que sea tratado como primitivo
     let texto = "Esto es una cadena de caracteres";
     //O como objeto, mas sencillo de la anterior
@@ -23,14 +23,14 @@
     //atributos
 
     console.log("===================================");
-    let texto2 = texto.toUpperCase();//los metodos de string te devuelven una cadena resultante
+    let texto2 = texto.toUpperCase();//los métodos de String te devuelven una cadena resultante
     console.log(texto2);
 
     //Lo normal es no crear una segunda variable:
     texto = texto.toUpperCase();
 
    
-    //Aceder a un caracter concreto
+    //Acceder a un caracter concreto
     console.log("====================================");
     console.log("CharAt:"+texto.charAt(10));//A
     console.log("CharAt:"+texto.charAt(100000)); //Si te pasas del tamaño TJ porque no te avisan
@@ -52,7 +52,7 @@
     porcion = mensaje.substring(7);     // porcion = "rio" 
 
     var porcion = mensaje.substring(0, 5);     // porcion = "Hola "
-    // Si indiceA es mayor que indiceB, entonces el efecto de substring es como si los 
+    // Si indice A es mayor que indice B, entonces el efecto de substring es como si los 
     // dos argumentos se intercambiasen;
     porcion = mensaje.substring(5, 0); // porcion = "Hola "
     console.log("porcion: " + porcion)
@@ -72,4 +72,3 @@
     </body>
     
 </html>
-    

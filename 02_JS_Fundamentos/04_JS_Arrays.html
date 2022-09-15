@@ -7,19 +7,19 @@
 <script type="text/javascript">
 
 //los arrays en js SON OBJETOS
-//los arrays son una coleccion ordenada de elementos
+//los arrays son una colección ordenada de elementos
 
-let array1 = []//array vacio
+let array1 = []//array vacío
 let array2 = [1,2,3,4,5]//array con datos
 //los arrays no tienen tipo
-let array3 = [1,2,3,4,5,true,"pepe","Lo que querais"]
+let array3 = [1,2,3,4,5,true,"pepe","Lo que queráis"]
 //En js solo hay un tipo de array PERO se pueden
 //usar de 2 maneras diferentes
-//1- Manera indexada -> Array de toda la vida, tienen un indice y un valor
-//2- Manera asociativa -> Serian equivalente a los mapas de java o diccionarios o python
+//1- Manera indexada -> Array de toda la vida, tienen un índice y un valor
+//2- Manera asociativa -> Serian equivalente a los mapas de java o diccionarios o Python
 
 //INDEXADOS 
-//tienen un indice automatico que empieza por 0
+//tienen un índice automático que empieza por 0
 array1[0] = 10
 array1[1] = 20
 array1[2] = 30
@@ -36,7 +36,7 @@ console.log(array1.length)//ojo esto es para indexados
 //add valores
 let array4 = []
 //
-array4.push("A")//add al final. Equivalente al metodo add(valor) de java
+array4.push("A")//add al final. Equivalente al método add(valor) de java
 array4.push("B")
 array4.push("C")
 array4.push("D","E","F")
@@ -47,11 +47,11 @@ console.log(array4.length)//6
 console.log(array4.shift());//sacamos el primer elemento que introdujimos
 
 //LIFO Last in first out (Pilas)
-console.log(array4.pop());//sacamos el ultimo elemento que introdujimos
+console.log(array4.pop());//sacamos el último elemento que introdujimos
 
 /* JOIN */
 //unir en una cadena todos los elementos de un array
-var array = ["hola", "ususario"];
+var array = ["hola", "usuario"];
 var mensaje = array.join(""); // mensaje = "holausuario"
 mensaje = array.join(" ");    // mensaje = "hola usuario"
 mensaje = array.join("-");    // mensaje = "hola-usuario"
@@ -61,11 +61,11 @@ var array = [1, 2, 3, 4];
 array.reverse();   // array = [4, 3, 2, 1]
 
 //Arrays asociativos (Estructuras de tipo hash o diccionarios)
-//No estan indexados
+//No están indexados
 //colecciono de duplas de clave-valor
-//una sola clave, la clave es unica, no se puede repetir
-//la clave y el valor son objetos de cualquie tipo
-//Tambien podemos usar objetos Map()
+//una sola clave, la clave es única, no se puede repetir
+//la clave y el valor son objetos de cualquier tipo
+//También podemos usar objetos Map()
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 
 let cervezas = []
@@ -74,7 +74,7 @@ cervezas["Mahou"] = "4.8"
 cervezas["San miguel"] = "4.6"
 cervezas["Guinness"] = "5.1"
 
-//Accedemos siempre a traves de la clave
+//Accedemos siempre a través de la clave
 console.log(cervezas["Mahou"])// 4.8
 //eliminar
 delete cervezas["San miguel"]
@@ -89,22 +89,22 @@ persona["direccion"] = "Japon"
 persona["telefono"] = "no tenia"
 //como podemos acceder????, asi:
 let nombre = persona["nombre"]
-//esto recuerda a los objetos accediendo a sus atributos y a sus metodos
-//en javascript los objetos son arrays asociativos
+//esto recuerda a los objetos accediendo a sus atributos y a sus métodos
+//en JavaScript los objetos son arrays asociativos
 let direccion = persona.direccion
 let telefono = persona.telefono
 let tacata = persona.tacata //undefined
 
 console.log(nombre + " " + direccion + " " + telefono + " " + tacata);
 
-//podemos operar con arrays asociativos de esta maera
+//podemos operar con arrays asociativos de esta manera
 let coche = []
 coche.marca = "Renault"//coche["marca"] = "Ranault"
 coche.modelo = "207"
 coche.matricula = "CWX9876"
 console.log(coche)
 
-//otra manera como si fuera notacion JSON (proximamente en sus mejores cines... :) :) :)
+//otra manera como si fuera notación JSON 
 let pelicula = {
     titulo : "Todo sobre mi madre",
     director : "Almodovar",
@@ -116,19 +116,19 @@ pelicula.actor = "Bardem"//pelicula["actor"] = "Bardem"
 
 console.log(pelicula)
 
-//Meter hasta metodos, como los objetos en java con atributos y metodos (funciones)
+//Meter hasta métodos, como los objetos en java con atributos y métodos (funciones)
 let cliente = {
     nombre : "Bender Bending Rodriguez",
     direccion : "NYC",
     saludar : function(){
-        console.log("Besa mi brillante culo metalico")
+        console.log("Besa mi brillante culo metálico")
     }
 }
 
 console.log(cliente.nombre)
 console.log(cliente.direccion)
-console.log(cliente.saludar)//Asi no se ejecuta el metodo, te imprime la funcion
-cliente.saludar()//Con parentesis ejecutariamos la funcion
+console.log(cliente.saludar)//Así no se ejecuta el método, te imprime la función
+cliente.saludar()//Con paréntesis ejecutaríamos la función
 
 //Recorriendo arays
 
@@ -139,10 +139,10 @@ for (let i = 0; i < 7; i++) {
     console.log(dias[i]);//Mostrará cada uno de los día de la semana en cada vuelta.
 }
 
-//ESTRUCTURA FOR-IN, ideal para recorrer indices de un array
+//ESTRUCTURA FOR-IN, ideal para recorrer índices de un array
 console.log("FOR IN - FOR EACH")
 for (let indice in dias) {
-    //OJO El valor que guarda es el indice del array y no el valor como en otro lenguajes 
+    //OJO El valor que guarda es el índice del array y no el valor como en otro lenguajes 
     //como JAVA
     console.log(dias[indice]);//Mostraría los días de la semana
 }
@@ -151,7 +151,7 @@ for (let indice in dias) {
 //arrays indexados
 //Ahora nos devuelve el valor del objeto
 array2 = [1,2,3,4,5]
-for(let numero of array2){//notese la diferencia de poner "in" o poner "of"
+for(let numero of array2){//nótese la diferencia de poner "in" o poner "of"
     console.log(numero)
 }
 
@@ -165,6 +165,3 @@ for(let clave in cervezas){
 
 </body>
 </html>
-
-
-

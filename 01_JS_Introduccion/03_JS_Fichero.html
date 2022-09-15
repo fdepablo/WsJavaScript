@@ -5,17 +5,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ficheros JS</title>
-	<!-- Podemos incluir JS importando ficheros locales que esten en el
+	<!-- Podemos incluir JS importando ficheros locales que estén en el
 	mismo directorio -->
 	<script type="text/javascript" src="js/fechas.js"></script>
 	
-	<!-- Podemos incluir JS importando ficheros locales que esten en otros 
+	<!-- Podemos incluir JS importando ficheros locales que estén en otros 
 	directorios de manera relativa o absoluta, pero usar siempre relativa para
 	directorios locales -->
 	<script type="text/javascript" src="js/matematicas.js"></script>
 	
 	<!-- Podemos incluir JS importando ficheros remotos CDN (u otro tipo) -->
-	<!-- Mas informacion sobre CDN https://www.webempresa.com/blog/cdn-wordpress.html -->
+	<!-- Mas información sobre CDN https://www.webempresa.com/blog/cdn-wordpress.html -->
 	<script type="text/javascript" 
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -25,7 +25,7 @@
 		//Esto sería un comentario en JS, es decir, no se va a procesar
 
 		/*Document.write, es una función la cual podemos escribimos directamente en el html
-		de nuestra pagina*/
+		de nuestra página*/
   		document.write('<h1>La fecha de hoy es:' + retornarFecha() + '</h1>');
   		document.write('<br/>');
   		document.write('La hora es: ' + retornarHora());
@@ -45,7 +45,7 @@
 	
 	<p>Pulsame!!</p>
 	
-	<!-- Usamos JQUERY, buscamos todas las etiquetas P y les add esta funcion -->
+	<!-- Usamos JQUERY, buscamos todas las etiquetas P y les add esta función -->
 	<!-- OJO! la etiqueta tiene que estar creada antes de este script -->
 	<script>
   		$("p").click(function(){
