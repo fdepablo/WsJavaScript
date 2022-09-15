@@ -57,8 +57,8 @@ Si queremos hacer que los símbolos especiales estén coloreados, como por ejemp
 
 Para abrir el fichero **settings.json**:
 
-1. pulsar **ctrl + mayusculas + p**
-2. Escribir **settings.json**, a continuación debemos elegir de "Abrir la configuración (JSON)"
+1. Pulsar **ctrl + mayusculas + p**
+2. Escribir **settings.json**, a continuación debemos elegir la opción de "Abrir la configuración (JSON)"
 
 Debería quedar algo parecido a la siguiente imagen
 
