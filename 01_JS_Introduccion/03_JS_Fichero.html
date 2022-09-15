@@ -14,18 +14,21 @@
 	directorios locales -->
 	<script type="text/javascript" src="js/matematicas.js"></script>
 	
-	<!-- Podemos incluir JS importando ficheros remotos CDN (u otro tipo) -->
-	<!-- Mas información sobre CDN https://www.webempresa.com/blog/cdn-wordpress.html -->
+	<!-- Podemos incluir JS importando ficheros CDN (Siglas de Red de distribución de contenidos)
+		 Mas información sobre CDN:
+			https://www.webempresa.com/blog/cdn-wordpress.html 
+			https://developer.mozilla.org/es/docs/Glossary/CDN
+	-->
 	<script type="text/javascript" 
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<!-- Usamos fechas.js -->
 	<script>
-		//Esto sería un comentario en JS, es decir, no se va a procesar
+		// Esto sería un comentario en JS, es decir, no se va a procesar
 
-		/*Document.write, es una función la cual podemos escribimos directamente en el html
-		de nuestra página*/
+		/* Document.write, es una función la cual podemos escribimos directamente en el html
+		de nuestra página, aunque no es muy usada */
   		document.write('<h1>La fecha de hoy es:' + retornarFecha() + '</h1>');
   		document.write('<br/>');
   		document.write('La hora es: ' + retornarHora());
