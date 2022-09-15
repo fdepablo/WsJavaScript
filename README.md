@@ -8,7 +8,7 @@
 
 - Es muy potente y es de los leguajes de programación más usados del mundo.
 
-## características
+## Características
 
 1. <b>Lenguaje orientado a objetos</b> JavaScript es un lenguaje orientado a objetos. Que un lenguaje esté orientado a objetos quiere decir que utiliza clases y objetos como estructuras que permiten organizarse de forma simple y son reutilizables durante todo el desarrollo. Otros lenguajes orientados a objetos son Java, Python o C++.
 
@@ -30,9 +30,9 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 
 1. Para arrancar este proyecto en VSC, primero clonarse o bajarse este repositorio de GitHub
 
-2. Instalar VSC
+2. Instalar VSC <https://code.visualstudio.com/download>
 
-3. Abrir Visual Studio Code -> File -> Open Workspace -> Elegir el fichero WorkspaceJS.code-workspace
+3. Abrir Visual Studio Code -> File -> Open Workspace -> Elegir el fichero **WorkspaceJS.code-workspace**
 
 4. Algunas extensiones recomendadas de VSC
     - Open in browse, para abrir directamente una página web en un navegador
