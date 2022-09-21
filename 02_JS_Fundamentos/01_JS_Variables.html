@@ -15,21 +15,25 @@ Esto son varias líneas
 de comentarios
 */
 
-// Para mostrar valores en js podemos usar la funcion alert o usar logs
+// Para mostrar valores en js podemos usar la funcion 'alert' o usar logs
 //mejor usar logs
-//alert("Es mejor evitar alerts");
+alert("Es mejor evitar alerts");
 console.log("Esto es un poco mejor que los alerts, f12 para verlos");
 
 // Variables
 //-----------
-//Podemos guardar cualquier valor y no tienen declaración
+//Podemos guardar cualquier valor
 
 //Las variables solo pueden estar formadas por letras, números, 
 //y los símbolos $ (dolar) y _ (guion bajo).
 //El primer caracter NO puede ser un número.
 
 //6 Tipos básicos-> enteros, decimales, cadenas de texto, booleanos, arrays y objetos
+//Si no ponemos ninguna palabra delante de la variable, estamos creando una variable global
+//este tipo de variables no tiene declaración.
 numero1 = 1;
+//En JS las varibles globales no se declaran
+numero1 = 2;
 numero2 = 1.5;
 texto1 = 'hola';
 texto2 = "Adios";
@@ -47,7 +51,7 @@ texto4 = 'Una frase con "comillas dobles" dentro';
 texto5 = 'Una frase con \'comillas simples\' dentro';
 texto6 = "Una frase con \"comillas dobles\" dentro";
 
-//también podemos hacer varias líneas de texto ("`" es la letra al lado de la P)
+//también podemos hacer varias líneas de texto ("`" es el caracter a la derecha de la letra 'P')
 /*texto7 = ```
 Podemos escribir 
 varias líneas 
@@ -82,13 +86,12 @@ console.log("Vamos a concatenar la variable numero2: " + numero2)
 //y dentro de la cadena usar "${NOMBRE_VARIABLE}"
 console.log(`Vamos a expandir la variable numero2: ${numero2}`)
 
-//podemos poner "var" para declarar variables, en este caso su ámbito
+//podemos user la palabra reservada "var" para declarar variables, en este caso su ámbito
 //es el de la función, si no ponemos nada el ámbito será global
-//y se asignara al objeto de windows (del DOM, se vera mas adelante)
-var dato = 5;
+var dato = 5;//En este caso, no estamos declarando la variable dentro de ninguna función
+            //por lo tanto, tambien sera global
 var dato = 7;//aquí no estamos creando la variable de nuevo, estamos redefiniéndola
-var movida;//podemos dejar variables sin declarar
-//el valor será ’undefined’
+var movida;//podemos dejar variables sin definir, el valor será ’undefined’
 console.log(movida);
 
 //’null’ es un tipo de valor en JS, ‘null’ indica ausencia de valor
@@ -101,10 +104,10 @@ referencia = "Siete";
 referencia = true;
 
 //OJO con operaciones imposibles
-/* NaN */
+/* NaN (Not a Number*/
 var numero1 = "cadena";   
-var numero2 = 0;
-console.log(numero1/numero2);//muestra el valor ‘NaN’
+var numero2 = 2;
+console.log("Resultado de division: " + numero1/numero2);//muestra el valor ‘NaN’
 
 //alguna función interesante para saber si es un número
 //podemos comprobar los tipos que guarda una variable
@@ -113,15 +116,19 @@ console.log(isNaN(numero2));//false
 
 //Hay otros dos tipos especiales en las variables
 //’undefined’, cuando no le asignamos ningún valor
-//object, se veran más adelante
-if(typeof dato == 'number'){
+
+//la palabra reservada 'typeof' sirve para averguar cual es el tipo que estamos guardando
+if(typeof dato == "number"){
     console.log("el dato es un numero");
 }
 if(typeof movida == 'undefined'){
     console.log("La movida es undefined");
 }
 
-//let es a partir de las últimas versiones de js
+//En la últimas versiones de JS podemos encontrar un nuevo tipo de alcance 
+//Este tipo de alcance seria el de bloque '{}' y lo podemos declarar con la palabra
+//reservada 'let'. Es equivalente al ambito de las varibles de Java
+//Recomendación, usar este tipo de alcance en JS
 let num1 = 5;
 let txt1 = "otro texto";
 //con let NO se puede redefinir una variable
@@ -129,7 +136,7 @@ let v1 = 9;
 //let v1 = 7; //esto daría un error
 v1 = 11;
 
-//también desde las últimas versiones constantes
+//también desde las últimas versiones constantes con la palabra reservada 'const'
 //no se puede cambiar su valor
 const PI = 3.1416;
 console.log(PI);
@@ -138,7 +145,7 @@ console.log(PI);
 console.log("=========== AMBITO ==============")
 function pruebaVar(){
     //las variables que no tienen declaración
-    //(no tienen ni var ni let) son de ámbito global
+    //(no tienen ni 'var' ni 'let') son de ámbito global
     variable1 = "Esta variable es global"
     //las variables con var su ámbito es el de función
     var variable2 = "El ámbito de esta variable es de ESTA función"
