@@ -1,151 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clases</title>
-<script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases</title>
+    <script>
+        //Las clases sirven como molde para crear objetos.
+        class Persona {
 
-//Las clases sirven como molde para crear objetos.
-class Persona {
+            //Podemos crear atributos públicos (por defecto) o privados con "#" delante del atributo
+            nombre;
+            #edad;
 
-    //Podemos crear atributos públicos (por defecto) o privados con "#" delante del atributo
-    nombre;
-    #edad;
+            //Los atributos estáticos son comunes a todos los objetos
+            static numeroPersonas = 0
 
-    //Los atributos estáticos son comunes a todos los objetos
-    static numeroPersonas = 0
+            //Solo podemos tener un constructor
+            constructor() {
+                //Dentro del constructor podemos poner los atributos que queramos declarar
+                //Es importante inicializar los atributos para evitar "NaN" o "undefined"
+                this.nombre = "";
+                this.#edad = 0;
+            }
 
-    //Solo podemos tener un constructor
-    constructor() {
-        //Dentro del constructor podemos poner los atributos que queramos declarar
-        //Es importante inicializar los atributos para evitar "NaN" o "undefined"
-        this.nombre = "";
-        this.#edad = 0;
-    }
+            //Podemos crear getter y setters con las palabras reservadas "get" y "set"
+            get edad() {
+                //A diferencia con otros lenguajes como Java, es obligatorio poner el this para
+                //acceder a los atributos
+                return this.#edad;
+            }
+            set edad(value) {
+                this.#edad = value;
+            }
 
-    //Podemos crear getter y setters con las palabras reservadas "get" y "set"
-    get edad() {
-        //A diferencia con otros lenguajes como Java, es obligatorio poner el this para
-        //acceder a los atributos
-        return this.#edad;
-    }
-    set edad(value) {
-        this.#edad = value;
-    }
+            //Podemos generar los métodos que queramos por defecto son públicos.
+            //Podríamos hacer métodos privados con '#' delante del nombre del método
+            saludar() {
+                return `Hola me llamo ${this.nombre} y tengo ${this.#edad} años`;
+            }
 
-    //Podemos generar los métodos que queramos por defecto son públicos.
-    //Podríamos hacer métodos privados con '#' delante del nombre del método
-    saludar() {
-        return `Hola me llamo ${this.nombre} y tengo ${this.#edad} años`;
-    }
+            //Podemos hacer documentación con anotaciones o decoradores como en otros lenguajes
 
-    //Podemos hacer documentación con anotaciones o decoradores como en otros lenguajes
-
-    /**
-     * Método que compara la edad de esta persona con la edad de persona que le pasemos
-     * por parámetro
-     * @param p la persona que queremos comparar
-     * @returns 'this' en caso de que esta persona sea mayor que la persona pasada por
-     * parámetro, 'p' en caso de que la persona pasada por parámetro sea mayor, y 'null'
-     * en caso de que sean iguales
-     */
-    esMayor(p) {
-        if (this.#edad > p.#edad) {
-            return this;
+            /**
+             * Método que compara la edad de esta persona con la edad de persona que le pasemos
+             * por parámetro
+             * @param p la persona que queremos comparar
+             * @returns 'this' en caso de que esta persona sea mayor que la persona pasada por
+             * parámetro, 'p' en caso de que la persona pasada por parámetro sea mayor, y 'null'
+             * en caso de que sean iguales
+             */
+            esMayor(p) {
+                if (this.#edad > p.#edad) {
+                    return this;
+                }
+                else if (p.#edad > this.#edad) {
+                    return p;
+                }
+                else {
+                    return null;
+                }
+            }
         }
-        else if (p.#edad > this.#edad) {
-            return p;
+
+        console.log("** PERSONAS **");
+        //Creamos objetos y sus referencias
+        let persona1 = new Persona();
+        let persona2 = new Persona();
+
+        //Los tipos de las referencias siempre serán "object"
+        console.log("El tipo de la variable es: " + typeof (persona1));
+
+        //Podemos modificar directamente al atributo público
+        persona1.nombre = "Steve Rogers";//cambiando atributo público
+        //Podemos cambiar el valor de un atributo privado mediante su 'set'
+        //OJO! no se pone persona1.edad(45)
+        persona1.edad = 45;//cambiando atributo privado mediante su 'set'
+        persona2.nombre = "Tony Stark";
+        persona2.edad = 50;
+
+        console.log("Imprimiendo personas")
+        //Podemos acceder a los atributos públicos directamente
+        console.log(persona1.nombre);
+        //Podemos acceder a los atributos privados mediante su 'get'
+        console.log(persona1.edad);
+        console.log(persona2.nombre);
+        console.log(persona2.edad);
+        //No podemos acceder a los atributos privados directamente, daría error
+        //console.log("Atributo privado" + persona2.#edad);
+
+        //Los atributos estáticos se acceden a través de su clase, incluso dentro de la
+        //propia clase
+        Persona.numeroPersonas = 2;
+        console.log("Numero de personas: " + Persona.numeroPersonas);
+
+        //Imprimimos la persona entera, por defecto lo saca con formato muy parecido a JSON
+        console.log(persona1); //Persona { _nombre: 'Steve Rogers', _edad: 45 }
+
+        //También podemos invocar a sus métodos
+        console.log(persona1.saludar());
+        let personaMayor = persona1.esMayor(persona2);
+        console.log("Persona mayor: " + personaMayor.nombre);
+
+        class Pelicula {
+            //Tambien podemos crear los atributos dentro del constructor
+            constructor(titulo, director) {
+                this.titulo = titulo;
+                this.director = director;
+                this.titulo = titulo;
+                this.director = director;
+            }
         }
-        else {
-            return null;
+        console.log("** PELICULAS **");
+        let pelicula = new Pelicula("La vida de Brian", "Terry Jones");
+        pelicula.titulo = "Los caballeros de la mesa cuadrada";
+        console.log(pelicula.titulo);
+        console.log(pelicula.director);
+
+        //Herencia
+        console.log("** HERENCIA **");
+        //Podemos heredar de una clase a otra con la palabra "extends"
+        //Heredamos todos los atributos y los métodos de la clase padre
+        class Empleado extends Persona {
+            constructor() {
+                //En el caso de herencia, debemos primero llamar al constructor padre mediante "super"
+                super();
+                this.salario = 0;
+            }
+
+            //Podemos sobrescribir métodos
+            //Para ello, el método hijo debe de tener la misma firma que el método padre
+            saludar() {
+                return `Hola me llamo ${this.nombre}, tengo ${this.edad} años y gano ${this.salario}`;
+            }
         }
-    }
-}
 
-console.log("** PERSONAS **");
-//Creamos objetos y sus referencias
-let persona1 = new Persona();
-let persona2 = new Persona();
-
-//Los tipos de las referencias siempre serán "object"
-console.log("El tipo de la variable es: " + typeof (persona1));
-
-//Podemos modificar directamente al atributo público
-persona1.nombre = "Steve Rogers";//cambiando atributo público
-//Podemos cambiar el valor de un atributo privado mediante su 'set'
-//OJO! no se pone persona1.edad(45)
-persona1.edad = 45;//cambiando atributo privado mediante su 'set'
-persona2.nombre = "Tony Stark";
-persona2.edad = 50;
-
-console.log("Imprimiendo personas")
-//Podemos acceder a los atributos públicos directamente
-console.log(persona1.nombre);
-//Podemos acceder a los atributos privados mediante su 'get'
-console.log(persona1.edad);
-console.log(persona2.nombre);
-console.log(persona2.edad);
-//No podemos acceder a los atributos privados directamente, daría error
-//console.log("Atributo privado" + persona2.#edad);
-
-//Los atributos estáticos se acceden a través de su clase, incluso dentro de la
-//propia clase
-Persona.numeroPersonas = 2;
-console.log("Numero de personas: " + Persona.numeroPersonas);
-
-//Imprimimos la persona entera, por defecto lo saca con formato muy parecido a JSON
-console.log(persona1); //Persona { _nombre: 'Steve Rogers', _edad: 45 }
-
-//También podemos invocar a sus métodos
-console.log(persona1.saludar());
-let personaMayor = persona1.esMayor(persona2);
-console.log("Persona mayor: " + personaMayor.nombre);
-
-class Pelicula {
-    //Tambien podemos crear los atributos dentro del constructor
-    constructor(titulo, director) {
-        this.titulo = titulo;
-        this.director = director;
-        this.titulo = titulo;
-        this.director = director;
-    }
-}
-console.log("** PELICULAS **");
-let pelicula = new Pelicula("La vida de Brian", "Terry Jones");
-pelicula.titulo = "Los caballeros de la mesa cuadrada";
-console.log(pelicula.titulo);
-console.log(pelicula.director);
-
-//Herencia
-console.log("** HERENCIA **");
-//Podemos heredar de una clase a otra con la palabra "extends"
-//Heredamos todos los atributos y los métodos de la clase padre
-class Empleado extends Persona {
-    constructor() {
-        //En el caso de herencia, debemos primero llamar al constructor padre mediante "super"
-        super();
-        this.salario = 0;
-    }
-
-    //Podemos sobrescribir métodos
-    //Para ello, el método hijo debe de tener la misma firma que el método padre
-    saludar() {
-        return `Hola me llamo ${this.nombre}, tengo ${this.edad} años y gano ${this.salario}`;
-    }
-}
-
-let empleado1 = new Empleado();
-empleado1.nombre = "Peter";
-empleado1.edad = 22;//Accedemos a través del 'set'
-empleado1.salario = 25000;
-console.log(empleado1.saludar());
-//El tipo de la variable empleado es también "object"
-console.log("El tipo de la variable empleado1 es: " + typeof (empleado1));
-console.log(empleado1);
-
-</script>
+        let empleado1 = new Empleado();
+        empleado1.nombre = "Peter";
+        empleado1.edad = 22;//Accedemos a través del 'set'
+        empleado1.salario = 25000;
+        console.log(empleado1.saludar());
+        //El tipo de la variable empleado es también "object"
+        console.log("El tipo de la variable empleado1 es: " + typeof (empleado1));
+        console.log(empleado1);
+    </script>
 </head>
 <body>
     

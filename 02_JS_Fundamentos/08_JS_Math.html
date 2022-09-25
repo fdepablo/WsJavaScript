@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>Clase Math</title>
+    <script type="text/javascript">
+        //https://www.w3schools.com/js/js_math.asp
+
+        //Algunas clases predefinidas en JS como la clase MATH
+
+        //numero PI
+        console.log(Math.PI)
+
+        //senos, conseno, tg, etc
+        console.log(Math.sin(90))
+
+        //random da un número aleatorio entre el 0 y el 1
+        //Si se multiplica por 100 entre el 0 y el 99
+        //le sumamos uno para hacer entre el 1 y el 100
+        console.log((Math.random() * 100) + 1)//lo ideal sería hacer un round
+
+        //redondeo si es 4.5 o superior te redondea a 5 si es 4.4 o inferior te redondea a 4
+        console.log(Math.round(4.7));    // returns 5
+        console.log(Math.round(4.4));    // returns 4
+
+        console.log(Math.floor(4.7)); //return 4
+        console.log(Math.floor(4.4)); //return 4
+
+        console.log(Math.ceil(4.7)); //return 5
+        console.log(Math.ceil(4.4)); //return 5
+
+        //potencias base-exponente, 8^2
+        Math.pow(8, 2);// returns 64
+
+        //Raiz cuadrada
+        Math.sqrt(64);// returns 8
+    </script>
 </head>
 <body>
-<script type="text/javascript">
-//https://www.w3schools.com/js/js_math.asp
-
-//Algunas clases predefinidas en JS como la clase MATH
-
-//numero PI
-console.log(Math.PI)
-
-//senos, conseno, tg, etc
-console.log(Math.sin(90))
-
-//random da un número aleatorio entre el 0 y el 1
-//Si se multiplica por 100 entre el 0 y el 99
-//le sumamos uno para hacer entre el 1 y el 100
-console.log((Math.random() * 100) + 1)//lo ideal sería hacer un round
-
-//redondeo si es 4.5 o superior te redondea a 5 si es 4.4 o inferior te redondea a 4
-console.log(Math.round(4.7));    // returns 5
-console.log(Math.round(4.4));    // returns 4
-
-console.log(Math.floor(4.7)); //return 4
-console.log(Math.floor(4.4)); //return 4
-
-console.log(Math.ceil(4.7)); //return 5
-console.log(Math.ceil(4.4)); //return 5
-
-//potencias base-exponente, 8^2
-Math.pow(8, 2);      // returns 64
-
-//Raiz cuadrada
-Math.sqrt(64);      // returns 8
-</script>
+    <h1>Clase Math!! Pulsa F12 para ver la consola</h1>
 </body>
 </html>
 

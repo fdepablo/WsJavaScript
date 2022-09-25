@@ -1,103 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>JS Operadores</title>
+    <meta charset="UTF-8">
+    <title>JS Operadores</title>
+    <script type="text/javascript">
+        //Asignación
+        //Es el mas utilizado y sencillo para guardar un valor específico en una variable. 
+        //Su símbolo es = (igual)
+        var variable = "Hernion grenjoy"
+        var numero = 1;
+        
+        //incremento y decremento
+        console.log("INCREMENTO/DECREMENTO")
+        numero++//numero = numero + 1 //2
+        numero++;//3
+        numero--//numero = numero - 1 //2
+        console.log(numero)//2
+        console.log(numero++)//imprimimos 2 pero cuando pasemos a la siguiente línea numero valdra 3
+        console.log(++numero)//imprimir 4
+        
+        //lógicos
+        var verdad = true;
+        var mentira = false;
+        
+        console.log("LOGICOS")
+        console.log(verdad && mentira)//AND 
+        console.log(verdad || mentira)//OR
+        console.log(!verdad)//NEGACION
+        console.log(!mentira)
+        
+        
+        /* MATEMÁTICOS */
+        console.log("MATEMATICOS")
+        var numero1 = 10;  var numero2 = 5;
+        
+        resultado = numero1 / numero2;  // resultado = 2
+        console.log(resultado)
+        resultado = 5 + numero1;        // resultado = 15
+        console.log(resultado)
+        resultado = numero2 - 2;        // resultado = 3
+        console.log(resultado)
+        resultado = numero1 * numero2; // resultado = 50
+        console.log(resultado)
+        resultado = numero1 % numero2; // resultado = 0
+        console.log(resultado)
+        
+        //Acumulativos
+        console.log("ACUMULATIVOS")
+        var numero1 = 5;
+        numero1 += 6;  // numero1 = numero1 + 6 
+        console.log(numero1)// numero1= 11
+        numero1 -= 1;  
+        console.log(numero1)// numero1 = 10
+        numero1 *= 2;   
+        console.log(numero1)// numero1 = 20
+        numero1 /= 5;   
+        console.log(numero1)// numero1 = 4
+        numero1 %= 4;   
+        console.log(numero1)// numero1 = 0
+        
+        /* RELACIONALES */
+        console.log("RELACIONALES")
+        var numero1 = 3; var numero2 = 5;
+        resultado = numero1 > numero2; // resultado = false
+        console.log(resultado)
+        resultado = numero1 < numero2; // resultado = true
+        console.log(resultado)
+        
+        numero1 = 5; numero2 = 5;
+        resultado = numero1 >= numero2; // resultado = true
+        resultado = numero1 <= numero2; // resultado = true
+        resultado = numero1 == numero2; // resultado = true
+        resultado = numero1 != numero2; // resultado = false
+        
+        var texto1 = "hola"; var texto2 = "hola"; var texto3 = "adios";
+        console.log("COMPARADORES DE CADENAS")
+        resultado = texto1 == texto3; // resultado = false
+        console.log(resultado)
+        resultado = texto1 != texto2; // resultado = false
+        console.log(resultado)
+        resultado = texto3 >= texto2; // resultado = false, ya que es menor "adios" que "hola" alfabeticamente; 'a' < 'h'
+        console.log(resultado)
+        resultado = texto1 <= texto2; // resultado = true
+        console.log(resultado)
+        
+        console.log("COMPARADORES DOBLE IGUAL Y TRIPLE IGUAL")
+        var numero3 = 1;
+        var numero4 = "1"
+        //comparación por valor
+        console.log("Los números son iguales en valor: " + numero3 == numero4)
+        //comparación por valor y tipo
+        console.log("Los números son iguales en valor y en tipo : " + numero3 === numero4)
+    </script>
 </head>
 <body>
-
-<script type="text/javascript">
-//Asignación
-//Es el mas utilizado y sencillo para guardar un valor específico en una variable. 
-//Su símbolo es = (igual)
-var variable = "Hernion grenjoy"
-var numero = 1;
-
-//incremento y decremento
-console.log("INCREMENTO/DECREMENTO")
-numero++//numero = numero + 1 //2
-numero++;//3
-numero--//numero = numero - 1 //2
-console.log(numero)//2
-console.log(numero++)//imprimimos 2 pero cuando pasemos a la siguiente línea numero valdra 3
-console.log(++numero)//imprimir 4
-
-//lógicos
-var verdad = true;
-var mentira = false;
-
-console.log("LOGICOS")
-console.log(verdad && mentira)//AND 
-console.log(verdad || mentira)//OR
-console.log(!verdad)//NEGACION
-console.log(!mentira)
-
-
-/* MATEMÁTICOS */
-console.log("MATEMATICOS")
-var numero1 = 10;  var numero2 = 5;
- 
-resultado = numero1 / numero2;  // resultado = 2
-console.log(resultado)
-resultado = 5 + numero1;        // resultado = 15
-console.log(resultado)
-resultado = numero2 - 2;        // resultado = 3
-console.log(resultado)
-resultado = numero1 * numero2; // resultado = 50
-console.log(resultado)
-resultado = numero1 % numero2; // resultado = 0
-console.log(resultado)
-
-//Acumulativos
-console.log("ACUMULATIVOS")
-var numero1 = 5;
-numero1 += 6;  // numero1 = numero1 + 6 
-console.log(numero1)// numero1= 11
-numero1 -= 1;  
-console.log(numero1)// numero1 = 10
-numero1 *= 2;   
-console.log(numero1)// numero1 = 20
-numero1 /= 5;   
-console.log(numero1)// numero1 = 4
-numero1 %= 4;   
-console.log(numero1)// numero1 = 0
-
-/* RELACIONALES */
-console.log("RELACIONALES")
-var numero1 = 3; var numero2 = 5;
-resultado = numero1 > numero2; // resultado = false
-console.log(resultado)
-resultado = numero1 < numero2; // resultado = true
-console.log(resultado)
- 
-numero1 = 5; numero2 = 5;
-resultado = numero1 >= numero2; // resultado = true
-resultado = numero1 <= numero2; // resultado = true
-resultado = numero1 == numero2; // resultado = true
-resultado = numero1 != numero2; // resultado = false
-
-var texto1 = "hola"; var texto2 = "hola"; var texto3 = "adios";
-console.log("COMPARADORES DE CADENAS")
-resultado = texto1 == texto3; // resultado = false
-console.log(resultado)
-resultado = texto1 != texto2; // resultado = false
-console.log(resultado)
-resultado = texto3 >= texto2; // resultado = false, ya que es menor "adios" que "hola" alfabeticamente; 'a' < 'h'
-console.log(resultado)
-resultado = texto1 <= texto2; // resultado = true
-console.log(resultado)
-
-console.log("COMPARADORES DOBLE IGUAL Y TRIPLE IGUAL")
-var numero3 = 1;
-var numero4 = "1"
-//comparación por valor
-console.log("Los números son iguales en valor: " + numero3 == numero4)
-//comparación por valor y tipo
-console.log("Los números son iguales en valor y en tipo : " + numero3 === numero4)
-
-</script>
-
-<h1> Operadores!! Pulsa F12 para ver más la consola</h1>
-
+    <h1>Operadores!! Pulsa F12 para ver más la consola</h1>
 </body>
 </html>

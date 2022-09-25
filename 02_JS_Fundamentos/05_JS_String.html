@@ -1,74 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<script type="text/javascript">
-    //Los String en JS son objetos y como tales tienen atributos y 
-    //funciones. Podemos crear el String para que sea tratado como primitivo
-    let texto = "Esto es una cadena de caracteres";
-    //O como objeto, mas sencillo de la anterior
-    let textoObjeto = new String("Esto es otra cadena de caracteres")
+    <meta charset="ISO-8859-1">
+    <title>Strings</title>
+    <script type="text/javascript">
+        //Los String en JS son objetos y como tales tienen atributos y 
+        //funciones. Van entre comillas dobles o simples
+        let texto = "Esto es una cadena de caracteres";
+
+        //Algunas funciones
+        //length - Nos devuelve la longitud de la cadena
+        console.log(texto.length); //32
+
+        //toUpperCase - Nos devuelve la cadena en mayúsculas
+        //Cuidado! las cadenas de texto en JS son inmutables (como en java)
+        //El concepto de inmutabilidad dice que una vez creado un objeto su estado no puede cambiar
+        //nunca, permanece inmutable en el tiempo. El estado de un objeto es el valor de sus 
+        //atributos
+        texto.toUpperCase();
+        console.log(texto); //Aquí la cadena sigue siendo en minúsculas, la cadena inicial no cambia
+
+        console.log("===================================");
+        let texto2 = texto.toUpperCase();//los métodos de String te devuelven una cadena resultante
+        console.log(texto2);
     
-    //Longitud de la cadena
-    let texto45 = "Esto es una cadena de caracteres";
-    console.log(texto.length); 
-    
-    //Algunas funciones
-    texto.toUpperCase();
-    console.log(texto); //cuidado que las cadenas de texto en JS son inmutables (como en java)
-    //El concepto de inmutabilidad dice que una vez creado un objeto su estado no puede cambiar
-    //nunca, permanece inmutable en el tiempo. El estado de un objeto es el valor de sus 
-    //atributos
+        //charAt - Acceder a un carácter a partir de un índice
+        console.log("====================================");
+        console.log("CharAt:"+texto.charAt(10));// devuelve 'a'
+        
+        /* INDEXOF - Devuelve la primera posición de un carácter */
+        var mensaje = "Hola";
+        var posicion = mensaje.indexOf('a'); // posicion = 3
+        posicion = mensaje.indexOf('b');     // posicion = -1
 
-    console.log("===================================");
-    let texto2 = texto.toUpperCase();//los métodos de String te devuelven una cadena resultante
-    console.log(texto2);
+        /* TRIM - Elimina espacios en blanco finales e iniciales*/
+        var mensaje = "  Hola        ";
+        var sinEspacios = mensaje.trim();
+        console.log(sinEspacios)//"Hola"
+        
+        /* SUBSTRING - obtener una subcadena a partir de una cadena */
+        var mensaje = "Hola usuario";
+        //Si le pasamos un solo argumento, nos devuelve desde esa posición hasta el final de la cadena
+        var porcion = mensaje.substring(2); // porcion = "la usuario"
+        porcion = mensaje.substring(5);     // porcion = "usuario"
+        porcion = mensaje.substring(7);     // porcion = "uario" 
 
-    //Lo normal es no crear una segunda variable:
-    texto = texto.toUpperCase();
+        //Si le pasamos dos valores, nos devuelve desde el primer valor (INCLUIDO) 
+        //hasta el último valor (SIN INCLUIR)
+        var porcion = mensaje.substring(0, 5);     // porcion = "Hola "
+        console.log("porción: " + porcion)
 
-   
-    //Acceder a un caracter concreto
-    console.log("====================================");
-    console.log("CharAt:"+texto.charAt(10));//A
-    console.log("CharAt:"+texto.charAt(100000)); //Si te pasas del tamaño TJ porque no te avisan
-    
-    /* INDEXOF & LASTINDEXOF */
-    var mensaje = "Hola";
-    var posicion = mensaje.indexOf('a'); // posicion = 3
-    posicion = mensaje.indexOf('b');     // posicion = -1
-
-    /* TRIM - Elimina espacios en blanco finales e iniciales*/
-    var mensaje = "  Hola        ";
-    var sinEspacios = mensaje.trim();
-    console.log(sinEspacios)//"Hola"
-    
-    /* SUBSTRING */
-    var mensaje = "Hola usuario";
-    var porcion = mensaje.substring(2); // porcion = "la usuario"
-    porcion = mensaje.substring(5);     // porcion = "usuario"
-    porcion = mensaje.substring(7);     // porcion = "rio" 
-
-    var porcion = mensaje.substring(0, 5);     // porcion = "Hola "
-    // Si indice A es mayor que indice B, entonces el efecto de substring es como si los 
-    // dos argumentos se intercambiasen;
-    porcion = mensaje.substring(5, 0); // porcion = "Hola "
-    console.log("porcion: " + porcion)
-
-    //Split
-    let trozos = texto.split(" "); //Trozos es un array con los fragmentos
-    for(let a=0; a<trozos.length; a++){
-        console.log(trozos[a]);
-    }
-
+        //Split - Divide una cadena por el caracter que le pasemos
+        let trozos = texto.split(" "); //Trozos es un array con los fragmentos
+        console.log("**** Split ****")
+        for(trozo of trozos){
+            console.log(trozo);
+        }
     </script>
-    
-    <body>
-    
-        <h1>04 Strings</h1>
-    
-    </body>
+</head>
+<body>
+    <h1> Strings!! Pulsa F12 para ver la consola</h1>
+</body>
     
 </html>

@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>Clase Date</title>
+    <script type="text/javascript">
+        //https://www.w3schools.com/js/js_dates.asp
+
+        //para crear una fecha usamos new 
+        //nos devuelve la fecha del sistema, normalmente será la fecha del cliente
+        var d = new Date();
+        console.log(d)
+
+        //new Date(year, month, day, hours, minutes, seconds, milliseconds)
+        //Ojo, el mes va de 0 a 11
+        var d = new Date(2018, 11, 24, 10, 33, 30, 0);
+        ////new Date(year, month, day)
+        var d = new Date(2018, 11, 24);
+
+        //The ISO 8601 syntax (YYYY-MM-DD) 
+        var d = new Date("2015-03-25");
+
+        //milisegundos desde 1970
+        console.log(d.getTime())
+
+        //otros métodos de acceso
+        d.getFullYear();//año
+        d.getMonth();//mes del 0-11
+        console.log(d.getDate());//dia de mes
+        d.getMinutes();//minutos
+        d.getSeconds();//segundos
+
+        //Tenemos los mismos métodos con "set"
+        //Ejemplo
+        d.setMonth(11);//Diciembre
+
+        /* Resumen métodos (w3school)
+
+        getFullYear() 	Get the year as a four digit number (yyyy)
+        getMonth() 	Get the month as a number (0-11)
+        getDate() 	Get the day as a number (1-31)
+        getHours() 	Get the hour (0-23)
+        getMinutes() 	Get the minute (0-59)
+        getSeconds() 	Get the second (0-59)
+        getMilliseconds() 	Get the millisecond (0-999)
+        getTime() 	Get the time (milliseconds since January 1, 1970)
+        getDay() 	Get the weekday as a number (0-6)
+        Date.now() 	Get the time. ECMAScript 5.
+        */
+    </script>
 </head>
 <body>
-<script type="text/javascript">
-//https://www.w3schools.com/js/js_dates.asp
-
-//para crear una fecha usamos new 
-//nos devuelve la fecha del sistema, normalmente será la fecha del cliente
-var d = new Date();
-console.log(d)
-
-//new Date(year, month, day, hours, minutes, seconds, milliseconds)
-//Ojo, el mes va de 0 a 11
-var d = new Date(2018, 11, 24, 10, 33, 30, 0);
-////new Date(year, month, day)
-var d = new Date(2018, 11, 24);
-
-//The ISO 8601 syntax (YYYY-MM-DD) 
-var d = new Date("2015-03-25");
-
-//milisegundos desde 1970
-console.log(d.getTime())
-
-//otros métodos de acceso
-d.getFullYear();//año
-d.getMonth();//mes del 0-11
-console.log(d.getDate());//dia de mes
-d.getMinutes();//minutos
-d.getSeconds();//segundos
-
-//Tenemos los mismos métodos con "set"
-//Ejemplo
-d.setMonth(11);//Diciembre
-
-/* Resumen métodos (w3school)
-
-getFullYear() 	Get the year as a four digit number (yyyy)
-getMonth() 	Get the month as a number (0-11)
-getDate() 	Get the day as a number (1-31)
-getHours() 	Get the hour (0-23)
-getMinutes() 	Get the minute (0-59)
-getSeconds() 	Get the second (0-59)
-getMilliseconds() 	Get the millisecond (0-999)
-getTime() 	Get the time (milliseconds since January 1, 1970)
-getDay() 	Get the weekday as a number (0-6)
-Date.now() 	Get the time. ECMAScript 5.
-
-*/
-</script>
+    <h1>Clase Date!! Pulsa F12 para ver la consola</h1>
 </body>
 </html>
 

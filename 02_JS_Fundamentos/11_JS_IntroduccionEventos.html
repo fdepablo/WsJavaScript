@@ -18,7 +18,7 @@
             // mediante la función document.getElementById(ID_ELEMENTO)
 
             // Si nos fijamos, nosotros en ningún momento hemos creado los objetos que hay en el
-            // árbol dom, pero podemos acceder a ellos. Este concepto está muy extendido en poo
+            // árbol dom, pero podemos acceder a ellos. Este concepto está muy extendido en POO
             // y se llama inversión de control (IoC), el cual nosotros como programadores NO
             // creamos los objetos, pero los podemos usar y cambiar su estado
 
@@ -56,22 +56,22 @@
             Cambiamos aleatoriamente el color del body
         */
         function cambiarColorBody(){
-            // Creamos aleatoriamente numeros entre el 0 y el 255 para asignarlo como colores
+            // Creamos aleatoriamente números entre el 0 y el 255 para asignarlo como colores
             let rojo = Math.round(Math.random() * 255); 
             let verde = Math.round(Math.random() * 255); 
             let azul = Math.round(Math.random() * 255); 
 
-            // la función rbg nos permite cambiar los colores de un elemento
+            // la función ‘rbg’ nos permite cambiar los colores de un elemento
             let color = `rgb(${rojo},${verde},${azul})`
 
-            // Para acceder al body no hace falta que se por id, accedemos luego a la 
+            // Para acceder al ‘body’ no hace falta que se por id, accedemos luego a la 
             // propiedad backgroundColor dentro de la propiedad style
             document.body.style.backgroundColor = color
         }
 
         function sumar10(){
             //Todas las entradas de campos de texto (no importa que sean de tipo number)
-            //son cadenas, por lo tanto debemos de convertir el valor a el tipo que 
+            //son cadenas, por lo tanto, debemos de convertir el valor a el tipo que 
             //necesitemos. En este caso tenemos que convertirlo a un numero
 
             //let resultado = campo3.value + 10 //esto concatena el numero del campo3 con el valor 10

@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Funciones avanzadas</title>
+	<script type="text/javascript">
+		//Algunas peculiaridades de JS, podemos tener funciones dentro de funciones
+		function imprimir(pelicula){
+			//podemos tener funciones anidadas
+			function imprimirPorConsola(pelicula){
+				console.log(pelicula)
+			}
+
+			function imprimirPorDivHtml(pelicula){
+				//codigo necesario para imprimir en html
+			}
+
+			imprimirPorConsola(pelicula)	
+		}
+
+		imprimir("Harry poter eh el prisionero de hazcabal")
+
+		//como las funciones son objetos podemos
+		//hacer cositas asin
+		let multiplicar = function(m1,m2){
+			return m1 * m2
+		}
+
+		console.log(multiplicar(4,2))
+		console.log(multiplicar(3,6))
+
+		console.log("=========================")
+		function crearDocumento(datos,funcion){
+			console.log("Creando documento")
+			/*
+			if(tipoDoc == "factura"){
+				//codigo necesario para crear una
+				//factura
+			}else if(tipoDoc == "pedido"){
+				//codigo necesario para crear un 
+				//pedido
+			}*/
+			let codigo = funcion(datos)//invocamos la funcion
+			console.log(codigo)
+		}
+
+		function crearCodigoFactura(cuerpo){
+			console.log("Creando codigo para la Factura")
+			return ("Fac-1: " + cuerpo)
+		}
+		function crearCodigoPedido(cuerpo){
+			console.log("Creando codigo para el pedido")
+			return ("Pedido-1: " + cuerpo)
+		}
+
+		crearDocumento("Datos1", crearCodigoFactura)
+		crearDocumento("Datos2", crearCodigoPedido)
+
+		//Usando el objeto Function
+		var miFuncion = new Function("a", "b", "return a+b;");
+	</script>
 </head>
 <body>
-<script type="text/javascript">
-
-//Algunas peculiaridades de JS, podemos tener funciones dentro de funciones
-function imprimir(pelicula){
-	//podemos tener funciones anidadas
-	function imprimirPorConsola(pelicula){
-		console.log(pelicula)
-	}
-
-	function imprimirPorDivHtml(pelicula){
-		//codigo necesario para imprimir en html
-	}
-
-	imprimirPorConsola(pelicula)	
-}
-
-imprimir("Harry poter eh el prisionero de hazcabal")
-
-//como las funciones son objetos podemos
-//hacer cositas asin
-let multiplicar = function(m1,m2){
-	return m1 * m2
-}
-
-console.log(multiplicar(4,2))
-console.log(multiplicar(3,6))
-
-console.log("=========================")
-function crearDocumento(datos,funcion){
-	console.log("Creando documento")
-	/*
-	if(tipoDoc == "factura"){
-		//codigo necesario para crear una
-		//factura
-	}else if(tipoDoc == "pedido"){
-		//codigo necesario para crear un 
-		//pedido
-	}*/
-	let codigo = funcion(datos)//invocamos la funcion
-	console.log(codigo)
-}
-
-function crearCodigoFactura(cuerpo){
-	console.log("Creando codigo para la Factura")
-	return ("Fac-1: " + cuerpo)
-}
-function crearCodigoPedido(cuerpo){
-	console.log("Creando codigo para el pedido")
-	return ("Pedido-1: " + cuerpo)
-}
-
-crearDocumento("Datos1", crearCodigoFactura)
-crearDocumento("Datos2", crearCodigoPedido)
-
-//Usando el objeto Function
-var miFuncion = new Function("a", "b", "return a+b;");
-</script>
+	<h1>Funciones Avanzadas!! Pulsa F12 para ver la consola</h1>
 </body>
 </html>
 

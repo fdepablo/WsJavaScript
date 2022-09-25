@@ -1,79 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>Funciones</title>
+    <script type="text/javascript">
+        //En JS las funciones son objetos asociadas a otro objeto
+        //En JS declaramos la funciones con la palabra reservada "function"
+
+        //JS al no ser tipado no se indica en las funciones
+        //el tipo de retorno, tampoco existe una palabra "void"
+        function saludar(){
+            console.log("Hola chiquitín! tienes frio y lo sabes")
+        }
+        
+        //llamamos a la función
+        saludar()
+        
+        //aunque no retornemos datos en la función, podemos pedírselos
+        let respuesta = saludar()
+        console.log(respuesta)//undefined
+        
+        //las funciones pueden recibir parámetros (no se indica tipo)
+        //podemos retornar valores con la palabra reservada "return"
+        function sumar(n1,n2){
+            return n1 + n2//aquí si que retornamos un valor en vez de imprimirlo
+        }
+        
+        let resultado2 = sumar(10,20)
+        console.log(resultado2)//30
+        
+        //OJO que al no ser tipado podemos hacer cosas como esta
+        resultado2 = sumar("10","20")//Aqui concatenamos
+        console.log(resultado2)//1020
+        
+        //JS es muy permisible
+        resultado2 = sumar()//esto en java daría error en tiempo de compilación
+        console.log(resultado2)//NaN
+        resultado2 = sumar(20)//esto en java también daría error
+        console.log(resultado2)//NaN
+        resultado2 = sumar(12,20,23)
+        console.log(resultado2)//sería 32, suma los 12 y 20, el 23 lo ignora
+        //al no ser tipado, podemos pasarle String
+        resultado2 = sumar("Pepe"," soy", " yo")
+        console.log(resultado2)//Pepe soy
+        
+        //las funciones tienen implícitamente un array con los
+        //argumentos de entrada, que podemos acceder a traves de 'arguments'
+        function pruebaArgumentos(){
+            console.log("===== ARGUMENTOS ======")
+            //la variable "arguments" se crea automáticamente en la función
+            //y lleva los argumentos de entrada, SIEMPRE! :)
+            for(let a = 0; a < arguments.length; a++){
+                console.log(arguments[a])
+            }
+        }
+        
+        pruebaArgumentos(1,2)
+        pruebaArgumentos()
+        pruebaArgumentos(1,2,3,4,5)
+        
+        //Ejemplo más útil sobre argumentos dinámicos
+        function sumaTotal(){
+            console.log("===== SUMA TOTAL ======")
+            let total = 0
+            for(numero of arguments){//podemos recorrerlo con un FOR-OF
+                total += numero
+            }
+            console.log(total)
+        }
+        
+        sumaTotal(1)//1
+        sumaTotal(1,6,7)//14
+        sumaTotal(1,6,7,6,7,4,45,44,33)//153
+        sumaTotal(7,8,9,4,0,5,"cadena")//"33cadena"        
+    </script>
 </head>
 <body>
-<script type="text/javascript">
-//En JS las funciones son objetos
-//asociadas SIEMPRE a otro objeto
-
-//JS al no ser tipado no se indica en las funciones
-//el tipo de retorno, tampoco existe una palabra "void"
-function saludar(){
-    console.log("Hola chiquitin! tienes frio y lo sabes")
-}
-//llamamos a la función
-saludar()
-
-//aunque no retornemos datos en la función, podemos pedírselos
-let respuesta = saludar()
-console.log(respuesta)//undefined
-
-//las funciones pueden recibir parámetros (no se indica tipo)
-function sumar(n1,n2){
-    return n1 + n2//aquí si que retornamos un valor en vez de imprimirlo
-}
-
-let resultado2 = sumar(10,20)
-console.log(resultado2)//30
-
-//OJO que al no ser tipado podemos hacer cosas como esta
-resultado2 = sumar("10","20")//Aqui concatenamos
-console.log(resultado2)//1020
-
-//lo gracioso :), javascript es muyyyy permisible
-resultado2 = sumar()//esto en java daría error en tiempo de compilación
-console.log(resultado2)//NaN
-resultado2 = sumar(20)//esto en java también daría error
-console.log(resultado2)//NaN
-resultado2 = sumar(12,20,23)
-console.log(resultado2)//32
-//al no ser tipado, podemos pasarle String
-resultado2 = sumar("Pepe"," soy", " jejeje!")
-console.log(resultado2)//Pepe soy
-
-//las funciones tienen implícitamente un array con los
-//argumentos de entrada
-function pruebaArgumentos(){
-    console.log("===== ARGUMENTOS ======")
-    //la variable "arguments" se crea automáticamente en la función
-    //y lleva los argumentos de entrada, SIEMPRE! :)
-    for(let a = 0; a < arguments.length; a++){
-        console.log(arguments[a])
-    }
-}
-
-pruebaArgumentos(1,2)
-pruebaArgumentos()
-pruebaArgumentos(1,2,3,4,5)
-
-//Ejemplo más útil sobre argumentos dinámicos
-function sumaTotal(){
-    console.log("===== SUMA TOTAL ======")
-    let total = 0
-    for(let a = 0; a < arguments.length; a++){
-        total += arguments[a]
-    }
-    console.log(total)
-}
-
-sumaTotal(1)//1
-sumaTotal(1,6,7)//14
-sumaTotal(1,6,7,6,7,4,45,44,33)//153
-sumaTotal(7,8,9,4,0,5,"cadena")//"33cadena"
-
-</script>
+    <h1>Funciones!! Pulsa F12 para ver la consola</h1>
 </body>
 </html>
