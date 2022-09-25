@@ -11,27 +11,31 @@
   <script type="text/javascript">
     var mensaje = true;
     //ESTRUCTURA IF
+    //if(condición){}
     //Preguntar directamente si algo es cierto
-    if (mensaje) { console.log("Hola usuario!!"); }
+    if (mensaje) { 
+      console.log("Hola usuario!!"); 
+    }
 
     // Se comparan los dos valores
-    if (mensaje == false) { console.log("Esto no sale :(") }
+    if (mensaje == false) { 
+      console.log("Este mensaje no sale por consola :(") 
+    }
 
     // Error - Se asigna el valor "false" a la variable
     //if(mostrarMensaje = false) { ...}
-
     var mostrado = false;
     var permiteMensajes = true;
 
-    //podemos usar estructuras logicas
+    //Podemos usar estructuras lógicas
     if (!mostrado && permiteMensajes) {
-      console.log("¡¡Es la primera vez que se muestra el mensaje al nuevo usuario!!");
+      console.log("¡¡Esto es un mensaje de estructuras lógicas.!!");
     }
 
     //ESTRUCTURA IF-ELSE
     var nombre = "";
 
-    //Aqui las cadenas se comparan con "=="
+    //Aquí las cadenas se comparan con "=="
     if (nombre == "") {
       console.log("¿Cuál es tu nombre de pila");
     } else {
@@ -51,18 +55,22 @@
     }
 
     //Operador Ternario
+    //-----------------
+    //(Condición) ? EN_CASO_VERDADERO : EN_CASO_FALSO
+    //Se valora una condicíon
     var resultadoTenario = (edad == 8) ? "Eres muy pequeño" : "Eres muy mayor" 
 
     //ESTRUCTURA FOR
     var mensaje = "Hola, estoy dentro de un bucle dando muchas vueltas";
-    //1- VALOR INICIAL; 2- CONDICION DE EJECUCION DE BUCLE; 3- INCREMENTO EN CADA ITERACION 
+    //For(VALOR INICIAL; CONDICIÓN DE EJECUCIÓN DE BUCLE; INCREMENTO EN CADA ITERACIÓN){SENTENCIAS}
     for (let i = 0; i < 5; i++) {
       console.log("iteracion: " + i)
       console.log(mensaje);
     }
 
-    //ESTRUCTURA WHILE
-    //OJO! CON LOS BUCLES INFINITOS
+    //ESTRUCTURA WHILE (0..N)
+    //While(CONDICIÓN DE EJECUCCIÓN DE BUCLE){}
+    //OJO CON LOS BUCLES INFINITOS!!
     console.log("WHILE")
     var resultado = 0; var num = 10; var i = 0;
     while (i <= num) {
@@ -73,7 +81,7 @@
     console.log(resultado);//55
 
     //ESTRUCTURA DO-WHILE
-    console.log("DO-WHILE")
+    console.log("DO-WHILE")//(1..N)
     var resultado = 1; var num = 5;
     do {
       resultado *= num;    // resultado = resultado * num
@@ -83,13 +91,13 @@
     console.log(resultado);//120
 
     //ESTRUCTUA SWITCH
-    //misma funcionalidad que el ELSE-IF
+    //misma funcionalidad que if-elseif-else
     console.log("SWITCH")
     var numero = 5
     switch (numero) {
       case 5:
         console.log("El numero es el 5")
-        break;//cuidado con la ejecución en cascada si no poneis el break!
+        break;//si no ponemos break, pasará al siguiente 'case' y entrará, se cumpla o no la condición
       case 8:
         console.log("El numero es el 8")
         break;
@@ -101,6 +109,8 @@
         break;
     }
 
+    //En el siguiente ejemplo, si la entrada es de "LUNES" a "VIERNES" tiene un comportamiento y si es
+    //"SABADO" o "DOMINGO" tiene otro.
     var diaSemana = "LUNES"
     switch (diaSemana) {
       case "LUNES":
@@ -108,7 +118,7 @@
       case "MIERCOLES":
       case "JUEVES":
       case "VIERNES":
-        console.log("VAYA CACA ES A DIARIO :( :(")
+        console.log("VAYA TELA... ES UN DIA ENTRE SEMANA :( :(")
         break;
       case "SABADO":
       case "DOMINGO":
@@ -119,36 +129,34 @@
     }
 
     /* BREAK */
+    //'break' hace que rompa la ejecución del bucle. 
     console.log(" BREAK ")
-    var cadena = "Esto es un texto muy largo que tomamos como ejemplo...";
-    var letras = cadena.split("");//Devuelve un array partiendo el string por dicho caracterf
+    var letras = "abcedefghijk";
     var resultado = "";
-    console.log(letras)
 
-    //vamos concatenando letras hasta que encontremos una 'a'
+    //Podemos usar este tipo de 'for' para recorrer estructuras de tipo array
     for (i in letras) {
-      if (letras[i] == 'a') {
+      if (letras[i] == 'f') {
         break; //salimos del for!
       } else {
-        resultado += letras[i];
+        resultado += letras[i];//vamos concatenando letras hasta que encontremos una 'f'
       }
     }
-    console.log(resultado);  // Aparecerá en pantalla  "Esto es un texto muy l"
+    console.log(resultado);  // muestra "abcde"
 
     /* CONTINUE */
+    //'continue' hace que vuelva al principio del bucle y pase a la siguiente condición
     console.log(" CONTINUE ")
-    var cadena = "En un lugar de la Mancha de cuyo nombre no quiero acordarme...";
-    var letras = cadena.split("");
     var resultado = "";
 
     for (i in letras) {
-      if (letras[i] == 'a') {
-        continue; //en luegar de romper el bucle, volvemos al bucle pasando al siguiente valor
+      if (letras[i] == 'f') {
+        continue; //en luegar de romper el bucle, pasamos a la siguiente iteración
       } else {
-        resultado += letras[i];  //en este caso, volvemos a escribir la cadena pero sin ninguna 'a'
+        resultado += letras[i];  //en este caso, volvemos a escribir la cadena pero sin ninguna 'f'
       }
     }
-    console.log(resultado);// muestra "En un lugr de l Mnch de cuyo nombre no quiero cordrme..."
+    console.log(resultado);// muestra "abcedeghijk"
   </script>
 
   <h1> Control de Flujo!! Pulsa F12 para ver la consola</h1>
