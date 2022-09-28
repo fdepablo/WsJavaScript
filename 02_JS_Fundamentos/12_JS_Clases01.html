@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <script>
+        //Las últimas versiones de JS permiten trabajar con clases
         //Las clases sirven como molde para crear objetos.
         class Persona {
 
@@ -31,7 +32,11 @@
                 return this.#edad;
             }
             set edad(value) {
-                this.#edad = value;
+                if(value < 0){
+                    this.#edad = 0;
+                }else{
+                    this.#edad = value;
+                }                
             }
 
             //Podemos generar los métodos que queramos por defecto son públicos.
@@ -75,7 +80,7 @@
         persona1.nombre = "Steve Rogers";//cambiando atributo público
         //Podemos cambiar el valor de un atributo privado mediante su 'set'
         //OJO! no se pone persona1.edad(45)
-        persona1.edad = 45;//cambiando atributo privado mediante su 'set'
+        persona1.edad = -9;//cambiando atributo privado mediante su 'set'
         persona2.nombre = "Tony Stark";
         persona2.edad = 50;
 
@@ -83,11 +88,16 @@
         //Podemos acceder a los atributos públicos directamente
         console.log(persona1.nombre);
         //Podemos acceder a los atributos privados mediante su 'get'
-        console.log(persona1.edad);
+        console.log(persona1.edad);//Aquí estamos invocando el método 'get'
         console.log(persona2.nombre);
         console.log(persona2.edad);
         //No podemos acceder a los atributos privados directamente, daría error
         //console.log("Atributo privado" + persona2.#edad);
+
+        persona1 = persona2;
+        persona1.edad = 100
+        console.log(persona2.edad);//0 100
+        console.log(persona1.edad);//0 100
 
         //Los atributos estáticos se acceden a través de su clase, incluso dentro de la
         //propia clase
@@ -95,22 +105,26 @@
         console.log("Numero de personas: " + Persona.numeroPersonas);
 
         //Imprimimos la persona entera, por defecto lo saca con formato muy parecido a JSON
-        console.log(persona1); //Persona { _nombre: 'Steve Rogers', _edad: 45 }
+        console.log(persona1); //Persona { nombre: 'Steve Rogers', #edad: 100 }
 
         //También podemos invocar a sus métodos
         console.log(persona1.saludar());
-        let personaMayor = persona1.esMayor(persona2);
-        console.log("Persona mayor: " + personaMayor.nombre);
+        let persona3 = new Persona()
+        persona3.nombre = "Peter Parker"
+        persona3.edad = 45
+        let personaMayor = persona1.esMayor(persona3);
+        console.log("Persona mayor: ");
+        console.log(personaMayor);
 
+        //Otro ejemplo de creación de objetos
         class Pelicula {
-            //Tambien podemos crear los atributos dentro del constructor
+            //También podemos crear los atributos dentro del constructor
             constructor(titulo, director) {
-                this.titulo = titulo;
-                this.director = director;
                 this.titulo = titulo;
                 this.director = director;
             }
         }
+
         console.log("** PELICULAS **");
         let pelicula = new Pelicula("La vida de Brian", "Terry Jones");
         pelicula.titulo = "Los caballeros de la mesa cuadrada";
@@ -130,6 +144,9 @@
 
             //Podemos sobrescribir métodos
             //Para ello, el método hijo debe de tener la misma firma que el método padre
+            //La firma de un método consta de 2 partes:
+            //1- El nombre del método
+            //2- El número de parametros de entrada
             saludar() {
                 return `Hola me llamo ${this.nombre}, tengo ${this.edad} años y gano ${this.salario}`;
             }
