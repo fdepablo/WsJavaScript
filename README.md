@@ -77,4 +77,5 @@ Debería quedar algo parecido a la siguiente imagen
  - <https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Introducci%C3%B3n>
  - <https://www.tutorialesprogramacionya.com/javascriptya/>
  - <https://www.javascripttutorial.net/>
+ - <https://lenguajejs.com/javascript/>
  - <https://www.w3schools.com/js/>
