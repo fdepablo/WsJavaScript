@@ -12,22 +12,33 @@
 			}
 
 			function imprimirPorDivHtml(pelicula){
-				//codigo necesario para imprimir en html
+				//código necesario para imprimir en html
 			}
 
 			imprimirPorConsola(pelicula)	
 		}
 
-		imprimir("Harry poter eh el prisionero de hazcabal")
+		imprimir("Harry Potter y la piedra filosofal")
 
-		//como las funciones son objetos podemos
-		//hacer cositas asin
+		//Como las funciones son objetos podemos igualar una variable a una función
 		let multiplicar = function(m1,m2){
 			return m1 * m2
 		}
 
 		console.log(multiplicar(4,2))
 		console.log(multiplicar(3,6))
+
+		//En las últimas versiones de JS tenemos las funciones flecha
+		//que simplifica el uso de las funciones
+		//https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+		let imprimirConFlecha = v => console.log(v);
+		imprimirConFlecha("valor a imprimir con la función flecha")
+
+		let mutiplicarConFlecha = (m1,m2) => {
+			return m1 * m2
+		}
+		console.log(mutiplicarConFlecha(40,20))
+		console.log(mutiplicarConFlecha(30,60))
 
 		console.log("=========================")
 		function crearDocumento(datos,funcion){
@@ -37,10 +48,10 @@
 				//codigo necesario para crear una
 				//factura
 			}else if(tipoDoc == "pedido"){
-				//codigo necesario para crear un 
+				//código necesario para crear un 
 				//pedido
 			}*/
-			let codigo = funcion(datos)//invocamos la funcion
+			let codigo = funcion(datos)//invocamos la función pasada por parámetro
 			console.log(codigo)
 		}
 
@@ -55,8 +66,13 @@
 
 		crearDocumento("Datos1", crearCodigoFactura)
 		crearDocumento("Datos2", crearCodigoPedido)
+		//Con funciones flecha
+		crearDocumento("Datos3", cuerpo => {
+			console.log("Creando codigo para el repartidor")
+			return ("Repartidor-1: " + cuerpo)
+		})
 
-		//Usando el objeto Function
+		//Usando el objeto Function, aunque es muy antigua
 		var miFuncion = new Function("a", "b", "return a+b;");
 	</script>
 </head>
