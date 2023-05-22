@@ -79,3 +79,4 @@ Debería quedar algo parecido a la siguiente imagen
  - <https://www.javascripttutorial.net/>
  - <https://lenguajejs.com/javascript/>
  - <https://www.w3schools.com/js/>
+ - [JavaScript y Firebase](https://www.youtube.com/watch?v=ey4k6mW9ds4&ab_channel=FaztCode)
