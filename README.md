@@ -36,7 +36,6 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 
 4. Algunas extensiones recomendadas de VSC
     - Open in browse, para abrir directamente una página web en un navegador
-    - Beautify, para que nos ayude para hacer HTML, CSS y JS
     - Live Server, para la parte de AJAX y para desplegar JS en un servidor
     - Markdown Preview Enhanced, para visualizar ficheros MarkDown. botón derecho y "open preview" para visualizar los fichero con extensión **.md**
 
