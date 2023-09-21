@@ -32,7 +32,7 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 
 2. Instalar VSC <https://code.visualstudio.com/download>
 
-3. Abrir Visual Studio Code -> File -> Open Workspace -> Elegir el fichero **WorkspaceJS.code-workspace**
+3. Abrir Visual Studio Code -> File -> Open Folder -> Elegir la carpeta **WorkspaceJS**
 
 4. Algunas extensiones recomendadas de VSC
     - Open in browse, para abrir directamente una página web en un navegador
