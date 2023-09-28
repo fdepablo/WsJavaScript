@@ -25,6 +25,7 @@
                 this.#edad = 0;
             }
 
+            
             //Podemos crear getter y setters con las palabras reservadas "get" y "set"
             get edad() {
                 //A diferencia con otros lenguajes como Java, es obligatorio poner el this para
@@ -57,7 +58,8 @@
              */
             esMayor(p) {
                 if (this.#edad > p.#edad) {
-                    return this;
+                    return this;//this es una palabra reservada que devuelva al referencia
+                                //del propio objeto
                 }
                 else if (p.#edad > this.#edad) {
                     return p;
@@ -94,11 +96,16 @@
         //No podemos acceder a los atributos privados directamente, daría error
         //console.log("Atributo privado" + persona2.#edad);
 
+        console.log("Son el mismo?")
+        console.log(persona1 == persona2)
         persona1 = persona2;
         persona1.edad = 100
-        console.log(persona2.edad);//0 100
+        console.log("Edades:")
         console.log(persona1.edad);//0 100
-
+        console.log(persona2.edad);//0 100
+        console.log("Son el mismo?")
+        console.log(persona1 == persona2)
+        
         //Los atributos estáticos se acceden a través de su clase, incluso dentro de la
         //propia clase
         Persona.numeroPersonas = 2;
@@ -109,12 +116,15 @@
 
         //También podemos invocar a sus métodos
         console.log(persona1.saludar());
+
+        //Probamos método esMayor()
         let persona3 = new Persona()
         persona3.nombre = "Peter Parker"
         persona3.edad = 45
         let personaMayor = persona1.esMayor(persona3);
         console.log("Persona mayor: ");
         console.log(personaMayor);
+        console.log(persona1 === personaMayor)
 
         //Otro ejemplo de creación de objetos
         class Pelicula {
