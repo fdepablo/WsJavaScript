@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introduccion a eventos</title>
     <script>
+        console.log("Bienvenidos a los eventos en JS")
         //Esta función solo se ejecutará cuando la invoquemos
         function copiarTexto(){
             // Debemos tener claro, que una página HTML se convierte en el navegador en un 
@@ -50,7 +51,7 @@
             // Por ejemplo, ya no es necesario utilizar la función "document.getElementById" 
             // podemos usar directamente la variable con su id que el navegador ha creado
             // por nosotros.
-            // let campo2 = document.getElementById("campo2")
+            //let campo2 = document.getElementById("campo2")
              campo2.value = ""
         }
 
@@ -75,7 +76,7 @@
         function sumar(){
             //Todas las entradas de campos de texto (no importa que sean de tipo number)
             //son cadenas, por lo tanto, debemos de convertir el valor a el tipo que 
-            //necesitemos. En este caso tenemos que convertirlo a un numero
+            //necesitemos. En este caso tenemos que convertirlo a un número
 
             //esto concatena el numero del campo3 con el valor del campo4
             //let resultado = campo3.value + campo3.value 
@@ -91,9 +92,9 @@
 </head>
 <body>
     <div style="text-align: center;">
-        <h1>Introducción a evento en JavaSctipt</h1>
+        <h1>Introducción a evento en JavaScript</h1>
 
-        Introduce un texto: <input id="campo1" type="text" value="Este seria el valor"/> 
+        Introduce un texto: <input id="campo1" type="text" value="Este sería el valor"/> 
         <!-- Tenemos dos maneras de hacer botones
             1- Mediante la etiqueta input type="button"
             2- Mediante al etiqueta button
@@ -125,9 +126,9 @@
         <button onclick="cambiarColorBody()">Púlsame para cambiar de color</button>
 
         <br/><br/>
-        Numero 1: <input id="campo3" type="number" name="numero1">
+        Número 1: <input id="campo3" type="number" name="numero1">
         <br/>
-        Numero 2: <input id="campo4" type="number">
+        Número 2: <input id="campo4" type="number">
         <br/><br/>
         <button onclick="sumar()">Púlsame para sumar</button>
         <br/><br/>
