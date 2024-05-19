@@ -36,7 +36,7 @@
         ////////////////
 
         //En JS this es una referencia al objeto al que se le ha asignado 
-        //la funcion 
+        //la función 
 
         console.log("============================")
         let disco = {
@@ -56,14 +56,14 @@
             console.log(s1+s2)
             console.log(this)
         }
-        //Podemos usar window para invocar la funcion (es un poco tonto hacerlo asi)
+        //Podemos usar window para invocar la función (es un poco tonto hacerlo así)
         window.sumar(10,20)
         sumar(20,30)
         //Una función puede estar asociada a varios objetos
         let calculadora = {
             sumar : sumar
         }
-        calculadora.sumar(30,40) //Aqui, dentro de la función sumar, this es 'calculadora'
+        calculadora.sumar(30,40) //Aquí, dentro de la función sumar, this es 'calculadora'
 
         console.log("============================")
         let persona1 = { nombre : 'Homer' }
@@ -92,7 +92,7 @@
         console.log(c)
         console.log(window.a) //5
         console.log(window.b) //10
-        console.log(window.c) //undefained
+        console.log(window.c) //undefined
 
         /////////////////////////
         // FUNCIONES PROTOTIPO //
