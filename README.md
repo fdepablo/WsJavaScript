@@ -36,7 +36,9 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 
 4. Algunas extensiones recomendadas de VSC
     - Live Server o Live Preview, para visualizar páginas web en un servidor.
-    - Markdown Preview Enhanced, para visualizar ficheros MarkDown. botón derecho y "open preview" para visualizar los fichero con extensión **.md**
+    - ESLint, es el vigilante de tu código. Te marcará en tiempo real con líneas rojas o amarillas los errores de sintaxis, variables que no estás usando o malas prácticas antes de que ejecutes el programa.
+    - Prettier - Code formatter, es el formateador por excelencia. Olvídate de ordenar el código a mano. Al guardar el archivo (Ctrl + S), Prettier acomoda automáticamente los espacios, añade los puntos y comas si quieres, y alinea todo para que quede impecable.
+    - Markdown All in One, para visualizar ficheros MarkDown, extensión **.md**. Se puede utilizar el visualizador nativo de VSC de las últimas versiones (ctrl + shift + V)
 
     Para instalar extensiones debemos ir al último icono de la barra izquierda del VSC o pulsar **ctrl+Mayus+X**. Una vez dentro, buscamos la extensión que queremos y la instalamos.
 
@@ -51,7 +53,9 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 Si queremos hacer que los símbolos especiales estén coloreados, como por ejemplo los símbolos **()[]{}** y conseguir que el código sea más legible, debemos añadir las siguientes líneas de código en el fichero de configuración **settings.json** (al final de fichero, antes del cierre **}**): 
 
     "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs":"active"
+    "editor.guides.bracketPairs":"active",
+    "editor.guides.bracketPairsHorizontal": "active",
+    "editor.guides.highlightActiveBracketPair": true
 
 Para abrir el fichero **settings.json**:
 
