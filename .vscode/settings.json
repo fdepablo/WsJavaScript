@@ -1,3 +1,7 @@
 {
     "java.configuration.checkProjectSettingsExclusions": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs":"active",
+    "editor.guides.bracketPairsHorizontal": "active",
+    "editor.guides.highlightActiveBracketPair": true    
 }
