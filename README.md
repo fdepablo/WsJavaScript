@@ -35,8 +35,7 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 3. Abrir Visual Studio Code -> File -> Open Folder -> Elegir la carpeta **WorkspaceJS**
 
 4. Algunas extensiones recomendadas de VSC
-    - Open in browse, para abrir directamente una página web en un navegador
-    - Live Server, para la parte de AJAX y para desplegar JS en un servidor
+    - Live Server o Live Preview, para visualizar páginas web en un servidor.
     - Markdown Preview Enhanced, para visualizar ficheros MarkDown. botón derecho y "open preview" para visualizar los fichero con extensión **.md**
 
     Para instalar extensiones debemos ir al último icono de la barra izquierda del VSC o pulsar **ctrl+Mayus+X**. Una vez dentro, buscamos la extensión que queremos y la instalamos.
