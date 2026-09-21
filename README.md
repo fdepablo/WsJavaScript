@@ -6,7 +6,7 @@
 
 - Todos los navegadores modernos tienen instalado JavaScript para poder ejecutarlo.
 
-- Es muy potente y es de los leguajes de programación más usados del mundo.
+- Es muy potente y es de los lenguajes de programación más usados del mundo.
 
 ## Características
 
@@ -18,7 +18,7 @@
 
 4. <b>Lenguaje interpretado</b> JavaScript es un lenguaje interpretado porque utiliza un intérprete que permite convertir las líneas de código en el lenguaje de la máquina. Esto tiene un gran número de ventajas como la reducción del procesamiento en servidores web al ejecutarse directamente en el navegador del usuario, o que es apto para múltiples plataformas permitiendo usar el mismo código. 
 
-5. <b>Case Sensitive</b> JavaScript en un lenguaje sensible a mayúsculas y minúsculas. La variable TIME es diferente a la variable Time
+5. <b>Case Sensitive</b> JavaScript es un lenguaje sensible a mayúsculas y minúsculas. La variable TIME es diferente a la variable Time
 
 ## Configuración del workspace
 
@@ -32,13 +32,18 @@ La ruta del repositorio seria <https://github.com/fdepablo/WsJavaScript>
 
 2. Instalar VSC <https://code.visualstudio.com/download>
 
-3. Abrir Visual Studio Code -> File -> Open Folder -> Elegir la carpeta **WorkspaceJS**
+3. Abrir Visual Studio Code -> File -> Open Folder -> Elegir la carpeta **WsJavaScript**
 
 4. Algunas extensiones recomendadas de VSC
-    - Live Server o Live Preview, para visualizar páginas web en un servidor.
-    - ESLint, es el vigilante de tu código. Te marcará en tiempo real con líneas rojas o amarillas los errores de sintaxis, variables que no estás usando o malas prácticas antes de que ejecutes el programa.
-    - Prettier - Code formatter, es el formateador por excelencia. Olvídate de ordenar el código a mano. Al guardar el archivo (Ctrl + S), Prettier acomoda automáticamente los espacios, añade los puntos y comas si quieres, y alinea todo para que quede impecable.
-    - Markdown All in One, para visualizar ficheros MarkDown, extensión **.md**. Se puede utilizar el visualizador nativo de VSC de las últimas versiones (ctrl + shift + V)
+    - **Live Server o Live Preview**, para visualizar páginas web en un servidor.
+    - **ESLint**, es el vigilante de tu código. Te marcará en tiempo real con líneas rojas o amarillas los errores de sintaxis, variables que no estás usando o malas prácticas antes de que ejecutes el programa.
+    - **Prettier - Code formatter**, es el formateador por excelencia. Para que formatee el código automáticamente al guardar, además de instalar la extensión hay que seleccionar Prettier como formateador predeterminado y activar el formateo al guardar en **settings.json**:
+
+        ```json
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+        ```
+    - **Markdown All in One**, para visualizar ficheros MarkDown, extensión **.md**. Se puede utilizar el visualizador nativo de VSC de las últimas versiones (ctrl + shift + V)
 
     Para instalar extensiones debemos ir al último icono de la barra izquierda del VSC o pulsar **ctrl+Mayus+X**. Una vez dentro, buscamos la extensión que queremos y la instalamos.
 
@@ -68,9 +73,9 @@ Debería quedar algo parecido a la siguiente imagen
 
 ## Crear un proyecto JS con Eclipse
 
-1. File -> new -> Static web proyect
-2. Parar abrir las páginas html, botón derecho sobre el fichero html -> open with -> Web Browser
-3. Para elegir otro buscador web con el que abrir, Window -> Web Browser -> Elegir el que se quiera
+1. File -> new -> Static Web Project
+2. Para abrir las páginas html, botón derecho sobre el fichero html -> open with -> Web Browser
+3. Para elegir otro navegador web con el que abrir, Window -> Web Browser -> Elegir el que se quiera
 4. Para abrir los fichero .js podemos abrirlos con botón derecho -> open with -> other -> js editor. De esta manera se facilita la lectura
 
 ## Bibliografía
