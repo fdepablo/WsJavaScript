@@ -76,10 +76,10 @@
             //---------------------
             // Cuando la búsqueda de una coincidencia requiere algo más que una coincidencia exacta
             // Podemos encontrar los siguientes tipos de caracteres especiales
-            // 1- Aserciones -> ^, $, x(?=y), x(?!y), (?<=y)x, (?<!y)x, \b, \B
+            // 1- Aserciones -> ^, $
             // 2- Cuantificadores -> *, +, ?, x{n}, x{n,}, x{n,m}
-            // 3- Clases de caracteres -> \, ., \cX, \d, \D, \f, \n, \r, \s, \S, \t, \v, \w, \W, \0, \xhh, \uhhhh, \uhhhhh, [\b]
-            // 4- Grupos y rangos -> (x), (?:x), (?<Name>x), x|y, [xyz], [^xyz], \Number
+            // 3- Clases de caracteres -> \, ., \d, \D, \s, \S, \w, \W
+            // 4- Grupos y rangos -> (x), x|y, [xyz], [^xyz]
             // 5- Escapes de propiedades Unicode -> \p{UnicodeProperty}, \P{UnicodeProperty}
             
             // Aserciones
