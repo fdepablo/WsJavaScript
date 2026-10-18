@@ -1,129 +1,131 @@
 <!DOCTYPE html>
-
-<!-- 
-
-Google Maps es una herramienta para mostrar longitudes y latitudes
-https://developers.google.com/maps/documentation/javascript/overview?hl=es-419
-
-Normalmente necesitamos una API key para trabajar con google maps
-Conseguir una API key de google
-https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ES
- -->
-<html>
-
+<html lang="es">
 <head>
-	<title>Google Maps 1</title>
-	<meta name="viewport" content="initial-scale=1.0">
-	<meta charset="utf-8">
-	<style>
-		/* Es muy importante definir el tamaño del contenedor del google map ya que si
-		es muy pequeño daría error, en este caso damos el maximo de tamaño */
-		#mapa {
-			height: 100%;
-		}
-
-		/* Tambien hacemos que el body y html se expandan */
-		html,
-		body {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-	</style>
-
-	<!--
-	Aqui vamos a cargar la api de google maps 
-	Ponemos la key y la función de callback que se llamara cuando se haya cargado el api
-	defer -> Ejecutamos el script una vez se haya descargado
- 	-->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy77yCKcWuIrbQ_aMazG-YHHkbw--1Cf4&callback=apiCargada"
-		async defer></script>
-
-	<script>
-		function apiCargada() {
-			//Normalmente aqui habilitaremos lo que haga falta para que el usuario pueda
-			//utilizar el Mapa, ya que no se puede usar hasta que este cargado
-			alert("api cargada");
-		}
-
-		function obtenerLocalizacion() {
-			//Si no existe, el navegador no soporta geolocalización
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(cargarMapa,
-					gestiona_errores);
-			} else {
-				alert('Tu navegador no soporta la API de geolocalizacion');
-			}
-		}
-
-		function cargarMapa(position) {
-			var latitud = position.coords.latitude;
-			var longitud = position.coords.longitude;
-
-			//Creamos un objeto LatLng donde poner la latitud y longitud
-			var googlePos = new google.maps.LatLng(latitud, longitud);
-			
-			/*Creamos los parametros de como vamos a crear el mapa
-			Zoom. Especifica el nivel de zoom
-			Center. Especifica que el mapa debe estar centrado en la ubicación dada
-			MapTypeId. Puede ser mapa de ruta, satélite o híbrido
-			*/
-			var parametros = {
-				center: googlePos,
-				zoom: 8,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			}
-
-			//Para crear el mapa necesitamos un contenedor y unos parametros
-			var goolgeMap = new google.maps.Map(
-				document.getElementById("mapa"), 
-				parametros
-			);
-
-			/* Marcadores, sirven para mejorar la visualizacion
-
-			//Parametros de creacion
-			map. Mapa donde aparecera el marcador
-			position. Posición en la que se muestra el marcador
-			title. Título del marcador
-			animation. Animación del marcador DROP/BOUNCE (cayendo o moviendose)
-			image. Icono simple para el marcador
-			draggable. true para podemos mover el marcador por el mapa
-			*/			
-			var markerOpt = {
-				map: goolgeMap,
-				position: googlePos,
-				title: 'Estoy en latitud ' + latitud + " y longitud " + longitud,
-				animation: google.maps.Animation.BOUNCE
-			};
-
-			//Creamos el marker(marcador) con las opciones dadas
-			var googleMarker = new google.maps.Marker(markerOpt);	
-			// podriamos eliminarlo guardando su rerefencia y luego poniendo el mapa a null		
-			//googleMarker.setMap(null);
-		}
-
-		function gestiona_errores(err) {
-			if (err.code == 0) {
-				alert("error desconocido");
-			}
-			if (err.code == 1) {
-				alert("El usuario no ha compartido su posicion");
-			}
-			if (err.code == 2) {
-				alert("no se puede obtener la posicion actual");
-			}
-			if (err.code == 3) {
-				alert("timeout recibiendo la posicion");
-			}
-		}
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación en Google Maps</title>
+    <style>
+        body { font: 1rem/1.5 Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        button, input { padding: .5rem; margin: .3rem; }
+        #mapa { height: 420px; width: 100%; background: #eee; }
+    </style>
 </head>
-
 <body>
-	<a href="javascript:obtenerLocalizacion();">Mostrar Mapa</a>
-	<div id="mapa"></div>
-</body>
+    <h1>Ubicación en Google Maps</h1>
+    <p>Configura una clave propia y carga la API. Después solicita tu posición para centrar el mapa.</p>
+    <label for="clave">Clave propia de Google Maps:</label>
+    <input id="clave" type="text" autocomplete="off" spellcheck="false">
+    <button type="button" id="cargar">Cargar API de mapas</button>
+    <button type="button" id="iniciar" disabled>Mostrar mi posición</button>
+    <div id="mapa" aria-label="Mapa de ubicación"></div>
+    <p id="mensaje" role="status"></p>
+    <p id="coordenadas"></p>
+    <script>
+        const mensaje = document.getElementById('mensaje');
+        const coordenadas = document.getElementById('coordenadas');
 
+        function disponible() {
+            if (!window.isSecureContext) {
+                mensaje.textContent = 'Abre la página con HTTPS o en localhost.';
+                return false;
+            }
+            if (!navigator.geolocation) {
+                mensaje.textContent = 'La geolocalización no está disponible en este navegador.';
+                return false;
+            }
+            return true;
+        }
+
+        function mostrarError(error) {
+            switch (error.code) {
+                case 1:
+                    mensaje.textContent = 'No hay permiso para acceder a la ubicación. Revisa los permisos del sitio.';
+                    break;
+                case 2:
+                    mensaje.textContent = 'No se ha podido determinar la posición.';
+                    break;
+                case 3:
+                    mensaje.textContent = 'Se ha agotado el tiempo de espera. Puedes volver a intentarlo.';
+                    break;
+                default:
+                    mensaje.textContent = 'Se ha producido un error al obtener la ubicación.';
+            }
+        }
+
+        const cargar = document.getElementById('cargar');
+        const iniciar = document.getElementById('iniciar');
+        const clave = document.getElementById('clave');
+        let mapa = null;
+        let marcador = null;
+
+        // El botón de ubicación se activa solo cuando Google termina de cargar.
+        window.apiCargada = function () {
+            iniciar.disabled = false;
+            mensaje.textContent = 'API de mapas cargada. Ya puedes solicitar tu ubicación.';
+        };
+        window.gm_authFailure = function () {
+            iniciar.disabled = true;
+            mensaje.textContent = 'Google no ha autorizado el mapa. Revisa clave, restricciones y facturación y recarga.';
+        };
+        cargar.addEventListener('click', function () {
+            if (!clave.value.trim()) {
+                mensaje.textContent = 'Introduce una clave propia de Maps JavaScript API.';
+                return;
+            }
+            cargar.disabled = true;
+            mensaje.textContent = 'Cargando Google Maps…';
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(clave.value.trim()) +
+                '&loading=async&callback=apiCargada&libraries=marker&v=weekly';
+            script.async = true;
+            script.onerror = function () {
+                mensaje.textContent = 'No se ha podido descargar Google Maps. Revisa la conexión y recarga.';
+            };
+            document.head.appendChild(script);
+        });
+
+        function mostrarEnMapa(posicion) {
+            const punto = { lat: posicion.coords.latitude, lng: posicion.coords.longitude };
+            coordenadas.textContent = 'Latitud: ' + punto.lat + ' | Longitud: ' + punto.lng +
+                ' | Precisión estimada: ' + Math.round(posicion.coords.accuracy) + ' metros.';
+            // Creamos el mapa una sola vez; después actualizamos su centro y el marcador.
+            if (mapa === null) {
+                mapa = new google.maps.Map(document.getElementById('mapa'), {
+                    center: punto,
+                    zoom: 15,
+                    mapId: 'DEMO_MAP_ID' // Identificador de demostración para practicar.
+                });
+                marcador = new google.maps.marker.AdvancedMarkerElement({
+                    map: mapa,
+                    position: punto,
+                    title: 'Ubicación del dispositivo'
+                });
+            } else {
+                mapa.setCenter(punto);
+                marcador.position = punto;
+            }
+        }
+
+        iniciar.addEventListener('click', function () {
+            if (!disponible()) return;
+            iniciar.disabled = true;
+            coordenadas.textContent = '';
+            mensaje.textContent = 'Esperando permiso o ubicación…';
+            navigator.geolocation.getCurrentPosition(function (posicion) {
+                iniciar.disabled = false;
+                try {
+                    mostrarEnMapa(posicion);
+                    mensaje.textContent = 'Posición mostrada en el mapa.';
+                } catch (error) {
+                    mensaje.textContent = 'No se ha podido mostrar el mapa. Revisa la consola.';
+                    console.error(error);
+                }
+            }, function (error) {
+                iniciar.disabled = false;
+                mostrarError(error);
+            }, { timeout: 10000, maximumAge: 0 });
+        });
+
+    </script>
+</body>
 </html>

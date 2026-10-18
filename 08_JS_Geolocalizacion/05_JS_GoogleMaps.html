@@ -1,123 +1,156 @@
 <!DOCTYPE html>
-
-<!--
-	Este ejemplo esta más destinado a app moviles ya que con la api de GoogleMaps
-	podemos estar geolocalizando continuamente nuestros dispositivos para hacer
-	una monitorizacion continua
--->
-<html>
+<html lang="es">
 <head>
-	<title>Google Maps 2</title>
-	<meta name="viewport" content="initial-scale=1.0">
-	<meta charset="utf-8">
-	<style>
-		/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-		#map {
-			height: 100%;
-		}
-
-		/* Optional: Makes the sample page fill the window. */
-		html,
-		body {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-	</style>
-	<!-- Ponemos la key, no hace falta función de callback-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy77yCKcWuIrbQ_aMazG-YHHkbw--1Cf4" async defer>
-	</script>
-
-	<script>
-		var goolgeMap;
-
-		function startWatch() {
-			//si no existe, el navegador no soporta geolocalización
-			if (navigator.geolocation) {
-				/*
-				enableHighAccuracy: True o false, para activar que el resultado sea lo más preciso posible. 
-					Hay que tener cuidado con esta opción dado que puede tener efectos adversos 
-					(tiempo demasiado largo de espera, consumo de batería algo, etc)
-				timeout: Tiempo (en milisegundos) máximo en responder.
-				maximumAge: Tiempo (en milisegundos) en el que se puede seguir utilizando los 
-					datos de ubicación en caché antes de intentar obtener nuevos datos de ubicación.
-				*/
-				var optn = {
-					enableHighAccuracy: true,
-					timeout: Infinity,
-					maximumAge: 0
-				};
-				//Esto esta más enfocado a dispotivos moviles 
-				//ya que hara una monitorización continua
-				//nos devuelve el id para luego poder pararlo
-				watchId = navigator.geolocation.watchPosition(cargarMapa, gestiona_errores, optn);
-			} else {
-				alert('Tu navegador no soporta la API de geolocalizacion');
-			}
-		}
-
-		function stopWatch() {
-			if (watchId) {
-				navigator.geolocation.clearWatch(watchId);
-				watchId = null;
-			}
-		}
-
-		//Vamos a hacer lo mismo que antes pero un poco más elaborado
-		function cargarMapa(position) {
-			var latitud = position.coords.latitude;
-			var longitud = position.coords.longitude;
-
-			var mapObj = document.getElementById('map');
-			//podemos crear un objeto LatLng
-			var googlePos = new google.maps.LatLng(latitud, longitud);
-			/*
-			Zoom. Especifica el nivel de zoom
-			Center. Especifica que el mapa debe estar centrado en la ubicación dada
-			MapTypeId. Puede ser mapa de ruta, satélite o híbrido
-			*/
-			var mapOptions = {
-				zoom: 12,
-				center: googlePos,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-
-			goolgeMap = new google.maps.Map(mapObj, mapOptions);
-
-			//Por ultimo vamos a add un marker para su mejor visualización
-			var markerOpt = {
-				map: goolgeMap,
-				position: googlePos,
-				title: 'Estoy en latitud ' + latitud + " y longitud " + longitud,
-				animation: google.maps.Animation.BOUNCE
-			};
-
-			var googleMarker = new google.maps.Marker(markerOpt);
-			
-		}
-
-		function gestiona_errores(err) {
-			if (err.code == 0) {
-				alert("error desconocido");
-			}
-			if (err.code == 1) {
-				alert("El usuario no ha compartido su posicion");
-			}
-			if (err.code == 2) {
-				alert("no se puede obtener la posicion actual");
-			}
-			if (err.code == 3) {
-				alert("timeout recibiendo la posicion");
-			}
-		}
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento en Google Maps</title>
+    <style>
+        body { font: 1rem/1.5 Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        button, input { padding: .5rem; margin: .3rem; }
+        #mapa { height: 420px; width: 100%; background: #eee; }
+    </style>
 </head>
-
 <body>
-	<a href="javascript:startWatch();">Empezar Monitorización</a>
-	<a href="javascript:stopWatch();">Parar Monitorización</a>
-	<div id="map"></div>
-</body>
+    <h1>Seguimiento en Google Maps</h1>
+    <p>El navegador proporciona las posiciones y Google Maps las representa. Puedes detener el seguimiento en cualquier momento.</p>
+    <label for="clave">Clave propia de Google Maps:</label>
+    <input id="clave" type="text" autocomplete="off" spellcheck="false">
+    <button type="button" id="cargar">Cargar API de mapas</button>
+    <button type="button" id="iniciar" disabled>Iniciar seguimiento</button>
+    <button type="button" id="detener" disabled>Detener seguimiento</button>
+    <div id="mapa" aria-label="Mapa de ubicación"></div>
+    <p id="mensaje" role="status"></p>
+    <p id="coordenadas"></p>
+    <script>
+        const mensaje = document.getElementById('mensaje');
+        const coordenadas = document.getElementById('coordenadas');
 
+        function disponible() {
+            if (!window.isSecureContext) {
+                mensaje.textContent = 'Abre la página con HTTPS o en localhost.';
+                return false;
+            }
+            if (!navigator.geolocation) {
+                mensaje.textContent = 'La geolocalización no está disponible en este navegador.';
+                return false;
+            }
+            return true;
+        }
+
+        function mostrarError(error) {
+            switch (error.code) {
+                case 1:
+                    mensaje.textContent = 'No hay permiso para acceder a la ubicación. Revisa los permisos del sitio.';
+                    break;
+                case 2:
+                    mensaje.textContent = 'No se ha podido determinar la posición.';
+                    break;
+                case 3:
+                    mensaje.textContent = 'Se ha agotado el tiempo de espera. Puedes volver a intentarlo.';
+                    break;
+                default:
+                    mensaje.textContent = 'Se ha producido un error al obtener la ubicación.';
+            }
+        }
+
+        const cargar = document.getElementById('cargar');
+        const iniciar = document.getElementById('iniciar');
+        const clave = document.getElementById('clave');
+        let mapa = null;
+        let marcador = null;
+
+        // El botón de ubicación se activa solo cuando Google termina de cargar.
+        window.apiCargada = function () {
+            iniciar.disabled = false;
+            mensaje.textContent = 'API de mapas cargada. Ya puedes solicitar tu ubicación.';
+        };
+        window.gm_authFailure = function () {
+            iniciar.disabled = true;
+            mensaje.textContent = 'Google no ha autorizado el mapa. Revisa clave, restricciones y facturación y recarga.';
+        };
+        cargar.addEventListener('click', function () {
+            if (!clave.value.trim()) {
+                mensaje.textContent = 'Introduce una clave propia de Maps JavaScript API.';
+                return;
+            }
+            cargar.disabled = true;
+            mensaje.textContent = 'Cargando Google Maps…';
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(clave.value.trim()) +
+                '&loading=async&callback=apiCargada&libraries=marker&v=weekly';
+            script.async = true;
+            script.onerror = function () {
+                mensaje.textContent = 'No se ha podido descargar Google Maps. Revisa la conexión y recarga.';
+            };
+            document.head.appendChild(script);
+        });
+
+        function mostrarEnMapa(posicion) {
+            const punto = { lat: posicion.coords.latitude, lng: posicion.coords.longitude };
+            coordenadas.textContent = 'Latitud: ' + punto.lat + ' | Longitud: ' + punto.lng +
+                ' | Precisión estimada: ' + Math.round(posicion.coords.accuracy) + ' metros.';
+            // Creamos el mapa una sola vez; después actualizamos su centro y el marcador.
+            if (mapa === null) {
+                mapa = new google.maps.Map(document.getElementById('mapa'), {
+                    center: punto,
+                    zoom: 15,
+                    mapId: 'DEMO_MAP_ID' // Identificador de demostración para practicar.
+                });
+                marcador = new google.maps.marker.AdvancedMarkerElement({
+                    map: mapa,
+                    position: punto,
+                    title: 'Ubicación del dispositivo'
+                });
+            } else {
+                mapa.setCenter(punto);
+                marcador.position = punto;
+            }
+        }
+
+        const detener = document.getElementById('detener');
+        let watchId = null; // No usamos una variable global implícita. El identificador puede ser 0.
+
+        function pararSeguimiento() {
+            if (watchId !== null) {
+                navigator.geolocation.clearWatch(watchId);
+                watchId = null;
+            }
+            iniciar.disabled = false;
+            detener.disabled = true;
+        }
+
+        iniciar.addEventListener('click', function () {
+            if (!disponible() || watchId !== null) return;
+            iniciar.disabled = true;
+            detener.disabled = false;
+            coordenadas.textContent = '';
+            mensaje.textContent = 'Seguimiento iniciado. Esperando ubicación…';
+            watchId = navigator.geolocation.watchPosition(function (posicion) {
+                if (watchId === null) return;
+                try {
+                    mostrarEnMapa(posicion);
+                    mensaje.textContent = 'Seguimiento activo. Pulsa Detener para finalizarlo.';
+                } catch (error) {
+                    pararSeguimiento();
+                    mensaje.textContent = 'No se ha podido mostrar el mapa. Revisa la consola.';
+                    console.error(error);
+                }
+            }, function (error) {
+                if (watchId === null) return;
+                // En este ejemplo paramos ante un error para permitir un nuevo intento.
+                pararSeguimiento();
+                mostrarError(error);
+            }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+        });
+
+        detener.addEventListener('click', function () {
+            pararSeguimiento();
+            mensaje.textContent = 'Seguimiento detenido. Se conserva la última posición en el mapa.';
+        });
+        window.addEventListener('pagehide', function () {
+            if (watchId !== null) pararSeguimiento();
+        });
+
+    </script>
+</body>
 </html>

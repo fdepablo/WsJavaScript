@@ -1,56 +1,62 @@
-<!DOCTYPE HTML>
-<html>
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Geolocalizacion 1</title>
-  <!-- 
-  Mediante la localizacion podemos averiguar la situacion greografica del dispositivo movil
-  o de nuestro ordenador
-  Podemos tener varios proveedores de geolocalizacion en nuestro telefono u ordenador, 
-  por ejemplo podemos tener localizado el dispositivo mediante GPS o mediante el operador de red
-
-  La latitud es la distancia que existe entre un punto cualquiera y el Ecuador(Lineas horizontales)
-
-   - Se expresa en grados sexagesimales.
-   - Se mide de -90 a 90 grados.
-   - 0 grados corresponde al ecuador
-   - Los polos Norte y Sur tienen latitud 90 grados y -90 grados respectivamente.
-
-   La longitud es la distancia que existe entre un punto cualquiera y el Meridiano de Greenwich
-   (Inglaterra son las Lineas verticales)
-
-   - Se expresa en grados sexagesimales.
-   - Se mide de -180 a 180 grados.
-   - 0 grados corresponde al meridiano de Greenwich
-
- -->
-  <script>
-    function obtenerLocalizacion() {
-      //El objeto geolocalizacion nos permite saber la latitud y la longitud de nuestros
-      //usuarios
-      //Siempre que intentemos geolocalizar a nuestros usuarios, estos nos tienen que dar
-      //permiso, siermpre que usemos la funcion getCurrentPosition
-      //Por otro lado a dicha funcion le tenemos que pasar una funcion de callback
-      //es decir, cuando el usuario acepte el navegador creara un objeto con las coordenadas
-      //e invocara a la funcion que le hayamos pasado por parametro
-      navigator.geolocation.getCurrentPosition(coordenadas);
-    }
-
-    //position es un objeto creado por JS que contendrá la información sobre la localizacion
-    //del usuario en cuestion
-    function coordenadas(position) {
-      var latitud = position.coords.latitude;
-      var longitud = position.coords.longitude;
-      alert('Tus coordenadas son: (' + latitud + ',' + longitud + ')');
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocalización 1</title>
+    <style>
+        body { font: 1rem/1.5 Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        button, input { padding: .5rem; margin: .3rem; }
+        #mapa { height: 420px; width: 100%; background: #eee; }
+    </style>
 </head>
-
 <body>
-  <a href="javascript:obtenerLocalizacion();">Mostrar Posicion</a>
-</body>
+    <h1>Geolocalización 1</h1>
+    <p>Solicita una posición al pulsar el botón. Consulta la teoría en el README.</p>
+    <button type="button" id="obtener">Obtener posición</button>
+    <p id="mensaje" role="status"></p>
+    <p id="coordenadas"></p>
+    <script>
+        const mensaje = document.getElementById('mensaje');
+        const coordenadas = document.getElementById('coordenadas');
 
+        const obtener = document.getElementById('obtener');
+
+        function disponible() {
+            if (!window.isSecureContext) {
+                mensaje.textContent = 'Abre la página con HTTPS o en localhost.';
+                return false;
+            }
+            if (!navigator.geolocation) {
+                mensaje.textContent = 'La geolocalización no está disponible en este navegador.';
+                return false;
+            }
+            return true;
+        }
+
+        function mostrarPosicion(posicion) {
+            const latitud = posicion.coords.latitude;
+            const longitud = posicion.coords.longitude;
+            coordenadas.textContent = 'Latitud: ' + latitud + ' | Longitud: ' + longitud +
+                ' | Precisión estimada: ' + Math.round(posicion.coords.accuracy) + ' metros.';
+            mensaje.textContent = 'Posición recibida.';
+        }
+
+        obtener.addEventListener('click', function () {
+            if (!disponible()) return;
+
+            obtener.disabled = true;
+            coordenadas.textContent = '';
+            mensaje.textContent = 'Esperando permiso o ubicación…';
+            // El resultado llega más tarde a una de estas dos funciones.
+            navigator.geolocation.getCurrentPosition(function (posicion) {
+                obtener.disabled = false;
+                mostrarPosicion(posicion);
+            }, function (error) {
+                obtener.disabled = false;
+                mensaje.textContent = 'No se ha obtenido la posición. Revisa permisos y conexión.';
+            }, { timeout: 10000 });
+        });
+    </script>
+</body>
 </html>
