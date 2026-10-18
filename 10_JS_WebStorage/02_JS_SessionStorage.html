@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Storage</title>
+</head>
+<body>
+    <h1>Session Storage</h1>
+    <p>Guarda datos, recarga la página y pulsa Cargar. La teoría está en el README.</p>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre">
+    <label for="apellido">Apellidos:</label>
+    <input type="text" id="apellido">
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" min="0">
+    <hr>
+    <button type="button" id="guardar">Guardar</button>
+    <button type="button" id="cargar">Cargar</button>
+    <button type="button" id="incrementar">Incrementar contador</button>
+    <button type="button" id="eliminar">Eliminar contador</button>
+    <button type="button" id="reiniciar">Borrar datos de este ejemplo</button>
+    <p id="resultadoPersona"></p>
+    <p id="resultadoContador"></p>
+    <p id="mensaje" role="status"></p>
+
+    <script>
+        // Solo cambia el almacenamiento entre los ejemplos 01 y 02.
+        // El prefijo separa nuestras claves de las de otros ejemplos del mismo origen.
+        const prefijo = 'ejemplo11:persona:';
+        const nombre = document.getElementById('nombre');
+        const apellido = document.getElementById('apellido');
+        const edad = document.getElementById('edad');
+        const resultadoPersona = document.getElementById('resultadoPersona');
+        const resultadoContador = document.getElementById('resultadoContador');
+        const mensaje = document.getElementById('mensaje');
+
+        // Tanto acceder al almacenamiento como escribir en él puede fallar.
+        function ejecutar(accion) {
+            try {
+                const almacenamiento = window.sessionStorage;
+                accion(almacenamiento);
+            } catch (error) {
+                mensaje.textContent = 'No se ha podido acceder o guardar en el almacenamiento.';
+                console.error(error);
+            }
+        }
+
+        document.getElementById('guardar').addEventListener('click', function () {
+            ejecutar(function (almacenamiento) {
+                almacenamiento.setItem(prefijo + 'nombre', nombre.value);
+                almacenamiento.setItem(prefijo + 'apellido', apellido.value);
+                almacenamiento.setItem(prefijo + 'edad', edad.value);
+                mensaje.textContent = 'Información guardada.';
+            });
+        });
+
+        document.getElementById('cargar').addEventListener('click', function () {
+            ejecutar(function (almacenamiento) {
+                const nombreGuardado = almacenamiento.getItem(prefijo + 'nombre');
+                if (nombreGuardado === null) {
+                    resultadoPersona.textContent = '';
+                    mensaje.textContent = 'Todavía no hay una persona guardada.';
+                    return;
+                }
+                nombre.value = nombreGuardado;
+                apellido.value = almacenamiento.getItem(prefijo + 'apellido') ?? '';
+                edad.value = almacenamiento.getItem(prefijo + 'edad') ?? '';
+                // textContent muestra lo escrito como texto, sin interpretarlo como HTML.
+                resultadoPersona.textContent = 'Nombre: ' + nombre.value +
+                    ' | Apellidos: ' + apellido.value + ' | Edad: ' + edad.value;
+                mensaje.textContent = 'Información recuperada.';
+            });
+        });
+
+        document.getElementById('incrementar').addEventListener('click', function () {
+            ejecutar(function (almacenamiento) {
+                const guardado = Number(almacenamiento.getItem(prefijo + 'contador'));
+                const anterior = Number.isSafeInteger(guardado) && guardado >= 0 ? guardado : 0;
+                const contador = anterior + 1;
+                almacenamiento.setItem(prefijo + 'contador', contador);
+                resultadoContador.textContent = 'Has pulsado el botón ' + contador + ' veces.';
+                mensaje.textContent = '';
+            });
+        });
+
+        document.getElementById('eliminar').addEventListener('click', function () {
+            ejecutar(function (almacenamiento) {
+                almacenamiento.removeItem(prefijo + 'contador');
+                resultadoContador.textContent = '';
+                mensaje.textContent = 'Contador eliminado.';
+            });
+        });
+
+        document.getElementById('reiniciar').addEventListener('click', function () {
+            ejecutar(function (almacenamiento) {
+                // No usamos clear(): borraría también los datos de otros ejemplos.
+                for (const clave of ['nombre', 'apellido', 'edad', 'contador']) {
+                    almacenamiento.removeItem(prefijo + clave);
+                }
+                resultadoPersona.textContent = '';
+                resultadoContador.textContent = '';
+                mensaje.textContent = 'Datos de este ejemplo eliminados.';
+            });
+        });
+    </script>
+</body>
+</html>

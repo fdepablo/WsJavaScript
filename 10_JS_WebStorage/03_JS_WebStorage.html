@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos con Web Storage</title>
+    <style>
+        body { font: 1rem/1.5 Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: .5rem; text-align: left; border: 1px solid #ccc; overflow-wrap: anywhere; }
+        tbody tr:nth-child(even) { background: #eef3ff; }
+        label { display: inline-block; width: 100px; }
+        input, button { padding: .4rem; }
+        button { cursor: pointer; margin-right: .3rem; }
+    </style>
+</head>
+<body>
+    <h1>Contactos</h1>
+    <p>Ejemplo de añadir, editar y eliminar objetos guardados con JSON. Consulta el README.</p>
+    <form id="formulario">
+        <p><label for="nombre">Nombre:</label><input id="nombre" type="text" required></p>
+        <p><label for="apellido">Apellidos:</label><input id="apellido" type="text" required></p>
+        <p><label for="correo">Correo:</label><input id="correo" type="email" required></p>
+        <button type="submit" id="guardar">Guardar contacto</button>
+        <button type="button" id="descartar">Descartar cambios</button>
+    </form>
+    <p id="mensaje" role="status"></p>
+    <table>
+        <thead><tr><th scope="col">ID</th><th scope="col">Nombre</th><th scope="col">Apellidos</th><th scope="col">Correo</th><th scope="col">Acciones</th></tr></thead>
+        <tbody id="contactos"></tbody>
+    </table>
+    <script>
+        const formulario = document.getElementById('formulario');
+        const nombre = document.getElementById('nombre');
+        const apellido = document.getElementById('apellido');
+        const correo = document.getElementById('correo');
+        const tabla = document.getElementById('contactos');
+        const mensaje = document.getElementById('mensaje');
+        const guardar = document.getElementById('guardar');
+        let idEditando = null;
+        let siguienteId = 1;
+        let contactos = [];
+
+        function ejecutar(accion) {
+            try {
+                accion();
+            } catch (error) {
+                mensaje.textContent = 'No se ha podido completar la operación de almacenamiento.';
+                console.error(error);
+            }
+        }
+
+        function limpiarFormulario() {
+            formulario.reset();
+            idEditando = null;
+            guardar.textContent = 'Guardar contacto';
+        }
+
+        function cargarContactos() {
+            const almacenamiento = window.localStorage;
+            const lista = [];
+            let mayorId = 0;
+            let invalidos = 0;
+            for (let i = 0; i < almacenamiento.length; i++) {
+                const clave = almacenamiento.key(i);
+                // Leemos únicamente nuestras claves. Contacts:index no es un contacto.
+                if (!/^Contacts:\d+$/.test(clave)) continue;
+                const id = Number(clave.slice('Contacts:'.length));
+                if (!Number.isSafeInteger(id) || id < 1 || id >= Number.MAX_SAFE_INTEGER) {
+                    invalidos++;
+                    continue;
+                }
+                mayorId = Math.max(mayorId, id);
+                let contacto;
+                try {
+                    contacto = JSON.parse(almacenamiento.getItem(clave));
+                } catch (error) {
+                    invalidos++;
+                    continue; // Una entrada dañada no impide leer las demás.
+                }
+                if (!contacto || Number(contacto.id) !== id ||
+                    typeof contacto.first_name !== 'string' ||
+                    typeof contacto.last_name !== 'string' || typeof contacto.email !== 'string') {
+                    invalidos++;
+                    continue;
+                }
+                // Se conservan las claves y campos del ejemplo anterior.
+                contacto.id = id;
+                lista.push(contacto);
+            }
+            contactos = lista.sort(function (a, b) { return a.id - b.id; });
+            siguienteId = mayorId + 1;
+            mostrarContactos();
+            return invalidos;
+        }
+
+        function mostrarContactos() {
+            tabla.replaceChildren();
+            for (const contacto of contactos) {
+                const fila = document.createElement('tr');
+                for (const valor of [contacto.id, contacto.first_name, contacto.last_name, contacto.email]) {
+                    const celda = document.createElement('td');
+                    celda.textContent = valor;
+                    fila.appendChild(celda);
+                }
+                const acciones = document.createElement('td');
+                for (const accion of ['editar', 'eliminar']) {
+                    const boton = document.createElement('button');
+                    boton.type = 'button';
+                    boton.textContent = accion === 'editar' ? 'Editar' : 'Eliminar';
+                    boton.addEventListener('click', function () {
+                        if (accion === 'editar') {
+                            idEditando = contacto.id;
+                            nombre.value = contacto.first_name;
+                            apellido.value = contacto.last_name;
+                            correo.value = contacto.email;
+                            guardar.textContent = 'Guardar cambios';
+                            mensaje.textContent = 'Editando el contacto ' + contacto.id + '.';
+                            nombre.focus();
+                        } else if (confirm('¿Eliminar a ' + contacto.first_name + '?')) {
+                            ejecutar(function () {
+                                window.localStorage.removeItem('Contacts:' + contacto.id);
+                                if (idEditando === contacto.id) limpiarFormulario();
+                                const invalidos = cargarContactos();
+                                mensaje.textContent = 'Contacto eliminado.' + avisoInvalidos(invalidos);
+                            });
+                        }
+                    });
+                    acciones.appendChild(boton);
+                }
+                fila.appendChild(acciones);
+                tabla.appendChild(fila);
+            }
+        }
+
+        function avisoInvalidos(cantidad) {
+            return cantidad ? ' Hay ' + cantidad + ' entradas dañadas que no se muestran; no se han borrado.' : '';
+        }
+
+        formulario.addEventListener('submit', function (evento) {
+            evento.preventDefault(); // Evitamos el envío antes de realizar cualquier operación.
+            if (!nombre.value.trim() || !apellido.value.trim()) {
+                mensaje.textContent = 'El nombre y los apellidos no pueden contener solo espacios.';
+                return;
+            }
+            ejecutar(function () {
+                // Volvemos a leer antes de guardar para recoger cambios recientes de otra pestaña.
+                cargarContactos();
+                if (idEditando !== null && !contactos.some(function (c) { return c.id === idEditando; })) {
+                    mensaje.textContent = 'Este contacto ya no está disponible. Descarta los cambios y revisa la lista.';
+                    return;
+                }
+                const contacto = {
+                    id: idEditando === null ? siguienteId : idEditando,
+                    first_name: nombre.value.trim(),
+                    last_name: apellido.value.trim(),
+                    email: correo.value.trim()
+                };
+                // Storage guarda texto: convertimos el objeto a JSON.
+                window.localStorage.setItem('Contacts:' + contacto.id, JSON.stringify(contacto));
+                limpiarFormulario();
+                const invalidos = cargarContactos();
+                mensaje.textContent = 'Contacto guardado.' + avisoInvalidos(invalidos);
+            });
+        });
+
+        document.getElementById('descartar').addEventListener('click', function () {
+            limpiarFormulario();
+            mensaje.textContent = 'Cambios descartados.';
+        });
+
+        ejecutar(function () {
+            const invalidos = cargarContactos();
+            mensaje.textContent = avisoInvalidos(invalidos).trim();
+        });
+    </script>
+</body>
+</html>
