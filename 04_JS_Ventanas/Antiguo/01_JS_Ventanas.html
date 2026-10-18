@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+    // Las ventanas suelen ser objetos que sobresalen del navegador. Suelen ser creados por una páginas web
+
+    // Tipos de ventanas
+    //-------------------
+    //--Pop-up o ventana emergente
+    // Este tipo de ventanas se abren haciendo clic en la interfaz o interactuando con ella. 
+    // Pueden aparecer al cargar la página, después de un periodo de tiempo o cuando se sitúa el puntero en un punto 
+    // determinado.
+    
+    //--Ventana Modal
+    // Son cuadros que aparecen sobre la página, bloqueando todas las funciones para concentrar el foco en una acción 
+    // particular que, habitualmente, conlleva que el usuario deba realizar una acción. 
+    // Las ventanas modales se activan cuando el usuario hace clic en un llamado o presiona un botón, previniendo a los 
+    // usuarios de errores y facilitando acciones, al permitir realizarlas sin salir de la página.
+    
+    //--Tooltip
+    // Son pequeños recuadros de información que aparecen al posicionar el ratón sobre un elemento. 
+    // Son utilizados de forma general para ofrecer información adicional sobre el elemento seleccionado o para mostrar 
+    // al usuario pequeños mensajes de ayuda. También se les llama hovercard.
+
+    //--Lightbox
+    // Son un tipo de ventanas modales con la particularidad de que muestran poca información y oscurecen el fondo detrás, 
+    // sin ningún tipo de acción o enlaces. 
+    // Se pueden usar para mostrar imágenes en tamaño completo, navegar una galería o ver un vídeo, sin necesidad de 
+    // cargar una página adicional.
+    // Ej: https://lokeshdhakar.com/projects/lightbox2/
+
+    // Aparte de las ventanas tambien tenemos pestañas en los navegadores
+    // Ejemplo sobre pestañas
+    function abrirPestaña() { 
+        // Usaremos la funcion "window.open()" que tiene tres parametros importantes
+
+        // Primer parametro -> la url de la ventana que queremos abrir, 
+        // Segundo argumento -> la descripción de la ventana
+        // Tercer Parametro una serie de propiedades que nos ayudan a definir cómo queremos que sea la ventana: 
+        //      Ej: menubar=yes,resizable=yes,scrollbars=yes,width=600, height=400
+        // Mas información: https://www.w3schools.com/jsref/met_win_open.asp
+
+        // OJO! Si no le damos tamaño a la ventana nos abrira una PESTAÑA
+        pestania = window.open("","Esto seria una descripcion","");
+        //Podeos guardar la referencia para más adelante cerrar la pestaña
+
+        //con esta funcion hacemos focus en nuestra ventana
+        window.focus();
+        //OJO, no funciona si abrimos una pestaña        
+    }
+
+    function cerrarPestaña(){
+        pestania.close();//es variable global
+    }
+
+    //Si le damos valores de tamaño, se abrirá una ventana en lugar de una pestaña
+    function abrirVentana() {
+        var myWindow = window.open("", "", "width=200,height=100");
+    }   
+
+    //podemos rellenar con informacion la ventana
+    function abrirVentanaTexto() {
+        var myWindow = window.open("", "MsgWindow", "width=200,height=100");
+        myWindow.document.write("<p style='color:red'>Esto es un texto muy bonito!</p>");
+        //seguir haciendo codigo para hacer elementos en la ventana
+    }
+
+    function abrirVentanaParametros() {
+        window.open("https://www.w3schools.com", "", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
+    }
+
+    // En JS tenemos un tipo especial que se llama "ventana prompt"
+    // Es una ventana con una caja de texto que nos pide un texto a introducir, con un boton de aceptar y otro de cancelar
+    function abrirVentanaPrompt(){
+        //p1 -> Texto a mostrar
+        //p2 -> Valor por defecto
+        //return -> El valor introducido en la caja
+        var persona = prompt("Por favor introduce tu nombre", "Harry Potter");
+
+        //Si el usuario cancela, la variable sera nula
+        if (persona != null) {//si no cancela
+            nombre.innerHTML = "Hola " + persona + "! ¿Que hay de nuevo viejo? \u{1F604}";
+        }else{//si cancela
+            nombre.innerHTML = "No te quieres presentar :( :( \u{1F62D} 😭"//dos maneras de poner el emoticono 😭 :)
+            // Mas información sobre caracteres unicode en js y emoticonos
+            //https://unicode.org/emoji/charts/full-emoji-list.html
+            //https://flaviocopes.com/javascript-unicode/
+            //https://vihan.org/blog/dealing-with-surrogates-in-javascript/
+        }
+    }
+
+</script>
+</head>
+<body>
+    <h3 onclick="abrirPestaña()" title="Esto seria un tooltip :)">Click aquí para crear pestaña</h3>
+    <h3 onclick="cerrarPestaña()">Click aquí para cerrar la pestaña</h3>
+    <h3 onclick="abrirVentana()">Click aquí para abrir una ventana</h3>
+    <h3 onclick="abrirVentanaTexto()">Click aquí para abrir una ventana con contenido</h3>
+    <h3 onclick="abrirVentanaParametros()">Click aquí para abrir una ventana a w3Schools</h3>
+    <h3 onclick="abrirVentanaPrompt()">Click aquí para abrir un prompt</h3>
+
+    <h1 id="nombre"></h1>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

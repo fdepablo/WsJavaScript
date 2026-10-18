@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar una acción con una ventana modal</title>
+    <style>
+        dialog { max-width: 400px; padding: 20px; }
+        dialog::backdrop { background: rgb(0 0 0 / 50%); } /* Oscurece el fondo del diálogo. */
+    </style>
+    <script>
+        function mostrarVentana() {
+            const ventana = document.getElementById('confirmacion');
+            // Abre el diálogo dentro de esta página y bloquea la interacción con el fondo.
+            ventana.showModal();
+        }
+
+        function cancelar() {
+            const ventana = document.getElementById('confirmacion');
+            // Cerrar no elimina la película ni realiza otra acción.
+            ventana.close();
+        }
+
+        function eliminarPelicula() {
+            const ventana = document.getElementById('confirmacion');
+            const pelicula = document.getElementById('pelicula');
+            const botonEliminar = document.getElementById('eliminar');
+            const mensaje = document.getElementById('mensaje');
+
+            ventana.close();
+            pelicula.remove(); // Solo eliminamos el elemento del DOM; no hay servidor ni base de datos.
+            botonEliminar.disabled = true;
+            mensaje.textContent = 'Película eliminada de esta página. Recarga para recuperar el ejemplo.';
+            mensaje.focus(); // El botón de apertura queda desactivado; dirigimos el foco al resultado.
+        }
+    </script>
+</head>
+<body>
+    <h1>Confirmar una acción con una ventana modal</h1>
+    <div id="pelicula">
+        <h2>La vida de Brian</h2>
+        <p>Director: Terry Jones. Género: Comedia.</p>
+    </div>
+    <button type="button" id="eliminar" onclick="mostrarVentana()">Eliminar película</button>
+    
+    <!-- 
+        tabindex=-1 para que el elemento no sea alcanzable con el teclado al pulsar tab 
+        Pero sí podemos situar el foco en él con mensaje.focus() tras eliminar la película.    
+    -->
+    <p id="mensaje" role="status" tabindex="-1"></p>
+
+    <!-- Sin open, el diálogo permanece oculto hasta llamar a showModal(). -->
+    <dialog id="confirmacion" aria-labelledby="tituloConfirmacion" aria-describedby="descripcionConfirmacion">
+        <h2 id="tituloConfirmacion">¿Eliminar la película?</h2>
+        <p id="descripcionConfirmacion">Se quitará La vida de Brian de esta página.</p>
+        <!-- autofocus sitúa el foco inicialmente en la opción que no elimina nada. -->
+        <button type="button" onclick="cancelar()" autofocus>Cancelar</button>
+        <button type="button" onclick="eliminarPelicula()">Eliminar</button>
+    </dialog>
+</body>
+</html>
