@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar una función como argumento</title>
+</head>
+<body>
+    <h1>Pasar una función como argumento</h1>
+    <p>Un callback es una función que entregamos a otra para que la ejecute. No tiene por qué ser asíncrono.</p>
+    <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
+    <h2>Practica</h2>
+    <p>Crea una función cuadrado y pásala a aplicarOperacion. Después repite la llamada escribiendo la flecha directamente. Con 5, ambas deben devolver 25.</p>
+    <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
+    <script>
+        const doble = numero => numero * 2;
+        const triple = numero => numero * 3;
+        
+        function aplicarOperacion(numero, operacion) {
+            // operacion contiene una función. Aquí la ejecutamos.
+            return operacion(numero);
+        }
+        
+        console.log(aplicarOperacion(4, doble));  // 8
+        console.log(aplicarOperacion(4, triple)); // 12
+        
+        // Podemos escribir la función directamente en el argumento.
+        console.log(aplicarOperacion(4, numero => numero + 10)); // 14
+        
+        // doble es la función. doble(4) es el resultado de ejecutarla.
+        console.log(typeof doble); // 'function'
+        console.log(doble(4));     // 8
+        
+        // No pases doble(4) como operación: sería el número 8, no una función.
+        // En este ejemplo el callback se ejecuta inmediatamente dentro de aplicarOperacion.
+    </script>
+</body>
+</html>

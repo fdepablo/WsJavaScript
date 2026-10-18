@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuándo usar una flecha y cuándo no</title>
+</head>
+<body>
+    <h1>Cuándo usar una flecha y cuándo no</h1>
+    <p>Ampliación opcional. Las flechas no sustituyen a todas las funciones tradicionales.</p>
+    <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
+    <h2>Practica</h2>
+    <p>Explica por qué saludar es un método tradicional y por qué la función devuelta por prepararSaludo sí es una flecha.</p>
+    <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
+    <script>
+        const persona = {
+            nombre: 'Ana',
+            // Un método tradicional recibe this según cómo se invoca.
+            saludar() {
+                return 'Hola, soy ' + this.nombre;
+            },
+            prepararSaludo() {
+                // La flecha conserva el this de prepararSaludo.
+                return () => 'Hola, soy ' + this.nombre;
+            }
+        };
+        console.log(persona.saludar()); // 'Hola, soy Ana'
+        const saludoPendiente = persona.prepararSaludo();
+        console.log(saludoPendiente()); // 'Hola, soy Ana'
+        
+        // No escribimos saludar: () => this.nombre esperando que this sea persona.
+        // La flecha toma this del contexto exterior, no del objeto que la contiene.
+        
+        // Las flechas no tienen arguments propio. Podemos usar parámetros rest.
+        const sumarVarios = (...numeros) => {
+            let total = 0;
+            for (const numero of numeros) total += numero;
+            return total;
+        };
+        console.log(sumarVarios(1, 2, 3)); // 6
+        
+        // Una función tradicional declarada puede llamarse antes de su declaración.
+        // Una flecha guardada en const debe usarse después de inicializar esa variable.
+        // Las flechas tampoco son constructoras: no se utilizan con new.
+    </script>
+</body>
+</html>

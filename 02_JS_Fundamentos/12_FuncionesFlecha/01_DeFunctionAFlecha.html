@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De function a una flecha</title>
+</head>
+<body>
+    <h1>De function a una flecha</h1>
+    <p>Una misma suma escrita de tres formas. Cambia la sintaxis, pero conservamos los parámetros y el resultado.</p>
+    <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
+    <h2>Practica</h2>
+    <p>Escribe una función tradicional que reste dos números y después su versión flecha. Comprueba que ambas devuelvan 6 al recibir 10 y 4.</p>
+    <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
+    <script>
+        // 1. Declaración de función: ya la conocemos.
+        function sumar(a, b) {
+            return a + b;
+        }
+        
+        // 2. Una función también puede guardarse en una variable.
+        const sumarConVariable = function (a, b) {
+            return a + b;
+        };
+        
+        // 3. Sustituimos function por una flecha después de los parámetros.
+        const sumarConFlecha = (a, b) => {
+            return a + b;
+        };
+        
+        console.log(sumar(4, 3));             // 7
+        console.log(sumarConVariable(4, 3));  // 7
+        console.log(sumarConFlecha(4, 3));    // 7
+        
+        // Todas se llaman con paréntesis y argumentos.
+        // const impide reasignar la variable, no ejecutar la función varias veces.
+        console.log(sumarConFlecha(10, 2));   // 12
+    </script>
+</body>
+</html>

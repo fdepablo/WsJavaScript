@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear una lista con map</title>
+</head>
+<body>
+    <h1>Crear una lista con map</h1>
+    <p>map transforma cada elemento y devuelve un nuevo array con los resultados.</p>
+    <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
+    <h2>Practica</h2>
+    <p>Usa map para obtener las longitudes de ["Ana", "Luis", "Eva"]. El resultado debe ser [3, 4, 3].</p>
+    <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
+    <script>
+        const numeros = [1, 2, 3];
+        
+        // Con un bucle construimos el resultado a mano.
+        const doblesConBucle = [];
+        for (const numero of numeros) {
+            doblesConBucle.push(numero * 2);
+        }
+        
+        // Con map indicamos qué resultado queremos para cada elemento.
+        const dobles = numeros.map(numero => numero * 2);
+        console.log(doblesConBucle); // [2, 4, 6]
+        console.log(dobles);         // [2, 4, 6]
+        console.log(numeros);        // [1, 2, 3]
+        
+        // Con llaves, recuerda devolver el resultado.
+        const triples = numeros.map(numero => {
+            return numero * 3;
+        });
+        console.log(triples); // [3, 6, 9]
+        
+        // Aquí no modificamos los elementos originales.
+        // map no es una copia profunda: un callback podría modificar objetos recibidos.
+    </script>
+</body>
+</html>

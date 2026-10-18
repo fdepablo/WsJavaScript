@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devolver un objeto con una función flecha</title>
+</head>
+<body>
+    <h1>Devolver un objeto</h1>
+    <p>Hasta ahora hemos devuelto números o textos. También podemos devolver un objeto con varias propiedades: en este caso, nombre y edad.</p>
+
+    <h2>1. Con llaves y return</h2>
+    <pre><code>const crearPersona = (nombre, edad) => {
+    return {
+        nombre: nombre,
+        edad: edad
+    };
+};</code></pre>
+    <p>Las llaves exteriores contienen las instrucciones. Las interiores crean el objeto que devuelve return.</p>
+    <pre id="resultadoLargo"></pre>
+
+    <h2>2. Sin return y con paréntesis</h2>
+    <pre><code>const crearPersonaCorta = (nombre, edad) => ({ nombre: nombre, edad: edad });</code></pre>
+    <p>Los paréntesis permiten devolver directamente el objeto. Sin ellos, las llaves se interpretarían como un bloque de instrucciones.</p>
+    <pre id="resultadoCorto"></pre>
+
+    <h2>3. Acceder a las propiedades</h2>
+    <p>En nombre: nombre, la izquierda es la propiedad y la derecha es el valor del parámetro recibido. Lo mismo sucede con edad: edad.</p>
+    <p id="propiedades"></p>
+    <p>Aquí this no representa el objeto que devolvemos. Usamos propiedad: valor.</p>
+
+    <h2>Practica</h2>
+    <p>Añade un parámetro ciudad y devuelve también esa propiedad en las dos versiones. Crea otra persona con datos diferentes y muestra su ciudad. Lee el código en el editor y comprueba también la consola con F12.</p>
+    <p><a href="README.md">Volver al recorrido de funciones flecha</a></p>
+
+    <script>
+        // Primera versión: return devuelve el objeto.
+        const crearPersona = (nombre, edad) => {
+            return {
+                nombre: nombre,
+                edad: edad
+            };
+        };
+
+        // Segunda versión: una expresión entre paréntesis, sin return.
+        const crearPersonaCorta = (nombre, edad) => ({ nombre: nombre, edad: edad });
+
+        const persona = crearPersona('Ana', 25);
+        const personaCorta = crearPersonaCorta('Ana', 25);
+
+        // JSON.stringify solo se utiliza para visualizar el objeto como texto.
+        // null, 2 hace que las propiedades se presenten en líneas con sangría.
+        document.getElementById('resultadoLargo').textContent = JSON.stringify(persona, null, 2);
+        document.getElementById('resultadoCorto').textContent = JSON.stringify(personaCorta, null, 2);
+        document.getElementById('propiedades').textContent =
+            'persona.nombre: ' + persona.nombre + ' | persona.edad: ' + persona.edad;
+
+        console.log(persona);      // { nombre: 'Ana', edad: 25 }
+        console.log(personaCorta); // { nombre: 'Ana', edad: 25 }
+        // Son dos objetos distintos con los mismos datos.
+        console.log(persona === personaCorta); // false
+    </script>
+</body>
+</html>

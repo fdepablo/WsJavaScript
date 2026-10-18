@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar elementos con filter</title>
+</head>
+<body>
+    <h1>Seleccionar elementos con filter</h1>
+    <p>filter crea una lista con los elementos para los que la función devuelve true.</p>
+    <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
+    <h2>Practica</h2>
+    <p>Filtra [5, 12, 8, 20] para quedarte con los valores mayores que 10. Debes obtener [12, 20].</p>
+    <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
+    <script>
+        const edades = [12, 18, 25, 16, 30];
+        
+        // Con un bucle: comprobamos y añadimos los que cumplen la condición.
+        const mayoresConBucle = [];
+        for (const edad of edades) {
+            if (edad >= 18) {
+                mayoresConBucle.push(edad);
+            }
+        }
+        
+        // Con filter: escribimos esa condición en el callback.
+        const mayores = edades.filter(edad => edad >= 18);
+        console.log(mayoresConBucle); // [18, 25, 30]
+        console.log(mayores);         // [18, 25, 30]
+        console.log(edades);          // [12, 18, 25, 16, 30]
+        
+        // filter selecciona; map transforma; forEach realiza acciones.
+        // No hace falta encadenarlos: guarda cada paso en una variable.
+    </script>
+</body>
+</html>

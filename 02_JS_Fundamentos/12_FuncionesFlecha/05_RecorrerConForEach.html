@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorrer una lista con forEach</title>
+</head>
+<body>
+    <h1>Recorrer una lista con forEach</h1>
+    <p>Compara un recorrido conocido con otro que recibe una función.</p>
+    <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
+    <h2>Practica</h2>
+    <p>Recorre una lista de tres precios con forEach y muestra cada precio con el texto euros. No cambies la lista original.</p>
+    <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
+    <script>
+        const nombres = ['Ana', 'Luis', 'Eva'];
+        
+        // Primero: una forma que ya conocemos.
+        for (const nombre of nombres) {
+            console.log('Hola, ' + nombre);
+        }
+        
+        // forEach ejecuta esta función para cada elemento de la lista.
+        nombres.forEach(nombre => {
+            console.log('Hola, ' + nombre);
+        });
+        
+        // El parámetro recibe cada nombre, en orden. No es el array completo.
+        // También podemos recibir el índice como segundo parámetro.
+        nombres.forEach((nombre, indice) => {
+            console.log(indice + ': ' + nombre);
+        });
+        
+        // forEach sirve para realizar una acción por elemento.
+        // No crea un array con los resultados ni permite break como un bucle.
+    </script>
+</body>
+</html>
