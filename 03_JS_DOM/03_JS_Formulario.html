@@ -14,7 +14,6 @@ function prepararEnvio(){
     const seleccionado = document.querySelector('input[name="servidor"]:checked');
     // action indica dónde se enviarán los datos. Son rutas de ejemplo del mismo servidor.
     formulario.action = seleccionado.value;
-    return true;
 }
 
 // Preparamos una vista previa de los parámetros a partir de los controles del formulario.
@@ -53,7 +52,7 @@ function verParametros(){
     <h1>Leer y utilizar los datos de un formulario</h1>
     <h2>Elegir el destino con radios y JavaScript</h2>
 
-    <form name="formulario" id="formulario" action="/recursoServidorA" method="get" onsubmit="return prepararEnvio()">
+    <form name="formulario" id="formulario" action="/recursoServidorA" method="get" onsubmit="prepararEnvio()">
         
         <!-- Prepara y muestra los parámetros en consola, sin enviar el formulario. -->
         <input type="button" value="Ver parámetros" onclick="verParametros()"/>

@@ -2,11 +2,11 @@
 
 El **DOM** (Document Object Model) es la representación de una página como un árbol de objetos. Cada elemento HTML se representa mediante un objeto que podemos utilizar desde JavaScript para cambiar su contenido, sus atributos o su estilo, o para añadir y eliminar elementos.
 
-Este README reúne la teoría por ejemplos. Primero aprenderemos a localizar elementos y consultar sus propiedades; después, a crear y eliminar elementos de la página.
+Este README reúne la teoría con ejemplos prácticos.
 
 ## Ejemplo 01 Acceder a los elementos del DOM
 
-Archivo: [01_JS_Acceso_DOM.html](01_JS_Acceso_DOM.html).
+Archivo: [01_JS_Acceso.html](01_JS_Acceso.html).
 
 ### Qué vamos a ver
 
@@ -19,7 +19,7 @@ Archivo: [01_JS_Acceso_DOM.html](01_JS_Acceso_DOM.html).
 
 Cuando el navegador interpreta el HTML, crea una estructura de nodos relacionados entre sí. Un nodo puede contener otros nodos: por ejemplo, el body contiene párrafos y cada párrafo puede contener texto.
 
-Por ejemplo, una página con un título, un enlace y un párrafo se puede representar así:
+Por ejemplo, una página con un título, un enlace y un párrafo se puede representar así en el árbol DOM:
 
 ```mermaid
 flowchart TD
@@ -36,7 +36,7 @@ flowchart TD
     parrafo --> textoParrafo["Texto: Mi primer párrafo"]
 ```
 
-Cada flecha conecta un nodo padre con uno de sus hijos. Un elemento como `p` contiene un nodo de texto; el elemento y su texto son nodos distintos. Para simplificar el dibujo, omitimos otros nodos, como los espacios y saltos de línea del HTML.
+Cada flecha conecta un nodo padre con uno de sus hijos. Un nodo puede tener varios hijos, pero solo un padre. Un elemento como `p` contiene un nodo de texto; el elemento y su texto son nodos distintos.
 
 El objeto `document` es la entrada que utilizamos para consultar el documento desde JavaScript. No tenemos que crear los elementos que ya están escritos en el HTML: el navegador los representa como objetos y nosotros podemos obtener sus referencias.
 
@@ -67,7 +67,7 @@ Las colecciones se pueden consultar por posición o recorrer con un bucle. Aunqu
 | `querySelector()` | Selector CSS. | El primer elemento que coincide, o null. |
 | `querySelectorAll()` | Selector CSS. | Una colección NodeList con todos los coincidentes. |
 
-Las colecciones se parecen a los arrays porque tienen posiciones y una propiedad `length`, pero **no son arrays**. Para empezar, basta con saber acceder a un elemento y recorrerlas con un bucle.
+Las colecciones tienen posiciones y una propiedad `length`. Para sacar sus elementos, basta con recorrerlas con un bucle.
 
 #### Buscar por id
 
@@ -77,7 +77,7 @@ El id identifica un elemento y debe ser único en el documento:
 const cabecera = document.getElementById('cabecera');
 ~~~
 
-En este método escribimos el identificador **sin #**. Si no existe, obtenemos `null`; antes de acceder a sus propiedades debemos asegurarnos de haber encontrado el elemento.
+En este método escribimos el identificador, si no existe, obtenemos `null`.
 
 #### Buscar por etiqueta
 
@@ -137,18 +137,17 @@ console.log(parrafosDeClase[0].style.color); // 'red' en este HTML.
 
 ### 3. Recorrer una colección
 
-Con un `for` clásico podemos consultar cada elemento por su posición:
+Con `for...of` podemos recorrer la colección y recibir directamente cada elemento, sin utilizar un índice:
 
 ~~~js
 const parrafos = document.getElementsByTagName('p');
 
-for (let i = 0; i < parrafos.length; i++) {
-    const parrafo = parrafos[i];
-    console.log(parrafo.id);
+for (const parrafo of parrafos) {
+    // Podríamos consultar o modificar cada párrafo.
 }
 ~~~
 
-`i` es el índice y cambia en cada vuelta. `parrafos[i]` es el elemento de esa posición. Algunos párrafos del ejemplo no tienen id; en esos casos se mostrará una cadena vacía.
+En cada vuelta, `parrafo` contiene uno de los elementos de la colección. Por ahora solo mostramos la estructura del recorrido, sin modificar los párrafos. En el ejemplo 02 aprenderemos a establecer su texto con `textContent`.
 
 ### 4. Por qué utilizamos const
 
@@ -156,10 +155,10 @@ Normalmente guardamos las referencias del DOM con `const` porque no necesitamos 
 
 ~~~js
 const parrafo = document.getElementById('parrafo1');
-parrafo.textContent = 'Texto nuevo'; // Permitido: cambia el contenido del elemento.
+parrafo.style.color = 'red'; // Permitido: cambia una propiedad del elemento.
 ~~~
 
-Usamos `let` cuando la variable debe cambiar de valor, como el contador del bucle anterior.
+En el `for...of`, cada vuelta tiene su propia constante `parrafo`. Usamos `let` cuando necesitamos reasignar una variable.
 
 ### 5. Consultar propiedades de un elemento
 
@@ -178,7 +177,7 @@ console.log(enlace.href);  // Dirección del enlace, expresada como URL absoluta
 
 Los resultados de color y grosor corresponden a los estilos escritos en el atributo `style` de ese párrafo. En JavaScript, `font-weight` se escribe `fontWeight` al acceder a esta propiedad.
 
-**`.style` consulta los estilos en línea**, no todos los estilos que se aplican desde CSS. Por ejemplo, el párrafo de clase principal tiene su color definido en una regla CSS: su `style.color` estará vacío aunque se vea coloreado. Para consultar el estilo calculado existe `getComputedStyle()`, que podemos estudiar más adelante.
+**`.style` consulta los estilos en línea**, no todos los estilos que se aplican desde CSS. Por ejemplo, el párrafo de clase principal tiene su color definido en una regla CSS: su `style.color` estará vacío aunque se vea coloreado. 
 
 ### 6. Acceso automático por id
 
@@ -189,7 +188,7 @@ console.log(enlace.title);
 console.log(enlace.href);
 ~~~
 
-Es un comportamiento del navegador que expone elementos mediante propiedades de `window`, no una novedad de JavaScript ni una declaración de variable. Es cómodo en ejemplos pequeños, pero puede haber conflictos de nombres. Para código más grande es preferible guardar una referencia explícita con `getElementById()`.
+Es un comportamiento del navegador que expone elementos mediante propiedades de `window`. Es cómodo en ejemplos pequeños, pero puede haber conflictos de nombres. Para código grandes puede ser preferible guardar una referencia explícita con `getElementById()`.
 
 ### 7. Cuándo ejecutar el código
 
@@ -210,14 +209,16 @@ Más adelante veremos otras formas de organizar la carga, como `DOMContentLoaded
 3. Usa la pestaña Elementos o Inspector para relacionar el HTML con su representación en el DOM.
 4. Compara los resultados de seleccionar un elemento y de obtener una colección, aunque esta contenga solo uno.
 
-Los comentarios de cada HTML aclaran las instrucciones concretas. La copia original de los cuatro ejemplos se conserva en la carpeta `Antiguo`.
+Los comentarios de cada HTML aclaran las instrucciones concretas.
+
 ## Ejemplo 02 Crear y eliminar elementos del DOM
 
-Archivo: [02_JS_Alterar_DOM.html](02_JS_Alterar_DOM.html).
+Archivo: [02_JS_Alterar.html](02_JS_Alterar.html).
 
 ### Qué vamos a ver
 
-- Crear un elemento con `createElement()` y asignarle un id.
+- Crear un elemento con `createElement()`.
+- Establecer atributos con `.` y con `setAttribute()`.
 - Establecer su texto con `textContent`.
 - Añadirlo a la página mediante `appendChild()`.
 - Eliminar un elemento con `remove()`.
@@ -232,7 +233,7 @@ const parrafo = document.createElement('p');
 parrafo.id = 'parrafo1';
 ~~~
 
-Ya tenemos un objeto que representa un párrafo y podemos modificarlo, pero **todavía no aparece en la página**. Asignar su id tampoco lo inserta: necesitamos añadirlo al documento.
+Ya tenemos un objeto que representa un párrafo y podemos modificarlo, pero **todavía no aparece en la página**. Asignar el atributo id tampoco lo inserta: necesitamos añadirlo al documento.
 
 Para establecer este atributo podemos asignar la propiedad `id`, como arriba, o utilizar el método `setAttribute()`:
 
@@ -241,12 +242,12 @@ Para establecer este atributo podemos asignar la propiedad `id`, como arriba, o 
 parrafo.setAttribute('id', 'parrafo1');
 ~~~
 
-El primer argumento es el nombre del atributo y el segundo es su valor. Para `id`, ambas formas producen el mismo resultado. En el HTML conservamos esta alternativa comentada; no necesitamos ejecutar las dos.
+El primer argumento es el nombre del atributo y el segundo es su valor.
 
 ### 2. Darle contenido con textContent
 
 ~~~js
-parrafo.textContent = 'Hola Mundo!';
+parrafo.textContent = 'Párrafo creado alterando el árbol DOM';
 ~~~
 
 `textContent` establece el texto del elemento. En un elemento que ya tenga contenido, lo sustituye. El contenido se trata como texto: si escribimos etiquetas como `<strong>Hola</strong>`, se mostrarán esos caracteres, sin interpretarlos como HTML.
@@ -254,17 +255,17 @@ parrafo.textContent = 'Hola Mundo!';
 El párrafo preparado equivale a:
 
 ~~~html
-<p id="parrafo1">Hola Mundo!</p>
+<p id="parrafo1">Párrafo creado alterando el árbol DOM</p>
 ~~~
 
 En el HTML también se conserva una alternativa comentada:
 
 ~~~js
-const contenido = document.createTextNode('Hola Mundo!');
+const contenido = document.createTextNode('Párrafo creado alterando el árbol DOM');
 parrafo.appendChild(contenido);
 ~~~
 
-Aquí creamos por separado un nodo de texto y lo añadimos como hijo del párrafo. Para este caso sencillo, utilizamos `textContent` como forma principal. Estas dos opciones son alternativas: no hay que ejecutarlas juntas para añadir el mismo texto.
+Aquí creamos por separado un nodo de texto y lo añadimos como hijo del párrafo. Para este caso sencillo, utilizamos `textContent` como forma principal. Estas dos opciones son alternativas.
 
 ### 3. Añadir el elemento a la página
 
@@ -279,7 +280,7 @@ La secuencia completa es **crear, preparar y añadir**:
 ~~~js
 const parrafo = document.createElement('p');
 parrafo.id = 'parrafo1';
-parrafo.textContent = 'Hola Mundo!';
+parrafo.textContent = 'Párrafo creado alterando el árbol DOM';
 document.body.appendChild(parrafo);
 ~~~
 
@@ -321,7 +322,7 @@ Esto evita repetir la operación: el enlace ya se ha eliminado y tampoco queremo
 
 ### Cómo probar el ejemplo 02
 
-1. Abre la página y comprueba que se ve el enlace y todavía no aparece «Hola Mundo!».
+1. Abre la página y comprueba que se ve el enlace y todavía no aparece «Párrafo creado alterando el árbol DOM».
 2. Pulsa **Modificar página**.
 3. Comprueba que aparece el nuevo párrafo, desaparece el enlace y el botón queda desactivado.
 4. Abre el Inspector para localizar el párrafo añadido en el árbol DOM.
@@ -329,7 +330,7 @@ Esto evita repetir la operación: el enlace ya se ha eliminado y tampoco queremo
 
 ## Ejemplo 03 Leer y utilizar los datos de un formulario
 
-Archivo: [03_JS_Formulario_DOM.html](03_JS_Formulario_DOM.html).
+Archivo: [03_JS_Formulario.html](03_JS_Formulario.html).
 
 ### Qué vamos a ver
 
@@ -338,8 +339,9 @@ Archivo: [03_JS_Formulario_DOM.html](03_JS_Formulario_DOM.html).
 - Recoger los datos con `FormData`, incluidos radios y casillas.
 - Convertirlos a parámetros con `URLSearchParams`.
 - Diferenciar una vista previa de parámetros y el envío del formulario.
+- Elegir el destino al que se envían los datos del formulario, mediante radios o botones.
 
-El formulario contiene Nombre, Ciudad, Servidor, Asignaturas y Observaciones. Este ejemplo no valida los campos; la validación se estudia en el apartado 06 de formularios. El objetivo es trabajar con sus datos; no necesitamos repetir las búsquedas de elementos del ejemplo 01.
+El formulario contiene Nombre, Ciudad, Servidor, Asignaturas y Observaciones. 
 
 ### 1. Leer un campo con value
 
@@ -351,8 +353,6 @@ console.log(campoNombre.value);
 ~~~
 
 Este fragmento muestra cómo consultar un campo individual. En el HTML recogemos los datos del formulario completo con `FormData`.
-
-En un selector simple como Ciudad, `.value` devuelve el valor de la opción seleccionada. Cuando la etiqueta `option` no tiene un atributo `value`, como en este ejemplo, se utiliza su texto.
 
 ### 2. Diferencia entre id y name
 
@@ -370,25 +370,16 @@ Aunque aquí coincidan, cumplen funciones diferentes:
 
 Tener un `id` no basta para que `FormData` recoja un campo: necesita `name`.
 
-### 3. Radios y casillas no significan lo mismo
+### 3. Radios y Checkbox
 
-**Servidor** utiliza radios: Servidor A y Servidor B comparten `name="servidor"`, por lo que solo podemos seleccionar una opción del grupo. Cada uno tiene un id distinto y su propio valor.
+Podemos elegir el actión con radios y mediante JS. Recordemos que los radios son excluyentes entre si. 
 
 ~~~html
 <input type="radio" name="servidor" id="servidorA" value="/recursoServidorA" checked>
 <input type="radio" name="servidor" id="servidorB" value="/servidorB">
 ~~~
 
-`checked` establece Servidor A como opción inicial. La propiedad `.checked` indica si un radio o una casilla están marcados actualmente.
-
-**Asignaturas** utiliza casillas independientes. Podemos seleccionar Encantamientos, Pociones y Defensa Contra las Artes Oscuras, varias o ninguna. Comparten `name="asignaturas"`, pero, a diferencia de los radios, las casillas no se excluyen entre sí.
-
-El atributo `for` de cada `label` coincide con el id de su control: pulsar el texto de la etiqueta permite seleccionarlo.
-
-
-#### Aplicar el destino seleccionado
-
-Antes del envío, `prepararEnvio()` utiliza este código para aplicar el destino seleccionado:
+Antes del envío, `prepararEnvio()` utiliza este código para aplicar el destino seleccionado, en función del radio button seleccionado iremos a un destino u otro:
 
 ~~~js
 const formulario = document.getElementById('formulario');
@@ -396,7 +387,9 @@ const seleccionado = document.querySelector('input[name="servidor"]:checked');
 formulario.action = seleccionado.value;
 ~~~
 
-`:checked` busca el radio marcado. Su valor es la ruta que asignamos a `action`. El cambio se realiza al enviar para utilizar siempre la selección actual, sin depender de haber pulsado antes Ver parámetros. Cambiar el destino no requiere FormData ni URLSearchParams: esas herramientas solo se utilizan aquí para la vista previa.
+`:checked` busca el radio marcado. El selector busca input cuyo nombre sea 'servidor' y que este **checked**
+
+Por otro lado, **Asignaturas** comparten `name="asignaturas"`, pero, a diferencia de los radios, las casillas no se excluyen entre sí.
 
 ### 4. Recoger los datos con FormData
 
@@ -414,8 +407,9 @@ Para los controles de este ejemplo:
 - Conserva varios valores con el mismo nombre si elegimos varias asignaturas.
 - No incluye controles deshabilitados con `disabled`.
 - No incluye los botones de envío cuando lo construimos así, sin indicar un botón concreto.
+- Muy util para AJAX. 
 
-Si no marcamos ninguna asignatura, no se añade ese parámetro. Un campo de texto vacío con `name` sí se recoge, con un valor vacío: recoger los datos no equivale a validarlos.
+Si no marcamos ninguna asignatura, no se añade ese parámetro. Un campo de texto vacío con `name` sí se recoge, con un valor vacío.
 
 Por ejemplo, si marcamos Encantamientos y Pociones, se conservan las dos parejas:
 
@@ -424,7 +418,7 @@ asignaturas → Encantamientos
 asignaturas → Pociones
 ~~~
 
-**FormData no valida ni envía nada por sí solo.** En este ejemplo se construye al pulsar Ver parámetros para obtener una vista previa de los valores actuales.
+**FormData no valida ni envía nada por sí solo.** En este ejemplo se construye al pulsar Ver parámetros para obtener una vista previa de los valores actuales. Usaremos este objeto más adelante con AJAX.
 
 ### 5. Convertir los datos a parámetros
 
@@ -463,8 +457,6 @@ asignaturas: Encantamientos
 asignaturas: Pociones
 ~~~
 
-Los parámetros con el mismo nombre aparecen en vueltas distintas. Los valores se leen ya decodificados: una ciudad como New York se muestra con su espacio, no como New+York.
-
 Si conocemos el nombre del parámetro, podemos consultarlo sin recorrer todos:
 
 ~~~js
@@ -474,9 +466,7 @@ console.log(parametros.getAll('asignaturas')); // ['Encantamientos', 'Pociones']
 
 `get()` devuelve el primer valor de ese nombre, o `null` si no existe. `getAll()` devuelve un array con todos sus valores; si no marcamos ninguna asignatura, devuelve `[]`. Para leer todas las asignaturas utilizamos `getAll()`, porque `get()` solo devolvería la primera.
 
-Estas consultas no envían ni modifican los datos: solo permiten leerlos.
-
-Esta conversión encaja con los controles actuales. Si se añaden campos de archivos, no basta con convertirlos a `URLSearchParams` para enviar el contenido de esos archivos.
+Estas consultas no envían ni modifican los datos: solo permiten leerlos. Muy util si queremos validarlos.
 
 ### 6. Espacios y caracteres especiales
 
@@ -501,11 +491,21 @@ También puedes encontrar espacios escritos como `%20`. Al leer una cadena de co
 | Ver parámetros | Recoge los datos con FormData y muestra la cadena en consola. No valida ni envía. |
 | Alta | Aplica el destino seleccionado y permite el envío, sin validar los campos. |
 
-Al enviar, el formulario ejecuta `onsubmit="return prepararEnvio()"`. La función actualiza `action` y devuelve `true` para permitir el envío. Aquí no se comprueba si el nombre está vacío; esas reglas se trabajan en el apartado 06.
+Al enviar, el formulario ejecuta `onsubmit="prepararEnvio()"`. La función actualiza `action` y el navegador continúa con el envío normal.
 
-El botón Alta no llama a `verParametros()`. El navegador recoge y codifica los datos del envío por su cuenta. Como Alta es el botón que inicia ese envío y tiene `name="accion"` y `value="Alta"`, al pulsarlo también puede verse `accion=Alta` en los parámetros enviados. Ese dato no aparece en nuestra vista previa construida con `new FormData(formulario)`.
+**Alta envía el formulario; Ver parámetros solo muestra sus datos en consola.** No hace falta pulsar Ver parámetros antes de enviar: el navegador prepara los datos automáticamente al pulsar Alta.
 
-`method="get"` coloca los parámetros en la URL de destino, después de `?`. `action` cambia a `/recursoServidorA` o `/servidorB` según la opción seleccionada. Son dos rutas ilustrativas dentro del mismo servidor, no dos servidores reales distintos. Para procesar los datos necesitamos un servidor que atienda esas rutas. Live Server muestra los archivos, pero no implementa esa lógica; si enviamos a una ruta inexistente, puede aparecer un error de recurso no encontrado.
+El botón Alta también aporta un dato al envío:
+
+~~~html
+<input type="submit" name="accion" value="Alta">
+~~~
+
+Al pulsarlo, su `name` y su `value` forman el parámetro `accion=Alta`. Esto permite al servidor identificar la acción solicitada.
+
+En cambio, al pulsar Ver parámetros usamos `new FormData(formulario)` sin indicar un botón de envío. Por eso la vista previa recoge los campos, pero no incluye `accion=Alta`.
+
+`method="get"` coloca los parámetros en la URL de destino, después de `?`. `action` cambia a `/recursoServidorA` o `/servidorB` según la opción seleccionada. Son dos rutas ilustrativas dentro del mismo servidor, no dos servidores reales distintos. Para procesar los datos necesitamos un servidor que atienda esas rutas. 
 
 ### 8. Elegir el destino con dos botones sin JavaScript
 
@@ -520,18 +520,11 @@ El HTML incluye un segundo formulario independiente para comparar otra opción: 
 </form>
 ~~~
 
-El atributo `formaction` del botón pulsado tiene prioridad sobre el `action` del formulario. Los dos botones envían los datos del mismo formulario, pero a rutas distintas. No necesitamos JavaScript ni llamar a `prepararEnvio()`.
+El atributo `formaction` del botón pulsado tiene prioridad sobre el `action` del formulario. Los dos botones envían los datos del mismo formulario, pero a rutas distintas.
 
 Este segundo formulario solo contiene su propio campo Nombre: no envía los datos del formulario anterior ni depende de sus radios.
 
-**También podríamos poner los dos botones dentro del primer formulario.** En ese caso enviarían los mismos campos: Alta utilizaría el destino elegido en los radios y cada botón con `formaction` utilizaría su propio destino. `formaction` tiene prioridad aunque `prepararEnvio()` cambie el `action` del formulario. Aquí mantenemos dos formularios únicamente para observar las alternativas por separado.
-
-| Alternativa | Cómo se elige el destino |
-| --- | --- |
-| Radios y un botón Alta | JavaScript lee el radio marcado y modifica action antes del envío. |
-| Dos botones con formaction | El botón pulsado determina el destino mediante HTML. |
-
-Prueba cada botón y observa la ruta de la barra de direcciones. Ambas rutas requieren un servidor que las atienda; con Live Server pueden producir un error de recurso no encontrado. El envío no implica que los datos se hayan guardado.
+Prueba cada botón y observa la ruta de la barra de direcciones. Ambas rutas requieren un servidor que las atienda.
 
 ### Cómo probar el ejemplo 03
 
@@ -547,13 +540,18 @@ Prueba cada botón y observa la ruta de la barra de direcciones. Ambas rutas req
 
 Archivo: [04_JS_TablasDinamicas.html](04_JS_TablasDinamicas.html).
 
+En muchas aplicaciones, la información que mostramos procede de un servidor: productos de una tienda, resultados de una búsqueda o un catálogo de películas. Cuando llegan datos nuevos, podemos querer actualizar solo esa parte de la página, sin volver a cargarla entera ni perder lo que el usuario estaba haciendo.
+
+Por ejemplo, al buscar una película, JavaScript puede solicitar los resultados al servidor y actualizar la tabla que los muestra. La cabecera de la página, los botones y el resto del contenido permanecen en su sitio. Para hacerlo necesitamos dos pasos: **obtener los datos y representarlos en la página**.
+
+En este ejemplo nos centramos en el segundo paso. Las películas ya están disponibles en un array local; no realizamos todavía ninguna petición a un servidor. Aprenderemos a convertir esos datos en una tabla y a sustituir su contenido sin recargar la página. Más adelante, en AJAX, podremos aplicar las mismas técnicas a datos recibidos mediante una petición.
+
 ### Qué vamos a ver
 
 - Aplicar arrays, objetos y bucles para mostrar datos en una página.
 - Construir una tabla creando elementos del DOM.
 - Generar la misma tabla mediante una cadena de HTML e `innerHTML`.
-- Distinguir el texto literal del contenido que se interpreta como HTML.
-- Sustituir el resultado anterior para no acumular tablas.
+- Sustituir el resultado anterior sin acumular o duplicar tablas.
 
 Este ejemplo combina lo aprendido. La novedad principal es comparar dos formas de generar el mismo contenido. Los dos botones muestran las mismas películas, cada uno en su propio contenedor.
 
@@ -660,12 +658,14 @@ contenedor.innerHTML = '<h2>Hola</h2>';
 
 Crea un encabezado de nivel 2 que muestra «Hola». Son dos alternativas para probar por separado: si ejecutamos ambas seguidas, la segunda sustituye el resultado de la primera.
 
+> **Cuidado con `innerHTML`: puede permitir inyecciones HTML** Úsalo únicamente con HTML y datos que controles, como los de este ejemplo, o con contenido correctamente sanitizado (tratado para eliminar etiquetas y atributos peligrosos). No insertes directamente texto de usuarios o fuentes externas; para mostrarlo como texto, utiliza `textContent`. 
+
 ### 5. Qué forma elegir
 
 | Forma | Cuándo resulta útil |
 | --- | --- |
 | Crear elementos y asignar `textContent` | Para insertar los valores como texto y trabajar con cada elemento de forma explícita. |
-| Construir HTML y asignar `innerHTML` | Para generar estructuras pequeñas con HTML y datos que controlamos, como los datos fijos de este ejemplo. |
+| Construir HTML y asignar `innerHTML` | Para generar estructuras pequeñas con HTML y datos que controlamos, como los datos fijos de este ejemplo. Nunca de datos directos de usuarios.|
 
 Como punto de partida, preferimos `createElement()` y `textContent` para mostrar texto procedente de usuarios o de fuentes externas: no queremos que sus valores se interpreten como etiquetas HTML.
 
@@ -681,3 +681,8 @@ Las dos formas son válidas. La primera permite entender la construcción del á
 4. Pulsa varias veces cada botón: debe mantenerse una sola tabla en cada contenedor.
 5. Inspecciona los elementos del navegador: ambos resultados contienen elementos de tabla, aunque se hayan creado de distinta manera.
 6. Como prueba en una copia del ejemplo, añade una película al array y comprueba que aparece al generar cualquiera de las dos tablas.
+
+## Bibliografía
+
+- [MDN Web Docs — Documentación de las APIs web](https://developer.mozilla.org/es/docs/Web/API)
+- [JavaScript.info — El documento y el DOM](https://es.javascript.info/document)
