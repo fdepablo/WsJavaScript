@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<script>
+function cargar(){
+    /* CREACIÓN DE NODO */
+
+    // Crear nodo de tipo Element
+    var parrafo = document.createElement("p");//<p></p>
+    parrafo.id = "parrafo1" //<p id="parrafo1"></p>
+    
+    // Crear nodo de tipo Text
+    var contenido = document.createTextNode("Hola Mundo!");//Hola Mundo!
+    
+    // Añadir el nodo Text como hijo del nodo Element
+    parrafo.appendChild(contenido);//<p id="parrafo1">Hola Mundo!</p>
+    
+    // Añadir el nodo Element como hijo de la pagina
+    document.body.appendChild(parrafo);
+
+    /* BORRADO DE NODO */
+    enlace.parentNode.removeChild(enlace);
+    
+}
+</script>
+</head>
+
+<body onload="cargar()">    
+
+    <div id="cabecera"> 
+        <p>Esto es un parrafo normalito :)</p>
+        <!-- El siguiente enlace se borrara al cargar la página-->
+        <a href="http://www.google.es" id="enlace" title="A google que nos vamos!!">Google</a>
+    </div>
+
+    <!-- Aquí aparecerá la etiquta p que hemos creado alterando el DOM-->
+    <!-- <p id="parrafo1">Hola Mundo!</p> -->
+</body>
+
+
+</html>

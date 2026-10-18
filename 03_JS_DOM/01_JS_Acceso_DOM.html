@@ -16,59 +16,50 @@
             }
         </style>
         <script>
-        /*
-        El DOM (Document Object Model) nos permite acceder y manipular páginas HTML como si fueran documentos XML.
-
-        Al cargar la página en el navegador necesitamos que se transforme toda la estructura y sus elementos en texto. 
-        Los elementos nuevos que se crearán se denominan nodos y estarán interconectados mediante un árbol de nodos. 
-        Cada website tiene su propio árbol de nodos. 
-
-         Tipos de Nodo Mas importantes
-        -------------------------------
-        Document - Nodo raiz
-        Element - Etiqueta HTML
-        Atributte - Atributo de etiqueta
-        Text - Texto plano
-        Comment - Comentario
-
-        (ver dibujo htmlArbolDeObjetos.gif)
-        */
+        // La teoría del DOM y el dibujo del árbol están en el README.md de esta carpeta.
 
     function cargar(){
-
-
-        // Podemos acceder a un nodo del arbol DOM mediante varias tecnicas
-
         /*  ACCESO AL NODO MEDIANTE EL ID */
-        var cabecera = document.getElementById("cabecera");
+        // Devuelve un elemento, o null si no existe ese id.
+        const cabecera = document.getElementById("cabecera");
         
         /* ACCESO AL NODO MEDIANTE ETIQUETAS  */
-        //nos devuelve todas las etiquetas p, es decir un array de nodos
-        var parrafos = document.getElementsByTagName("p");
-        var primerParrafo = parrafos[0];
+        // Devuelve una colección HTMLCollection con todos los elementos p.
+        const parrafos = document.getElementsByTagName("p");
+        const primerParrafo = parrafos[0]; // La posición 0 corresponde al primer elemento.
 
-        for(var i=0; i<parrafos.length; i++) {
-            var parrafo = parrafos[i];
+        for(let i=0; i<parrafos.length; i++) {
+            const parrafo = parrafos[i];
             //podriamos alterar todos los parrafos
         }
         
         /* ACCESO AL NODO MEDIANTE NOMBRE */
-        //nos devuleve los nodos que coincidan por el atributo "name", tambien es un array
-        var p1Name = document.getElementsByName("parrafo1");
+        // Devuelve una colección NodeList con los elementos cuyo atributo name coincide.
+        const p1Name = document.getElementsByName("parrafo1");
         
         /* ACCESO AL NODO MEDIANTE NOMBRE DE CLASE */
-        //Accedemos a los elementos cuya clase sea "principal"
-        var principal = document.getElementsByClassName("principal");//solo queremos el primero (solo hay uno)
+        // Devuelve una colección HTMLCollection con los elementos de clase "principal".
+        // Aunque solo haya uno, el resultado sigue siendo una colección.
+        const principal = document.getElementsByClassName("principal");
         
         /* ACCESO AL NODO MEDIANTE EL SELECTOR CSS */
-        //accedemos a las etiquetas p cuya clase sea "parrafo2Clase", tambien devuelve un array
-        var p2Css = document.querySelectorAll("p.parrafo2Clase");
+        // querySelector devuelve el primer elemento que coincide, o null si no hay ninguno.
+        const primerPrincipal = document.querySelector(".principal");
+        // querySelectorAll devuelve todos los coincidentes en una colección NodeList.
+        // Si no hay coincidencias, devuelve una colección vacía.
+        const principales = document.querySelectorAll(".principal");
+        console.log("Primer elemento de clase principal:", primerPrincipal);
+        console.log("Colección de elementos de clase principal:", principales);
+
+        // Devuelve una colección NodeList con los elementos p de clase "parrafo2Clase".
+        const p2Css = document.querySelectorAll("p.parrafo2Clase");
         
         /* ACCESO DIRECTO A LOS ATRIBUTOS HTML */
-        var p1 = document.getElementById("parrafo1");
+        const p1 = document.getElementById("parrafo1");
         console.log("Valores Parrafo1 de diferentes maneras")
         //Podemos acceder a sus atributos mediante el "."
         console.log(p1.id)
+        // .style consulta los estilos escritos en el atributo style del HTML.
         console.log(p1.style.fontWeight);  // muestra "bold"
         console.log(p1.style.color);  // muestra "blue"
 
@@ -78,9 +69,10 @@
         console.log(principal);
         console.log(p2Css[0].style.color); //Rojo
 
-        //Las ultimas versiones de JS crean variables con el id de los
-        //elementos de la pagina, esto es la caña ya que no hace
-        //falta usar el el metodo document.getElementById("logo");
+        // El navegador permite acceder a elementos por su id.
+        // Aquí enlace permite acceder al elemento con id="enlace".
+        // Para código más grande es preferible guardar una referencia explícita:
+        // const enlace = document.getElementById("enlace");
         console.log("Valores del enlace")
         console.log(enlace.title)
         console.log(enlace.href)

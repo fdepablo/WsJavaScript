@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar una tabla de películas</title>
+    <style>
+        table {
+            border-collapse: collapse; /* Une los bordes de las celdas para evitar líneas dobles. */
+            margin: 10px 0; /* Deja espacio arriba y abajo de la tabla, sin centrarla. */
+        }
+        th, td {
+            border: 1px solid black; /* Dibuja un borde negro alrededor de cada celda. */
+            padding: 5px; /* Separa el contenido del borde dentro de cada celda. */
+        }
+    </style>
+    <script>
+
+//Funcion que devuelve un array de objetos pelicula
+function listarPeliculas(){
+    const peliculas = [
+        { titulo   : 'La vida de Brian',
+          director : 'Terry Jones',
+          genero   : 'Comedia' },
+        { titulo   : 'Die Hard',
+          director : 'John McTiernan',
+          genero   : 'Accion' },
+        { titulo   : 'Harry Potter y la piedra filosofal',
+          director : 'Chris Columbus',
+          genero   : 'Fantasía' },
+        { titulo   : 'Los Vengadores',
+          director : 'Joss Whedon',
+          genero   : 'Superhéroes' }
+    ]
+    return peliculas;    
+}
+
+// Creamos la tabla con elementos del DOM y asignamos su contenido como texto.
+function crearNodosDOM(){
+    const peliculas = listarPeliculas();
+    const contenedor = document.getElementById("div2");
+    const tabla = document.createElement("table");
+
+    // Cabecera: creamos las celdas y las añadimos a una fila.
+    const trCabecera = document.createElement("tr");
+    const th1 = document.createElement("th");
+    const th2 = document.createElement("th");
+    const th3 = document.createElement("th");
+    th1.textContent = "Título";
+    th2.textContent = "Director";
+    th3.textContent = "Género";
+    trCabecera.appendChild(th1);
+    trCabecera.appendChild(th2);
+    trCabecera.appendChild(th3);
+    tabla.appendChild(trCabecera);
+
+    // Cada película se convierte en una fila con tres celdas.
+    for(const pelicula of peliculas){
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+        td1.textContent = pelicula.titulo;
+        td2.textContent = pelicula.director;
+        td3.textContent = pelicula.genero;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tabla.appendChild(tr);
+    }
+
+    // Vaciamos el resultado anterior para no acumular tablas en cada pulsación.
+    contenedor.textContent = "";
+    contenedor.appendChild(tabla);
+}
+
+// Construimos una cadena de HTML y el navegador la convierte en elementos.
+function crearNodosHTML(){
+    const peliculas = listarPeliculas();
+    const contenedor = document.getElementById("div3");
+
+    // Las plantillas con acentos graves permiten escribir varias líneas de texto.
+    let tabla = `
+        <table>
+            <tr>
+                <th>Título</th>
+                <th>Director</th>
+                <th>Género</th>
+            </tr>`;
+
+    for(const pelicula of peliculas){
+        // ${...} inserta el valor de una expresión en el texto. += añade la nueva fila.
+        tabla += `
+            <tr>
+                <td>${pelicula.titulo}</td>
+                <td>${pelicula.director}</td>
+                <td>${pelicula.genero}</td>
+            </tr>`;
+    }
+
+    tabla += "</table>";
+
+    // innerHTML interpreta las etiquetas y sustituye el contenido anterior del contenedor.
+    // Aquí usamos datos fijos del ejemplo. Para texto introducido por usuarios, preferimos textContent.
+    contenedor.innerHTML = tabla;
+}
+
+    </script>
+</head>
+<body>
+    <h1>Generar una tabla de películas</h1>
+    <p>Comparamos dos formas de mostrar los mismos datos: crear elementos del DOM o generar HTML con innerHTML.</p>
+
+    <h2>Crear elementos del DOM</h2>
+    <button type="button" id="btn_crearNodosDOM" onclick="crearNodosDOM()">Crear tabla con DOM</button>
+    <div id="div2"></div>
+
+    <h2>Generar HTML con innerHTML</h2>
+    <button type="button" id="btn_crearNodosHTML" onclick="crearNodosHTML()">Crear tabla con innerHTML</button>
+    <div id="div3"></div>
+</body>
+</html>

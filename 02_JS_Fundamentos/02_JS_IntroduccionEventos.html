@@ -43,14 +43,13 @@
             Con esta función borramos el valor del texto del campo2
         */
         function borrarTexto(){
-            // IMPORTANTE: Desde las últimas versiones de JS los navegadores crean
-            // automáticamente referencias a los objetos a partir de su atributo "id"
-            // Es decir, nosotros vamos a tener por cada elemento con id en nuestro HTML
+            // Los navegadores crean automáticamente referencias a los objetos a partir de su atributo "id",
+            // es decir, nosotros vamos a tener por cada elemento con id en nuestro HTML
             // una referencia creada a dicho elemento, cuyo nombre será su id.
 
-            // Por ejemplo, ya no es necesario utilizar la función "document.getElementById" 
-            // podemos usar directamente la variable con su id que el navegador ha creado
-            // por nosotros.
+            // Es una forma cómoda de acceso en ejemplos pequeños.
+            // No equivale a declarar una variable y puede haber conflictos de nombres.
+            // También podemos obtener el elemento explícitamente con getElementById().
             //let campo2 = document.getElementById("campo2")
              campo2.value = ""
         }

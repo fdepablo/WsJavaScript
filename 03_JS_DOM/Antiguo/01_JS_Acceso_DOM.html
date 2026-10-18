@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DOM - Document Object Model</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">        
+        <!-- "solo la etiqueta" -> todas las etiqeutas
+            "." clase 
+            "#" id
+            -->
+        <style>
+            .principal{
+                color:blueviolet;
+                font-weight: bold
+            }
+        </style>
+        <script>
+        /*
+        El DOM (Document Object Model) nos permite acceder y manipular páginas HTML como si fueran documentos XML.
+
+        Al cargar la página en el navegador necesitamos que se transforme toda la estructura y sus elementos en texto. 
+        Los elementos nuevos que se crearán se denominan nodos y estarán interconectados mediante un árbol de nodos. 
+        Cada website tiene su propio árbol de nodos. 
+
+         Tipos de Nodo Mas importantes
+        -------------------------------
+        Document - Nodo raiz
+        Element - Etiqueta HTML
+        Atributte - Atributo de etiqueta
+        Text - Texto plano
+        Comment - Comentario
+
+        (ver dibujo htmlArbolDeObjetos.gif)
+        */
+
+    function cargar(){
+
+
+        // Podemos acceder a un nodo del arbol DOM mediante varias tecnicas
+
+        /*  ACCESO AL NODO MEDIANTE EL ID */
+        var cabecera = document.getElementById("cabecera");
+        
+        /* ACCESO AL NODO MEDIANTE ETIQUETAS  */
+        //nos devuelve todas las etiquetas p, es decir un array de nodos
+        var parrafos = document.getElementsByTagName("p");
+        var primerParrafo = parrafos[0];
+
+        for(var i=0; i<parrafos.length; i++) {
+            var parrafo = parrafos[i];
+            //podriamos alterar todos los parrafos
+        }
+        
+        /* ACCESO AL NODO MEDIANTE NOMBRE */
+        //nos devuleve los nodos que coincidan por el atributo "name", tambien es un array
+        var p1Name = document.getElementsByName("parrafo1");
+        
+        /* ACCESO AL NODO MEDIANTE NOMBRE DE CLASE */
+        //Accedemos a los elementos cuya clase sea "principal"
+        var principal = document.getElementsByClassName("principal");//solo queremos el primero (solo hay uno)
+        
+        /* ACCESO AL NODO MEDIANTE EL SELECTOR CSS */
+        //accedemos a las etiquetas p cuya clase sea "parrafo2Clase", tambien devuelve un array
+        var p2Css = document.querySelectorAll("p.parrafo2Clase");
+        
+        /* ACCESO DIRECTO A LOS ATRIBUTOS HTML */
+        var p1 = document.getElementById("parrafo1");
+        console.log("Valores Parrafo1 de diferentes maneras")
+        //Podemos acceder a sus atributos mediante el "."
+        console.log(p1.id)
+        console.log(p1.style.fontWeight);  // muestra "bold"
+        console.log(p1.style.color);  // muestra "blue"
+
+        //otras maneras de acceder a parrafo1
+        console.log(primerParrafo.style.color);
+        console.log(p1Name[0].style.color);
+        console.log(principal);
+        console.log(p2Css[0].style.color); //Rojo
+
+        //Las ultimas versiones de JS crean variables con el id de los
+        //elementos de la pagina, esto es la caña ya que no hace
+        //falta usar el el metodo document.getElementById("logo");
+        console.log("Valores del enlace")
+        console.log(enlace.title)
+        console.log(enlace.href)
+    }
+        </script>
+    </head>
+
+    <!-- Esta funcion se ejecuta cuando se termine de cargar el body -->
+    <body onload="cargar()">    
+
+        <!-- Esto es un nodo comentario -->
+        <div id="cabecera"> 
+            <a href="http://www.google.es" id="enlace" title="A google que nos vamos!!">Google</a>
+        </div>
+    
+        <p id="parrafo1" name="parrafo1" style="font-weight: bold;color: blue;">Parrafo 1</p>
+        <p name="parrafo2" class="parrafo2Clase" style="color:red;">Parrafo 2</p>
+        <p class="principal"> Parrafo 3 </p>
+
+    </body>
+
+
+</html>

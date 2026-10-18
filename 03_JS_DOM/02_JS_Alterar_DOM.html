@@ -6,39 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 <script>
-function cargar(){
+function modificar(){
     /* CREACIÓN DE NODO */
 
     // Crear nodo de tipo Element
-    var parrafo = document.createElement("p");//<p></p>
+    const parrafo = document.createElement("p");//<p></p>
     parrafo.id = "parrafo1" //<p id="parrafo1"></p>
+    // Alternativa para establecer el mismo atributo mediante un método:
+    // parrafo.setAttribute("id", "parrafo1");
     
-    // Crear nodo de tipo Text
-    var contenido = document.createTextNode("Hola Mundo!");//Hola Mundo!
-    
-    // Añadir el nodo Text como hijo del nodo Element
-    parrafo.appendChild(contenido);//<p id="parrafo1">Hola Mundo!</p>
+    // Asignamos el texto del párrafo sin interpretarlo como HTML.
+    parrafo.textContent = "Párrafo creado alterando el árbol DOM"; //<p id="parrafo1">Párrafo creado alterando el árbol DOM</p>
+
+    // Alternativa: crear un nodo de texto y añadirlo como hijo del párrafo.
+    // const contenido = document.createTextNode("Párrafo creado alterando el árbol DOM");
+    // parrafo.appendChild(contenido);
     
     // Añadir el nodo Element como hijo de la pagina
     document.body.appendChild(parrafo);
 
     /* BORRADO DE NODO */
-    enlace.parentNode.removeChild(enlace);
+    // Eliminamos el enlace de la página.
+    enlace.remove();
+
+    // Alternativa mediante su nodo padre:
+    // parentNode obtiene el padre: en este HTML es el div con id="cabecera".
+    // removeChild(enlace) le pide al padre que elimine ese hijo.
+    // enlace.parentNode.removeChild(enlace);
+
+    // El cambio se realiza una sola vez: el enlace ya no existe tras eliminarlo.
+    document.getElementById("modificar").disabled = true;
     
 }
 </script>
 </head>
 
-<body onload="cargar()">    
+<body>
+
+    <button type="button" id="modificar" onclick="modificar()">Modificar página</button>
 
     <div id="cabecera"> 
         <p>Esto es un parrafo normalito :)</p>
-        <!-- El siguiente enlace se borrara al cargar la página-->
+        <!-- El siguiente enlace se borrará al pulsar Modificar página -->
         <a href="http://www.google.es" id="enlace" title="A google que nos vamos!!">Google</a>
     </div>
 
-    <!-- Aquí aparecerá la etiquta p que hemos creado alterando el DOM-->
-    <!-- <p id="parrafo1">Hola Mundo!</p> -->
+    <!-- Aquí aparecerá la etiqueta 'p' que hemos creado alterando el DOM al pulsar el botón Modificar página -->
+    <!-- <p id="parrafo1">Párrafo creado alterando el árbol DOM</p> -->
 </body>
 
 

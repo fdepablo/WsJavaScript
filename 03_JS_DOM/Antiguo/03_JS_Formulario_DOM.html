@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<script type="application/javascript">
+
+function pruebasDOM(){
+
+    //Document es un objeto implícito que representa al árbol DOM
+    //Document Object Model
+    console.log(document)
+
+    //Document tiene funciones que sirven para localizar nodos en 
+    //el árbol. Buscando nodos por el id
+    console.log("==================================")
+    let nodo = document.getElementById("dato")
+
+    //Nodo es un objeto JS y como tal tiene propiedades
+    //Algunas de esas propiedades guardan funciones
+    console.log(nodo)
+    console.log(nodo.value) //texto
+    console.log(nodo.size) //25
+
+    //Un nodo de tipo elemento/etiqueta tienen un cerro de propiedades
+    //Un objeto en js es un array asociativo    
+    for( let clave in nodo ){
+        //console.log(clave+":"+nodo[clave] )
+    }
+
+    //Buscando nodos por el nombre de etiqueta
+    console.log("==================================")
+    //Nodos es un array
+    let nodos = document.getElementsByTagName("input")
+    for(let nodo of nodos){
+        if( nodo.type == 'text'){
+            console.log(nodo)
+        }
+    }
+
+    //Buscando nodos por el atributo 'name'
+    console.log("==================================")    
+    let nodos2 = document.getElementsByName("accion")
+    for(let nodo of nodos2){
+        console.log(nodo)
+    }
+
+    //BUSCANDO COSAS QUE TIENEN ID
+    console.log("==================================") 
+    //Por cada nodo del árbol DOM que tenga id existirá una 
+    //variable implícita. El nombre de la variable es el id y valor
+    //es el nodo    
+    console.log(document.getElementById("dato"))   
+    console.log(dato)
+    console.log(nombre)
+    console.log(direccion)
+    console.log(telefono)
+    console.log(ciudad)
+}
+
+//METODO QUE VALIDA MEDIANTE JS QUE LOS DATOS DEL FORMULARIO NO ESTEN EN BLANCO
+function validar(){
+    
+    //let nombre = document.getElementById("nombre").value
+    if( nombre.value.trim() == '' ){//eliminar los blancos laterales
+        alert("El nombre es obligatorio")
+    }
+    if( direccion.value.trim() == '' ){
+        alert("La dirección es obligatoria")
+    }
+    if( telefono.value.trim() == '' ){
+        alert("El telefono es obligatorio")
+    }
+
+           
+}
+
+//ESTE EJEMPLO SIRVE PARA COMO SE PUEDEN COGER VALORES DE UN FORMULARIO PARA SU ENVIO
+//ACCEDIENDO A DICHOS VALORES MEDIANTE EL DOM
+// ?accion=Insertar&nombre=fsdfsdf&direccion=dddd&telefono=ffff&ciudad=Getafe&observaciones=
+function prepararParametros(){
+    
+    // Dos metodos
+    // Método 'grán fajador', se puede formar directamente así si conocemos el 
+    // atributo "name" de los campos del formulario de la pagina (normalmente lo conoceremos)
+    let parametros = "nombre="+nombre.value+
+                     "&direccion="+direccion.value+
+                     "&telefono="+telefono.value+
+                     "&ciudad="+ciudad.value+
+                     "&observaciones="+observaciones.value
+                     
+    console.log(parametros)
+
+    // Método 'fino estilista', lo podemos hacer asi en caso de que no conozcamos el "name"
+    // de los campos (mas raro, pero posible). Este metodo sería universal
+    let formulario = document.getElementById("formulario")
+
+    // "formulario.childNodes" Esto no nos sirve porque nos da los hijos directos (p,h1,div,etc.)
+    // Habria que usar "formulario.elements", ya que los formularios tienen la propiedad
+    // extra "elements" que devuelve un array con todos sus campos (inputs, selects, radiobuttons, etc.)
+    parametros = "";
+
+    let campos = formulario.elements
+    console.log(campos)
+
+    for(campo of campos){
+        //los campos button y submit no los queremos
+        if( campo.type=="button" || campo.type=="submit"){
+            continue
+        }
+        let nombreParametro = campo.name
+        let valorParametro  = campo.value 
+        parametros += nombreParametro+"="+valorParametro+"&"        
+    }
+
+    //para quitar el ultimo "&"
+    parametros = parametros.substring(0, parametros.length-1)
+    console.log(parametros)
+
+    //incluso podriamos mandarlo sin necesidad de que el boton sea un "submit"
+    formulario.submit();
+}
+
+</script>
+</head>
+
+<body onload="pruebasDOM()">    
+    
+    <h1>Árbol DOM</h1>
+    
+    Nombre: <input type="text" 
+                   name="dato" 
+                   id="dato" 
+                   size="25" 
+                   value="texto" 
+                   class="xXx"/>
+    
+    <hr/>
+    
+    <form name="formulario" id="formulario" action="urlServidor" method="get"> 
+        
+        <input type="button" name="accion" value="Validar" onclick="validar()"/>
+        <input type="button" value="Preparar parametros" onclick="prepararParametros()"/>
+        <input type="submit" name="accion" value="Insertar"/>
+        
+        <table>
+            <tr>
+                <td id="td1">Nombre</td>
+                <td id="td2">
+                    <input type="text" name="nombre" id="nombre"/>
+                </td>
+            </tr>
+            <tr>
+                <td id="td3">Dirección</td>
+                <td id="td4">
+                    <input type="text" name="direccion" id="direccion"/>
+                </td>
+            </tr>
+            <tr>
+                <td id="td5">Teléfono</td>
+                <td id="td6">
+                    <input type="text" name="telefono" id="telefono"/>
+                </td>
+            </tr>
+            <tr>
+                <td id="td7">Ciudad</td>
+                <td id="td8">
+                    <select name="ciudad" id="ciudad">
+                        <option>Getafe</option>
+                        <option>Madrid</option>
+                        <option>Salamanca</option>
+                        <option>Santa Pola</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td id="td9">Observaciones</td>
+                <td id="td10">
+                    <textarea name="observaciones" id="observaciones"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+
+</html>
