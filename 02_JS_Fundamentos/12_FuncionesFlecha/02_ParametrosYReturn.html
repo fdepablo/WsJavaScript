@@ -7,44 +7,56 @@
 </head>
 <body>
     <h1>Parámetros y retorno</h1>
-    <p>Primero usa llaves y return. Después aprende cuándo puedes abreviar.</p>
+    <p>Primero usa llaves y return. Después aprenderemos cuándo puedes abreviar.</p>
     <p>Abre la consola con F12 y lee el código del archivo en el editor.</p>
     <h2>Practica</h2>
-    <p>Crea esMayorDeEdad con un parámetro que devuelva true o false. Escribe primero la versión con return y después la abreviada. Prueba 17 y 18.</p>
+    <p>Crea `esMayorDeEdad` con un parámetro que devuelva `true` o `false`. 
+        Escribe primero la versión con `return` y después la abreviada. Prueba con 17 y 18.</p>
     <p><a href="../README.md">Volver al índice de Fundamentos</a></p>
     <script>
         // Sin parámetros: necesitamos ().
         const saludar = () => {
             return 'Hola';
         };
-        
+        console.log(saludar()); // 'Hola'
+
         // Un parámetro: los paréntesis pueden omitirse.
         const doble = numero => {
             return numero * 2;
         };
-        
+        console.log(doble(5)); // 10
+
+        // Una sola expresión sin llaves devuelve su resultado automáticamente.
+        const dobleCorto = numero => numero * 2;
+        console.log(dobleCorto(5)); // 10
+
         // Varios parámetros: los paréntesis son obligatorios.
         const multiplicar = (a, b) => {
             return a * b;
         };
-        
-        // Una sola expresión sin llaves devuelve su resultado automáticamente.
-        const dobleCorto = numero => numero * 2;
-        console.log(saludar());           // 'Hola'
-        console.log(doble(5));            // 10
-        console.log(dobleCorto(5));       // 10
-        console.log(multiplicar(3, 4));   // 12
-        
-        // Con llaves, si queremos devolver algo debemos escribir return.
+        console.log(multiplicar(3, 4)); // 12
+
+        //Como tiene una sola expresión, podemos abreviar la función y no poner llaves ni `return`.
+        const multiplicarCorto = (a, b) => a * b;
+        console.log(multiplicarCorto(3, 4)); // 12
+ 
+        // Con llaves, si queremos devolver algo debemos escribir `return`.
         const sinReturn = numero => { numero * 2; };
         console.log(sinReturn(5)); // undefined
         
-        // Varias instrucciones: conserva las llaves y escribe return.
-        const precioFinal = precio => {
-            const impuesto = precio * 0.21;
-            return precio + impuesto;
+        // Varias instrucciones: Obligatorio conservar las llaves y opcional escribir `return`.
+        const precioConIVA = precio => {
+            const total = precio * 1.21;
+            return total;
         };
-        console.log(precioFinal(100)); // 121
+        console.log(precioConIVA(100)); // 121
+
+        //Varias instrucciones: Obligatorio conservar las llaves. En este caso imprimimos el resultado en lugar de devolverlo.
+        const precioConImpuestos = (precio, impuesto) => {
+            const total = precio * impuesto;
+            console.log(total); // 110
+        };
+        precioConImpuestos(100, 1.10);
     </script>
 </body>
 </html>

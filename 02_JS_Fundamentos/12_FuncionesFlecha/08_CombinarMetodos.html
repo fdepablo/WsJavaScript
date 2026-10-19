@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinar filter, map y forEach</title>
+</head>
+<body>
+    <h1>Combinar filter, map y forEach</h1>
+    <p>Una tienda de objetos mágicos quiere consultar su catálogo y preparar ofertas. Trabajamos siempre con los mismos productos para comparar qué aporta cada método.</p>
+    <p>Abre la consola con F12 y sigue los bloques del código en orden. Guardamos los pasos en variables para observar los resultados intermedios.</p>
+    <h2>Orden del ejemplo</h2>
+    <ol>
+        <li>filter y forEach: seleccionar los productos disponibles y mostrar sus nombres.</li>
+        <li>map y forEach: crear mensajes con los precios de todos los productos y mostrarlos.</li>
+        <li>map y filter: aplicar un descuento y seleccionar las ofertas de hasta 20 euros.</li>
+        <li>filter, map y forEach: seleccionar los disponibles, preparar sus ofertas y mostrarlas.</li>
+        <li>Comparar el orden: filtrar antes o después de aplicar el descuento.</li>
+        <li>Encadenar filter, map y forEach para mostrar las ofertas disponibles.</li>
+    </ol>
+    <h2>Practica</h2>
+    <p>Añade un producto disponible de 50 euros. Antes de ejecutar, decide en qué resultados aparecerá. Después cambia el descuento del 20 % al 10 % y comprueba qué ofertas siguen costando como máximo 20 euros.</p>
+    <p><a href="README.md">Volver al recorrido de funciones flecha</a></p>
+    <script>
+        const productos = [
+            { nombre: 'Varita', precio: 30, disponible: true },
+            { nombre: 'Poción', precio: 10, disponible: false },
+            { nombre: 'Mapa mágico', precio: 25, disponible: true },
+            { nombre: 'Capa', precio: 60, disponible: true }
+        ];
+
+        // 1. `filter()` + `forEach()`: elegir productos y realizar una acción con cada uno.
+        console.log('1. Productos disponibles');
+        const disponibles = productos.filter(producto => producto.disponible);
+        console.log(disponibles); // Varita, Mapa mágico y Capa, conservando sus objetos.
+        disponibles.forEach(producto => {
+            console.log(producto.nombre);
+        });
+        // `forEach()` muestra los nombres; no guardamos su retorno en una variable.
+
+        // 2. `map()` + `forEach()`: transformar cada objeto en un mensaje y mostrarlo.
+        console.log('2. Precios del catálogo completo');
+        const mensajes = productos.map(producto => `${producto.nombre}: ${producto.precio} euros`);
+        console.log(mensajes); // Nuevo array de cuatro textos, no de objetos.
+        mensajes.forEach(mensaje => {
+            console.log(mensaje);
+        });
+        // Se muestran todos: aquí no hemos filtrado por disponibilidad.
+
+        // 3. `map()` + `filter()`: transformar primero y seleccionar según el nuevo precio.
+        console.log('3. Ofertas de hasta 20 euros');
+        // Multiplicar por 0.8 aplica un descuento del 20 %.
+        // ({ ... }) devuelve un nuevo objeto; no cambiamos el precio del original.
+        const ofertas = productos.map(producto => ({
+            nombre: producto.nombre,
+            precio: producto.precio * 0.8
+        }));
+        console.log(ofertas); // Nuevos precios: 24, 8, 20 y 48.
+        const ofertasEconomicas = ofertas.filter(oferta => oferta.precio <= 20);
+        console.log(ofertasEconomicas); // Poción a 8 y Mapa mágico a 20.
+        // Filtramos el precio rebajado, no el original. Todavía no comprobamos disponibilidad.
+
+        // 4. `filter()` + `map()` + `forEach()`: preparar ofertas solo de productos disponibles.
+        console.log('4. Ofertas disponibles');
+        const productosDisponibles = productos.filter(producto => producto.disponible);
+        const ofertasDisponibles = productosDisponibles.map(producto => ({
+            nombre: producto.nombre,
+            precio: producto.precio * 0.8
+        }));
+        ofertasDisponibles.forEach(oferta => {
+            console.log(`${oferta.nombre}: ${oferta.precio} euros`);
+        });
+        // Muestra Varita: 24 euros, Mapa mágico: 20 euros y Capa: 48 euros.
+        // La Poción no aparece porque `filter()` la descartó antes de transformar los datos.
+
+        // 5. ENCADENAR: el array que devuelve un método se utiliza en el siguiente.
+        // Se puede encadenar `filter()`, `map()` y `forEach()` en una sola línea.
+        console.log('5. Comparar filter(...).map(...) con map(...).filter(...)');
+
+        // A. Primero elegimos los que cuestan hasta 20 ANTES del descuento.
+        const primeroFiltrar = productos
+            .filter(producto => producto.precio <= 20)
+            .map(producto => ({
+                nombre: producto.nombre,
+                precio: producto.precio * 0.8
+            }));
+        console.log('Primero filtrar:', primeroFiltrar); // Solo Poción a 8.
+
+        // B. Primero rebajamos todos y elegimos los que cuestan hasta 20 DESPUÉS.
+        const primeroTransformar = productos
+            .map(producto => ({
+                nombre: producto.nombre,
+                precio: producto.precio * 0.8
+            }))
+            .filter(producto => producto.precio <= 20);
+        console.log('Primero transformar:', primeroTransformar); // Poción a 8 y Mapa mágico a 20.
+
+        // 6. LOS TRES ENCADENADOS: la misma tarea del bloque 4, sin variables intermedias.
+        console.log('6. Filtrar, transformar y mostrar en una cadena');
+        productos
+            .filter(producto => producto.disponible)
+            .map(producto => ({
+                nombre: producto.nombre,
+                precio: producto.precio * 0.8
+            }))
+            .forEach(oferta => {
+                console.log(`${oferta.nombre}: ${oferta.precio} euros`);
+            });
+        // Muestra Varita: 24 euros, Mapa mágico: 20 euros y Capa: 48 euros.
+        // `forEach()` va al final ya que devuelve `undefined`, no un array para continuar, como `map()` o `filter()`.
+
+        console.log('Catálogo original, sin cambios:', productos);
+        // No hemos modificado sus objetos: los `map()` anteriores crean textos u objetos nuevos.
+        // `filter()` y `map()` devuelven arrays; `forEach()` se utiliza para las acciones finales.
+    </script>
+</body>
+</html>

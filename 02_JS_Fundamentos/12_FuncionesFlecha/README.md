@@ -148,7 +148,7 @@ numeros.forEach(numero => {
 // Muestra por consola, uno por uno: 2, 4, 6, 8 y 10.
 ~~~
 
-La función se ejecuta una vez por cada elemento y muestra su doble. La función `forEach()` **NO** devulve una lista de resultados. Aquí loo que nos interesa es la acción que realiza con cada número. El array `numeros` no cambia, sigue siendo `[1, 2, 3, 4, 5]`.
+La función se ejecuta una vez por cada elemento y muestra su doble. La función `forEach()` **NO** devulve una lista de resultados. Aquí lo que nos interesa es la acción que realiza con cada número. El array `numeros` no cambia, sigue siendo `[1, 2, 3, 4, 5]`.
 
 Caso diferente es con `map()`. Si queremos **obtener una nueva lista con los dobles**, usamos `map()`:
 
@@ -204,7 +204,7 @@ console.log(filtradosConFor);      // [3, 4, 5]
 console.log(filtradosConForOf);    // [3, 4, 5]
 ~~~
 
-En las dos primeras versiones, `filter()` pasa cada número a la función y conserva aquellos para los que devuelve `true`. La función tradicional utiliza `function` y `return`; la flecha abreviada devuelve directamente el resultado de `numero > 2`.
+En las dos primeras versiones, `filter()` pasa cada número a la función y conserva aquellos para los que devuelve `true`. La función tradicional utiliza `function` y `return` mientras que la función flecha devuelve directamente el resultado de `numero > 2`.
 
 En la versión con `for` clásico, hacemos el recorrido mediante un índice: `i` es la posición, `numeros[i]` es el elemento actual y `push()` lo añade a la nueva lista si cumple la condición.
 
@@ -212,11 +212,11 @@ Con `for...of`, la variable `numero` recibe directamente cada valor del array, s
 
 Las cuatro versiones obtienen `[3, 4, 5]` y conservan la lista original.
 
-## Ampliación sobre this
+## Ampliación sobre this y arguments
 
 Las flechas conservan el this del contexto donde se crean. Los métodos tradicionales pueden recibirlo según cómo se invocan. Por eso, para un método que necesita acceder al objeto mediante this, empieza utilizando un método tradicional.
 
-Las flechas no tienen arguments propio ni se pueden utilizar como constructoras con new. Además, una flecha asignada a const debe utilizarse después de inicializar esa variable. El ejemplo 08 permite observar estas diferencias después de estudiar objetos.
+Las flechas no tienen arguments propio ni se pueden utilizar como constructoras con new. Además, una flecha asignada a const debe utilizarse después de inicializar esa variable. El ejemplo 09 permite observar estas diferencias después de estudiar objetos.
 
 ## Orden de aprendizaje
 
@@ -231,14 +231,69 @@ En los ejemplos vamos a trabajar mejor todos estos conceptos que hemos aprendido
 | [05 Recorrer con forEach](05_RecorrerConForEach.html) | Realizar una acción por cada elemento de una lista. |
 | [06 Transformar con map](06_TransformarConMap.html) | Crear un array con un resultado por cada elemento. |
 | [07 Seleccionar con filter](07_SeleccionarConFilter.html) | Crear un array con los elementos que cumplen una condición. |
-| [08 Flechas y this](08_FlechasYThis.html) | Ampliación opcional sobre las diferencias con otras funciones. |
+| [08 Combinar métodos](08_CombinarMetodos.html) | Combinar los métodos por parejas y después seleccionar, transformar y mostrar ofertas. |
+| [09 Flechas y this](09_FlechasYThis.html) | Ampliación opcional sobre las diferencias con otras funciones. |
 
 ## Errores que conviene reconocer
 
 - Escribir una flecha con llaves y olvidar return cuando necesitas un resultado.
 - Utilizar forEach() esperando recibir una nueva lista.
 - Usar map() para seleccionar elementos: para eso está filter().
-- Creer que una flecha puede reemplazar cualquier función sin cambiar su comportamiento.
+
+## Combinar los métodos paso a paso
+
+El [ejemplo 08](08_CombinarMetodos.html) utiliza un catálogo de objetos mágicos. No cambiamos el catálogo original y guardamos los resultados en variables nuevas.
+
+| Combinación | Qué hacemos |
+| --- | --- |
+| `filter()` y `forEach()` | Elegir los productos disponibles y mostrar sus nombres. |
+| `map()` y `forEach()` | Convertir todos los productos en mensajes con nombre y precio, y mostrarlos. |
+| `map()` y `filter()` | Crear ofertas con un descuento y seleccionar las que cuestan hasta 20 euros. |
+| `filter()`, `map()` y `forEach()` | Elegir los productos disponibles, crear sus ofertas y mostrarlas. |
+
+### Encadenar filter y map y comparar su orden
+
+Encadenar significa utilizar directamente el array que devuelve un método para llamar al siguiente, sin guardarlo antes en una variable intermedia:
+
+~~~js
+const primeroFiltrar = productos
+    .filter(producto => producto.precio <= 20)
+    .map(producto => ({
+        nombre: producto.nombre,
+        precio: producto.precio * 0.8
+    }));
+
+const primeroTransformar = productos
+    .map(producto => ({
+        nombre: producto.nombre,
+        precio: producto.precio * 0.8
+    }))
+    .filter(producto => producto.precio <= 20);
+~~~
+
+En `productos.filter(...).map(...)`, primero termina `filter()` y después `map()` transforma el array filtrado. En `productos.map(...).filter(...)`, primero termina `map()` y después `filter()` comprueba los elementos transformados. 
+
+Encadenar produce los mismos resultados que separar esas mismas operaciones en variables intermedias, **si conservamos el mismo orden y las mismas funciones**. 
+
+`filter()` y `map()` devuelven arrays que podemos utilizar en el siguiente paso. `forEach()` realiza la acción final de mostrar cada resultado ya que no lo utilizamos para construir otra lista.
+
+### Encadenar los tres métodos
+
+El último bloque del ejemplo realiza la misma tarea que el bloque 4, pero sin variables intermedias:
+
+~~~js
+productos
+    .filter(producto => producto.disponible)
+    .map(producto => ({
+        nombre: producto.nombre,
+        precio: producto.precio * 0.8
+    }))
+    .forEach(oferta => {
+        console.log(`${oferta.nombre}: ${oferta.precio} euros`);
+    });
+~~~
+
+Primero seleccionamos los productos disponibles, después creamos sus ofertas y finalmente mostramos cada una.
 
 ## Práctica final
 

@@ -23,14 +23,18 @@
             }
         }
         
-        // Con filter: escribimos esa condición en el callback.
-        const mayores = edades.filter(edad => edad >= 18);
+        // Con `filter()`: escribimos esa condición en el callback.
+        let mayores = edades.filter(edad => edad >= 18);
         console.log(mayoresConBucle); // [18, 25, 30]
         console.log(mayores);         // [18, 25, 30]
-        console.log(edades);          // [12, 18, 25, 16, 30]
-        
-        // filter selecciona; map transforma; forEach realiza acciones.
-        // No hace falta encadenarlos: guarda cada paso en una variable.
+        console.log(edades);          // [12, 18, 25, 16, 30] No se modifica el array original.
+
+        //También podemos pasar una función ya definida como argumento.
+        const esMayorDeEdad = edad => edad >= 18;
+        mayores = edades.filter(esMayorDeEdad);
+        console.log(mayores); // [18, 25, 30]
+
+        // `filter()` selecciona; `map()` transforma; `forEach()` realiza acciones.
     </script>
 </body>
 </html>

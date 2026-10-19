@@ -23,17 +23,23 @@
             return a + b;
         };
         
-        // 3. Sustituimos function por una flecha después de los parámetros.
+        // 3. Sustituimos `function` por una flecha después de los parámetros.
         const sumarConFlecha = (a, b) => {
             return a + b;
         };
-        
+
+        // 4. No es obligatorio que una función fecha tenga `return`.
+        const saludar = () => {
+            console.log('Hola');
+        };
+                
+        // Todas se llaman con paréntesis y argumentos.
         console.log(sumar(4, 3));             // 7
         console.log(sumarConVariable(4, 3));  // 7
         console.log(sumarConFlecha(4, 3));    // 7
-        
-        // Todas se llaman con paréntesis y argumentos.
-        // const impide reasignar la variable, no ejecutar la función varias veces.
+        saludar();                            // 'Hola'
+
+        // Recordemos que `const` impide reasignar la variable, no ejecutar la función varias veces.
         console.log(sumarConFlecha(10, 2));   // 12
     </script>
 </body>

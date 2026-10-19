@@ -20,19 +20,24 @@
             console.log('Hola, ' + nombre);
         }
         
-        // forEach ejecuta esta función para cada elemento de la lista.
+        // `forEach()` ejecuta esta función para cada elemento de la lista.
         nombres.forEach(nombre => {
             console.log('Hola, ' + nombre);
         });
         
+        //También podemos pasar una función ya definida como argumento.
+        const saludar = nombre => console.log('Hola, ' + nombre);
+        nombres.forEach(saludar);
+
         // El parámetro recibe cada nombre, en orden. No es el array completo.
         // También podemos recibir el índice como segundo parámetro.
         nombres.forEach((nombre, indice) => {
             console.log(indice + ': ' + nombre);
         });
         
-        // forEach sirve para realizar una acción por elemento.
-        // No crea un array con los resultados ni permite break como un bucle.
+        // `forEach()` sirve para realizar una acción por elemento.
+        // No crea un array con los resultados ni permite `break` como un bucle.
+
     </script>
 </body>
 </html>

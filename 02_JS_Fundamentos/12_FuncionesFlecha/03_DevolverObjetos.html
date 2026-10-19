@@ -34,7 +34,7 @@
     <p><a href="README.md">Volver al recorrido de funciones flecha</a></p>
 
     <script>
-        // Primera versión: return devuelve el objeto.
+        // Primera versión: `return` devuelve el objeto.
         const crearPersona = (nombre, edad) => {
             return {
                 nombre: nombre,
@@ -42,16 +42,15 @@
             };
         };
 
-        // Segunda versión: una expresión entre paréntesis, sin return.
+        // Segunda versión: una expresión entre paréntesis, sin `return`.
         const crearPersonaCorta = (nombre, edad) => ({ nombre: nombre, edad: edad });
 
         const persona = crearPersona('Ana', 25);
         const personaCorta = crearPersonaCorta('Ana', 25);
 
-        // JSON.stringify solo se utiliza para visualizar el objeto como texto.
-        // null, 2 hace que las propiedades se presenten en líneas con sangría.
-        document.getElementById('resultadoLargo').textContent = JSON.stringify(persona, null, 2);
-        document.getElementById('resultadoCorto').textContent = JSON.stringify(personaCorta, null, 2);
+        // `JSON.stringify()` solo se utiliza para visualizar el objeto como texto.
+        document.getElementById('resultadoLargo').textContent = JSON.stringify(persona);
+        document.getElementById('resultadoCorto').textContent = JSON.stringify(personaCorta);
         document.getElementById('propiedades').textContent =
             'persona.nombre: ' + persona.nombre + ' | persona.edad: ' + persona.edad;
 

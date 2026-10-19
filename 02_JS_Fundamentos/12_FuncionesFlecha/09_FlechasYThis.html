@@ -15,12 +15,12 @@
     <script>
         const persona = {
             nombre: 'Ana',
-            // Un método tradicional recibe this según cómo se invoca.
+            // Un método tradicional recibe `this` según cómo se invoca.
             saludar() {
                 return 'Hola, soy ' + this.nombre;
             },
             prepararSaludo() {
-                // La flecha conserva el this de prepararSaludo.
+                // La flecha conserva el `this` de `prepararSaludo`.
                 return () => 'Hola, soy ' + this.nombre;
             }
         };
@@ -28,10 +28,10 @@
         const saludoPendiente = persona.prepararSaludo();
         console.log(saludoPendiente()); // 'Hola, soy Ana'
         
-        // No escribimos saludar: () => this.nombre esperando que this sea persona.
-        // La flecha toma this del contexto exterior, no del objeto que la contiene.
+        // No escribimos `saludar: () => this.nombre` esperando que `this` sea `persona`.
+        // La flecha toma `this` del contexto exterior, no del objeto que la contiene.
         
-        // Las flechas no tienen arguments propio. Podemos usar parámetros rest.
+        // Las flechas no tienen `arguments` propio. Podemos usar parámetros rest.
         const sumarVarios = (...numeros) => {
             let total = 0;
             for (const numero of numeros) total += numero;
@@ -40,8 +40,8 @@
         console.log(sumarVarios(1, 2, 3)); // 6
         
         // Una función tradicional declarada puede llamarse antes de su declaración.
-        // Una flecha guardada en const debe usarse después de inicializar esa variable.
-        // Las flechas tampoco son constructoras: no se utilizan con new.
+        // Una flecha guardada en `const` debe usarse después de inicializar esa variable.
+        // Las flechas tampoco son constructoras: no se utilizan con `new`.
     </script>
 </body>
 </html>

@@ -21,11 +21,12 @@
             doblesConBucle.push(numero * 2);
         }
         
-        // Con map indicamos qué resultado queremos para cada elemento.
-        const dobles = numeros.map(numero => numero * 2);
+        // Con `map()` indicamos qué resultado queremos para cada elemento.
+        // Aquí no modificamos los elementos originales.
+        let dobles = numeros.map(numero => numero * 2);
         console.log(doblesConBucle); // [2, 4, 6]
         console.log(dobles);         // [2, 4, 6]
-        console.log(numeros);        // [1, 2, 3]
+        console.log(numeros);        // [1, 2, 3] No se modifica el array original.
         
         // Con llaves, recuerda devolver el resultado.
         const triples = numeros.map(numero => {
@@ -33,8 +34,10 @@
         });
         console.log(triples); // [3, 6, 9]
         
-        // Aquí no modificamos los elementos originales.
-        // map no es una copia profunda: un callback podría modificar objetos recibidos.
+        //También podemos pasar una función ya definida como argumento.
+        const calcularDobles = numero => numero * 2;
+        dobles = numeros.map(calcularDobles);
+        console.log(dobles); // [2, 4, 6]        
     </script>
 </body>
 </html>
