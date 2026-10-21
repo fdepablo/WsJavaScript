@@ -20,7 +20,8 @@ function modificar(){
     parrafo.name = "parrafo1" //<p id="parrafo1" title="Párrafo creado alterando el árbol DOM" name="parrafo1"></p>
     
     // Podemos asignar un nodo de texto al nodo Element, que se mostrará como contenido del párrafo.
-    parrafo.textContent = "Párrafo creado alterando el árbol DOM"; //<p id="parrafo1">Párrafo creado alterando el árbol DOM</p>
+    parrafo.textContent = "Párrafo creado alterando el árbol DOM"; 
+    //<p id="parrafo1" title="Párrafo creado alterando el árbol DOM" name="parrafo1">Párrafo creado alterando el árbol DOM</p>
 
     // Alternativa: crear un nodo de texto y añadirlo como hijo del párrafo.
     // const contenido = document.createTextNode("Párrafo creado alterando el árbol DOM");
@@ -28,10 +29,15 @@ function modificar(){
     
     // Añadir el nodo Element como hijo de la pagina
     document.body.appendChild(parrafo);
+    // Alternativa: añadirlo como hijo de un nodo concreto, por ejemplo el div con id="cabecera"
+    // document.getElementById("cabecera").appendChild(parrafo);
 
     /* BORRADO DE NODO */
-    // Eliminamos el enlace de la página.
+    // Eliminamos el enlace de la página, y todos sus hijos (si los tuviera).
+    const enlace = document.getElementById("enlace");
     enlace.remove();
+    // Podemos borrar toda la página, aunque no es recomendable.
+    //document.body.remove();
 
     // Alternativa mediante su nodo padre:
     // parentNode obtiene el padre: en este HTML es el div con id="cabecera".
@@ -53,6 +59,7 @@ function modificar(){
         <p>Esto es un parrafo normalito :)</p>
         <!-- El siguiente enlace se borrará al pulsar Modificar página -->
         <a href="http://www.google.es" id="enlace" title="A google que nos vamos!!">Google</a>
+        <!-- Esta sería la alternativa para añadir el párrafo como hijo del div -->
     </div>
 
     <!-- Aquí aparecerá la etiqueta 'p' que hemos creado alterando el DOM al pulsar el botón Modificar página -->
