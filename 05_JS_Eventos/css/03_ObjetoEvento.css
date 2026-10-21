@@ -1,0 +1,15 @@
+#boton span {
+    color: red;
+}
+
+#titulo {
+    color: blue;
+}
+
+/* Destacamos el resultado con un fondo suave, espacio interior y texto en negrita. */
+#informacion {
+    background-color: #fff3cd;
+    color: #332701;
+    padding: 12px;
+    font-weight: bold;
+}

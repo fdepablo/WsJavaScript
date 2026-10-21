@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto y selección</title>
+    <!-- defer permite ejecutar el archivo cuando el HTML ya está construido. -->
+    <script src="js/02_TextoYSeleccion.js" defer></script>
+</head>
+<body>
+    <h1>Texto y selección</h1>
+
+    <p>Escribe, pega y borra texto para ver el contador. Después elige otro destino.</p>
+    <h2>Ejemplo 1 — Contar caracteres con input</h2>
+    <p><label for="observaciones">Observaciones</label></p>
+    <!-- HTML limita la longitud y JavaScript actualiza el contador. -->
+    <textarea id="observaciones" maxlength="60" rows="3" cols="35"></textarea>
+    <p id="contador">0 / 60 caracteres</p>
+    
+    <h2>Ejemplo 2 — Elegir un destino con change</h2>
+    <label for="ciudad">Destino</label>
+    <select id="ciudad">
+        <option value="Hogsmeade">Hogsmeade</option>
+        <option value="Rivendel">Rivendel</option>
+        <option value="New York">New York</option>
+    </select>
+    <!-- aria-live="polite" permite que un lector de pantalla anuncie los cambios del mensaje sin interrumpir su lectura actual. -->
+    <p id="resumen" aria-live="polite">Destino elegido: Hogsmeade</p>
+    
+    <h2>Practica</h2>
+    <p>Añade un checkbox para solicitar una visita guiada. Usa change para mostrar si está marcado o desmarcado.</p>
+    <p><a href="README.md">Volver al apartado de eventos</a></p>
+</body>
+</html>

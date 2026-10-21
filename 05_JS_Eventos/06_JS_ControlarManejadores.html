@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activar y retirar manejadores</title>
+    <!-- defer permite ejecutar el archivo cuando el HTML ya está construido. -->
+    <script src="js/06_ControlarManejadores.js" defer></script>
+</head>
+<body>
+    <h1>Activar y retirar manejadores</h1>
+    <h2>Ejemplo 1 — Activar y retirar el manejador del contador</h2>
+    <button type="button" id="contar">Contar</button>
+    <button type="button" id="desactivar">Desactivar contador</button>
+    <button type="button" id="activar" disabled>Activar contador</button>
+    <p id="contador" aria-live="polite">Pulsaciones: 0</p>
+    <h3 id="estado" aria-live="polite">Contador activado.</h3>
+
+    <h2>Ejemplo 2 — Ejecutar un manejador una sola vez</h2>
+    <button type="button" id="regalo">Reclamar regalo</button>
+    <p id="mensajeRegalo" aria-live="polite">Todavía no has reclamado el regalo.</p>
+
+    <h2>Practica</h2>
+    <p>Suma tres pulsaciones, desactiva y pulsa Contar dos veces. El contador debe seguir mostrando 3. Después actívalo y pulsa otra vez para comprobar que muestra 4.</p>
+    <p><a href="README.md">Volver al apartado de eventos</a></p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El objeto evento</title>
+    <link rel="stylesheet" href="css/03_ObjetoEvento.css">
+    <!-- defer permite ejecutar el archivo cuando el HTML ya está construido. -->
+    <script src="js/03_ObjetoEvento.js" defer></script>
+</head>
+<body>
+    <h1>El objeto evento</h1>
+    
+    <p>El manejador puede recibir información sobre lo que acaba de ocurrir. </p> 
+    <h2>Ejemplo 1 — Consultar el evento al pulsar un botón</h2>
+    <button type="button" id="boton"><span>Pulsa este texto</span> o el resto del botón</button>
+    
+    <h2 id="titulo">Ejemplo 2 — Pasa el ratón por encima de este título</h2>
+    <p>Los dos primeros ejemplos muestran su resultado en el siguiente mensaje.</p>
+    <p id="informacion" aria-live="polite">Resultado del evento → Pulsa el botón o pasa el ratón por el título azul.</p>
+    
+    <h2>Ejemplo 3 — Detectar una tecla</h2>
+    <p><label for="teclado">Escribe y prueba la tecla Escape</label></p>
+    <input type="text" id="teclado">
+    <p id="tecla">Todavía no has pulsado una tecla en el campo.</p>
+    
+    <h2>Ejemplo 4 — Llamar a una función con argumentos</h2>
+    <button type="button" id="botonOferta">Consultar oferta</button>
+    <p id="oferta" aria-live="polite">Aquí aparecerá la oferta.</p>
+
+    <h2>Ejemplo 5 — Cambiar el texto de varios botones con una misma función</h2>
+    <p>Los dos botones utilizan la misma función. Pulsa cada uno y comprueba que solo cambia el texto del botón pulsado mediante <code>evento.currentTarget</code>.</p>
+    <button type="button" id="botonCambiar">Cambiar el texto del primer botón</button>
+    <button type="button" id="segundoBotonCambiar">Cambiar el texto del segundo botón</button>
+    
+    <h2>Practica</h2>
+    <p>Haz que al pulsar Enter en el campo de texto aparezca un mensaje con lo que has escrito. Por ejemplo, si escribes Hola y pulsas Enter, debe mostrarse «Has escrito: Hola». Conserva el comportamiento de Escape para vaciar el campo.</p>
+    <p><a href="README.md">Volver al apartado de eventos</a></p>
+</body>
+</html>

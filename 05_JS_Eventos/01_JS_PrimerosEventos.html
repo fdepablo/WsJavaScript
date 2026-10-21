@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeros eventos</title>
+    <!-- defer permite ejecutar el archivo cuando el HTML ya está construido. -->
+    <script src="js/01_PrimerosEventos.js" defer></script>
+</head>
+<body>
+    <h1>Primeros eventos</h1>
+    <p>Una página puede reaccionar a lo que hacemos. Pulsa los botones para cambiar un mensaje y contar pulsaciones.</p>
+    
+    <h2>Ejemplo 1 — Mostrar y cambiar un mensaje</h2>
+    <button type="button" id="botonSaludar">Saludar</button>
+    <button type="button" id="botonCambiar">Cambiar mensaje</button>
+    <p id="mensaje" aria-live="polite">Aquí aparecerán los mensajes.</p>
+
+    <h2>Ejemplo 2 — Contar pulsaciones</h2>
+    <button type="button" id="botonContar">Contar</button>    
+    <p id="contador" aria-live="polite">Pulsaciones: 0</p>
+
+    <h2>Practica</h2>
+    <p>Añade un botón que muestre otro mensaje usando una función con nombre. Comprueba que el mensaje solo cambia al pulsarlo.</p>
+    <p><a href="README.md">Volver al apartado de eventos</a></p>
+</body>
+</html>

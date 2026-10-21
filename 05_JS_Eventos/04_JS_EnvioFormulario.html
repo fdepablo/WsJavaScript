@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El evento submit</title>
+    <!-- defer permite ejecutar el archivo cuando el HTML ya está construido. -->
+    <script src="js/04_EnvioFormulario.js" defer></script>
+</head>
+<body>
+    <h1>El evento submit y el método preventDefault()</h1>
+    
+    <h2>Ejemplo 1 — Mostrar una reserva sin recargar la página</h2>
+    <form id="formulario">
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div>
+            <label for="destino">Destino</label>
+            <select id="destino" name="destino">
+                <option value="Hogsmeade">Hogsmeade</option>
+                <option value="Rivendel">Rivendel</option>
+            </select>
+        </div>
+        <button type="submit">Reservar</button>
+    </form>
+    <p id="resultado" aria-live="polite">Aquí aparecerá el resumen de la reserva.</p>
+    
+    <h2>Practica</h2>
+    <p>Prueba el formulario y amplía su lista de destinos.</p>
+    <ol>
+        <li>Escribe Ana en el campo Nombre, selecciona Rivendel y pulsa Reservar. Debe aparecer un resumen que empiece por «Reserva de Ana para visitar Rivendel» sin recargar la página.</li>
+        <li>Cambia el nombre por Luis y, sin salir de ese campo, pulsa Enter. Debe actualizarse el resumen con Luis, igual que al pulsar Reservar.</li>
+        <li>Añade Hogwarts como nueva opción del selector en el HTML. Selecciónala y pulsa Reservar. El resumen debe incluir «para visitar Hogwarts».</li>
+    </ol>
+    <p><a href="README.md">Volver al apartado de eventos</a></p>
+</body>
+</html>
