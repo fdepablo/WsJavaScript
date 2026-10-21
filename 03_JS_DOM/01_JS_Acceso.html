@@ -26,20 +26,22 @@
         /* ACCESO AL NODO MEDIANTE ETIQUETAS  */
         // Devuelve una colección HTMLCollection con todos los elementos p.
         const parrafos = document.getElementsByTagName("p");
-        const primerParrafo = parrafos[0]; // La posición 0 corresponde al primer elemento.
+        //Aunque haya un solo elemento, sigue siendo una colección. Para acceder al primer elemento, usamos la posición 0.
+        const primerParrafo = parrafos[0];
 
         for(const parrafo of parrafos) {
             // Podríamos consultar o modificar cada párrafo.
         }
         
-        /* ACCESO AL NODO MEDIANTE NOMBRE */
+        /* ACCESO A LOS NODOS MEDIANTE NAME */
         // Devuelve una colección NodeList con los elementos cuyo atributo name coincide.
-        const p1Name = document.getElementsByName("parrafo1");
-        
-        /* ACCESO AL NODO MEDIANTE NOMBRE DE CLASE */
+        const listaNodosName = document.getElementsByName("parrafo1");
+        const p1Name = listaNodosName[0]; // La posición 0 corresponde al primer elemento.
+
+        /* ACCESO A LOS NODOS MEDIANTE NOMBRE DE CLASE */
         // Devuelve una colección HTMLCollection con los elementos de clase "principal".
         // Aunque solo haya uno, el resultado sigue siendo una colección.
-        const principal = document.getElementsByClassName("principal");
+        const principal = document.getElementsByClassName("principal")[0]; // La posición 0 corresponde al primer elemento.
         
         /* ACCESO AL NODO MEDIANTE EL SELECTOR CSS */
         // querySelector devuelve el primer elemento que coincide, o null si no hay ninguno.
@@ -64,7 +66,7 @@
 
         //otras maneras de acceder a parrafo1
         console.log(primerParrafo.style.color);
-        console.log(p1Name[0].style.color);
+        console.log(p1Name.style.color);
         console.log(principal);
         console.log(p2Css[0].style.color); //Rojo
 

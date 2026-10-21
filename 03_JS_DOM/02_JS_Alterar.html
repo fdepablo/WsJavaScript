@@ -14,8 +14,12 @@ function modificar(){
     parrafo.id = "parrafo1" //<p id="parrafo1"></p>
     // Alternativa para establecer el mismo atributo mediante un método:
     // parrafo.setAttribute("id", "parrafo1");
+
+    //Podemos alterar cualquier atributo
+    parrafo.title = "Párrafo creado alterando el árbol DOM"; //<p id="parrafo1" title="Párrafo creado alterando el árbol DOM"></p>
+    parrafo.name = "parrafo1" //<p id="parrafo1" title="Párrafo creado alterando el árbol DOM" name="parrafo1"></p>
     
-    // Asignamos el texto del párrafo sin interpretarlo como HTML.
+    // Podemos asignar un nodo de texto al nodo Element, que se mostrará como contenido del párrafo.
     parrafo.textContent = "Párrafo creado alterando el árbol DOM"; //<p id="parrafo1">Párrafo creado alterando el árbol DOM</p>
 
     // Alternativa: crear un nodo de texto y añadirlo como hijo del párrafo.
