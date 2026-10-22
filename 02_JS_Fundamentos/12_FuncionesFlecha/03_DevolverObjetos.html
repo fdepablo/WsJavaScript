@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devolver un objeto con una función flecha</title>
+    <style>
+        pre,#propiedades {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Devolver un objeto</h1>
@@ -43,6 +49,7 @@
         };
 
         // Segunda versión: una expresión entre paréntesis, sin `return`.
+        // Debemos de poner paréntesis para que JS no confunda las llaves con un bloque de instrucciones.
         const crearPersonaCorta = (nombre, edad) => ({ nombre: nombre, edad: edad });
 
         const persona = crearPersona('Ana', 25);

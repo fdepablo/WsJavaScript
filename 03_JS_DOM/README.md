@@ -480,7 +480,7 @@ Un carácter escrito por el usuario no debe confundirse con los separadores de l
 
 - `%26` representa el signo `&` que forma parte del valor.
 - `URLSearchParams` escribe los espacios como `+`.
-- `%2B` representa un signo más literal, para distinguirlo de un espacio.
+- `%2B` representa el signo más (+), para distinguirlo de un espacio.
 
 También puedes encontrar espacios escritos como `%20`. Al leer una cadena de consulta, `URLSearchParams` interpreta tanto `New+York` como `New%20York` como «New York». Esto no significa que `+` represente un espacio en cualquier parte de una URL.
 

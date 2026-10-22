@@ -37,10 +37,10 @@ function listarPeliculas(){
 
 // Creamos la tabla con elementos del DOM y asignamos su contenido como texto.
 function crearNodosDOM(){
-    const peliculas = listarPeliculas();
-    const contenedor = document.getElementById("div2");
+    const peliculas = listarPeliculas();//Podria ser una llamada un un servlet que me responde con un json de películas
+    const contenedor = document.getElementById("contenedorTablaDOM");
+    
     const tabla = document.createElement("table");
-
     // Cabecera: creamos las celdas y las añadimos a una fila.
     const trCabecera = document.createElement("tr");
     const th1 = document.createElement("th");
@@ -49,6 +49,7 @@ function crearNodosDOM(){
     th1.textContent = "Título";
     th2.textContent = "Director";
     th3.textContent = "Género";
+
     trCabecera.appendChild(th1);
     trCabecera.appendChild(th2);
     trCabecera.appendChild(th3);
@@ -63,6 +64,7 @@ function crearNodosDOM(){
         td1.textContent = pelicula.titulo;
         td2.textContent = pelicula.director;
         td3.textContent = pelicula.genero;
+
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -71,13 +73,14 @@ function crearNodosDOM(){
 
     // Vaciamos el resultado anterior para no acumular tablas en cada pulsación.
     contenedor.textContent = "";
+    // Añadimos la tabla al contenedor. La visualizamos en el navegador.
     contenedor.appendChild(tabla);
 }
 
 // Construimos una cadena de HTML y el navegador la convierte en elementos.
 function crearNodosHTML(){
     const peliculas = listarPeliculas();
-    const contenedor = document.getElementById("div3");
+    const contenedor = document.getElementById("contenedorTablaHTML");
 
     // Las plantillas con acentos graves permiten escribir varias líneas de texto.
     let tabla = `
@@ -100,6 +103,7 @@ function crearNodosHTML(){
 
     tabla += "</table>";
 
+    tabla += "<h4>Tabla generada con innerHTML</h4>";
     // innerHTML interpreta las etiquetas y sustituye el contenido anterior del contenedor.
     // Aquí usamos datos fijos del ejemplo. Para texto introducido por usuarios, preferimos textContent.
     contenedor.innerHTML = tabla;
@@ -113,10 +117,10 @@ function crearNodosHTML(){
 
     <h2>Crear elementos del DOM</h2>
     <button type="button" id="btn_crearNodosDOM" onclick="crearNodosDOM()">Crear tabla con DOM</button>
-    <div id="div2"></div>
+    <div id="contenedorTablaDOM"></div>
 
     <h2>Generar HTML con innerHTML</h2>
     <button type="button" id="btn_crearNodosHTML" onclick="crearNodosHTML()">Crear tabla con innerHTML</button>
-    <div id="div3"></div>
+    <div id="contenedorTablaHTML"></div>
 </body>
 </html>

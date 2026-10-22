@@ -32,11 +32,11 @@ function verParametros(){
 
     // Recorremos cada pareja. [nombre, valor] separa sus dos componentes en variables.
     // Si un nombre se repite, como asignaturas, aparece en varias vueltas.
-    for(const [nombre, valor] of parametros){
-        console.log(nombre + ": " + valor);
+    for(const [nombre_parametro, valor_parametro] of parametros){
+        console.log(nombre_parametro + ": " + valor_parametro);
     }
 
-    // get() devuelve el primer valor del nombre indicado, o null si no existe.
+    // get() devuelve el primer valor del nombre indicado por "name", o null si no existe.
     console.log("Ciudad seleccionada:", parametros.get("ciudad"));
     // getAll() devuelve un array con todos sus valores, o [] si no hay ninguno.
     console.log("Asignaturas seleccionadas:", parametros.getAll("asignaturas"));
@@ -51,13 +51,13 @@ function verParametros(){
     
     <h1>Leer y utilizar los datos de un formulario</h1>
     <h2>Elegir el destino con radios y JavaScript</h2>
-
-    <form name="formulario" id="formulario" action="/recursoServidorA" method="get" onsubmit="prepararEnvio()">
+    <form name="formulario" id="formulario" action="" method="get" onsubmit="prepararEnvio()">
         
-        <!-- Prepara y muestra los parámetros en consola, sin enviar el formulario. -->
-        <input type="button" value="Ver parámetros" onclick="verParametros()"/>
         <!-- Aplica el destino seleccionado y permite el envío del formulario. -->
         <input type="submit" name="accion" value="Alta"/>
+
+        <!-- Prepara y muestra los parámetros en consola, sin enviar el formulario. -->
+        <input type="button" value="Ver parámetros" onclick="verParametros()"/>
         
         <table>
             <tr>
@@ -84,7 +84,7 @@ function verParametros(){
                     <!-- El mismo name hace que solo podamos seleccionar un radio del grupo. -->
                     <input type="radio" name="servidor" id="servidorA" value="/recursoServidorA" checked>
                     <label for="servidorA">Servidor A</label>
-                    <input type="radio" name="servidor" id="servidorB" value="/servidorB">
+                    <input type="radio" name="servidor" id="servidorB" value="/recursoServidorB">
                     <label for="servidorB">Servidor B</label>
                 </td>
             </tr>
