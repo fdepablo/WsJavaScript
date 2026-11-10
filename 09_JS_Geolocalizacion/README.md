@@ -1,4 +1,4 @@
-# 08 · Geolocalización en JavaScript
+# 09 · Geolocalización en JavaScript
 
 La geolocalización permite solicitar la posición aproximada del dispositivo desde el navegador. Podemos usarla para mostrar servicios cercanos, centrar un mapa o actualizar una ubicación mientras la página está en uso.
 
