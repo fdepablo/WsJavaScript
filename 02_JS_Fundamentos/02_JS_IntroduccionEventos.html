@@ -77,12 +77,21 @@
             //son cadenas, por lo tanto, debemos de convertir el valor a el tipo que 
             //necesitemos. En este caso tenemos que convertirlo a un número
 
-            //esto concatena el numero del campo3 con el valor del campo4
-            //let resultado = campo3.value + campo3.value 
+            //Si no lo hicieramos así, concatena el número del campo3 con el valor del campo4
+            let resultadoString = campo3.value + campo4.value
+            console.log("Resultado concatenado: " + resultadoString)
             
-            // Convertimos el valor del campo3 a tipo numérico
+            // Convertimos el valor del campo3 a tipo numérico con parseInt() 
+            // y lo guardamos en la variable numero1
             let numero1 = parseInt(campo3.value)
-            let numero2 = parseInt(campo4.value)
+
+            // Si el tipo de campo es number, podemos usar la propiedad 'valueAsNumber'
+            // para obtener directamente el valor como número
+            // el atributo 'valueAsNumber' devuelve NaN si el campo está vacío
+            // A diferencia de parseInt(), 'valueAsNumber' mantiene los decimales si el 
+            // usuario escribe un número flotante.
+            let numero2 = campo4.valueAsNumber;
+
             let resultado = numero1 + numero2;
             campo5.value = resultado
         }
