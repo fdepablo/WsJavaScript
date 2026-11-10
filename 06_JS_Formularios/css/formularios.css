@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 24px;
+    max-width: 750px;
+    line-height: 1.5;
+}
+
+/* Separamos los campos y los grupos para facilitar su lectura. */
+.campo, fieldset {
+    margin-bottom: 16px;
+}
+
+.campo > label {
+    display: block;
+}
+
+input, select, textarea, button {
+    font: inherit;
+}
+
+textarea {
+    display: block;
+}
+
+/* Los errores tienen texto explicativo además del color. */
+.error {
+    color: #a40000;
+    margin: 4px 0;
+}
+
+[aria-invalid="true"] {
+    border: 2px solid #a40000;
+}
+
+.resultado {
+    background: #eef4fa;
+    padding: 12px;
+    white-space: pre-line;
+}

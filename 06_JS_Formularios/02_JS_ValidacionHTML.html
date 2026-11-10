@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación con HTML</title>
+    <link rel="stylesheet" href="css/formularios.css">
+    <script src="js/02_ValidacionHTML.js" defer></script>
+</head>
+<body>
+    <h1>Validación con HTML</h1>
+    <p>El navegador puede comprobar reglas habituales sin programarlas de nuevo en JavaScript. Los mensajes dependen del navegador y su idioma.</p>
+    <h2>Ejemplo 1 — Comprobar una inscripción</h2>
+    <!-- Sustituye action por la ruta que procese la inscripción en tu servidor. -->
+    <form id="formulario" action="/inscripciones" method="post">
+        <div class="campo">
+            <label for="nombre">Nombre de usuario de 3 a 20 caracteres</label>
+            <input id="nombre" name="nombre" type="text" minlength="3" maxlength="20" required>
+        </div>
+        <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" required>
+        </div>
+        <div class="campo">
+            <label for="entradas">Número de entradas del 1 al 4</label>
+            <input id="entradas" name="entradas" type="number" min="1" max="4" step="1" required>
+        </div>
+        <div class="campo">
+            <label for="turno">Turno</label>
+            <select id="turno" name="turno" required>
+                <option value="">Elige un turno</option>
+                <option value="mañana">Mañana</option>
+                <option value="tarde">Tarde</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label><input type="checkbox" id="condiciones" name="condiciones" required> Acepto las condiciones de inscripción</label>
+        </div>
+        <button type="submit">Enviar inscripción</button>
+        <button type="button" id="comprobar">Ver avisos sin enviar</button>
+    </form>
+    <p id="resultado" class="resultado" aria-live="polite">Completa los datos para comprobarlos.</p>
+    <h2>Practica</h2>
+    <p>Prueba un correo sin arroba, cinco entradas y un turno sin elegir. El navegador debe impedir el envío. Corrige los datos y utiliza  el botón "Ver avisos sin enviar" para comprobarlos sin navegar. Después pulsa "Enviar inscripción" para iniciar el envío al servidor.</p>
+    <p>El servidor no está incluido por lo que un envío válido terminará en una página de error.</p>
+</body>
+</html>

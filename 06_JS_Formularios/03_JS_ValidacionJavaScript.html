@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación con JavaScript</title>
+    <link rel="stylesheet" href="css/formularios.css">
+    <script src="js/03_ValidacionJavaScript.js" defer></script>
+</head>
+<body>
+    <h1>Validación con JavaScript</h1>
+    <p>Mostramos los errores junto a cada campo y añadimos una regla propia para comprobar que los dos correos coinciden.</p>
+    <h2>Ejemplo 1 — Mensajes propios de validación</h2>
+    <!-- novalidate evita los avisos automáticos al enviar, pero conserva las reglas HTML (required, etc.). -->
+    <form id="formulario" action="/registros" method="post" novalidate>
+        <div class="campo">
+            <label for="nombre">Nombre de 3 a 20 caracteres sin contar espacios en los extremos</label>
+            <input id="nombre" name="nombre" type="text" required aria-describedby="errorNombre">
+            <p id="errorNombre" class="error"></p>
+        </div>
+        <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" required aria-describedby="errorCorreo">
+            <p id="errorCorreo" class="error"></p>
+        </div>
+        <div class="campo">
+            <label for="correoConfirmacion">Repite el correo electrónico</label>
+            <input id="correoConfirmacion" name="confirmacion" type="email" required aria-describedby="errorConfirmacion">
+            <p id="errorConfirmacion" class="error"></p>
+        </div>
+        <button type="submit">Enviar registro</button>
+    </form>
+    <p id="resultado" class="resultado" aria-live="polite">Aquí aparecerá el resultado de la comprobación.</p>
+    
+    <h2>Practica</h2>
+    <p>Intenta enviar los campos vacíos y comprueba que aparecen todos los errores sin abandonar la página. Prueba después con Ana y dos correos diferentes. Al corregirlos y enviar de nuevo, el navegador debe iniciar el envío al servidor.</p>
+    <p>El servidor no está incluido por lo que un envío válido terminará en una página de error.</p>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leer datos del formulario</title>
+    <link rel="stylesheet" href="css/formularios.css">
+    <script src="js/01_LeerDatosFormulario.js" defer></script>
+</head>
+<body>
+    <h1>Leer datos del formulario</h1>
+    <p>Prepara tu visita a una feria de videojuegos. Cambia las opciones y pulsa el botón Mostrar resumen. Los datos solo se muestran en esta página.</p>
+    <h2>Ejemplo 1 — Obtener los valores elegidos</h2>
+    <form id="formulario">
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text">
+        </div>
+        <div class="campo">
+            <label for="juego">Juego que quieres probar</label>
+            <select id="juego" name="juego">
+                <option value="hollow-knight">Hollow Knight</option>
+                <option value="portal">Portal</option>
+                <option value="stardew-valley">Stardew Valley</option>
+            </select>
+        </div>
+        <fieldset>
+            <legend>Turno de visita</legend>
+            <label><input type="radio" name="turno" value="mañana"> Mañana</label>
+            <label><input type="radio" name="turno" value="tarde"> Tarde</label>
+        </fieldset>
+        <fieldset>
+            <legend>Actividades que te interesan</legend>
+            <label><input type="checkbox" name="actividades" value="Torneo"> Torneo</label>
+            <label><input type="checkbox" name="actividades" value="Charla"> Charla</label>
+            <label><input type="checkbox" name="actividades" value="Zona retro"> Zona retro</label>
+        </fieldset>
+        <div class="campo">
+            <label><input type="checkbox" id="avisos" name="avisos" value="si"> Quiero recibir avisos</label>
+        </div>
+        <div class="campo">
+            <label for="observaciones">Observaciones</label>
+            <textarea id="observaciones" name="observaciones" rows="3" cols="35"></textarea>
+        </div>
+        <button type="submit">Mostrar resumen</button>
+    </form>
+    <p id="resumen" class="resultado" aria-live="polite">Aquí aparecerán tus elecciones.</p>
+    
+    <h2>Practica</h2>
+    <p>Añade una actividad y otro juego. Comprueba que aparecen en el resumen al seleccionarlos.</p>
+</body>
+</html>
