@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejemplo AJAX</title>
+</head>
+
+<script type="application/javascript">
+
+/*
+Podríamos decir que AJAX (Asynchronous JavaScript And XML) es un conjunto de APIs utilizadas por 
+el navegador web, para transferir XML y otros datos en formato de texto (muy habitual formato JSON), 
+desde el navegador hacia un servidor web, mediante el protocolo de comunicaciones HTTP. 
+
+Ventajas:
+    1) Reducimos el ancho de banda requerido, al no tener que recuperar toda la página.
+    2) Agilizamos la actualización y eliminamos el parpadeo de la página.
+Inconvenientes:
+    1) No es posible volver a la página anterior. Además, si guardamos la página en favoritos 
+    puede ser almacenada una diferente a aquella en la que estamos.
+    2) Puede causar problemas con navegadores antiguos que no implementan esta tecnología.
+    3) No funciona si el usuario tiene desactivado Javascript en su navegador.
+
+Pasos de ejecución en AJAX (Dibujo 8_LlamadaAjax.png)
+    1) Se produce un evento en la web, como la carga de la página, un clic en un botón...
+        1.1 ) JavaScript crea un objeto XMLHttpRequest.
+    2) El nuevo objeto XMLHttpRequest envía una solicitud a un servidor web.
+    3) El servidor procesa la solicitud aplicando la logica de negocio oportuna
+        3.1) El servidor normalmente accede a una BBDD para acceder a la información
+    4) La base de datos responde la consulta a la logica de negocio de nuestra app
+    5) El servidor envía la respuesta a la web en un formato (normalmente JSON o XML)
+    6) JavaScript lee la respuesta y realiza la acción adecuada a esa respuesta (normalmente mostrar
+    la informacion al usuario modificando el arbol DOM de HTML).
+
+Propiedades mas imporantes del objeto XMLHttpRequest:
+    this.responseText //El body del HTTP Response en bruto
+    this.responseXML  //Si el body contenía un XML, el XML procesado
+    this.status       //Código de respuesta del HTTP Response (Ej: 200)
+    this.statusText   //Texto asociado al código de respuesta del HTTP Response (Ej: OK)
+    this.readyState   //Estado del objeto en un entero, las fases por las que va pasando
+    
+Propiedades pensadas para que coloquemos funciones de retrollamada o "callback"
+    this.onreadystatechange = null
+    this.onload  = null
+    this.onerror = null
+
+Metodos mas importantes del objeto XMLHttpRequest
+    XMLHttpRequest.open() //Decimos la URL o recurso donde queremos ir a buscar la información 
+                        //(www.mipizzeria.com)
+                        //Tambien le decimos el verbo HTTP que queremos usar (GET)
+    XMLHttpRequest.send() //Enviamos la peticion al servidor, pudiendo enviar información
+*/
+
+//En caso de TOMCAT habria que cambiar al puerto 8080. En Apache seria el 80
+const URL_DESTINO = "http://localhost:5500/08_AJAX/"
+const RECURSO = "fichero.txt"
+
+//Funcion de ejemplo para enviar una peticion SINCRONA. Solo como ejemplo didactico, no 
+//se recomienda su uso.
+//En una peticion sincrona el JS de nuestro navegador se queda bloqueado hasta que llegue 
+//la respuesta del servidor
+function enviarPeticionSincrona(){
+
+    //Siempre hay que formar el objeto XMLHttpRequest
+    let xmlHttp = new XMLHttpRequest()
+
+    //xmlHttp.open(método (str), url (str), asíncrono/síncrono (true/false) )
+    xmlHttp.open('GET', URL_DESTINO + RECURSO, false)
+    //al ser una peticion sincrona, el JS se quedaria bloqueado en este punto
+    //hasta que el servidor responda MUY IMPORTANTE!
+    xmlHttp.send(null) //Lo que queremos que vaya en el BODY del mensaje HTTP REQUEST
+                       //lo pasamos como parámetro a la función send, en este caso nada
+                       //ya que GET no debe de llevar BODY
+    
+    //Cuando el servidor responda continuaremos ejecutando este codigo
+    xmlHttp.responseText //El BODY del mensaje HTTP RESPONSE en texto plano
+    xmlHttp.responseXML  //El BODY del mensaje HTTP RESPONSE en XML procesado
+    xmlHttp.status       //Código de respuesta del HTTP RESPONSE
+    xmlHttp.statusText   //Texto de respuesta del HTTP RESPONSE
+
+    console.log("================================")
+    console.log("Response text:"+xmlHttp.responseText)
+    console.log("Status       :"+xmlHttp.status)
+    console.log("Status text  :"+xmlHttp.statusText)
+    
+    procesarRespuesta(xmlHttp.responseText)
+}
+
+//Metodo de ejemplo para enviar una peticion ASINCRONA. 
+//En una peticion sincrona el JS de nuestro navegador NO se queda bloqueado, por lo 
+//que tenemos que tener una funcion de callback que se ejecutará cuando el servidor
+//nos mande la respuesta
+function enviarPeticionAsincrona(){
+
+    let xmlHttp = new XMLHttpRequest()
+
+    //Asignamos la funcion de callback que vamos a ejecutar cuando cambie el 
+    //estado de la popiedad "readyState" de nuestra peticion AJAX
+    // Valores de la propiedad readyState
+    //------------------------------------
+    //0- Valor inicial, simplemente hemos creado el objeto xmlHttpRequest
+    //1- Open, cuando ejecutamos dicha funcion
+    //2- Send, cuando enviamos dicha funcion
+    //3- Cuando comienza a recibirse la respuesta del servidor
+    //4- Cuando la respuesta HTTP esta completa
+
+    //Esta funcion se va a ejecutar CADA VEZ que haya un cambio en la propiedad
+    //"readyState"
+    xmlHttp.onreadystatechange = function(){        
+        //Solo cuando la respuesta este completa y su estado sea 200 (OK) leeremos el mensaje
+        //del servidor y la procesamos
+        if( this.readyState == 4){
+            if(this.status == 200){//OK
+                procesarRespuesta(this.responseText)
+            } else {
+                alert("ZASCA!")
+            }
+        }
+    }
+
+    //readyState = 1, y se ejecutará la función de callback
+    xmlHttp.open('GET',URL_DESTINO + RECURSO, true)//true para que sea ASINCRONO
+    //readyState = 2, y se ejecutará la función de callback
+    xmlHttp.send(null)
+    //En este caso NO se queda esperando la respuesta
+
+    console.log("responseText: "+xmlHttp.responseText)//no pinta nada, porque en este punto todavia
+                                            //NO ha llegado la respuesta del servidor
+
+}
+
+//Funcion AJAX que podemos usar en la mayoría de los casos
+function peticionAjax(){
+    let xmlHttp = new XMLHttpRequest()
+    xmlHttp.open('GET', URL_DESTINO + RECURSO, true)//Asincrono
+    xmlHttp.send() //podemos poner null o no, es lo mismo
+
+    //esta funcion de callback se ejecutara cuando se haya procesado la respueta HTTP
+    xmlHttp.onload = function(){
+        procesarRespuesta(this.responseText)
+    }
+
+    xmlHttp.onerror = function(){
+        alert("ZASCA!")
+    }
+
+}
+
+//funcion que manipula el DOM para añadir a un DIV la respuesta del servidor
+function procesarRespuesta(respuesta){
+    resultadoBusqueda.innerHTML = "<h2>"+respuesta+"</h2>"
+}
+
+</script>
+
+<body>
+    <h1>EJEMPLO AJAX</h1>
+
+    <button id="btnBuscarSincrono"  onclick="enviarPeticionSincrona()">Buscar síncrono</button>
+    <button id="btnBuscarAsincrono" onclick="enviarPeticionAsincrona()">Buscar asíncrono</button>
+    <button id="btnBuscarAsincrono" onclick="peticionAjax()">Petición AJAX</button>
+
+    <div id="resultadoBusqueda"></div>
+</body>
+</html>
