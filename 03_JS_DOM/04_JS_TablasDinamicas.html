@@ -109,6 +109,42 @@ function crearNodosHTML(){
     contenedor.innerHTML = tabla;
 }
 
+// Creamos filas y celdas con los métodos específicos de las tablas.
+function crearTablaConMetodos(){
+    const peliculas = listarPeliculas();
+    const contenedor = document.getElementById("contenedorTablaMetodos");
+    const tabla = document.createElement("table");
+
+    // Estos métodos crean y añaden la cabecera y su fila.
+    const cabecera = tabla.createTHead();
+    const filaCabecera = cabecera.insertRow();
+
+    const encabezados = ["Título", "Director", "Género"];
+
+    for(const texto of encabezados){
+        // `insertCell()` crea un `td`, por eso creamos los `th` expresamente.
+        const encabezado = document.createElement("th");
+        encabezado.textContent = texto;
+        encabezado.scope = "col";
+        filaCabecera.appendChild(encabezado);
+    }
+
+    const cuerpo = tabla.createTBody();
+    for(const pelicula of peliculas){
+        // La fila y las celdas se insertan al final sin necesitar `appendChild()`.
+        const fila = cuerpo.insertRow();
+        const celdaTitulo = fila.insertCell();
+        celdaTitulo.textContent = pelicula.titulo;
+        const celdaDirector = fila.insertCell();
+        celdaDirector.textContent = pelicula.director;
+        const celdaGenero = fila.insertCell();
+        celdaGenero.textContent = pelicula.genero;
+    }
+
+    // Sustituimos la tabla anterior para evitar duplicados.
+    contenedor.textContent = "";
+    contenedor.appendChild(tabla);
+}
     </script>
 </head>
 <body>
@@ -118,6 +154,11 @@ function crearNodosHTML(){
     <h2>Crear elementos del DOM</h2>
     <button type="button" id="btn_crearNodosDOM" onclick="crearNodosDOM()">Crear tabla con DOM</button>
     <div id="contenedorTablaDOM"></div>
+
+    <h2>Crear filas y celdas con métodos de tabla</h2>
+    <p>Esta tercera alternativa utiliza los mismos datos con insertRow() e insertCell().</p>
+    <button type="button" id="btn_crearTablaConMetodos" onclick="crearTablaConMetodos()">Crear tabla con métodos de tabla</button>
+    <div id="contenedorTablaMetodos"></div>
 
     <h2>Generar HTML con innerHTML</h2>
     <button type="button" id="btn_crearNodosHTML" onclick="crearNodosHTML()">Crear tabla con innerHTML</button>

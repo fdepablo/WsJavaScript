@@ -550,10 +550,11 @@ En este ejemplo nos centramos en el segundo paso. Las películas ya están dispo
 
 - Aplicar arrays, objetos y bucles para mostrar datos en una página.
 - Construir una tabla creando elementos del DOM.
+- Crear filas y celdas con los métodos específicos de las tablas.
 - Generar la misma tabla mediante una cadena de HTML e `innerHTML`.
 - Sustituir el resultado anterior sin acumular o duplicar tablas.
 
-Este ejemplo combina lo aprendido. La novedad principal es comparar dos formas de generar el mismo contenido. Los dos botones muestran las mismas películas, cada uno en su propio contenedor.
+Este ejemplo combina lo aprendido. La novedad principal es comparar tres formas de generar el mismo contenido. Los tres botones muestran las mismas películas, cada uno en su propio contenedor.
 
 ### 1. Los datos y la tabla son cosas distintas
 
@@ -567,9 +568,9 @@ const pelicula = {
 };
 ~~~
 
-Estos datos todavía no son una tabla ni aparecen en pantalla. Las funciones `crearNodosDOM()` y `crearNodosHTML()` leen el array y construyen su representación visual.
+Estos datos todavía no son una tabla ni aparecen en pantalla. Las funciones `crearNodosDOM()`, `crearNodosHTML()` y `crearTablaConMetodos()` leen el array y construyen su representación visual.
 
-En ambas utilizamos `for...of`: cada vuelta recibe una película y genera una fila con sus tres datos.
+En las tres utilizamos `for...of` para recorrer las películas y generar sus filas.
 
 ### 2. Construir la tabla con elementos del DOM
 
@@ -660,18 +661,45 @@ Crea un encabezado de nivel 2 que muestra «Hola». Son dos alternativas para pr
 
 > **Cuidado con `innerHTML`: puede permitir inyecciones HTML** Úsalo únicamente con HTML y datos que controles, como los de este ejemplo, o con contenido correctamente sanitizado (tratado para eliminar etiquetas y atributos peligrosos). No insertes directamente texto de usuarios o fuentes externas; para mostrarlo como texto, utiliza `textContent`. 
 
-### 5. Qué forma elegir
+### 5. Crear filas y celdas con métodos de tabla
+
+El botón **Crear tabla con métodos de tabla** ejecuta `crearTablaConMetodos()`. Es una tercera alternativa que reutiliza `listarPeliculas()` y tiene su propio contenedor.
+
+| Método | Qué hace |
+| --- | --- |
+| `tabla.createTHead()` | Crea y añade la sección de encabezados, o devuelve la existente |
+| `tabla.createTBody()` | Crea y añade un cuerpo para las filas de datos |
+| `cuerpo.insertRow()` | Crea una fila y la añade al final del cuerpo |
+| `fila.insertCell()` | Crea una celda `td` y la añade al final de la fila |
+
+```js
+const cuerpo = tabla.createTBody();
+const fila = cuerpo.insertRow();
+const celdaTitulo = fila.insertCell();
+celdaTitulo.textContent = pelicula.titulo;
+```
+
+`insertRow()` e `insertCell()` devuelven el elemento que acaban de insertar. Por eso podemos guardarlo en una constante y utilizarlo inmediatamente, sin añadirlo después con `appendChild()`. También admiten un índice para indicar otra posición.
+
+`insertCell()` siempre crea un `td`, no un `th`. Para los encabezados usamos `createElement('th')` y los añadimos a la fila de la cabecera. Cada encabezado lleva `scope="col"` para indicar que corresponde a su columna.
+
+El resultado sigue siendo una tabla de elementos DOM y los datos se asignan con `textContent`. Antes de mostrarla, vaciamos su contenedor para que las pulsaciones sucesivas no acumulen tablas.
+
+### 6. Qué forma elegir
 
 | Forma | Cuándo resulta útil |
 | --- | --- |
-| Crear elementos y asignar `textContent` | Para insertar los valores como texto y trabajar con cada elemento de forma explícita. |
-| Construir HTML y asignar `innerHTML` | Para generar estructuras pequeñas con HTML y datos que controlamos, como los datos fijos de este ejemplo. Nunca de datos directos de usuarios.|
+| `createElement()`, `appendChild()` y `textContent` | Para aprender cómo se construye el árbol DOM y trabajar con cualquier tipo de elemento. |
+| Métodos de tabla y `textContent` | Para crear tablas con menos pasos, ya que `insertRow()` e `insertCell()` crean e insertan las filas y celdas. |
+| Una cadena de HTML e `innerHTML` | Para generar estructuras pequeñas con HTML y datos controlados. No debemos insertar directamente datos no fiables. |
 
-Como punto de partida, preferimos `createElement()` y `textContent` para mostrar texto procedente de usuarios o de fuentes externas: no queremos que sus valores se interpreten como etiquetas HTML.
+Las dos primeras alternativas construyen elementos DOM y muestran sus valores como texto. Podemos usar cualquiera de ellas para datos de usuarios o de fuentes externas, siempre que asignemos esos datos con `textContent`.
 
-`innerHTML` es más compacto, pero no debemos introducir directamente contenido no fiable. Interpreta HTML y puede permitir la inserción de contenido peligroso. Las plantillas con `${...}` no escapan automáticamente los valores que insertamos.
+Para esta tabla, los métodos específicos permiten reducir las llamadas a `createElement()` y `appendChild()` sin tener que construir una cadena HTML. La primera versión sigue siendo útil para entender cada paso y para trabajar con elementos que no tienen métodos específicos.
 
-Las dos formas son válidas. La primera permite entender la construcción del árbol paso a paso; la segunda ofrece una alternativa más breve para contenido controlado. Tener menos líneas no hace que una solución sea siempre mejor.
+`innerHTML` puede resultar más compacto, pero interpreta los valores como HTML. Las plantillas con `${...}` no los escapan automáticamente, por lo que debemos reservar esta alternativa para contenido controlado o correctamente sanitizado.
+
+Las tres formas producen la misma información. La elección depende del contenido y de cómo queremos trabajar con los elementos, no solo de cuántas líneas tenga el código.
 
 ### Cómo probar el ejemplo 04
 
@@ -679,8 +707,10 @@ Las dos formas son válidas. La primera permite entender la construcción del á
 2. Pulsa **Crear tabla con DOM**: debe aparecer una cabecera y cuatro filas de películas.
 3. Pulsa **Crear tabla con innerHTML** y compara los datos de ambas tablas.
 4. Pulsa varias veces cada botón: debe mantenerse una sola tabla en cada contenedor.
-5. Inspecciona los elementos del navegador: ambos resultados contienen elementos de tabla, aunque se hayan creado de distinta manera.
-6. Como prueba en una copia del ejemplo, añade una película al array y comprueba que aparece al generar cualquiera de las dos tablas.
+5. Inspecciona los elementos del navegador: los tres resultados contienen elementos de tabla, aunque se hayan creado de distinta manera.
+6. Como prueba en una copia del ejemplo, añade una película al array y comprueba que aparece al generar cualquiera de las tres tablas.
+
+Para probar la ampliación, pulsa **Crear tabla con métodos de tabla**. Debe mostrar las mismas cuatro películas y mantener una sola tabla en su contenedor aunque pulses varias veces. En el inspector puedes observar sus secciones `thead` y `tbody`.
 
 ## Bibliografía
 
