@@ -33,6 +33,8 @@
         console.log('1. Productos disponibles');
         const disponibles = productos.filter(producto => producto.disponible);
         console.log(disponibles); // Varita, Mapa mágico y Capa, conservando sus objetos.
+        
+        // parte del forEach: mostrar el nombre de cada producto disponible.
         disponibles.forEach(producto => {
             console.log(producto.nombre);
         });
@@ -42,6 +44,7 @@
         console.log('2. Precios del catálogo completo');
         const mensajes = productos.map(producto => `${producto.nombre}: ${producto.precio} euros`);
         console.log(mensajes); // Nuevo array de cuatro textos, no de objetos.
+
         mensajes.forEach(mensaje => {
             console.log(mensaje);
         });
@@ -56,6 +59,7 @@
             precio: producto.precio * 0.8
         }));
         console.log(ofertas); // Nuevos precios: 24, 8, 20 y 48.
+
         const ofertasEconomicas = ofertas.filter(oferta => oferta.precio <= 20);
         console.log(ofertasEconomicas); // Poción a 8 y Mapa mágico a 20.
         // Filtramos el precio rebajado, no el original. Todavía no comprobamos disponibilidad.
@@ -63,10 +67,12 @@
         // 4. `filter()` + `map()` + `forEach()`: preparar ofertas solo de productos disponibles.
         console.log('4. Ofertas disponibles');
         const productosDisponibles = productos.filter(producto => producto.disponible);
+        
         const ofertasDisponibles = productosDisponibles.map(producto => ({
             nombre: producto.nombre,
             precio: producto.precio * 0.8
         }));
+
         ofertasDisponibles.forEach(oferta => {
             console.log(`${oferta.nombre}: ${oferta.precio} euros`);
         });
@@ -97,6 +103,7 @@
 
         // 6. LOS TRES ENCADENADOS: la misma tarea del bloque 4, sin variables intermedias.
         console.log('6. Filtrar, transformar y mostrar en una cadena');
+        
         productos
             .filter(producto => producto.disponible)
             .map(producto => ({

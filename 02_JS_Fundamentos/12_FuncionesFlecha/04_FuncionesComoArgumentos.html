@@ -16,9 +16,12 @@
         const doble = numero => numero * 2;
         const triple = numero => numero * 3;
 
-        function aplicarOperacion(numero, operacion) {
+        doble(8);//16
+        triple(10);//30
+
+        function aplicarOperacion(numero, operacionFuncion) {
             // `operacion` contiene una función. Aquí la ejecutamos.
-            return operacion(numero);
+            return operacionFuncion(numero);
         }
         
         console.log(aplicarOperacion(4, doble));  // 8
