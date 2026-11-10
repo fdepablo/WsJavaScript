@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+    <script>
+        // Creamos un objeto JavaScript.
+        var objetoJsonBasico = {"atributo1" : "valor1"}
+        console.log(objetoJsonBasico)
+
+        objetoJsonBasico = {"atributo1" : "valor1","atributo2" : "valor2"}
+        console.log(objetoJsonBasico)
+        // Un array puede contener valores de distintos tipos.
+        var arrayBasico = ["valor1","valor2","valor3",5,true,false,null,{"atributo1" : "valor1"}]
+        console.log(arrayBasico)
+        // Combinamos objetos y arrays.
+        var homer = {
+            "nombre" : "Homer",
+            "apellidos" : "Simpson",
+            "edad" : 40,
+            "estaCasado" : true,
+            "cervezasFavoritas" : ["Mahou", "Aguila", "San Miguel" ],
+            "direccion" : {
+                "tipoVia" : "Calle",
+                "nombreVia" : "742 Evergreen Terrace",
+                "CIUDAD" : "Springfield" 
+            }
+        }
+
+        console.log(homer)
+        // Los nombres de las propiedades distinguen mayúsculas y minúsculas.
+        console.log(homer.nombre)
+        console.log(homer.edad)
+        console.log(homer.estaCasado)
+        console.log(homer.cervezasFavoritas[0])
+        console.log(homer.direccion.tipoVia)
+        console.log(homer.direccion.CIUDAD)
+
+        // Convertimos el objeto a texto JSON.
+        var textoJson = JSON.stringify(homer)
+        console.log("Texto json: " + textoJson)
+
+        // Interpretamos texto JSON para obtener un objeto JavaScript.
+        textoJson = '{"nombre" : "Marge","edad" : 38}'
+        var objetoJson = JSON.parse(textoJson)
+        
+        console.log(objetoJson)
+        console.log(objetoJson.nombre)
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">JSON</h1>
+    <p>Abre la consola del navegador para observar los resultados. Este ejemplo no realiza peticiones AJAX.</p>
+    <p><a href="README.md">Consultar la teoría en el README</a></p>
+</body>
+</html>

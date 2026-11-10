@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar XML con fetch</title>
+</head>
+<body>
+    <h1>Cargar XML con fetch</h1>
+    <p>Solicitamos el catálogo de música al servidor y creamos una tabla sin recargar la página.</p>
+    <h2>Ejemplo 1 — Mostrar el catálogo de música</h2>
+    <button type="button" id="cargar">Cargar música</button>
+    <p id="estado" role="status">Todavía no se ha solicitado el catálogo.</p>
+    <table>
+        <caption>Catálogo de música</caption>
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Artista</th>
+            </tr>
+        </thead>
+        <tbody id="resultadoBusqueda"></tbody>
+    </table>
+
+    <h2>Practica</h2>
+    <p>Añade una columna para el año usando la etiqueta YEAR. Comprueba que al cargar varias veces no se duplican las filas. Después prueba con un recurso que no exista para observar el mensaje de error.</p>
+    <p><a href="README.md">Consultar la explicación en el README</a></p>
+
+    <script>
+        const botonCargar = document.getElementById('cargar');
+        const estado = document.getElementById('estado');
+        const resultadoBusqueda = document.getElementById('resultadoBusqueda');
+        const RECURSO = './ficheros/musica.xml';
+
+        function procesarRespuesta(datos) {
+            // Buscamos los elementos CD del documento XML.
+            const discos = datos.getElementsByTagName('CD');
+            for (const disco of discos) {
+                // Los métodos de tabla crean e insertan los elementos directamente.
+                const fila = resultadoBusqueda.insertRow();
+                const celdaTitulo = fila.insertCell();
+                const celdaArtista = fila.insertCell();
+                // Los datos se muestran como texto, no como etiquetas HTML.
+                celdaTitulo.textContent = disco.getElementsByTagName('TITLE')[0].textContent;
+                celdaArtista.textContent = disco.getElementsByTagName('ARTIST')[0].textContent;
+            }
+        }
+
+        async function cargarMusica() {
+            botonCargar.disabled = true;
+            estado.textContent = 'Cargando...';
+            resultadoBusqueda.textContent = '';
+
+            try {
+                const respuesta = await fetch(RECURSO);
+                if (!respuesta.ok) {
+                    throw new Error(`Error HTTP ${respuesta.status}`);
+                }
+
+                // Primero leemos el texto y después lo interpretamos como XML.
+                const texto = await respuesta.text();
+                const parser = new DOMParser();
+                const documentoXML = parser.parseFromString(texto, 'application/xml');
+
+                // Un XML mal formado produce un nodo `parsererror`.
+                if (documentoXML.querySelector('parsererror') !== null) {
+                    throw new Error('El archivo no contiene XML bien formado.');
+                }
+
+                procesarRespuesta(documentoXML);
+                const numeroDiscos = resultadoBusqueda.rows.length;
+                estado.textContent = `Se han cargado ${numeroDiscos} discos.`;
+            } catch (error) {
+                resultadoBusqueda.textContent = '';
+                estado.textContent = 'No se ha podido cargar el catálogo. Comprueba el recurso, su formato y la conexión.';
+                console.error('Error al cargar el catálogo:', error);
+            } finally {
+                botonCargar.disabled = false;
+            }
+        }
+
+        botonCargar.addEventListener('click', cargarMusica);
+    </script>
+</body>
+</html>
