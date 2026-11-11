@@ -36,13 +36,33 @@ function modificar(){
     // Eliminamos el enlace de la página, y todos sus hijos (si los tuviera).
     const enlace = document.getElementById("enlace");
     enlace.remove();
-    // Podemos borrar toda la página, aunque no es recomendable.
+    // Podemos incluso borrar toda la página, aunque no es recomendable.
     //document.body.remove();
 
     // Alternativa mediante su nodo padre:
     // parentNode obtiene el padre: en este HTML es el div con id="cabecera".
     // removeChild(enlace) le pide al padre que elimine ese hijo.
     // enlace.parentNode.removeChild(enlace);
+
+    /* BORRADO DE NODO SIN REFERENCIA */
+    const cabecera = document.getElementById("cabecera");
+
+    // lastElementChild devuelve el último elemento hijo de cabecera.
+    // En este ejemplo es el enlace. Los comentarios HTML no cuentan (tampocolo los nodos de texto).
+    const ultimoElemento = cabecera.lastElementChild;
+    ultimoElemento.remove();
+
+    // Tambien podríamos haber usado firstElementChild para obtener el primer elemento hijo
+    const primerElemento = cabecera.firstElementChild;
+    primerElemento.remove();
+
+    // Tambien podriamos haber usado children para obtener todos los elementos hijos y eliminar el primero o el último.
+    // children también ignora los comentarios HTML y los nodos de texto.
+    // const elementos = cabecera.children;
+    // elementos[0].remove(); // elimina el primer elemento hijo
+    // elementos[elementos.length - 1].remove(); // elimina el último elemento hijo
+    // o recorrer el array de elementos hijos y eliminar el que queramos según su índice.
+
 
     // El cambio se realiza una sola vez: el enlace ya no existe tras eliminarlo.
     document.getElementById("modificar").disabled = true;
